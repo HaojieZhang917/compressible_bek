@@ -12,7 +12,6 @@ class WeeklyTimerApp:
         self.start_time = None
         self.elapsed_time = 0
 
-        # Create UI elements
         self.time_label = tk.Label(root, text="00:00:00", font=("Helvetica", 48), padx=20, pady=20)
         self.time_label.pack()
 
@@ -166,7 +165,6 @@ class WeeklyTimerApp:
         close_button = tk.Button(message_box, text="Close", command=message_box.destroy)
         close_button.pack(pady=5)
 
-# Create the main Tkinter window
 root = tk.Tk()
 app = WeeklyTimerApp(root)
 root.mainloop()
