@@ -1,35 +1,35 @@
 """doc:
     2024.3.4
-    ———————————————————————————————————————————————————————————————————————————————————————————————————
-    | module_TimeMode is the function to caculate the time eigenvalues problem of the BEK model.      |
-    |    The module include three subfunctions.                                                       |
-    |    KEB_LST_all:consider the Coriolis force and curvature items which is the Practical problems. |
-    |    KEB_LST_OS:neglect the Coriolis force and curvature.                                         |
-    |    KEB_LST_Rayleigh:solve the inviscous Rayleigh equation.                                      |
-    |input:                                                                                           |
-    |    baseflow:velocity profiles of the BEK problem include u v w                                  |
-    |    N:Number of discrete points                                                                  |
-    |    α:radial wavenumber                                                                          |
-    |    β:Circumferential wavenumber                                                                 |
-    |    R:indimensional radial                                                                       |
-    |    Ro:Rossby Number                                                                             |
-    |output:                                                                                          |
-    |    Aϕ=ωBϕ                                                                                       |
-    |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -|
-    | module_SpatialMode is the function to caculate the spatial eigenvalues problem of BEK model     |
-    |   The module include one subfunctions.                                                          |
-    |   KEB_LST_ALL:consider the Coriolis force and curvature items which is the Practical problems.  |
-    |   KEB_LST_OS_SPA:neglect the Coriolis force and curvature items
-    |input:                                                                                           |
-    |    baseflow:velocity profiles of the BEK problem include u v w                                  |
-    |    N:Number of discrete points                                                                  |
-    |    ω:frequecy of the disturbence                                                                |
-    |    β:Circumferential wavenumber                                                                 |
-    |    R:indimensional radial                                                                       |
-    |    Ro:Rossby Number                                                                             |
-    |output:                                                                                          |
-    |   (A0 +A1*alpha +A2*alpha^2 +A3*alpha^3 +A4*alpha^4)ϕ=0                                         |
-    ————————————————————————————————————————————————————————————————————————————————————————————————————
+   
+     module_TimeMode is the function to caculate the time eigenvalues problem of the BEK model.      
+        The module include three subfunctions.                                                       
+        KEB_LST_all:consider the Coriolis force and curvature items which is the Practical problems. 
+        KEB_LST_OS:neglect the Coriolis force and curvature.                                         
+        KEB_LST_Rayleigh:solve the inviscous Rayleigh equation.                                      
+    input:                                                                                           
+        baseflow:velocity profiles of the BEK problem include u v w                                  
+        N:Number of discrete points                                                                  
+        α:radial wavenumber                                                                          
+        β:Circumferential wavenumber                                                                 
+        R:indimensional radial                                                                       
+        Ro:Rossby Number                                                                             
+    output:                                                                                          
+        Aϕ=ωBϕ                                                                                       
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     module_SpatialMode is the function to caculate the spatial eigenvalues problem of BEK model     
+       The module include one subfunctions.                                                          
+       KEB_LST_ALL:consider the Coriolis force and curvature items which is the Practical problems.  
+       KEB_LST_OS_SPA:neglect the Coriolis force and curvature items
+    input:                                                                                           
+        baseflow:velocity profiles of the BEK problem include u v w                                  
+        N:Number of discrete points                                                                  
+        ω:frequecy of the disturbence                                                                
+        β:Circumferential wavenumber                                                                 
+        R:indimensional radial                                                                       
+        Ro:Rossby Number                                                                             
+    output:                                                                                          
+       (A0 +A1*alpha +A2*alpha^2 +A3*alpha^3 +A4*alpha^4)ϕ=0                                         
+
     The equation in function is the incompressible N-S equation and simplified by vorticity methods
     Discrete method is chebyshev method 
     2024.3.14
