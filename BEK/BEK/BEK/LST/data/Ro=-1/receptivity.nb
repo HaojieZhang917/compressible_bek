@@ -1,0 +1,66 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      1917,         58]
+NotebookOptionsPosition[      1255,         40]
+NotebookOutlinePosition[      1673,         57]
+CellTagsIndexPosition[      1630,         54]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.911258384881277*^9, 3.9112583868360786`*^9}, {
+  3.9112727020940075`*^9, 
+  3.91127270273536*^9}},ExpressionUUID->"2d81570a-01a9-4581-b6b4-\
+1e32e1ee5ed3"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9112726916594486`*^9, 
+  3.911272692159043*^9}},ExpressionUUID->"19858773-4e2c-41d1-bcb5-\
+02459ca7dd45"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9112726971185045`*^9, 3.9112726999106617`*^9}},
+ NumberMarks->False,ExpressionUUID->"2568cea9-b9c9-4984-a252-fe40304fc40b"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.911272689390897*^9, 
+  3.9112726893918996`*^9}},ExpressionUUID->"70f7cbc4-5886-4ce6-b881-\
+0b28960383a1"]
+},
+WindowSize->{571., 627.5},
+WindowMargins->{{349, Automatic}, {36.5, Automatic}},
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (2021\:5e7412\:67082\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f5617981-1f0c-484d-b5af-9e7a028ea691"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 204, 4, 28, "Input",ExpressionUUID->"2d81570a-01a9-4581-b6b4-1e32e1ee5ed3"],
+Cell[765, 26, 154, 3, 28, InheritFromParent,ExpressionUUID->"19858773-4e2c-41d1-bcb5-02459ca7dd45"],
+Cell[922, 31, 172, 2, 28, "Input",ExpressionUUID->"2568cea9-b9c9-4984-a252-fe40304fc40b"],
+Cell[1097, 35, 154, 3, 28, InheritFromParent,ExpressionUUID->"70f7cbc4-5886-4ce6-b881-0b28960383a1"]
+}
+]
+*)
+
