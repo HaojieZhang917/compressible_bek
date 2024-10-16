@@ -43,175 +43,96 @@ module KEB_TimeMode
 
     using LinearAlgebra
     using BSplineKit
-    using Debugger
+
     export KEB_LST_all,KEB_LST_OS,KEB_LST_Rayleigh,rayleigh_quotient_iteration
+    function  KEB_LST_all(baseflow,N,α,β,R,Ro,Co)
 
-    function interpolate(baseflow,N)
-            ## chebyshev dot
-            θ = range(0,length=N+1,stop=pi)
-            x = reshape(-cos.(θ), N+1, 1)
-            c = [2; ones(N-1, 1) ; 2] .* (-1) .^ (0:N)
-            X = repeat(x, 1, N+1);
-            dX = X - X';
-            D = (c * (1 ./ c)') ./ (dX .+ I(N+1));
-            D = D - diagm(vec(sum(D, dims=2)));
-            for i=1:N+1
-
-                D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
-
-            end
-            D2 = D^2
-            for i=1:N+1
-
-                x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
-
-                if x[i]>50
-
-                    x[i]=50
-
-                end
-
-            end
-
-    
-            ## input basic flow
-    
-            f = open( baseflow, "r" )
-    
-            n = countlines( f )
-    
-            seekstart( f )
-    
-            data = zeros(n,6)
-    
-            for i = 1:n
-    
-                z,w,u,v,du,dv = split( readline( f ), " " ) 
-    
-                data[i,1] = parse(Float64,z)
-    
-                data[i,2] = parse(Float64,w)
-    
-                data[i,3] = parse(Float64,u)
-    
-                data[i,4] = parse(Float64,v) 
-    
-                data[i,5] = parse(Float64,du)
-    
-                data[i,6] = parse(Float64,dv)
-            end
-    
-            close( f ) 
-    
-            ## interpolation baseflow into chebyshev dot
-            
-            t=data[:,1]
-    
-            w=data[:,2]
-    
-            u=data[:,3]
-    
-            v=data[:,4]
-    
-            du=data[:,5]
-    
-            dv=data[:,6]
-    
-            itpw  = BSplineKit.interpolate(t , w , BSplineOrder(4))
-    
-            itpu  = BSplineKit.interpolate(t , u , BSplineOrder(4))
-
-            itpv = BSplineKit.interpolate(t, v , BSplineOrder(4))
-    
-            itpdu = BSplineKit.interpolate(t, du , BSplineOrder(4))
-    
-            itpdv = BSplineKit.interpolate(t, dv , BSplineOrder(4))
-    
-            U = zeros(N+1,1)
-            V = zeros(N+1,1)
-            W = zeros(N+1,1)
-            dU = zeros(N+1,1) 
-            dV = zeros(N+1,1)
-            
-            for i=1:N+1
-    
-                U[i,1] = itpu(x[i])
-
-                V[i,1] = itpv(x[i])
-
-                W[i,1] = itpw(x[i])
-
-                dU[i,1] = itpdu(x[i])
-
-                dV[i,1] = itpdv(x[i])
-    
-            end
-            
-            dW=-2*U
-
-            ddU=D*dU;
-            
-            ddV=D*dV;
-            
-            return D,D2,x,U,V,W,dU,dV,dW,ddU,ddV
-
+        θ = range(0,length=N+1,stop=pi)
+        x = reshape(-cos.(θ), N+1, 1)
+        c = [2; ones(N-1, 1) ; 2] .* (-1) .^ (0:N)
+        X = repeat(x, 1, N+1);
+        dX = X - X';
+        D = (c * (1 ./ c)') ./ (dX .+ I(N+1));
+        D = D - diagm(vec(sum(D, dims=2))); 
+        #interpolation
+        f = open( baseflow, "r" )
+        n = countlines( f )
+        seekstart( f )
+        data = zeros(n,6)
+        for i = 1:n
+            z,w,u,v,du,dv = split( readline( f ), " " ) 
+            data[i,1] = parse(Float64,z)
+            data[i,2] = parse(Float64,w)
+            data[i,3] = parse(Float64,u)
+            data[i,4] = parse(Float64,v)  
+            data[i,5] = parse(Float64,du)
+            data[i,6] = parse(Float64,dv)
         end
-    function KEB_LST_all(N,α,β,R,Ro,Co,baseflow)
-        
-        D,D2,x,U,V,W,dU,dV,dW,ddU,ddV = KEB_TimeMode.interpolate(baseflow,N)
-        
-        ## assemble matrix
 
-        α_bar=α - im/R
+        close( f )
 
-        λ=sqrt(α^2 + β^2) 
-        
+        t=data[:,1]
+        w=data[:,2]
+        u=data[:,3]
+        v=data[:,4]
+        du=data[:,5]
+        dv=data[:,6]
+        itpw=itp = interpolate(t, w , BSplineOrder(4))
+        itpu=itp = interpolate(t, u , BSplineOrder(4))
+        itpv=itp = interpolate(t, v , BSplineOrder(4))
+        itpdu=itp = interpolate(t, du , BSplineOrder(4))
+        itpdv=itp = interpolate(t, dv , BSplineOrder(4))
+        #interpolation
+        # for i=1:N+1
+        #     x[i,1]=10* x[i,1]+ 10
+        # end
+        # D=0.1* D
+        for i=1:N+1
+            D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
+        end
+        for i=1:N+1
+            x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
+            if x[i]>50
+                x[i]=50
+            end
+        end
+        D2=D^2;
+        U=zeros(N+1,1)
+        V=zeros(N+1,1)
+        W=zeros(N+1,1)
+        dU=zeros(N+1,1)
+        dV=zeros(N+1,1)
+        dW=zeros(N+1,1)
+        p=zeros(N+1,1)
+        for i=1:N+1
+            U[i,1]=itpu(x[i])
+            V[i,1]=itpv(x[i])
+            W[i,1]=itpw(x[i])
+            dU[i,1]=itpdu(x[i])
+            dV[i,1]=itpdv(x[i])
+        end
+        dW=-2*U
+        ddU=D*dU;
+        ddV=D*dV;
+        α_bar=α-im/R
+        λ=sqrt(α^2+β^2)
         λ_bar=sqrt(α*α_bar+β^2)
-
-        ## origional equation operater
-
-        A11 = im * ((D2 - (λ^2) * I(N+1)) * (D2-(λ_bar^2) * I(N+1)))+R * ((α * U + β * V)) .* (D2 - (λ_bar^2) * I(N+1))
-                - R * (α_bar * ddU + β * ddV) .* I(N+1) - im * Ro * W .* D * (D^2 - (λ_bar^2) * I(N+1)) 
-                    - im * Ro * dW .* (D2-(λ_bar^2) * I(N+1))
-                        -im*Ro*U.*D2 
-        A12 = ( 2 * Ro * V .+ Co) .* D + 2 * Ro * dV .* I(N+1)
-        A21 = (2 * Ro * V .+ Co) .* D - im * R * (α * dV - β * dU) .* I(N+1)
-        A22 = im * (D2 - (λ^2) * I(N+1)) + R * (α * U + β * V) .* I(N+1) - im * Ro * W .* D - im * Ro * U .* I(N+1)
-        
-        B11 = R * (D2 - (λ_bar^2) * I(N+1))
-        B12 = zeros(N+1,N+1)
-        B21 = B12
-        B22 = R * I(N+1)
-        B22 = Matrix(B22)
-
-        ## def form
-        
-        def = 2
-        Mat_left = zeros(Complex{Float64},2*(N+1),2*(N+1))
-        Mat_right = zeros(Complex{Float64},2*(N+1),2*(N+1))
-
-        for i = 1 : 1 : N+1
-
-            Mat_left[1 : N+1 , def*i-1] = A11[ : , i]
-            Mat_left[1 : N+1 , def*i] = A12[ : , i]
-            Mat_left[N+2 : 2N+2 , def*i-1] = A21[ : , i]
-            Mat_left[N+2 : 2N+2 , def*i] = A22[ : , i]
- 
-            Mat_right[1 : N+1 , def*i-1] = B11[ : , i]
-            Mat_right[1 : N+1 , def*i] = B12[ : , i]
-            Mat_right[N+2 : 2N+2 , def*i-1] = B21[ : , i]
-            Mat_right[N+2 : 2N+2 , def*i] = B22[ : , i]
-        
-        end
-      
+        A11=im*((D2-(λ^2)*I(N+1))*(D2-(λ_bar^2)*I(N+1)))+R*((α*U+β*V)).*(D2-(λ_bar^2)*I(N+1))-R*(α_bar*ddU+β*ddV).*I(N+1)-im*Ro*W.*D*(D^2-(λ_bar^2)*I(N+1))-im*Ro*dW.*(D2-(λ_bar^2)*I(N+1))-im*Ro*U.*D2
+        A12=(2*Ro*V.+ Co).*D+2*Ro*dV.*I(N+1)
+        A21=(2*Ro*V.+ Co).*D-im*R*(α*dV-β*dU).*I(N+1)
+        A22=im*(D2-(λ^2)*I(N+1))+R*(α*U+β*V).*I(N+1)-im*Ro* W.*D-im*Ro* U.*I(N+1)
+        B11=R*(D2-(λ_bar^2)*I(N+1))
+        B12=zeros(N+1,N+1)
+        B21=B12
+        B22=R*I(N+1)
+        B22=Matrix(B22)
         #boundary condition
-
-        Mat_left = Mat_left[setdiff(1:end , (1,2,3,2N-1,2N+1,2N+2)),setdiff(1:end , (1,2,3,2N-1,2N+1,2N+2))]
-        Mat_right = Mat_right[setdiff(1:end , (1,2,3,2N-1,2N+1,2N+2)),setdiff(1:end , (1,2,3,2N-1,2N+1,2N+2))]
-        
-        return Mat_left,Mat_right,A11,A12,A21,A22,B11,B12,B21,B22
-
-        end
+        A=[A11 A12;A21 A22]
+        B=[B11 B12;B21 B22]
+        A=A[setdiff(1:end , (1,2,N,N+1,N+2,2N+2)),setdiff(1:end , (1,2,N,N+1,N+2,2N+2))]
+        B=B[setdiff(1:end , (1,2,N,N+1,N+2,2N+2)),setdiff(1:end , (1,2,N,N+1,N+2,2N+2))]
+        return A,B,A11,A12,A21,A22,B11,B12,B21,B22
+     end
     function KEB_LST_OS(baseflow,N,α,β_bar,R)
         θ = range(0,length=N+1,stop=pi)
         x = reshape(-cos.(θ), N+1, 1)
@@ -291,19 +212,19 @@ module KEB_TimeMode
         c = [2; ones(N-1, 1) ; 2] .* (-1) .^ (0:N)
         X = repeat(x, 1, N+1);
         dX = X - X';
-        D = (c * (1 ./ c)') ./ (dX .+ I(N+1));   
-        D = D - diagm(vec(sum(D, dims=2)));      
+        D = (c * (1 ./ c)') ./ (dX .+ I(N+1));   # off-diagonal entries
+        D = D - diagm(vec(sum(D, dims=2)));      # diagonal entries
         #interpolation
         f = open( baseflow, "r" )
         n = countlines( f )
         seekstart( f )
         data = zeros(n,6)
         for i = 1:n
-            z,w,u,v,du,dv = split( readline( f ), " " )  
+            z,w,u,v,du,dv = split( readline( f ), " " )  # 读取每一行数据并用split函数将数据“剥离”开来
             data[i,1] = parse(Float64,z)
             data[i,2] = parse(Float64,w)
             data[i,3] = parse(Float64,u)
-            data[i,4] = parse(Float64,v)  
+            data[i,4] = parse(Float64,v)  # 将字符串转化为数字
             data[i,5] = parse(Float64,du)
             data[i,6] = parse(Float64,dv)
         end
@@ -360,8 +281,8 @@ module KEB_TimeMode
         B=B[setdiff(1:end , (1,2,N,N+1,N+2,2N+2)),setdiff(1:end , (1,2,N,N+1,N+2,2N+2))]
         return A,B,x
     
-     end
         end
+     end
 module KEB_SpatialMode
 
     using LinearAlgebra
