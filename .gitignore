@@ -1,3 +1,5 @@
 myenv/
-data/
-csv
+/compress/data/
+/compress/fingure/
+*.lpk
+*.dat
