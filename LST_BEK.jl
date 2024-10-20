@@ -243,13 +243,13 @@ module KEB_TimeMode
         v=data[:,4]
         du=data[:,5]
         dv=data[:,6]
-        itpw=itp = interpolate(t, w , BSplineOrder(4))
-        itpu=itp = interpolate(t, u , BSplineOrder(4))
-        itpv=itp = interpolate(t, v , BSplineOrder(4))
-        itpdu=itp = interpolate(t, du , BSplineOrder(4))
-        itpdv=itp = interpolate(t, dv , BSplineOrder(4))
-        for i=1:N+1
-            D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
+        itpw=itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
+        itpu=itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
+        itpv=itp = SplineKit.interpolate(t, v , BSplineOrder(4))
+        itpdu=itp =BSplineKit.interpolat(t, du , BSplineOrder(4))
+        itpdv=itp =BSplineKit.interpolat(t, dv , BSplineOrder(4))
+        for i=1:N1
+            D[i,:]=D[i,:].*((2*x[i]^3-x[]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
         end
         for i=1:N+1
             x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
@@ -316,11 +316,11 @@ module KEB_TimeMode
         v=data[:,4]
         du=data[:,5]
         dv=data[:,6]
-        itpw=itp = interpolate(t, w , BSplineOrder(4))
-        itpu=itp = interpolate(t, u , BSplineOrder(4))
-        itpv=itp = interpolate(t, v , BSplineOrder(4))
-        itpdu=itp = interpolate(t, du , BSplineOrder(4))
-        itpdv=itp = interpolate(t, dv , BSplineOrder(4))
+        itpw=itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
+        itpu=itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
+        itpv=itp = SplineKit.interpolate(t, v , BSplineOrder(4))
+        itpdu=itp =BSplineKit.interpolate(t, du , BSplineOrder(4))
+        itpdv=itp =BSplineKit.interpolate(t, dv , BSplineOrder(4))
         psi=zeros(N+1,1)
         for i=1:N+1
             D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
@@ -399,11 +399,11 @@ module KEB_SpatialMode
         v=-1*data[:,4]
         du=-1*data[:,5]
         dv=-1*data[:,6]
-        itpw=itp = interpolate(t, w , BSplineOrder(4))
-        itpu=itp = interpolate(t, u , BSplineOrder(4))
-        itpv=itp = interpolate(t, v , BSplineOrder(4))
-        itpdu=itp = interpolate(t, du , BSplineOrder(4))
-        itpdv=itp = interpolate(t, dv , BSplineOrder(4))
+        itpw=itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
+        itpu=itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
+        itpv=itp = SplineKit.interpolate(t, v , BSplineOrder(4))
+        itpdu=itp =BSplineKit.interpolate(t, du , BSplineOrder(4))
+        itpdv=itp =BSplineKit.interpolate(t, dv , BSplineOrder(4))
         #interpolation
         # for i=1:N+1
         #     x[i,1]=10* x[i,1]+ 10
@@ -511,11 +511,11 @@ module KEB_SpatialMode
         v=data[:,4]
         du=data[:,5]
         dv=data[:,6]
-        itpw=itp = interpolate(t, w , BSplineOrder(4))
-        itpu=itp = interpolate(t, u , BSplineOrder(4))
-        itpv=itp = interpolate(t, v , BSplineOrder(4))
-        itpdu=itp = interpolate(t, du , BSplineOrder(4))
-        itpdv=itp = interpolate(t, dv , BSplineOrder(4))
+        itpw=itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
+        itpu=itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
+        itpv=itp = SplineKit.interpolate(t, v , BSplineOrder(4))
+        itpdu=itp =BSplineKit.interpolate(t, du , BSplineOrder(4))
+        itpdv=itp =BSplineKit.interpolate(t, dv , BSplineOrder(4))
         #interpolation
         # for i=1:N+1
         #     x[i,1]=10* x[i,1]+ 10
