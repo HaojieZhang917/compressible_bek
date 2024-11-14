@@ -1,5 +1,5 @@
 
-" Design by hj_zhang on Dec 13,2024 "
+" Designed by hj_zhang on Dec 13,2024,TJU "
 
 module CRD_BF
 
@@ -109,7 +109,7 @@ module CRD_BF
         dV = u[6 , :]
         dT = u[7 , :]
         return U,V,W,T,dU,dV,dT
-    end
+     end
     function T_start(F_dU,F_dV,F_W,sigma,gamma,Tw,tspan,Num)
         gamma = gamma
         Tw = Tw 
@@ -206,7 +206,13 @@ module CRD_BF
 
     end
 
-
+    function Physical_Interpretation(T,delt,Num)
+        z = zeros(Num,1)
+        integral_T = delt * T
+        for i = 1 : 1 : Num
+            z[i,1] = sum(integral_T[1:i])
+        end
+        return z
  end
 
 using.CRD_BF
@@ -222,7 +228,6 @@ global gamma = 1.4
 global r = x_step/(y_step^2)
 global q = x_step / (2*y_step)
 global data = empty!
-global Title = "Variables= \"x\" \"z\" \"Temp\"\nZone T=\"1\" I=1001 J=$(it_num)"
 
 println("type in viscouslaw,x_max,Ma")
 parameters = readline(stdin)
@@ -236,7 +241,7 @@ t = range(0,20,N)
 m_left = zeros(N,N)
 m_right = zeros(N,N)
 D,D2 = y_DiffMat(t,N)
-
+Title = " Variables= \"x\" \"z\" \"Temp\" \n Zone T=1 I=1001 J=$(it_num) "
 if viscouslaw == "CP"
     local u,z = CRD_BF.sol_baseflowODE(tspan,N)
     local u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w = CRD_BF.velocity_CP(t,u)
@@ -261,7 +266,8 @@ if viscouslaw == "CP"
             m_right[end,1] = 1
             T0 = m_left\m_right
             x = x_step * j * ones(N,1)
-            data_temp = [x t T0]
+            eta = Physical_Interpretation(T0,y_step,N)
+            data_temp = [x t eta T0]
             data = [data;data_temp]  
     end
     data = data[2:end,:]
@@ -293,13 +299,15 @@ elseif viscouslaw == "SL"
             m_right[end,1] = 1
             T0 = m_left\m_right
             x = x_step * j * ones(N,1)
-            H = (T0.^(3/2).*(273+114))./(T0.*273 .+ 114)       
-            data_temp = [x t T0]
+            H = (T0.^(3/2).*(273+114))./(T0.*273 .+ 114)
+            eta = Physical_Interpretation(T0,y_step,N)
+            data_temp = [x t eta T0]
             data = [data;data_temp]  
     end
     data = data[2:end,:]
-    data_full = [Title empty empty; data]
+    data_full = [Title empty empty empty; data]
     DelimitedFiles.writedlm("Ma = $(Ma)_Tw = $(Tw)_1.dat",data_full,'\t')
 else
             println("Undifine law,this module only support Sutherland Law(SL) and Chapman Law(CP)")
+ end
  end
