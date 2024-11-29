@@ -229,7 +229,7 @@ global r = x_step/(y_step^2)
 global q = x_step / (2*y_step)
 global data = empty!
 
-println("type in viscouslaw,x_max,Ma")
+println("type in viscouslaw,x_max,Ma,Tw")
 parameters = readline(stdin)
 c = split(parameters,',')
 viscouslaw = c[1,1]
@@ -241,7 +241,8 @@ t = range(0,20,N)
 m_left = zeros(N,N)
 m_right = zeros(N,N)
 D,D2 = y_DiffMat(t,N)
-Title = " Variables= \"x\" \"z\" \"Temp\" \n Zone T=1 I=1001 J=$(it_num) "
+Title = " Variables= \"x\" \"z\" \"eta\" \"u0\" \"v0\" \"w0\" \"W\"  \"Temp\" \"mu\" 
+        \n Zone T=1 I=1001 J=$(it_num) "
 if viscouslaw == "CP"
     local u,z = CRD_BF.sol_baseflowODE(tspan,N)
     local u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w = CRD_BF.velocity_CP(t,u)
@@ -267,11 +268,12 @@ if viscouslaw == "CP"
             T0 = m_left\m_right
             x = x_step * j * ones(N,1)
             eta = Physical_Interpretation(T0,y_step,N)
-            data_temp = [x t eta T0]
+            W = w0 ./ T0
+            data_temp = [x t eta u0 v0 w0 W T0 H]
             data = [data;data_temp]  
     end
     data = data[2:end,:]
-    data_full = [Title empty empty; data]
+    data_full = [Title empty empty empty empty empty empty empty empty; data]
     writedlm("Ma = $(Ma)_Tw = $(Tw)_1.dat",data_full,'\t')
 
 elseif viscouslaw == "SL"
@@ -301,11 +303,12 @@ elseif viscouslaw == "SL"
             x = x_step * j * ones(N,1)
             H = (T0.^(3/2).*(273+114))./(T0.*273 .+ 114)
             eta = Physical_Interpretation(T0,y_step,N)
-            data_temp = [x t eta T0]
+            W = w0 ./ T0
+            data_temp = [x t eta u0 v0 w0 W T0 H]
             data = [data;data_temp]  
     end
     data = data[2:end,:]
-    data_full = [Title empty empty empty; data]
+    data_full = [Title empty empty empty empty empty empty empty empty; data]
     DelimitedFiles.writedlm("Ma = $(Ma)_Tw = $(Tw)_1.dat",data_full,'\t')
 else
             println("Undifine law,this module only support Sutherland Law(SL) and Chapman Law(CP)")
