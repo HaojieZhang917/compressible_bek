@@ -201,10 +201,8 @@ module CRD_BF
             D2[i,i-1] = 1 / (dely^2)
         end
     end
-
     return D,D2
-
-    end
+     end
 
     function Physical_Interpretation(T,delt,Num)
         z = zeros(Num,1)
@@ -213,17 +211,15 @@ module CRD_BF
             z[i,1] = sum(integral_T[1:i])
         end
         return z
- end
+     end
 
 using.CRD_BF
 using DelimitedFiles
-
 global N = 1001
 global x_step = 10^-2
 global y_step = 2 * 10^-2
 global tspan = (0,20)
 global sigma = 0.7
-global Tw = 0.5
 global gamma = 1.4
 global r = x_step/(y_step^2)
 global q = x_step / (2*y_step)
@@ -233,17 +229,18 @@ println("type in viscouslaw,x_max,Ma,Tw")
 parameters = readline(stdin)
 c = split(parameters,',')
 viscouslaw = c[1,1]
-Ma = parse(Int64,c[3,1])
 x_max = parse(Int64,c[2,1])
+Ma = parse(Int64,c[3,1])
+Tw = parse(Float64,c[4,1])
 it_num = Int(round(x_max/x_step))
 A = zeros(N,N)
 t = range(0,20,N)
 m_left = zeros(N,N)
 m_right = zeros(N,N)
 D,D2 = y_DiffMat(t,N)
-Title = " Variables= \"x\" \"z\" \"eta\" \"u0\" \"v0\" \"w0\" \"W\"  \"Temp\" \"mu\" 
-        \n Zone T=1 I=1001 J=$(it_num) "
 if viscouslaw == "CP"
+    Title = " Variables= \"x\" \"z\" \"eta\" \"u0\" \"v0\" \"w0\" \"W\"  \"Temp\"  
+        \n Zone T=1 I=1001 J=$(it_num) "
     local u,z = CRD_BF.sol_baseflowODE(tspan,N)
     local u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w = CRD_BF.velocity_CP(t,u)
     local T0,dT0 = CRD_BF.T_start(F_du,F_dv,F_w,sigma,gamma,Tw,tspan,N)
@@ -269,14 +266,16 @@ if viscouslaw == "CP"
             x = x_step * j * ones(N,1)
             eta = Physical_Interpretation(T0,y_step,N)
             W = w0 ./ T0
-            data_temp = [x t eta u0 v0 w0 W T0 H]
+            data_temp = [x t eta u0 v0 w0 W T0]
             data = [data;data_temp]  
     end
     data = data[2:end,:]
-    data_full = [Title empty empty empty empty empty empty empty empty; data]
+    data_full = [Title empty empty empty empty empty empty empty; data]
     writedlm("Ma = $(Ma)_Tw = $(Tw)_1.dat",data_full,'\t')
 
 elseif viscouslaw == "SL"
+    Title = " Variables= \"x\" \"z\" \"eta\" \"u0\" \"v0\" \"w0\" \"W\"  \"Temp\" \"mu\" 
+        \n Zone T=1 I=1001 J=$(it_num) "
     local u,z = CRD_BF.In_Su(tspan,N)
     local u0,v0,w0,T0,du0,dv0,dT0 = CRD_BF.velocity_SL(t,u)
     local data = empty!
