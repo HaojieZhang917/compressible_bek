@@ -18,7 +18,7 @@
     module_SpatialMode is the function to caculate the spatial eigenvalues problem of BEK model     
       The module include one subfunctions.                                                          
       KEB_LST_ALL:consider the Coriolis force and curvature items which is the Practical problems.  
-      KEB_LST_OS_SPA:neglect the Coriolis force and curvature items
+      KEB_LST_OS_SPA:neglect the Coriolis force and cursvature items
    input:                                                                                           
        baseflow:velocity profiles of the BEK problem include u v w                                  
        N:Number of discrete points                                                                  
@@ -494,6 +494,7 @@ module iteration
     end
     end
 module io
+
     using DelimitedFiles
     using LinearAlgebra 
     function inp()
@@ -509,4 +510,23 @@ module io
         end
         return Ro
     end
+ end
+
+module eigvec_compute
+    
+    using LinearAlgebra
+    
+    function compute(v,N,al,be,R,D)
+       
+        h = v[1 : N - 3 , 1]
+        yam = v[N - 2 : 2N - 4 , 1]
+        h = [0;0;h;0;0]
+        yam = [0;yam;0]
+        dh = D * h
+        f = (al^2 - (im * al/R) + be^2)^(-1) * (im * al * dh .- be * yam)
+        g = yam ./ al .+ (be/al) * f
+
+        return f,g,h
+
     end
+end
