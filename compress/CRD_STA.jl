@@ -456,14 +456,19 @@ function baseflow_var(N_cheb)
 function T_ca(R,Ma,f,q,W,gamma,Tw,x,t,N)
     Mx = Ma * R
     T = T_var(Mx,f,q,Tw,gamma)
-    itpT = BSplineKit.interpolate(t,T,BSplineOrder(4)) 
+    T_x = - (gamma - 1) * Ma^2 * R * f
+    itpT = BSplineKit.interpolate(t,T,BSplineOrder(4))
+    itpT_x = BSplineKit.interpolate(t,T_x,BSplineOrder(4)) 
     T = zeros(N+1,1)
+    T_x = zeros(N+1,1)
     for i=1:N+1
         T[i,1] = itpT(x[i])
+        T_x[i,1] = itpT_x(x[i])
     end
     RHO = 1 ./ T
     H = W .* T
-    return RHO,H,T
+    RHO_x = 1 ./ T_x
+    return RHO,H,T,T_x,RHO_x
  end
 function Time_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be)
     # phi_hat = [u,v,w,rho,p,t]
@@ -578,26 +583,26 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
     A0_22 = -2 * rho .* (G .+ 1) .* I(N_cheb + 1)
     A0_23 = R * rho.^2 .* D*F .* I(N_cheb + 1)
     A0_24 = rho .* (D2 * F) .* I(N_cheb + 1)
-    A0_25 = -rho .* (D * (rho .* (D * F))) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
+    A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
 
     A0_31 = 2 * rho .* (G .+ 1) .* I(N_cheb + 1)
     A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
-    A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*lam) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
+    A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
     A0_34 = 2 * F .* (G .+ 1) .* I(N_cheb + 1) + rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
-    A0_35 = -rho .* (D * (rho .* (D * G))) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
+    A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
 
     A0_41 = zeros(N_cheb + 1, N_cheb + 1)
     A0_42 = -im * be * (rho .* (D*lam) + (1 .+ lam .* rho)).*D
     A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + rho.^2 .* ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
-    A0_44 = R * rho .* D * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
-    A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + R * rho .* D * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
+    A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
+    A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1) + rho .* D)
 
     A0_51 = -2 * (gamma - 1) * Ma^2 * rho .* (D*F) .* D
     A0_52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* D
     A0_53 = -2 * im * (gamma - 1) * Ma^2 * (be * (D*G))  .* I(N_cheb + 1 ) + R * rho.^2 .* (D*T) .* I(N_cheb + 1)
-    A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) * Ma^2 * (im * R * (be * G .- omega) .* I(N_cheb + 1) + rho .* H .* D) * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1) )
-    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* T .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))
-        + (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * Ma^2 * (im * R * (be * G .- omega) .* I(N_cheb + 1) + rho .* H .* D) * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1) )
+    A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) *  (gamma)^(-1) * ( (im * R * (be * G .- omega) .* T .* I(N_cheb + 1) )+ rho .* H .* D*T .* I(N_cheb + 1) + rho .* H .* T .* D))
+    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))
+        + (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
 
     A1_11 = im * R * rho .* I(N_cheb + 1)
     A1_12 = zeros(N_cheb + 1, N_cheb + 1)
@@ -625,9 +630,9 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
 
     A1_51 = zeros(N_cheb + 1, N_cheb + 1)
     A1_52 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_53 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_54 = -(gamma - 1) * Ma^2 * im * R * F .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
-    A1_55 = im * R * rho .* F .* I(N_cheb + 1) - (gamma - 1) * Ma^2 * im * R * F .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
+    A1_53 = -2 * im * (gamma - 1) * Ma^2 * D * F .* I(N_cheb + 1)
+    A1_54 = -(gamma - 1) * (gamma)^(-1) *  im * R * F  .* T .* I(N_cheb + 1)
+    A1_55 = im * R * rho .* F .* I(N_cheb + 1) - (gamma - 1) * (gamma)^(-1) * im * R * F .* rho .* I(N_cheb + 1)
 
     A2_11 = zeros(N_cheb + 1, N_cheb + 1)
     A2_12 = zeros(N_cheb + 1, N_cheb + 1)
