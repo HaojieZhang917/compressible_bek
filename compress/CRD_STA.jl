@@ -1,4 +1,7 @@
-" Designed by hj_zhang on Nov 16,2024,TJU "
+" 
+    ∊ Designed by hj_zhang on Nov 16,2024,TJU 
+    ∊ Add Stability Analysis on Jan 16,2025,TJU
+                                                "
 module FDqScheme
 
     using Polynomials, GenericLinearAlgebra, SparseArrays, LinearAlgebra
@@ -218,7 +221,7 @@ module FDqScheme
 end
 module CRD_BF
 
-    export sol_baseflowODE,velocity,Cheb,phi_var,f_q,T_var
+    export sol_baseflowODE,velocity,Cheb,phi_var,f_q,T_var,Physical_Interpretation
 
     using LinearAlgebra
     using BoundaryValueDiffEq
@@ -226,7 +229,7 @@ module CRD_BF
     using BSplineKit
     using IterativeSolvers
     
-function In_Su(Num)
+ function In_Su(Num)
         T0 = 273
         S = 114
         sigma = 0.7
@@ -266,7 +269,7 @@ function In_Su(Num)
         u=sol(t)
         return u , t
         end
-function sol_baseflowODE(tspan,Num)
+ function sol_baseflowODE(tspan,Num)
 
         function oneDiskODE!(du, u , p, t)
             
@@ -294,14 +297,14 @@ function sol_baseflowODE(tspan,Num)
             residual[5] = u[end][3] + 1.0e0
         end
             prob = BVProblem(oneDiskODE!, oneDiskbc!, [0.0, 0.5103341351120374, 0.0, -0.6151547026271073, 0.0] ,tspan, dtmax=0.01)
-            sol = solve(prob, Shooting(Vern7()), dt=0.01)
-            t=range(0.0, 20, Num)
+            sol = solve(prob, Shooting(Vern7()))
+            t=range(0.0, 80, Num)
             u=sol(t)
         
         return u , t
 
         end
-function velocity(u,t,phi)
+ function velocity(u,t,phi)
 
     U = u[1 , :]
     dU = u[2 , :]
@@ -317,7 +320,7 @@ function velocity(u,t,phi)
 
   end
 
-function Cheb(u,v,w,phi,t,N)
+ function Cheb(N)
         θ = range(0,length=N+1,stop=pi)
         x = reshape(-cos.(θ), N+1, 1)
         c = [2; ones(N-1, 1) ; 2] .* (-1) .^ (0:N)
@@ -335,39 +338,29 @@ function Cheb(u,v,w,phi,t,N)
         end
         for i=1:N+1
             x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
-            if x[i]>80
-                x[i]=80
+            if x[i]>60
+                x[i]=60
             end
         end
+
         D2 = D^2
-        itpw = itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
-        itpu = itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
-        itpv = itp = BSplineKit.interpolate(t, v , BSplineOrder(4))
-        itpphi = itp = BSplineKit.interpolate(t, phi , BSplineOrder(4))
-        u = zeros(N+1,1)
-        v = zeros(N+1,1)
-        w = zeros(N+1,1)
-        phi = zeros(N+1,1)
-        for i=1:N+1
-            u[i,1] = itpu(x[i])
-            v[i,1] = itpv(x[i])
-            w[i,1] = itpw(x[i])
-            phi[i,1] = itpphi(x[i])
-        end
-        return D,D2,x,u,v,w,phi
+
+        return D,D2,x
+
         end
 
 
-function Physical_Interpretation(T,delt,Num)
-        z = zeros(Num,1)
+ function Physical_Interpretation(T,delt,Num)
+        z = zeros(Num)
+        z[1] = 0
         integral_T = delt * T
-        for i = 1 : 1 : Num
-            z[i,1] = sum(integral_T[1:i])
+        for i = 2 : 1 : Num
+                z[i] = sum(integral_T[1:i])
         end
+        z = vec(z)
         return z
      end
-    end
-function phi_var(u,del,N)
+ function phi_var(u,del,N)
     phi = zeros(N)
     for i = 1 : N
         z = 0
@@ -378,7 +371,7 @@ function phi_var(u,del,N)
     end
     return phi
   end
-function f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
+ function f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
     function ODE_f!(du,u,p,t)
         q = u[1]
         dq = u[2]
@@ -409,11 +402,11 @@ function f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
     q = q[1,:]
     return f,q
   end
-function T_var(Mx,f,q,Tw,gamma)
+ function T_var(Mx,f,q,Tw,gamma)
     T = 1 .- ( (gamma-1)/2 )*Mx^2 * f + (Tw - 1) * q
     return T
   end
-
+end
 import .CRD_BF
 import .FDqScheme
 using DifferentialEquations
@@ -427,49 +420,60 @@ function baseflow_var(N_cheb)
     sigma = 0.72
     u,z = CRD_BF.sol_baseflowODE(tspan,N)
     u0 = u[1,:]
-    PHI = phi_var(u0,t.step.hi,N)
+    PHI = CRD_BF.phi_var(u0,t.step.hi,N)
     u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u,t,PHI)
-    f,q = f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    D,D2,x,F,G,W,phi = CRD_BF.Cheb(u0,v0,w0,PHI,t,N_cheb)
-    # itpw = itp = BSplineKit.interpolate(t, w0 , BSplineOrder(4))
-    # itpu = itp = BSplineKit.interpolate(t, u0 , BSplineOrder(4))
-    # itpv = itp = BSplineKit.interpolate(t, v0 , BSplineOrder(4))
-    # itpphi = itp = BSplineKit.interpolate(t, PHI , BSplineOrder(4))
+    D,D2,x = CRD_BF.Cheb(N_cheb)
+    f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
 
-    # F = zeros(N_cheb+1,1)
-    # G = zeros(N_cheb+1,1)
-    # W = zeros(N_cheb+1,1)
-    # phi = zeros(N_cheb+1,1)
-
-    # for i=1:N_cheb
-    
-    #     F[i,1] = itpu(x[i])
-    #     G[i,1] = itpv(x[i])
-    #     W[i,1] = itpw(x[i])
-    #     phi[i,1] = itpphi(x[i])
-    
-    # end
-
-    return F,G,W,f,q,D,D2,x,t,phi
+    return u0,v0,w0,f,q,D,D2,x
  end
 
-function T_ca(R,Ma,f,q,W,gamma,Tw,x,t,N)
-    Mx = Ma * R
-    T = T_var(Mx,f,q,Tw,gamma)
-    T_x = - (gamma - 1) * Ma^2 * R * f
-    itpT = BSplineKit.interpolate(t,T,BSplineOrder(4))
-    itpT_x = BSplineKit.interpolate(t,T_x,BSplineOrder(4)) 
-    T = zeros(N+1,1)
-    T_x = zeros(N+1,1)
-    for i=1:N+1
-        T[i,1] = itpT(x[i])
-        T_x[i,1] = itpT_x(x[i])
-    end
-    RHO = 1 ./ T
+function T_ca(Mr,f,q,W,gamma,Tw)
+    T = CRD_BF.T_var(Mr,f,q,Tw,gamma)
     H = W .* T
-    RHO_x = 1 ./ T_x
-    return RHO,H,T,T_x,RHO_x
+    return H,T
+
  end
+function interp(u,v,w,T,x,N,mode)
+    if mode == "sim"
+        z = range(0,80,1001)
+        itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
+        itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
+        itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
+        itT = BSplineKit.interpolate(z, T , BSplineOrder(4))
+        F = zeros(N+1,1)
+        G = zeros(N+1,1)
+        H = zeros(N+1,1)
+        T = zeros(N+1,1)
+        for i = 1 : N + 1
+            F[i,1] = itu(x[i])
+            G[i,1] = itv(x[i])
+            H[i,1] = itw(x[i])
+            T[i,1] = itT(x[i])
+        end
+        rho = 1 ./ T
+    end
+    if mode == "phy"
+        z = CRD_BF.Physical_Interpretation(T,0.08,1001)
+        itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
+        itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
+        itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
+        itT = BSplineKit.interpolate(z, T , BSplineOrder(4))
+        F = zeros(N+1,1)
+        G = zeros(N+1,1)
+        H = zeros(N+1,1)
+        T = zeros(N+1,1)
+        for i = 1 : N + 1
+            F[i,1] = itu(x[i])
+            G[i,1] = itv(x[i])
+            H[i,1] = itw(x[i])
+            T[i,1] = itT(x[i])
+        end
+        rho = 1 ./ T
+    end
+        return F,G,H,T,rho,z
+  end
+
 function Time_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be)
     # phi_hat = [u,v,w,rho,p,t]
 
@@ -673,4 +677,118 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
     A2 = A2[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
 
     return A0,A1,A2
-end
+ end
+function DevelopingSpatialMode()
+    c = -2/3
+    eye = I(N_cheb + 1)
+    Zero = zeros(N_cheb + 1, N_cheb + 1)
+    A0_11 = (1/R) * rho .* eye
+    A1_11 = im * rho .* eye
+    A2_11 = Zero
+
+    A0_12 = im * be * rho .* eye
+    A1_12 = Zero
+    A2_12 = Zero
+
+    A0_13 = rho .* D + D * rho .* eye
+    A1_13 = Zero
+    A2_13 = Zero
+
+    A0_14 = im * be * G .* eye .- im * omega + (1/R) * H .* D + (2*F)/R .* eye + (D*H)/R .* eye
+    A1_14 = im * F .* eye
+    A2_14 = Zero
+
+    A0_15 = Zero
+    A1_15 = Zero
+    A2_15 = Zero
+
+    A0_21 = im * be * rho .* G .* eye - im * omega .* rho .* eye + (rho.*F)./R .* eye + ((rho.*H)./R) .* D + be^2 / R .* T .* eye - D * T .* D - T .* D2
+    A1_21 = im * rho .* F .* eye
+    A2_21 = ((2+c)/R) * T .* eye
+
+    A0_22 = -(2/R) * rho .* G .* eye - 2 * rho .* eye
+    A1_22 = (c/R) * be * T .* eye + (be/R) * T .* eye
+    A2_22 = Zero
+
+    A0_23 = rho .* D*F .* eye 
+    A1_23 = -(1/R) * (im * c * T .* D + im * D * T .* eye + im * T .* D)
+    A2_23 = Zero
+
+    A0_24 = F.^2 .* eye + (1/R) * H .* D * F .* eye - (1/R) * G.^2 .* eye - 2 * G .* eye - R .* eye
+    A1_24 = im * (gamma * Ma^2)^(-1) * T .* eye
+    A2_24 = Zero
+
+    A0_25 = -(D2 * F .* eye + D*F .* D)
+    A1_25 = im * (gamma * Ma^2)^(-1) * rho .* eye
+    A2_25 = Zero
+
+    A0_31 = (1/R) * (2 * rho .* G .* eye + 2 * rho .* eye - c * T * im * be /R .* eye)  
+    A1_31 = (c/R) * be * T .* eye
+    A2_31 = Zero
+
+    A0_32 = im * be * rho .* G .* eye - im * omega .* rho .* eye + (1/R) * ( rho .* H .* D + rho .* F .* eye + c * be^2 *T .* eye + im * be * (c/R) * T .* eye + 2 * be^2 * T .* eye) - D*T .* D - T .* D2
+    A1_32 = im * rho .* F .* eye
+    A2_32 = Zero
+
+    A0_33 = rho .* (D*G) .* eye - (c/R^2) * im * be * T .* D - (im*be/R) * D * T .* eye - im * be / R * T .* D
+    A1_33 = Zero
+    A2_33 = Zero
+
+    A0_34 = (1/R) * (2 * F .* G .* eye + H .* D * G .* eye + 2 * F .* eye ) + im * be * (gamma * Ma^2)^(-1) * T .* eye
+    A1_34 = Zero
+    A2_34 = Zero
+
+    A0_35 = -(D2 * G .* eye + D*G .* D) + im * be *(gamma * Ma^2)^(-1) * rho .* eye
+    A1_35 = Zero
+    A2_35 = Zero
+
+    A0_41 = - (c/R^2) * T .* D
+    A1_41 = -(im * c/R) * T .* D - im * T .* D
+    A2_41 = Zero
+
+    A0_42 = (-1/R) * (im * be * c * T .* D + im * be * T .* D)
+    A1_42 = Zero
+    A2_42 = Zero
+
+    A0_43 = im * be * rho .* G .* eye - im * omega .* rho .* eye + (1/R) * (rho .* H .* D + rho .* D * H .* eye - c * T .* D2 + be^2 * T .* eye) - 2 * D * T .* D - 2 * T .* D2
+    A1_43 = im * rho .* F .* eye
+    A2_43 = (1/R) * T .* eye
+
+    A0_44 = (H .* D * H .* eye) / (R^2) + (gamma * Ma^2)^(-1) * (D*T .* eye + T .* D)
+    A1_44 = Zero
+    A2_44 = Zero
+
+    A0_45 = - (1/R) * ((c/R) * D * F .* eye + (c/R) * D2 * H .* eye + im * be * D * G .* eye + 2 * D2 * H .* eye + 2 * D * H .* D) + (gamma * Ma^2)^(-1) * (D * rho .* eye + rho .* D)
+    A1_45 = - im * D * F .* eye
+    A2_45 = Zero
+
+    A0_51 = -(1/R^2) * (2 * Ma^2 * (gamma - 1)) * im * be * T .* G .* eye - (2 * Ma^2 * (gamma - 1)/R) * R * (T .* D * F .* D) - (c * Ma^2 * (gamma - 1) / R^2) * (4 * T .* F .* eye + D * H .* T .* eye)
+    A1_51 = -(4 * im * Ma^2 * (gamma - 1) / R^2) * T .* F .* eye - (c * Ma^2 * (gamma - 1) / R^2) * (4 * im * R  * T .* F .* eye + im * R * D * H .* F.* eye )
+    A2_51 = Zero
+
+    A0_52 = - (Ma^2 * (gamma - 1) / R) * (4 * im * be / R * T .* F .* eye + 2 * R * D * G .* T .* D + (c/R) * (4 * im * be * R * T .* F .* eye + 2 * im * be * R * D * H .* eye))
+    A1_52 = -(2 * im * Ma^2 * (gamma - 1) / R^2) * T .* G .* eye
+    A2_52 = Zero
+
+    A0_53 = D * T .* rho .* eye - (Ma^2*(gamma - 1) / R) * ((4/R) * T .* D * H .* eye + 2 * im * be * T .* D * G .* eye + (c/R) * (4 * R * T .* F .* D + 2 * R * D * H .* D))
+    A1_53 = - (Ma^2*(gamma - 1) / R) * (2 * im *  T .* D * F) .* eye
+    A2_53 = Zero
+
+    A0_54 = (1/R) * H .* D * T .* eye + (gamma-1)/(gamma) * ((im * be * G .* eye - im * omega .* eye) .* T + H .* D * T .* eye + H .* T .* D) 
+    A1_54 = (gamma-1)/(gamma) * (im * F .* T .* eye)
+    A2_54 = Zero
+
+    A0_55 = im * be * rho .* G .* eye -im * omega * rho .* eye + (1/R) * (rho .* H .* D ) + (1/sigma) * (be^2 .* eye - D^2 ) - (Ma^2 * (gamma - 1) / R) * (4 * F.^2 / R^2 .* eye + (2 * D * H + G.^2) / R^2 .* eye 
+    + R * (D*F).^2 .* eye + R * (D*G).^2 .* eye + (c/R) * (4 * F.^2 .* eye + 4 * F .* D * H .* eye + (D*H).^2 .* eye)) + (gamma-1)/(gamma) * (im * be * G .* eye -im * omega .* eye) .* rho + (gamma-1)/(gamma) * (H .* D * rho .* eye + H .* rho .* D )
+    A1_55 = im * rho .* F .* eye - (im/(sigma * R^2) .* eye) + (gamma-1)/gamma * im * F .* rho .* eye
+    A2_55 = 1/(sigma * R) .* eye
+
+    A0 = [A0_11 A0_12 A0_13 A0_14 A0_15 ; A0_21 A0_22 A0_23 A0_24 A0_25 ; A0_31 A0_32 A0_33 A0_34 A0_35 ; A0_41 A0_42 A0_43 A0_44 A0_45 ; A0_51 A0_52 A0_53 A0_54 A0_55  ]
+    A1 = [A1_11 A1_12 A1_13 A1_14 A1_15 ; A1_21 A1_22 A1_23 A1_24 A1_25 ; A1_31 A1_32 A1_33 A1_34 A1_35 ; A1_41 A1_42 A1_43 A1_44 A1_45 ; A1_51 A1_52 A1_53 A1_54 A1_55  ]
+    A2 = [A2_11 A2_12 A2_13 A2_14 A2_15 ; A2_21 A2_22 A2_23 A2_24 A2_25 ; A2_31 A2_32 A2_33 A2_34 A2_35 ; A2_41 A2_42 A2_43 A2_44 A2_45 ; A2_51 A2_52 A2_53 A2_54 A2_55  ]
+
+    A0 = A0[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    A1 = A1[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    A2 = A2[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+
+ end
