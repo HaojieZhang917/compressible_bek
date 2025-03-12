@@ -269,7 +269,7 @@ module CRD_BF
         u=sol(t)
         return u , t
         end
- function sol_baseflowODE(tspan,Num)
+ function sol_baseflowODE(tspan,Num,Ro,Co)
 
         function oneDiskODE!(du, u , p, t)
             
@@ -279,12 +279,24 @@ module CRD_BF
             dV = u[4]
             W = u[5]
             du[1] = dU
-            ddU = U^2 + W*dU - (V+1.0e0)^2
+            ddU = Ro*(U^2 + W*dU - (V^2 - 1e0)) - Co*(V + 1.0e0)
             du[2] = ddU
-            ddV = 2.0e0*U*(V + 1.0e0) + W*dV
+            ddV = Ro*(2*U*V + W*dV) + Co*(U)
             du[3] = dV
             du[4] = ddV                          
             du[5] = -2.0e0*U
+            # U = u[1]
+            # dU = u[2]
+            # V = u[3]
+            # dV = u[4]
+            # W = u[5]
+            # du[1] = dU
+            # ddU = Ro*(U^2 + W*dU - (V^2 - 1)) - Co*(V - 1.0)
+            # du[2] = ddU
+            # ddV = Ro*(2*U*V + W*dV) + Co*U
+            # du[3] = dV
+            # du[4] = ddV                          
+            # du[5] = -2.0*U
 
         end
         function oneDiskbc!(residual, u , p, t)
@@ -292,13 +304,27 @@ module CRD_BF
             residual[1] = u[begin][1] 
             residual[2] = u[begin][3] 
             residual[3] = u[begin][5] 
-            residual[4] = u[end][1] 
 
-            residual[5] = u[end][3] + 1.0e0
+            residual[4] = u[end][1] 
+            residual[5] = u[end][3] + 1.0
         end
-            prob = BVProblem(oneDiskODE!, oneDiskbc!, [0.0, 0.5103341351120374, 0.0, -0.6151547026271073, 0.0] ,tspan, dtmax=0.01)
+            # if Ro == 1
+            #     ini = [0.0 , 9.419709011708589097e-01, 0.0,-7.728853782538425143e-01, 0.0]
+            # elseif Ro == 0
+            #     ini = [0.0 , 1, 0.0, -1, 0.0]
+            # else 
+            #     ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
+            # end
+            if Ro + Co == -1
+                ini = [0.0 , 0.94197, 0.0,-0.77288, 0.0]
+            elseif Ro + Co== 2
+                ini = [0.0 , 1.0, 0.0, -1.0, 0.0]
+            else 
+                ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
+            end
+            prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.01)
             sol = solve(prob, Shooting(Vern7()))
-            t=range(0.0, 80, Num)
+            t=range(0.0, 20, Num)
             u=sol(t)
         
         return u , t
@@ -412,13 +438,13 @@ import .FDqScheme
 using DifferentialEquations
 using BSplineKit
 using LinearAlgebra
-function baseflow_var(N_cheb)
+function baseflow_var(N_cheb,Ro,Co)
 
     N = 1001
-    tspan = (0,80)
-    t = range(0,80,N)
+    tspan = (0,20)
+    t = range(0,20,N)
     sigma = 0.72
-    u,z = CRD_BF.sol_baseflowODE(tspan,N)
+    u,z = CRD_BF.sol_baseflowODE(tspan,N,Ro,Co)
     u0 = u[1,:]
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
     u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u,t,PHI)
