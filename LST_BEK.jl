@@ -401,7 +401,7 @@ module KEB_SpatialMode
         dv=-1*data[:,6]
         itpw=itp = BSplineKit.interpolate(t, w , BSplineOrder(4))
         itpu=itp = BSplineKit.interpolate(t, u , BSplineOrder(4))
-        itpv=itp = SplineKit.interpolate(t, v , BSplineOrder(4))
+        itpv=itp = BSplineKit.interpolate(t, v , BSplineOrder(4))
         itpdu=itp =BSplineKit.interpolate(t, du , BSplineOrder(4))
         itpdv=itp =BSplineKit.interpolate(t, dv , BSplineOrder(4))
         #interpolation
