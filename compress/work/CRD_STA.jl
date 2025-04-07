@@ -322,7 +322,7 @@ module CRD_BF
             else 
                 ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
             end
-            prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.001)
+            prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.01)
             sol = solve(prob, Shooting(Vern7()))
             t=range(0.0, 20, Num)
             u=sol(t)
@@ -359,17 +359,20 @@ module CRD_BF
         # end
         # D = (1/40) * D
         # D2 = D^2
+        a=0.4
+        b=0.6
+        c=0
         for i=1:N+1
-            D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
+            D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
         end
         for i=1:N+1
-            x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
-            if x[i]>15
-                x[i]=15
+            x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
+            if x[i]>20
+                x[i]=20
             end
         end
-
-        D2 = D^2
+        
+        D2 = D^2;
 
         return D,D2,x
 
@@ -440,7 +443,7 @@ using BSplineKit
 using LinearAlgebra
 function baseflow_var(N_cheb,Ro,Co)
 
-    N = 1001
+    N = 2001
     tspan = (0,20)
     t = range(0,20,N)
     sigma = 0.72
@@ -462,7 +465,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,20,1001)
+        z = range(0,20,2001)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -599,7 +602,7 @@ function Time_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be)
 
     return A,B
  end
-function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
+function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
     # phi_hat = [u,v,w,rho,p,t]

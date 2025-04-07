@@ -309,12 +309,12 @@ module KEB_SpatialMode
 
         close( f )
 
-        t=data[:,1]
-        w=data[:,2]
-        u=data[:,3]
-        v=data[:,4]
-        du=data[:,5]
-        dv=data[:,6]
+        t= data[:,1]
+        w=-1 * data[:,2]
+        u=-1 * data[:,3]
+        v= -1 * data[:,4]
+        du= -1 * data[:,5]
+        dv= -1 * data[:,6]
         itpw=itp = interpolate(t, w , BSplineOrder(4))
         itpu=itp = interpolate(t, u , BSplineOrder(4))
         itpv=itp = interpolate(t, v , BSplineOrder(4))

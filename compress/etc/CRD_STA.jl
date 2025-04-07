@@ -309,11 +309,11 @@ module CRD_BF
             residual[5] = u[end][3] + 1e0
         end
             # if Ro == 1
-            #     ini = [0.0 , -9.419709011708589097e-01, 0.0,7.728853782538425143e-01, 0.0]
+            #     ini = [0.0 , 9.419709011708589097e-01, 0.0,-7.728853782538425143e-01, 0.0]
             # elseif Ro == 0
-            #     ini = [0.0 , -1, 0.0, 1, 0.0]
+            #     ini = [0.0 , 1, 0.0, -1, 0.0]
             # else 
-            #     ini = [0.0, -0.51, 0.0, 0.6159, 0.0]
+            #     ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
             # end
             if Ro + Co == -1
                 ini = [0.0 , 0.942 , 0.0 , -0.7729, 0.0]
@@ -364,8 +364,8 @@ module CRD_BF
         end
         for i=1:N+1
             x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
-            if x[i]>15
-                x[i]=15
+            if x[i]>20
+                x[i]=20
             end
         end
 
@@ -440,7 +440,7 @@ using BSplineKit
 using LinearAlgebra
 function baseflow_var(N_cheb,Ro,Co)
 
-    N = 10001
+    N = 2001
     tspan = (0,20)
     t = range(0,20,N)
     sigma = 0.72
@@ -462,7 +462,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,20,10001)
+        z = range(0,20,2001)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
