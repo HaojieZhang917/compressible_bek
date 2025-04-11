@@ -285,7 +285,7 @@ module CRD_BF
             du[3] = dV
             du[4] = ddV                          
             du[5] = -2.0e0*U
-            # U = u[1]
+            U = u[1]
             # dU = u[2]
             # V = u[3]
             # dV = u[4]
@@ -309,11 +309,11 @@ module CRD_BF
             residual[5] = u[end][3] + 1e0
         end
             # if Ro == 1
-            #     ini = [0.0 , -9.419709011708589097e-01, 0.0,7.728853782538425143e-01, 0.0]
+            #     ini = [0.0 , 9.419709011708589097e-01, 0.0,-7.728853782538425143e-01, 0.0]
             # elseif Ro == 0
-            #     ini = [0.0 , -1, 0.0, 1, 0.0]
+            #     ini = [0.0 , 1, 0.0, -1, 0.0]
             # else 
-            #     ini = [0.0, -0.51, 0.0, 0.6159, 0.0]
+            #     ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
             # end
             if Ro + Co == -1
                 ini = [0.0 , 0.942 , 0.0 , -0.7729, 0.0]
@@ -324,7 +324,7 @@ module CRD_BF
             end
             prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.01)
             sol = solve(prob, Shooting(Vern7()))
-            t=range(0.0, 20, Num)
+            t=range(0.0, 30, Num)
             u=sol(t)
         
         return u , t
@@ -359,17 +359,20 @@ module CRD_BF
         # end
         # D = (1/40) * D
         # D2 = D^2
+        a = 0.2
+        b = 1
+        c = 1
         for i=1:N+1
-            D[i,:]=D[i,:].*((2*x[i]^3-x[i]^2+3*x[i]-4)^2/(20*(6*x[i]^2-2*x[i]+3)))
+            D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
         end
         for i=1:N+1
-            x[i]=(4*x[i]^3-2*x[i]^2+6*x[i]+12)/(-2*x[i]^3+x[i]^2-3*x[i]+4)
-            if x[i]>15
-                x[i]=15
+            x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
+            if x[i]>30
+                x[i]=30
             end
         end
-
-        D2 = D^2
+        
+        D2 = D^2;
 
         return D,D2,x
 
@@ -441,8 +444,8 @@ using LinearAlgebra
 function baseflow_var(N_cheb,Ro,Co)
 
     N = 10001
-    tspan = (0,20)
-    t = range(0,20,N)
+    tspan = (0,30)
+    t = range(0,30,N)
     sigma = 0.72
     u,z = CRD_BF.sol_baseflowODE(tspan,N,Ro,Co)
     u0 = u[1,:]
@@ -462,7 +465,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,20,10001)
+        z = range(0,30,10001)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -599,7 +602,7 @@ function Time_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be)
 
     return A,B
  end
-function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
+function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
     # phi_hat = [u,v,w,rho,p,t]
@@ -704,7 +707,7 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be)
 
     return A0,A1,A2
   end
-function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,Ro,Co)
+function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb,Ro,Co)
 
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
     # phi_hat = [u,v,w,rho,t]
@@ -717,7 +720,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,Ro,Co)
     A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
     A0_22 = - 1 * rho .* (2*Ro*G .+ Co) .* I(N_cheb + 1)
     A0_23 = Ro * R * rho.^2 .* D*F .* I(N_cheb + 1)
-    A0_24 =  rho .* (D2 * F) .* I(N_cheb + 1)
+    A0_24 = rho .* H .* (D * F) .* I(N_cheb + 1)
     A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
 
     A0_31 = rho .* (2*Ro*G .+ Co) .* I(N_cheb + 1)
