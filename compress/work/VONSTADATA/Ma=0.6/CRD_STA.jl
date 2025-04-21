@@ -272,62 +272,61 @@ module CRD_BF
  function sol_baseflowODE(tspan,Num,Ro,Co)
 
         function oneDiskODE!(du, u , p, t)
-                
-            # U = u[1]
-            # dU = u[2]
-            # V = u[3]
-            # dV = u[4]
-            # W = u[5]
-            # du[1] = dU
-            # ddU = Ro*(U^2 + W*dU - (V^2 - 1e0)) - Co*(V + 1.0e0)
-            # du[2] = ddU
-            # ddV = Ro*(2*U*V + W*dV) + Co*(U)
-            # du[3] = dV
-            # du[4] = ddV                          
-            # du[5] = -2.0e0*U
+            
             U = u[1]
             dU = u[2]
             V = u[3]
             dV = u[4]
             W = u[5]
             du[1] = dU
-            ddU = Ro*(U^2 + W*dU - (V^2 - 1)) - Co*(V - 1.0)
+            ddU = Ro*(U^2 + W*dU - (V^2 - 1e0)) - Co*(V + 1.0e0)
             du[2] = ddU
-            ddV = Ro*(2*U*V + W*dV) + Co*U
+            ddV = Ro*(2*U*V + W*dV) + Co*(U)
             du[3] = dV
             du[4] = ddV                          
-            du[5] = -2.0*U
-        
+            du[5] = -2.0e0*U
+            U = u[1]
+            # dU = u[2]
+            # V = u[3]
+            # dV = u[4]
+            # W = u[5]
+            # du[1] = dU
+            # ddU = Ro*(U^2 + W*dU - (V^2 - 1)) - Co*(V - 1.0)
+            # du[2] = ddU
+            # ddV = Ro*(2*U*V + W*dV) + Co*U
+            # du[3] = dV
+            # du[4] = ddV                          
+            # du[5] = -2.0*U
+
         end
         function oneDiskbc!(residual, u , p, t)
-        
+
             residual[1] = u[begin][1] 
             residual[2] = u[begin][3] 
             residual[3] = u[begin][5] 
-        
+
             residual[4] = u[end][1] 
-            residual[5] = u[end][3] - 1
-        
+            residual[5] = u[end][3] + 1e0
         end
-            if Ro == 1
-                ini = [0.0 , -9.419709011708589097e-01, 0.0,7.728853782538425143e-01, 0.0]
-            elseif Ro == 0
-                ini = [0.0 , -1, 0.0, 1, 0.0]
-            else 
-                ini = [0.0, -0.51, 0.0, 0.6159, 0.0]
-            end
-            # if Ro + Co == -1
-            #     ini = [0.0 , 0.942 , 0.0 , -0.7729, 0.0]
-            # elseif Ro + Co== 2
-            #     ini = [0.0 , 1.0, 0.0, -1.0, 0.0]
+            # if Ro == 1
+            #     ini = [0.0 , 9.419709011708589097e-01, 0.0,-7.728853782538425143e-01, 0.0]
+            # elseif Ro == 0
+            #     ini = [0.0 , 1, 0.0, -1, 0.0]
             # else 
             #     ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
             # end
+            if Ro + Co == -1
+                ini = [0.0 , 0.942 , 0.0 , -0.7729, 0.0]
+            elseif Ro + Co== 2
+                ini = [0.0 , 1.0, 0.0, -1.0, 0.0]
+            else 
+                ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
+            end
             prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.01)
             sol = solve(prob, Shooting(Vern7()))
-            t=range(0.0, 15, Num)
-            u= -1 * sol(t)
-            
+            t=range(0.0, 20, Num)
+            u=sol(t)
+        
         return u , t
 
         end
@@ -368,8 +367,8 @@ module CRD_BF
         end
         for i=1:N+1
             x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i]>15
-                x[i]=15
+            if x[i]>20
+                x[i]=20
             end
         end
         
@@ -444,9 +443,9 @@ using BSplineKit
 using LinearAlgebra
 function baseflow_var(N_cheb,Ro,Co)
 
-    N = 10001
-    tspan = (0,15)
-    t = range(0,15,N)
+    N = 2001
+    tspan = (0,20)
+    t = range(0,20,N)
     sigma = 0.72
     u,z = CRD_BF.sol_baseflowODE(tspan,N,Ro,Co)
     u0 = u[1,:]
@@ -454,12 +453,6 @@ function baseflow_var(N_cheb,Ro,Co)
     u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u,t,PHI)
     D,D2,x = CRD_BF.Cheb(N_cheb)
     f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    
-    if Ro == 1
-        u0 = -1 * u0
-        v0 = -1 * v0
-        w0 = -1 * w0
-    end
 
     return u0,v0,w0,f,q,D,D2,x
  end
@@ -472,7 +465,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,15,10001)
+        z = range(0,20,2001)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -619,21 +612,21 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     A0_14 = im * R * (be * G .- omega ) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1) + rho .* H .* D 
     A0_15 = zeros(N_cheb + 1, N_cheb + 1)
 
-    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + rho .* Ro * F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
-    A0_22 = -1 * rho .* (2*Ro * G .+ Co) .* I(N_cheb + 1)
-    A0_23 = Ro * R * rho.^2 .* D*F .* I(N_cheb + 1)
+    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + rho .* F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
+    A0_22 = -2 * rho .* (G .+ 1) .* I(N_cheb + 1)
+    A0_23 = R * rho.^2 .* D*F .* I(N_cheb + 1)
     A0_24 = rho .* (D2 * F) .* I(N_cheb + 1)
     A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
 
-    A0_31 =  rho .* (2 * Ro * G .+ Co) .* I(N_cheb + 1)
-    A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
+    A0_31 = 2 * rho .* (G .+ 1) .* I(N_cheb + 1)
+    A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
     A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
-    A0_34 = F .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + Ro * rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
+    A0_34 = 2 * F .* (G .+ 1) .* I(N_cheb + 1) + rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
     A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
 
     A0_41 = zeros(N_cheb + 1, N_cheb + 1)
     A0_42 = -im * be * (rho .* (D*lam) + (1 .+ lam .* rho)).*D
-    A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho.^2 .*  ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
+    A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + rho.^2 .* ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
     A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
     A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1) + rho .* D)
 
@@ -724,21 +717,21 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb
     A0_14 = im * R * (be * G .- omega ) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1) + rho .* H .* D 
     A0_15 = zeros(N_cheb + 1, N_cheb + 1)
 
-    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + Ro * rho .*  F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
-    A0_22 = -1 * rho .* (2*Ro * G .+ Co) .* I(N_cheb + 1)
-    A0_23 = R * rho.^2 .* D*F .* I(N_cheb + 1)
-    A0_24 = rho .* (D2 * F) .* I(N_cheb + 1)
+    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
+    A0_22 = - 1 * rho .* (2*Ro*G .+ Co) .* I(N_cheb + 1)
+    A0_23 = Ro * R * rho.^2 .* D*F .* I(N_cheb + 1)
+    A0_24 = rho .* H .* (D * F) .* I(N_cheb + 1)
     A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
 
-    A0_31 =  rho .* (2 * Ro * G .+ Co) .* I(N_cheb + 1)
-    A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
-    A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
-    A0_34 = F .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + Ro * rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
+    A0_31 = rho .* (2*Ro*G .+ Co) .* I(N_cheb + 1)
+    A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
+    A0_33 = Ro * R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
+    A0_34 = F .* (2*Ro*G .+ Co) .* I(N_cheb + 1) + rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
     A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
 
     A0_41 = zeros(N_cheb + 1, N_cheb + 1)
     A0_42 = -im * be * (rho .* (D*lam) + (1 .+ lam .* rho)).*D
-    A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho.^2 .*  ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
+    A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + rho.^2 .* (Ro * (D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
     A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
     A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1) + rho .* D)
 
