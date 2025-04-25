@@ -228,6 +228,7 @@ module CRD_BF
     using DifferentialEquations
     using BSplineKit
     using IterativeSolvers
+    using PyCall
     
  function In_Su(Num)
         T0 = 273
@@ -265,79 +266,111 @@ module CRD_BF
         ini = [0,0,0,0.5,0.5103341351120374,-0.6151547026271073,0]
         prob = BVProblem(ODE!, bc! ,ini ,tspan)
         sol = solve(prob, Shooting(Vern7()))
-        t=range(0.0, 20, Num)
+        t=range(0.0, 30, Num)
         u=sol(t)
         return u , t
         end
- function sol_baseflowODE(tspan,Num,Ro,Co)
+ function sol_baseflowODE()
 
-        function oneDiskODE!(du, u , p, t)
+        py"""
+        import numpy as np
+        from scipy.integrate import solve_bvp
+        import matplotlib.pyplot as plt
+        kappa = 1
+        def oneDiskODE(z, y):
+        
+                # Y0 = H, Y1 = F', Y2 = F, Y3 = G', Y4 = G
+                dydz = np.zeros((5, len(z)))
+                dydz = np.array([-
+                                2.0*
+                                y[2], kappa * 
+                                (y[2] *
+                                y[2] +
+                                    y[0] *
+                                    y[1] -
+                                    (y[4] *
+                                    y[4]- 
+                                    1.0)) -
+                                (2.0 -
+                                    kappa - 
+                                    kappa**2) *
+                                (y[4] -
+                                    1.0), y[1], kappa *
+                                (2.0 * 
+                                    y[2] *
+                                    y[4] +
+                                    y[0] *
+                                    y[3]) +
+                                (2.0 -
+                                    kappa -
+                                    kappa**2) *
+                                y[2], y[3]])
+                return dydz 
+        
+        def oneDiskBC(ya, yb):
+                resa = np.array([ya[0],
+                                ya[2],
+                                ya[4]])
                 
-            # U = u[1]
-            # dU = u[2]
-            # V = u[3]
-            # dV = u[4]
-            # W = u[5]
-            # du[1] = dU
-            # ddU = Ro*(U^2 + W*dU - (V^2 - 1e0)) - Co*(V + 1.0e0)
-            # du[2] = ddU
-            # ddV = Ro*(2*U*V + W*dV) + Co*(U)
-            # du[3] = dV
-            # du[4] = ddV                          
-            # du[5] = -2.0e0*U
-            U = u[1]
-            dU = u[2]
-            V = u[3]
-            dV = u[4]
-            W = u[5]
-            du[1] = dU
-            ddU = Ro*(U^2 + W*dU - (V^2 - 1)) - Co*(V - 1.0)
-            du[2] = ddU
-            ddV = Ro*(2*U*V + W*dV) + Co*U
-            du[3] = dV
-            du[4] = ddV                          
-            du[5] = -2.0*U
+                resb = np.array([yb[2],
+                                yb[4] - 1.0])
+                
+                return np.concatenate((resa, resb))
         
-        end
-        function oneDiskbc!(residual, u , p, t)
         
-            residual[1] = u[begin][1] 
-            residual[2] = u[begin][3] 
-            residual[3] = u[begin][5] 
+        z = np.linspace(0, 50, 20000)
+        y = np.zeros((5, len(z)))
+        y_guess = np.zeros((5, z.size))
+        if kappa == 1:
+                y_guess[0] = 1.2
+                y_guess[1] = 0
+                y_guess[2] = 0
+                y_guess[3] = 0
+                y_guess[4] = 1
+        elif kappa == -1:
+                y_guess[0] = 1.2
+                y_guess[1] = 0
+                y_guess[2] = 0
+                y_guess[3] = 0
+                y_guess[4] = 1
+        else:
+                y_guess[0] = 1.2
+                y_guess[1] = 0
+                y_guess[2] = 0
+                y_guess[3] = 0
+                y_guess[4] = 1
         
-            residual[4] = u[end][1] 
-            residual[5] = u[end][3] - 1
         
-        end
-            if Ro == 1
-                ini = [0.0 , -9.419709011708589097e-01, 0.0,7.728853782538425143e-01, 0.0]
-            elseif Ro == 0
-                ini = [0.0 , -1, 0.0, 1, 0.0]
-            else 
-                ini = [0.0, -0.51, 0.0, 0.6159, 0.0]
-            end
-            # if Ro + Co == -1
-            #     ini = [0.0 , 0.942 , 0.0 , -0.7729, 0.0]
-            # elseif Ro + Co== 2
-            #     ini = [0.0 , 1.0, 0.0, -1.0, 0.0]
-            # else 
-            #     ini = [0.0, 0.51, 0.0, -0.6159, 0.0]
-            # end
-            prob = BVProblem(oneDiskODE!, oneDiskbc!, ini,tspan, dtmax=0.01)
-            sol = solve(prob, Shooting(Vern7()))
-            t=range(0.0, 15, Num)
-            u= -1 * sol(t)
-            
-        return u , t
+        
+        
+        solution = solve_bvp(oneDiskODE, oneDiskBC, z, y_guess,tol=1e-10,max_nodes=5000000)
+        
+        x_plot = np.linspace(0, 50, 20000)
+        
+        
+        y1_plot = solution.sol(x_plot)[0]
+        y2_plot = solution.sol(x_plot)[2]
+        y3_plot = solution.sol(x_plot)[4]
+        y4_plot = solution.sol(x_plot)[1]
+        y5_plot = solution.sol(x_plot)[3]
+        
+        """
+        w0 = py"y1_plot"
+        u0 = py"y2_plot"
+        v0 = py"y3_plot"
+        du0 = py"y4_plot"
+        dv0 = py"y5_plot"
+        x = py"x_plot"
+        
+        return -u0,-v0,-w0,-du0,-dv0,x
 
         end
- function velocity(u,t,phi)
-
-    U = u[1 , :]
-    dU = u[2 , :]
-    V = u[3 , :]
-    dV = u[4 , :]
-    W = u[5 , :]
+ function velocity(u0,v0,w0,du0,dv0,t,phi)
+    U = u0
+    V = v0
+    W = w0
+    dU = du0
+    dV = dv0
     F_U = itp = interpolate(t, U , BSplineOrder(4))
     F_dU = itp = interpolate(t, dU , BSplineOrder(4))
     F_dV = itp = interpolate(t, dV , BSplineOrder(4))
@@ -360,16 +393,16 @@ module CRD_BF
         # end
         # D = (1/40) * D
         # D2 = D^2
-        a = 0.2
-        b = 1
-        c = 1
+        a = 1
+        b = 0.6
+        c = 0.5
         for i=1:N+1
             D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
         end
         for i=1:N+1
             x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i]>15
-                x[i]=15
+            if x[i]>50
+                x[i]=50
             end
         end
         
@@ -444,23 +477,20 @@ using BSplineKit
 using LinearAlgebra
 function baseflow_var(N_cheb,Ro,Co)
 
-    N = 10001
-    tspan = (0,15)
-    t = range(0,15,N)
+    N = 20000
+    tspan = (0,50)
+    t = range(0,50,N)
     sigma = 0.72
-    u,z = CRD_BF.sol_baseflowODE(tspan,N,Ro,Co)
-    u0 = u[1,:]
+    u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE()
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
-    u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u,t,PHI)
+    u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u0,v0,w0,du0,dv0,t,PHI)
     D,D2,x = CRD_BF.Cheb(N_cheb)
     f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    
     if Ro == 1
         u0 = -1 * u0
         v0 = -1 * v0
         w0 = -1 * w0
     end
-
     return u0,v0,w0,f,q,D,D2,x
  end
 
@@ -472,7 +502,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,15,10001)
+        z = range(0,50,20000)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))

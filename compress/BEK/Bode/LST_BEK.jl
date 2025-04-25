@@ -18,7 +18,7 @@
     module_SpatialMode is the function to caculate the spatial eigenvalues problem of BEK model     
       The module include one subfunctions.                                                          
       KEB_LST_ALL:consider the Coriolis force and curvature items which is the Practical problems.  
-      KEB_LST_OS_SPA:neglect the Coriolis force and curvature items
+      KEB_LST_OS_SPA:neglect the Coriolis force and cursvature items
    input:                                                                                           
        baseflow:velocity profiles of the BEK problem include u v w                                  
        N:Number of discrete points                                                                  
@@ -40,7 +40,7 @@ module KEB_TimeMode
     using BSplineKit
 
     export KEB_LST_all,KEB_LST_OS,KEB_LST_Rayleigh,rayleigh_quotient_iteration
-    function  KEB_LST_all(baseflow,N,α,β,R,Ro)
+    function  KEB_LST_all(baseflow,N,α,β,R,Ro,Co)
 
         θ = range(0,length=N+1,stop=pi)
         x = reshape(-cos.(θ), N+1, 1)
@@ -309,12 +309,12 @@ module KEB_SpatialMode
 
         close( f )
 
-        t= data[:,1]
-        w=-1 * data[:,2]
-        u=-1 * data[:,3]
-        v= -1 * data[:,4]
-        du= -1 * data[:,5]
-        dv= -1 * data[:,6]
+        t=data[:,1]
+        w=data[:,2]
+        u=data[:,3]
+        v=data[:,4]
+        du=data[:,5]
+        dv=data[:,6]
         itpw=itp = interpolate(t, w , BSplineOrder(4))
         itpu=itp = interpolate(t, u , BSplineOrder(4))
         itpv=itp = interpolate(t, v , BSplineOrder(4))
@@ -494,6 +494,7 @@ module iteration
     end
     end
 module io
+
     using DelimitedFiles
     using LinearAlgebra 
     function inp()
@@ -509,4 +510,23 @@ module io
         end
         return Ro
     end
+ end
+
+module eigvec_compute
+    
+    using LinearAlgebra
+    
+    function compute(v,N,al,be,R,D)
+       
+        h = v[1 : N - 3 , 1]
+        yam = v[N - 2 : 2N - 4 , 1]
+        h = [0;0;h;0;0]
+        yam = [0;yam;0]
+        dh = D * h
+        f = (al^2 - (im * al/R) + be^2)^(-1) * (im * al * dh .- be * yam)
+        g = yam ./ al .+ (be/al) * f
+
+        return f,g,h
+
     end
+end
