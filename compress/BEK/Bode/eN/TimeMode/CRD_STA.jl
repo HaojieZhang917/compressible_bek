@@ -540,105 +540,78 @@ function interp(u,v,w,T,x,N,mode)
         return F,G,H,T,rho,z
   end
 
-function Time_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be)
-    # phi_hat = [u,v,w,rho,p,t]
-
-    A11 = ((im * al * R + 1) .* rho) .* I(N_cheb + 1)
-    A12 = (im * be * R).*rho .* I(N_cheb + 1)
-    A13 = R * rho .*(D*rho.* I(N_cheb + 1) + rho .* D)
-    A14 = (im * R .* (al * F + be * G)) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1) + rho .* H .* D 
-    A15 = zeros(N_cheb + 1, N_cheb + 1)
-    A16 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A21 = im * R * rho .* (al *  F + be * G) .* I(N_cheb + 1) + rho .* F .* I(N_cheb + 1) + al^2 .* (lam + 2  * T) .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
-    A22 = -2 * rho .* (G .+ 1) .* I(N_cheb + 1) + al * be * (lam .+ T) .* I(N_cheb + 1)
-    A23 = R * rho.^2 .* (D*F) .* I(N_cheb + 1) - im * al *(rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
-    A24 = rho .* (D2 * F) .* I(N_cheb + 1)
-    A25 = im * al * R .* I(N_cheb + 1)
-    A26 = -rho .* D * (rho .* (D*F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D
-
-    A31 = 2 * rho .* (G .+ 1) .* I(N_cheb + 1) + al * be * (lam .+ T) .* I(N_cheb + 1)
-    A32 = im * R * rho .* (al *  F + be * G) .* I(N_cheb + 1) + rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + al^2 * T .* I(N_cheb + 1) + rho.^2 .* H .* D - rho .* D2
-    A33 = -im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D) + R * rho.^2 .* (D*G) .* I(N_cheb + 1)
-    A34 = 2 * F .* (G .+ 1) .* I(N_cheb + 1) + rho .* H .* (D*G) .* I(N_cheb + 1)
-    A35 = im * be * R .* I(N_cheb + 1)
-    A36 = -rho .* D * (rho .* (D*G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D
-
-    A41 = -im * al *(rho .* (D*lam).* I(N_cheb + 1) + (1 .+ lam .* rho).*D)
-    A42 = -im * be * (rho .* (D*lam) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
-    A43 = im * R * rho .* (al * F + be * G) .* I(N_cheb + 1) + rho.^2 .* (D * H .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + (al^2 + be^2) .* T .* I(N_cheb + 1)
-    A44 = zeros(N_cheb + 1, N_cheb + 1)
-    A45 = R * rho .* D 
-    A46 = - im * rho .* D * (al * F + be * G) .* I(N_cheb + 1)
-
-    A51 = -2 * (gamma - 1) * Ma^2 * rho .* (D*F) .* D 
-    A52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* D
-    A53 = -2 * im * (gamma - 1) * Ma^2 * D * (al * F + be * G) .* I(N_cheb + 1) + R * rho.^2 .* D * T .* I(N_cheb + 1)
-    A54 = rho .* H .* (D * T) .* I(N_cheb + 1)
-    A55 = -(gamma - 1) * Ma^2 .* (im * R * (al * F + be * G) .* I(N_cheb + 1) + rho .* H .* D)
-    A56 = im * R * rho .* (al * F + be * G) .* I(N_cheb + 1) + (al^2 + be^2) * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2)
-        + (1/sigma) * (-rho .* ((D*rho .* D*T + rho .* D2 * T ).* I(N_cheb + 1) - (rho .* (D * T) .* D)))
-        + (-(gamma - 1) * Ma^2 * rho.^2 .* ((D * F).^2 + (D * G).^2 )).* I(N_cheb + 1)
-
-    A61 = zeros(N_cheb + 1, N_cheb + 1)
-    A62 = zeros(N_cheb + 1, N_cheb + 1)
-    A63 = zeros(N_cheb + 1, N_cheb + 1)
-    A64 = - T .* I(N_cheb + 1)
-    A65 = gamma * Ma^2 .* I(N_cheb + 1)
-    A66 = -rho .* I(N_cheb + 1)
-
-    A = [A11 A12 A13 A14 A15 A16; A21 A22 A23 A24 A25 A26; A31 A32 A33 A34 A35 A36; A41 A42 A43 A44 A45 A46; A51 A52 A53 A54 A55 A56; A61 A62 A63 A64 A65 A66]
-
-    B11 = zeros(N_cheb + 1, N_cheb + 1)
-    B12 = zeros(N_cheb + 1, N_cheb + 1)
-    B13 = zeros(N_cheb + 1, N_cheb + 1)
-    B14 = im * R .* I(N_cheb + 1)
-    B15 = zeros(N_cheb + 1, N_cheb + 1)
-    B16 = zeros(N_cheb + 1, N_cheb + 1)
-
-    B21 = im * R * rho .* I(N_cheb + 1)
-    B22 = zeros(N_cheb + 1, N_cheb + 1)
-    B23 = zeros(N_cheb + 1, N_cheb + 1)
-    B24 = zeros(N_cheb + 1, N_cheb + 1)
-    B25 = zeros(N_cheb + 1, N_cheb + 1)
-    B26 = zeros(N_cheb + 1, N_cheb + 1)
-
-    B31 = zeros(N_cheb + 1, N_cheb + 1)
-    B32 = im * R * rho .* I(N_cheb + 1)
-    B33 = zeros(N_cheb + 1, N_cheb + 1)
-    B34 = zeros(N_cheb + 1, N_cheb + 1)
-    B35 = zeros(N_cheb + 1, N_cheb + 1)
-    B36 = zeros(N_cheb + 1, N_cheb + 1)
-
-    B41 = zeros(N_cheb + 1, N_cheb + 1)
-    B42 = zeros(N_cheb + 1, N_cheb + 1)
-    B43 = im * R * rho .* I(N_cheb + 1)
-    B44 = zeros(N_cheb + 1, N_cheb + 1)
-    B45 = zeros(N_cheb + 1, N_cheb + 1)
-    B46 = zeros(N_cheb + 1, N_cheb + 1)
-
-    B51 = zeros(N_cheb + 1, N_cheb + 1)
-    B52 = zeros(N_cheb + 1, N_cheb + 1)
-    B53 = zeros(N_cheb + 1, N_cheb + 1)
-    B54 = zeros(N_cheb + 1, N_cheb + 1)
-    B55 = -(gamma-1) * Ma^2 * im * R  .* I(N_cheb + 1)
-    B56 = im * R * rho .* I(N_cheb + 1)
-
-    B61 = zeros(N_cheb + 1, N_cheb + 1)
-    B62 = zeros(N_cheb + 1, N_cheb + 1)
-    B63 = zeros(N_cheb + 1, N_cheb + 1)
-    B64 = zeros(N_cheb + 1, N_cheb + 1)
-    B65 = zeros(N_cheb + 1, N_cheb + 1)
-    B66 = zeros(N_cheb + 1, N_cheb + 1)
-
-    B = [B11 B12 B13 B14 B15 B16; B21 B22 B23 B24 B25 B26; B31 B32 B33 B34 B35 B36; B41 B42 B43 B44 B45 B46; B51 B52 B53 B54 B55 B56; B61 B62 B63 B64 B65 B66]
-
-    A = A[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,5N_cheb + 5,5N_cheb + 6,6N_cheb + 6)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,5N_cheb + 5,5N_cheb + 6,6N_cheb + 6))]
-    B = B[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,5N_cheb + 5,5N_cheb + 6,6N_cheb + 6)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,5N_cheb + 5,5N_cheb + 6,6N_cheb + 6))]
-
-
-    return A,B
- end
+function Timemode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be,N_cheb,Ro,Co)
+        A0_11 = rho .* I(N_cheb + 1) + al * im * R * rho .* I(N_cheb + 1)
+        A0_12 = im * be * R * rho .* I(N_cheb + 1)
+        A0_13 = R * rho .* (D*rho .* I(N_cheb + 1) + rho .* D)
+        A0_14 = im * R * (be * G ) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1) + rho .* H .* D + al * im * R * F .* I(N_cheb + 1)
+        A0_15 = zeros(N_cheb + 1, N_cheb + 1)
+    
+        A0_21 = im * R * rho .* (be * G ) .* I(N_cheb + 1) + Ro * rho .*  F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2 + al*(im * R * rho .* F .* I(N_cheb + 1)) + al^2 * ((lam + 2 * T) .* I(N_cheb + 1))
+        A0_22 = -1 * rho .* (2*Ro * G .+ Co) .* I(N_cheb + 1) + al *(be * (lam .+ T) .* I(N_cheb + 1))
+        A0_23 = R * rho.^2 .* D*F .* I(N_cheb + 1) + al * (-im * ((rho .* (D*T) + (1 .+ lam .* rho)).* D))
+        A0_24 = rho .* (D2 * F) .* I(N_cheb + 1) + al * (im * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1))
+        A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) - rho.^2 .* (D*F) .* D + al * (im * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1))
+    
+        A0_31 =  rho .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + al * (be * (lam + T) .* I(N_cheb + 1))
+        A0_32 = im * R * rho .* (be * G ) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2 + al * (im * R * rho .* F .* I(N_cheb + 1)) + al^2 * (T .* I(N_cheb + 1))
+        A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D)
+        A0_34 = F .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + Ro * rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
+        A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
+    
+        A0_41 = zeros(N_cheb + 1, N_cheb + 1) + al * (-im * (rho .* (D*lam) .* I(N_cheb + 1) + (1 .+ lam .* rho) .* D))
+        A0_42 = -im * be * (rho .* (D*lam) + (1 .+ lam .* rho)).*D
+        A0_43 = im * R * rho .* (be * G) .* I(N_cheb + 1) + Ro * rho.^2 .*  ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1) + al * (im * R * rho .* F .* I(N_cheb + 1)) + al^2 * (T .* I(N_cheb + 1))
+        A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
+        A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1) + rho .* D) + al *  (-im * rho .* ( (D*F)) .* I(N_cheb + 1))
+    
+        A0_51 = -2 * (gamma - 1) * Ma^2 * rho .* (D*F) .* D
+        A0_52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* D
+        A0_53 = -2 * im * (gamma - 1) * Ma^2 * (be * (D*G))  .* I(N_cheb + 1 ) + R * rho.^2 .* (D*T) .* I(N_cheb + 1) + al * ( -2 * im * (gamma - 1) * Ma^2 * D * F .* I(N_cheb + 1))
+        A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) *  (gamma)^(-1) * ( (im * R * (be * G ) .* T .* I(N_cheb + 1) )+ rho .* H .* D*T .* I(N_cheb + 1) + rho .* H .* T .* D)) + al * (-(gamma - 1) * (gamma)^(-1) *  im * R * F  .* T .* I(N_cheb + 1))
+        A0_55 = im * R * rho .* (be * G) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))+ (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
+        + al * (im * R * rho .* F .* I(N_cheb + 1) - (gamma - 1) * (gamma)^(-1) * im * R * F .* rho .* I(N_cheb + 1)) + al^2 * (kappa .* I(N_cheb + 1))
+        A0_omega_coeff_11 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_12 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_13 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_14 = im * R .* I(N_cheb + 1)
+        A0_omega_coeff_15 = zeros(N_cheb + 1, N_cheb + 1)
+    
+        A0_omega_coeff_21 = im * R * rho .* I(N_cheb + 1)
+        A0_omega_coeff_22 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_23 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_24 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_25 = zeros(N_cheb + 1, N_cheb + 1)
+    
+        A0_omega_coeff_31 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_32 = im * R * rho .* I(N_cheb + 1)
+        A0_omega_coeff_33 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_34 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_35 = zeros(N_cheb + 1, N_cheb + 1)
+    
+        A0_omega_coeff_41 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_42 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_43 = im * R * rho .* I(N_cheb + 1)
+        A0_omega_coeff_44 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_45 = zeros(N_cheb + 1, N_cheb + 1)
+    
+        A0_omega_coeff_51 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_52 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_53 = zeros(N_cheb + 1, N_cheb + 1)
+        A0_omega_coeff_54 = ((gamma - 1) * (gamma)^(-1) * im * R .* T .* I(N_cheb + 1))
+        A0_omega_coeff_55 = im * R * rho .* I(N_cheb + 1) + ((gamma - 1) * (gamma)^(-1) * im * R .* rho .* I(N_cheb + 1))
+        A0 = [A0_11 A0_12 A0_13 A0_14 A0_15 ; A0_21 A0_22 A0_23 A0_24 A0_25 ; A0_31 A0_32 A0_33 A0_34 A0_35 ; A0_41 A0_42 A0_43 A0_44 A0_45 ; A0_51 A0_52 A0_53 A0_54 A0_55  ]
+        A0_omega_coeff = [A0_omega_coeff_11 A0_omega_coeff_12 A0_omega_coeff_13 A0_omega_coeff_14 A0_omega_coeff_15;
+        A0_omega_coeff_21 A0_omega_coeff_22 A0_omega_coeff_23 A0_omega_coeff_24 A0_omega_coeff_25;
+        A0_omega_coeff_31 A0_omega_coeff_32 A0_omega_coeff_33 A0_omega_coeff_34 A0_omega_coeff_35;
+        A0_omega_coeff_41 A0_omega_coeff_42 A0_omega_coeff_43 A0_omega_coeff_44 A0_omega_coeff_45;
+        A0_omega_coeff_51 A0_omega_coeff_52 A0_omega_coeff_53 A0_omega_coeff_54 A0_omega_coeff_55]
+        B0 = A0
+        B1 = A0_omega_coeff
+        B0 = B0[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+        B1 = B1[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+     return B0,B1
+end
 function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
@@ -776,8 +749,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb
     A0_52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* D
     A0_53 = -2 * im * (gamma - 1) * Ma^2 * (be * (D*G))  .* I(N_cheb + 1 ) + R * rho.^2 .* (D*T) .* I(N_cheb + 1)
     A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) *  (gamma)^(-1) * ( (im * R * (be * G .- omega) .* T .* I(N_cheb + 1) )+ rho .* H .* D*T .* I(N_cheb + 1) + rho .* H .* T .* D))
-    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))
-        + (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
+    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))+ (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
 
     A1_11 = im * R * rho .* I(N_cheb + 1)
     A1_12 = zeros(N_cheb + 1, N_cheb + 1)
