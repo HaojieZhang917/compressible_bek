@@ -113,7 +113,7 @@ module FDqScheme
         for i in 1:n
             scheme_matrix[i, si[i]:si[i]+q]=LagrangeScheme(x[si[i]:si[i]+q], x[i])
         end
-        return (scheme_matrix)
+        return sparse(scheme_matrix)
     end
 
     #construct_polynomial factor pi_y
@@ -222,7 +222,7 @@ end
 module CRD_BF
 
     export sol_baseflowODE,velocity,Cheb,phi_var,f_q,T_var,Physical_Interpretation
-    import. FDqScheme
+
     using LinearAlgebra
     using BoundaryValueDiffEq
     using DifferentialEquations
@@ -270,12 +270,13 @@ module CRD_BF
         u=sol(t)
         return u , t
         end
- function sol_baseflowODE(Ro)
+ function sol_baseflowODE()
+
         py"""
         import numpy as np
         from scipy.integrate import solve_bvp
         import matplotlib.pyplot as plt
-        kappa = $Ro
+        kappa = 1
         def oneDiskODE(z, y):
         
                 # Y0 = H, Y1 = F', Y2 = F, Y3 = G', Y4 = G
@@ -379,16 +380,37 @@ module CRD_BF
 
   end
 
- function Cheb(N,mode)
+ function Cheb(N)
         θ = range(0,length=N+1,stop=pi)
         x = reshape(-cos.(θ), N+1, 1)
         c = [2; ones(N-1, 1) ; 2] .* (-1) .^ (0:N)
         X = repeat(x, 1, N+1);
         dX = X - X';
         D = (c * (1 ./ c)') ./ (dX .+ I(N+1));
-        D = D - diagm(vec(sum(D, dims=2)));
-    return D,x
- end
+        D = D - diagm(vec(sum(D, dims=2))); 
+        # for i=1:N+1
+        #     x[i] = 40 * x[i] .+ 40
+        # end
+        # D = (1/40) * D
+        # D2 = D^2
+        a = 1
+        b = 0.6
+        c = 0.5
+        for i=1:N+1
+            D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
+        end
+        for i=1:N+1
+            x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
+            if x[i]>50
+                x[i]=50
+            end
+        end
+        
+        D2 = D^2;
+
+        return D,D2,x
+
+        end
 
 
  function Physical_Interpretation(T,delt,Num)
@@ -449,42 +471,22 @@ module CRD_BF
   end
 end
 import .CRD_BF
+import .FDqScheme
 using DifferentialEquations
 using BSplineKit
 using LinearAlgebra
-function baseflow_var(N_cheb,Ro,mode)
+function baseflow_var(N_cheb,Ro,Co)
 
     N = 20000
     tspan = (0,50)
     t = range(0,50,N)
     sigma = 0.72
-    u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
+    u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE()
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
     u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u0,v0,w0,du0,dv0,t,PHI)
-    if mode == "cheb"
-        D,x = CRD_BF.Cheb(N_cheb,mode)
-    elseif mode =="fdq"
-        x,D = x,D = FDqScheme.FD_q_Scheme(N_cheb+1, 20)
-    else
-        error("no method")
-    end
-    a = 1
-    b = 0.6
-    c = 0.5
-    for i=1:N_cheb + 1
-        D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
-    end
-    for i=1:N_cheb + 1
-        x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-        if x[i]>50
-            x[i]=50
-        end
-    end
-    
-    D2 = D^2;
-
+    D,D2,x = CRD_BF.Cheb(N_cheb)
     f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    if Ro  > 0
+    if Ro == 1
         u0 = -1 * u0
         v0 = -1 * v0
         w0 = -1 * w0

@@ -8,12 +8,11 @@ function Caculate_AS(Mr)
     N_cheb = 49
     gamma = 1.4
     sigma = 0.72
-    Ro = 1
-    Co = 0
-    Tw = 1.2
-
+    Ro = 0.313
+    Co = 2 - Ro - Ro^2
+    Tw = 1
         #baseflow
-        global u0,v0,w0,f,q,D,D2,x = baseflow_var(N_cheb,Ro,Co);
+        global u0,v0,w0,f,q,D,D2,x = baseflow_var(N_cheb,Ro);
         global H,T = T_ca(Mr,f,q,w0,gamma,Tw);
         global F,G,H,T,rho,z = interp(u0,v0,H,T,x,N_cheb,"sim");
         global lam = - (2/3) * T;
@@ -22,11 +21,11 @@ function Caculate_AS(Mr)
         global data_all = [0 0 0 0]
 
         #outloop of R
-        for R = 30 :  -0.25 : 20
+        for R = 120 : 0.5 : 140
             global mode = 2
             #innerloop of beta
-            for be = 0.2 : -0.005 : -0.15
-
+            # for be = 0.1 : -0.005 : -0.05
+            for be = 0.25 : -0.005 : -0.05
                 if mode == 1
                     data_temp = [R be -1 -1]
                     global data_all = [data_all;data_temp]
@@ -40,16 +39,16 @@ function Caculate_AS(Mr)
                 writedlm("AS.dat",total)
                 B0,B1 = Timemode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al0,be,N_cheb,Ro,Co)
                 global C = eigen(B0,B1)
-                global val = filter(x->-0.02<imag(x)<0.1&&abs(real(x))<0.2,C.values)
+                global val = filter(x->-0.01<imag(x)<0.01&&abs(real(x))<0.2,C.values)
 
-                if val == ComplexF64[]
+                if val == ComplexF64[]3
                     data_temp = [R be -1 -1]
                     global data_all = [data_all;data_temp]
                     writedlm("Dataall_$Tw _$Mr.dat",data_all[2:end,:])
                     continue
                 end 
 
-                for i = 1 : min(3,length(val))
+                for i = 1 : min(2,length(val))
                     indi = []
                     val_temp = val[i]
                     for al = 0.1 : 0.006 : 0.7
