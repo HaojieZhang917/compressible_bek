@@ -222,11 +222,9 @@ end
 module CRD_BF
 
     export sol_baseflowODE,velocity,Cheb,phi_var,f_q,T_var,Physical_Interpretation
-    import. FDqScheme
     using LinearAlgebra
-    using BoundaryValueDiffEq
-    using DifferentialEquations
     using BSplineKit
+    using DifferentialEquations
     using IterativeSolvers
     using PyCall
     
@@ -449,7 +447,6 @@ module CRD_BF
   end
 end
 import .CRD_BF
-using DifferentialEquations
 using BSplineKit
 using LinearAlgebra
 function baseflow_var(N_cheb,Ro,mode)
