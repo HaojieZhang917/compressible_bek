@@ -315,7 +315,7 @@ module CRD_BF
                 return np.concatenate((resa, resb))
         
         
-        z = np.linspace(0, 50, 20000)
+        z = np.linspace(0, 30, 20000)
         y = np.zeros((5, len(z)))
         y_guess = np.zeros((5, z.size))
         if kappa == 1:
@@ -342,7 +342,7 @@ module CRD_BF
         
         solution = solve_bvp(oneDiskODE, oneDiskBC, z, y_guess,tol=1e-10,max_nodes=5000000)
         
-        x_plot = np.linspace(0, 50, 20000)
+        x_plot = np.linspace(0, 30, 20000)
         
         
         y1_plot = solution.sol(x_plot)[0]
@@ -452,8 +452,8 @@ using LinearAlgebra
 function baseflow_var(N_cheb,Ro,mode)
 
     N = 20000
-    tspan = (0,50)
-    t = range(0,50,N)
+    tspan = (0,30)
+    t = range(0,30,N)
     sigma = 0.72
     u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
@@ -465,27 +465,33 @@ function baseflow_var(N_cheb,Ro,mode)
     else
         error("no method")
     end
-    a = 1
-    b = 0.6
-    c = 0.5
+    if Ro == -1
+        a = 2
+        b = 0.6
+        c = 0.5
+    else
+        a = 1
+        b = 0.6
+        c = 0.5
+    end
     for i=1:N_cheb + 1
         D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
     end
     for i=1:N_cheb + 1
         x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-        if x[i]>50
-            x[i]=50
+        if x[i]>30
+            x[i]=30
         end
     end
     
     D2 = D^2;
 
     f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    if Ro  > 0
-        u0 = -1 * u0
-        v0 = -1 * v0
-        w0 = -1 * w0
-    end
+    
+    u0 = -1 * u0
+    v0 = -1 * v0
+    w0 = -1 * w0
+    
     return u0,v0,w0,f,q,D,D2,x
  end
 
@@ -497,7 +503,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,50,20000)
+        z = range(0,30,20000)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -608,7 +614,8 @@ function Timemode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be,N_cheb,Ro,Co)
      return B0,B1
 end
 function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
-    
+    Ro = 1
+    Co = 2
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
     # phi_hat = [u,v,w,rho,p,t]
     A0_11 = rho .* I(N_cheb + 1)
@@ -617,7 +624,7 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     A0_14 = im * R * (be * G .- omega ) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1) + rho .* H .* D 
     A0_15 = zeros(N_cheb + 1, N_cheb + 1)
 
-    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + rho .* Ro * F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
+    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + Ro * rho.^2 .* H .* D - rho .* D2
     A0_22 = -1 * rho .* (2*Ro * G .+ Co) .* I(N_cheb + 1)
     A0_23 = Ro * R * rho.^2 .* D*F .* I(N_cheb + 1)
     A0_24 = rho .* (D2 * F) .* I(N_cheb + 1)

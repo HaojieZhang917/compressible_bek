@@ -224,7 +224,6 @@ module CRD_BF
     export sol_baseflowODE,velocity,Cheb,phi_var,f_q,T_var,Physical_Interpretation
 
     using LinearAlgebra
-    using BoundaryValueDiffEq
     using DifferentialEquations
     using BSplineKit
     using IterativeSolvers
@@ -270,13 +269,13 @@ module CRD_BF
         u=sol(t)
         return u , t
         end
- function sol_baseflowODE()
+ function sol_baseflowODE(Ro)
 
         py"""
         import numpy as np
         from scipy.integrate import solve_bvp
         import matplotlib.pyplot as plt
-        kappa = 1
+        kappa = $Ro
         def oneDiskODE(z, y):
         
                 # Y0 = H, Y1 = F', Y2 = F, Y3 = G', Y4 = G
@@ -481,12 +480,12 @@ function baseflow_var(N_cheb,Ro,Co)
     tspan = (0,50)
     t = range(0,50,N)
     sigma = 0.72
-    u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE()
+    u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
     u0,du0,v0,dv0,w0,F_u,F_du,F_dv,F_w,F_phi = CRD_BF.velocity(u0,v0,w0,du0,dv0,t,PHI)
     D,D2,x = CRD_BF.Cheb(N_cheb)
     f,q = CRD_BF.f_q(sigma,F_du,F_dv,F_u,F_phi,tspan,t)
-    if Ro == 1
+    if Ro >= 0
         u0 = -1 * u0
         v0 = -1 * v0
         w0 = -1 * w0
@@ -718,7 +717,9 @@ function Spatial_mode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb)
     return A0,A1,A2
   end
 function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb,Ro,Co)
-
+    if Ro == -1
+        Ro = 1
+    end
     # (A0 +A1*alpha +A2*alpha^2)ϕ=0 
     # phi_hat = [u,v,w,rho,t]
     A0_11 = rho .* I(N_cheb + 1)
