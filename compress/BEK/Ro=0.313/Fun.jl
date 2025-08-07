@@ -1,9 +1,14 @@
 using DelimitedFiles
 using LinearAlgebra
-function eigvector(eigval,values,vec)
-    index = findall(x-> x== eigval,values)
-    vector = vec[:,index] 
-    return vector
+function eigvector(eigval, values, vec)
+    index = findall(x-> abs(x - eigval) < 1e-8, values)  # 使用容差比较避免浮点误差
+    if isempty(index)
+        # 如果找不到精确匹配，返回最近的特征向量
+        idx = argmin(abs.(values .- eigval))
+        return vec[:, idx]
+    else
+        return vec[:, index[1]]  # 取第一个匹配的
+    end
 end
 function RQI(A, B, sigma; q0=rand(size(A, 1), 1))
 

@@ -541,7 +541,7 @@ function interp(u,v,w,T,x,N,mode)
         return F,G,H,T,rho,z
   end
 
-function Timemode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be,N_cheb,Ro,Co)
+function Timemode(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,al,be,N_cheb,Ro,Co,D,D2)
         A0_11 = rho .* I(N_cheb + 1) + al * im * R * rho .* I(N_cheb + 1)
         A0_12 = im * be * R * rho .* I(N_cheb + 1)
         A0_13 = R * rho .* (D*rho .* I(N_cheb + 1) + rho .* D)
