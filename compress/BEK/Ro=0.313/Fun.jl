@@ -26,6 +26,8 @@ function RQI(A, B, sigma; q0=rand(size(A, 1), 1))
 
       return sigma, q0
 end
+
+
 function diff1(y, h)
     """
     使用六阶中心差分法计算向量y的导数。
