@@ -1,12 +1,8 @@
 #!MC 1410
-$!VarSet |LFDSFN1| = '"CRIT_Tw=0.8_Ro=1.0.dat" "CRIT_Tw=0.9_Ro=1.0.dat" "CRIT_Tw=1.0_Ro=1.0.dat" "CRIT_Tw=1.1_Ro=1.0.dat" "CRIT_Tw=1.2_Ro=1.0.dat"'
-$!VarSet |LFDSVL1| = '"Tw" "r" "beta" "alpha_i" "alpha_r" "omega_i" "omega_r"'
-$!VarSet |LFDSFN2| = '"CRIT_Ma=0.3_Ro=1.0.dat" "CRIT_Ma=0.6_Ro=1.0.dat" "CRIT_Ma=0.9_Ro=1.0.dat" "CRIT_Ma=1.2_Ro=1.0.dat"'
-$!VarSet |LFDSVL2| = '"Tw" "r" "beta" "alpha_i" "alpha_r" "omega_i" "omega_r"'
-$!VarSet |LFDSFN3| = '"interp_Tw=0.8_Ma=0.3_Ro=1.0.dat" "interp_Tw=0.8_Ma=0.6_Ro=1.0.dat" "interp_Tw=0.8_Ma=0.9_Ro=1.0.dat" "interp_Tw=0.8_Ma=1.2_Ro=1.0.dat" "interp_Tw=0.9_Ma=0.3_Ro=1.0.dat" "interp_Tw=0.9_Ma=0.6_Ro=1.0.dat" "interp_Tw=0.9_Ma=0.9_Ro=1.0.dat" "interp_Tw=0.9_Ma=1.2_Ro=1.0.dat" "interp_Tw=1.0_Ma=0.3_Ro=1.0.dat" "interp_Tw=1.0_Ma=0.6_Ro=1.0.dat" "interp_Tw=1.0_Ma=0.9_Ro=1.0.dat" "interp_Tw=1.0_Ma=1.2_Ro=1.0.dat" "interp_Tw=1.1_Ma=0.3_Ro=1.0.dat" "interp_Tw=1.1_Ma=0.6_Ro=1.0.dat" "interp_Tw=1.1_Ma=0.9_Ro=1.0.dat" "interp_Tw=1.1_Ma=1.2_Ro=1.0.dat" "interp_Tw=1.2_Ma=0.3_Ro=1.0.dat" "interp_Tw=1.2_Ma=0.6_Ro=1.0.dat" "interp_Tw=1.2_Ma=0.9_Ro=1.0.dat" "interp_Tw=1.2_Ma=1.2_Ro=1.0.dat"'
-$!VarSet |LFDSVL3| = '"R" "beta"'
-$!VarSet |LFDSFN4| = '"CRIT_Ma=0.3_Ro=1.0.dat" "CRIT_Ma=0.6_Ro=1.0.dat" "CRIT_Ma=0.9_Ro=1.0.dat" "CRIT_Ma=1.2_Ro=1.0.dat"'
-$!VarSet |LFDSVL4| = '"Tw" "r" "beta" "alpha_i" "alpha_r" "omega_i" "omega_r"'
+$!VarSet |LFDSFN2| = '"..\..\CRIT_Ma=0.3_Ro=0.687.dat" "..\..\CRIT_Ma=0.6_Ro=0.687.dat" "..\..\CRIT_Ma=0.9_Ro=0.687.dat" "..\..\CRIT_Ma=1.2_Ro=0.687.dat"'
+$!VarSet |LFDSVL2| = '"Tw" "R" "beta"
+$!VarSet |LFDSFN3| = '"..\..\interp_Tw=0.8_Ma=0.3_Ro=0.687.dat" "..\..\interp_Tw=0.8_Ma=0.6_Ro=0.687.dat" "..\..\interp_Tw=0.8_Ma=0.9_Ro=0.687.dat" "..\..\interp_Tw=0.8_Ma=1.2_Ro=0.687.dat" "..\..\interp_Tw=0.9_Ma=0.3_Ro=0.687.dat" "..\..\interp_Tw=0.9_Ma=0.6_Ro=0.687.dat" "..\..\interp_Tw=0.9_Ma=0.9_Ro=0.687.dat" "..\..\interp_Tw=0.9_Ma=1.2_Ro=0.687.dat" "..\..\interp_Tw=1.0_Ma=0.3_Ro=0.687.dat" "..\..\interp_Tw=1.0_Ma=0.6_Ro=0.687.dat" "..\..\interp_Tw=1.0_Ma=0.9_Ro=0.687.dat" "..\..\interp_Tw=1.0_Ma=1.2_Ro=0.687.dat" "..\..\interp_Tw=1.1_Ma=0.3_Ro=0.687.dat" "..\..\interp_Tw=1.1_Ma=0.6_Ro=0.687.dat" "..\..\interp_Tw=1.1_Ma=0.9_Ro=0.687.dat" "..\..\interp_Tw=1.1_Ma=1.2_Ro=0.687.dat" "..\..\interp_Tw=1.2_Ma=0.3_Ro=0.687.dat" "..\..\interp_Tw=1.2_Ma=0.6_Ro=0.687.dat" "..\..\interp_Tw=1.2_Ma=0.9_Ro=0.687.dat" "..\..\interp_Tw=1.2_Ma=1.2_Ro=0.687.dat"'
+$!VarSet |LFDSVL3| = '"beta" "R"'
 $!SetStyleBase Factory
 $!GlobalPaper 
   PaperSizeInfo
