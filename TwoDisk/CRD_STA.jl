@@ -741,16 +741,17 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb
     A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) - rho.^2 .* (D*G) .* D  + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
 
     A0_41 = zeros(N_cheb + 1, N_cheb + 1)
-    A0_42 = -im * be * (rho .* (D*lam) + (1 .+ lam .* rho)).*D
+    A0_42 = -im * be * (rho .* (D*lam) .* I(N_cheb + 1) + (1 .+ lam .* rho).* D)
     A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho.^2 .*  ((D*H) .* I(N_cheb + 1) + H .* D) - rho .* (2 .+ lam .* rho) .* D2 + be^2 * T .* I(N_cheb + 1)
-    A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
+    A0_44 = (gamma*Ma^2 )^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1) + T .* D)
     A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1) + rho .* D)
 
     A0_51 = -2 * (gamma - 1) * Ma^2 * rho .* (D*F) .* D
     A0_52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* D
     A0_53 = -2 * im * (gamma - 1) * Ma^2 * (be * (D*G))  .* I(N_cheb + 1 ) + R * rho.^2 .* (D*T) .* I(N_cheb + 1)
     A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) *  (gamma)^(-1) * ( (im * R * (be * G .- omega) .* T .* I(N_cheb + 1) )+ rho .* H .* D*T .* I(N_cheb + 1) + rho .* H .* T .* D))
-    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))+ (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
+    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + rho.^2 .* (H .* D - kappa .* D2) 
+            + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1) - rho .* (D*T) .* D))+ (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1) + rho .* H .* rho .* D))
 
     A1_11 = im * R * rho .* I(N_cheb + 1)
     A1_12 = zeros(N_cheb + 1, N_cheb + 1)
@@ -822,6 +823,20 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb
 
     return A0,A1,A2
  end
+function ALST_Operater(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,alpha,N_cheb,Ro,Co,D,D2)
+    eye = I(N_cheb + 1)
+    A0_11 = rho .* eye
+    A1_11 = im * R * rho 
+    
+    A0 = [A0_11 A0_12 A0_13 A0_14 A0_15 ; A0_21 A0_22 A0_23 A0_24 A0_25 ; A0_31 A0_32 A0_33 A0_34 A0_35 ; A0_41 A0_42 A0_43 A0_44 A0_45 ; A0_51 A0_52 A0_53 A0_54 A0_55  ]
+    A1 = [A1_11 A1_12 A1_13 A1_14 A1_15 ; A1_21 A1_22 A1_23 A1_24 A1_25 ; A1_31 A1_32 A1_33 A1_34 A1_35 ; A1_41 A1_42 A1_43 A1_44 A1_45 ; A1_51 A1_52 A1_53 A1_54 A1_55  ]
+    A2 = [A2_11 A2_12 A2_13 A2_14 A2_15 ; A2_21 A2_22 A2_23 A2_24 A2_25 ; A2_31 A2_32 A2_33 A2_34 A2_35 ; A2_41 A2_42 A2_43 A2_44 A2_45 ; A2_51 A2_52 A2_53 A2_54 A2_55  ]
+    
+    A0 = A0[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    A1 = A1[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    A2 = A2[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+   return A0,A1,A2
+end
 function DevelopingSpatialMode()
     c = -2/3
     eye = I(N_cheb + 1)
