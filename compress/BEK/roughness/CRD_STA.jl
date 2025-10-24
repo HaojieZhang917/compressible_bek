@@ -760,7 +760,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,N_cheb
 
     A1_21 = im * R * rho .* F .* I(N_cheb + 1)
     A1_22 = be * (lam .+ T) .* I(N_cheb + 1)
-    A1_23 = -im * ((rho .* (D*T) + (1 .+ lam .* rho)).* D)
+    A1_23 = -im * ((rho .* (D*T) .* I(N_cheb + 1) + (1 .+ lam .* rho).*D))
     A1_24 = im * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
     A1_25 = im * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
 
