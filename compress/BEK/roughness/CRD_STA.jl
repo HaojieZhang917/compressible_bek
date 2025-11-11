@@ -59,7 +59,7 @@ module CRD_BF
                 return np.concatenate((resa, resb))
         
         
-        z = np.linspace(0, 30, 20000)
+        z = np.linspace(0, 20, 10000)
         y = np.zeros((5, len(z)))
         y_guess = np.zeros((5, z.size))
         if kappa == 1:
@@ -86,7 +86,7 @@ module CRD_BF
         
         solution = solve_bvp(oneDiskODE, oneDiskBC, z, y_guess,tol=1e-10,max_nodes=5000000)
         
-        x_plot = np.linspace(0, 30, 20000)
+        x_plot = np.linspace(0, 20, 10000)
         
         
         y1_plot = solution.sol(x_plot)[0]
@@ -137,8 +137,8 @@ module CRD_BF
         end
         for i=1:N+1
             x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i] > 30
-                x[i] = 30
+            if x[i] > 20
+                x[i] = 20
             end
         end
         
@@ -215,18 +215,23 @@ struct COF
         A :: Matrix{ComplexF64}
         B :: Matrix{ComplexF64}
         C :: Matrix{ComplexF64}
+        dC :: Matrix{ComplexF64}
         D1 :: Matrix{ComplexF64}
         Vxx :: Matrix{ComplexF64}
         Vyy :: Matrix{ComplexF64}
         Vzz :: Matrix{ComplexF64}
+        dVzz :: Matrix{ComplexF64}
+        d2Vzz :: Matrix{ComplexF64}
         Vxy :: Matrix{ComplexF64}
         Vxz :: Matrix{ComplexF64}
+        dVxz :: Matrix{ComplexF64}
         Vyz :: Matrix{ComplexF64}
+        dVyz :: Matrix{ComplexF64}
 end
 function baseflow_var(N_cheb,Ro,Co)
-    N = 20000
-    tspan = (0,30)
-    t = range(0,30,N)
+    N = 10000
+    tspan = (0,20)
+    t = range(0,20,N)
     sigma = 0.72
     u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
@@ -249,7 +254,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,30,20000)
+        z = range(0,20,10000)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -495,34 +500,62 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     A_55 = 1/gamma * R * rho .* F .* eye
 
     B_11 = B_13 = B_15 = B_22 = B_23 = B_24 = B_25 = B_31 = B_41 = B_44 = B_51 = B_52 = Zero
+    dB_11 = dB_13 = dB_15 = dB_22 = dB_23 = dB_24 = dB_25 = dB_31 = dB_41 = dB_44 = dB_51 = dB_52 = Zero
     B_12 = R* rho .* eye
+    dB_12 = R * (D*rho) .* eye
     B_14 = R * G .* eye
+    dB_14 = R * (D*G) .* eye
     B_21 = R * rho .* G .* eye
+    dB_21 = R * (D*rho) .* G .* eye + R * (D * G) .* rho .* eye
     B_32 = R * rho .* G .* eye
+    dB_32 = R * (D*rho) .* G .* eye + R * (D * G) .* rho .* eye
     B_33 = -rho .* (D*T) .* eye
+    dB_33 = -(D*rho) .* (D*T) .* eye - rho .* (D2*T) .* eye
     B_34 = (gamma * Ma^2)^(-1)  * R .* T .* eye
+    dB_34 = (gamma * Ma^2)^(-1)  * R .* (D*T).*eye
     B_35 = (gamma * Ma^2)^(-1)  * R .* rho .* eye
+    dB_35 = (gamma * Ma^2)^(-1)  * R .* (D*rho).*eye
     B_42 = -rho .* (D*lam) .* eye
+    dB_42 = -(D*rho) .* (D*lam) .* eye - rho .* (D2*lam) .* eye
     B_43 = R * rho .* G .* eye
+    dB_43 = R * (D*rho) .* G .* eye + R * (D * G) .* rho .* eye
     B_45 = -rho .* (D*G) .* eye
+    dB_45 = -(D*rho).*(D*G).*eye - rho .* (D2*G).*eye
     B_53 = -2 * (gamma-1) * Ma^2 * (D*G) .* eye
+    dB_53 = -2 * (gamma-1) * Ma^2 * (D2*G) .* eye
     B_54 = -(gamma-1)/(gamma) * R * T .* G .* eye
+    dB_54 = -(gamma-1)/(gamma) * R * (T .* (D*G) + (D*T) .* G) .* eye
     B_55 = 1/gamma * R .* rho .* G .* eye
+    dB_55 = 1/gamma * R .* (rho .* (D*G) + (D*rho) .* G) .* eye
 
     C_11 = C_12 = C_15 = C_22 = C_23 = C_24 = C_31 = C_33 = C_34 = C_41 = C_42 = C_53 = Zero
+    dC_11 = dC_12 = dC_15 = dC_22 = dC_23 = dC_24 = dC_31 = dC_33 = dC_34 = dC_41 = dC_42 = dC_53 = Zero
     C_13 = R * rho.^2 .* eye
+    dC_13 = 2 * R * rho .* D * rho .* eye
     C_14 = rho .* H .* eye
+    dC_14 = D*rho .* H .* eye + rho .* (D*H) .* eye
     C_21 = Ro * rho.^2  .* H .* eye
+    dC_21 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
     C_25 = -rho.^2 .* (D*F) .* eye
+    dC_25 = -2 * rho .* (D*rho) .* (D*F) .* eye - rho.^2 .* (D2*F) .* eye
     C_32 = Ro * rho.^2 .* H .* eye
+    dC_32 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
     C_35 = -rho.^2 .* (D*G) .* eye
+    dC_35 = -2 * rho .* (D*rho) .* (D*G) .* eye - rho.^2 .* (D2*G) .* eye
     C_43 = Ro * rho.^2 .* H .* eye
+    dC_43 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
     C_44 = R * (gamma * Ma^2)^(-1) * rho .* T .* eye
+    dC_44 = R * (gamma * Ma^2)^(-1) * (rho .* (D*T) .+ (D*rho) .* T) .* eye
     C_45 = R * (gamma * Ma^2)^(-1) * rho .* rho .* eye
+    dC_45 = R * (gamma * Ma^2)^(-1) * (rho .* (D*rho) .+ (D*rho) .* rho) .* eye
     C_51 = -2 * (gamma-1) * Ma^2 * rho .* (D*F) .* eye
+    dC_51 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*F) + (D*rho) .* (D*F)) .* eye
     C_52 = -2 * (gamma-1) * Ma^2 * rho .* (D*G) .* eye
+    dC_52 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*G) + (D*rho) .* (D*G)) .* eye
     C_54 = -(gamma-1)/gamma * rho .* H .* T .* eye
+    dC_54 = -(gamma-1)/gamma * (rho .* (D*T) .* H .+ (D*rho) .* T .* H .+ rho .* (D*H) .* T).* eye
     C_55 = 1/gamma * rho.^2 .* H .* eye + 1/sigma * rho.^2 .* (D*T) .* eye
+    dC_55 = 1/gamma * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye) + 1/sigma * (2 * rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2*T) .* eye)
 
     D_12 = D_15 = D_41 = D_42 = D_51 = D_52 = Zero
     D_11 = rho .* eye
@@ -552,58 +585,104 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     Vxx_55 = -kappa .* eye
 
     Vyy_11 = Vyy_12 = Vyy_13 = Vyy_14 = Vyy_15 = Vyy_22 = Vyy_23 = Vyy_24 = Vyy_25 = Vyy_31 = Vyy_33 = Vyy_34 = Vyy_35 = Vyy_41 = Vyy_42 = Vyy_44 = Vyy_45 = Vyy_51 = Vyy_52 = Vyy_53 = Vyy_54 = Zero
+    dVyy_11 = dVyy_12 = dVyy_13 = dVyy_14 = dVyy_15 = dVyy_22 = dVyy_23 = dVyy_24 = dVyy_25 = dVyy_31 = dVyy_33 = dVyy_34 = dVyy_35 = dVyy_41 = dVyy_42 = dVyy_44 = dVyy_45 = dVyy_51 = dVyy_52 = dVyy_53 = dVyy_54 = Zero
+    d2Vyy_11 = d2Vyy_12 = d2Vyy_13 = d2Vyy_14 = d2Vyy_15 = d2Vyy_22 = d2Vyy_23 = d2Vyy_24 = d2Vyy_25 = d2Vyy_31 = d2Vyy_33 = d2Vyy_34 = d2Vyy_35 = d2Vyy_41 = d2Vyy_42 = d2Vyy_44 = d2Vyy_45 = d2Vyy_51 = d2Vyy_52 = d2Vyy_53 = d2Vyy_54 = Zero
     Vyy_21 = -T .* eye
+    dVyy_21 = -(D*T) .* eye
+    d2Vyy_21 = -(D2*T).*eye
     Vyy_32 = -(lam .+ 2*T) .* eye
+    dVyy_32 = -(D*lam .+ 2*D*T) .* eye
+    d2Vyy_32 = -(D2*lam .+ 2*D2*T) .* eye
     Vyy_43 = -T .* eye
+    dVyy_43 = -D*T.*eye
+    d2Vyy_43 = -D2*T .* eye
     Vyy_55 = -kappa .* eye
+    dVyy_55 = -D*kappa .* eye
+    d2Vyy_55 = -D2*kappa .* eye
 
     Vzz_11 = Vzz_12 = Vzz_13 = Vzz_14 = Vzz_15 = Vzz_22 = Vzz_23 = Vzz_24 = Vzz_25 = Vzz_31 = Vzz_33 = Vzz_34 = Vzz_35 = Vzz_41 = Vzz_42 = Vzz_44 = Vzz_45 = Vzz_51 = Vzz_52 = Vzz_53 = Vzz_54 = Zero
+    dVzz_11 = dVzz_12 = dVzz_13 = dVzz_14 = dVzz_15 = dVzz_22 = dVzz_23 = dVzz_24 = dVzz_25 = dVzz_31 = dVzz_33 = dVzz_34 = dVzz_35 = dVzz_41 = dVzz_42 = dVzz_44 = dVzz_45 = dVzz_51 = dVzz_52 = dVzz_53 = dVzz_54 = Zero
+    d2Vzz_11 = d2Vzz_12 = d2Vzz_13 = d2Vzz_14 = d2Vzz_15 = d2Vzz_22 = d2Vzz_23 = d2Vzz_24 = d2Vzz_25 = d2Vzz_31 = d2Vzz_33 = d2Vzz_34 = d2Vzz_35 = d2Vzz_41 = d2Vzz_42 = d2Vzz_44 = d2Vzz_45 = d2Vzz_51 = d2Vzz_52 = d2Vzz_53 = d2Vzz_54 = Zero    
     Vzz_21 = -rho .* eye
+    dVzz_21 = -D*rho .* eye
+    d2Vzz_21 = -D2*rho .* eye
     Vzz_32 = -rho .* eye
+    dVzz_32 = -D*rho .* eye
+    d2Vzz_32 = -D2*rho .* eye
     Vzz_43 = -rho .* (2 .+ lam .* rho) .* eye
+    dVzz_43 = -2 * (D*rho) .* eye -2 * rho .* (D * rho) .* lam .* eye - rho.^2 .* (D * lam) .* eye
+    d2Vzz_43 = -2 * (D2*rho) .* eye - 2 * (D * rho) .* (D * rho) .* lam .* eye - 2 * rho .* (D2 * rho) .* lam .* eye - 4 * rho .* (D * rho) .* (D * lam) .* eye - rho.^2 .* (D2 * lam) .* eye
     Vzz_55 = -rho.^2 .* kappa .* eye
+    dVzz_55 = -2 * rho .* (D * rho) .* kappa .* eye - rho.^2 .* (D * kappa) .* eye
+    d2Vzz_55 = - 2 * (D * rho) .* (D * rho) .* kappa .* eye - 2 * rho .* (D2 * rho) .* kappa .* eye - 4 * rho .* (D * rho) .* (D * kappa) .* eye - rho.^2 .* (D2 * kappa) .* eye
 
     Vxy_11 = Vxy_12 = Vxy_13 = Vxy_14 = Vxy_15 = Vxy_21 = Vxy_23 = Vxy_24 = Vxy_25 = Vxy_32 = Vxy_33 = Vxy_34 = Vxy_35 = Vxy_41 = Vxy_42  = Vxy_43 = Vxy_44 = Vxy_45 = Vxy_51 = Vxy_52 = Vxy_53 = Vxy_54 = Vxy_55 =  Zero
+    dVxy_11 = dVxy_12 = dVxy_13 = dVxy_14 = dVxy_15 = dVxy_21 = dVxy_23 = dVxy_24 = dVxy_25 = dVxy_32 = dVxy_33 = dVxy_34 = dVxy_35 = dVxy_41 = dVxy_42  = dVxy_43 = dVxy_44 = dVxy_45 = dVxy_51 = dVxy_52 = dVxy_53 = dVxy_54 = dVxy_55 =  Zero
+
     Vxy_22 = -(lam .+ T) .* eye
+    dVxy_22 = -(D*lam .+ D*T) .* eye
     Vxy_31 = -(lam .+ T) .* eye
+    dVxy_31 = -(D*lam .+ D*T) .* eye
 
     Vxz_11 = Vxz_12 = Vxz_13 = Vxz_14 = Vxz_15 = Vxz_21 = Vxz_22 = Vxz_24 = Vxz_25 = Vxz_31 = Vxz_32 = Vxz_33 = Vxz_34 = Vxz_35 = Vxz_42 = Vxz_43 = Vxz_44 = Vxz_45 = Vxz_51 = Vxz_52 = Vxz_53 = Vxz_54 = Vxz_55 =  Zero
+    dVxz_11 = dVxz_12 = dVxz_13 = dVxz_14 = dVxz_15 = dVxz_21 = dVxz_22 = dVxz_24 = dVxz_25 = dVxz_31 = dVxz_32 = dVxz_33 = dVxz_34 = dVxz_35 = dVxz_42 = dVxz_43 = dVxz_44 = dVxz_45 = dVxz_51 = dVxz_52 = dVxz_53 = dVxz_54 = dVxz_55 =  Zero
     Vxz_23 = - (1 .+ rho.*lam) .* eye
+    dVxz_23 = - (D*rho.*lam .+ rho.*D*lam) .* eye
     Vxz_41 = - (1 .+ rho.*lam) .* eye
+    dVxz_41 = - (D*rho.*lam .+ rho.*D*lam) .* eye
 
     Vyz_11 = Vyz_12 = Vyz_13 = Vyz_14 = Vyz_15 = Vyz_21 = Vyz_22 = Vyz_23 = Vyz_24 = Vyz_25 = Vyz_31 = Vyz_32  = Vyz_34 = Vyz_35 = Vyz_41 = Vyz_43 = Vyz_44 = Vyz_45 = Vyz_51 = Vyz_52 = Vyz_53 = Vyz_54 = Vyz_55 =  Zero
+    dVyz_11 = dVyz_12 = dVyz_13 = dVyz_14 = dVyz_15 = dVyz_21 = dVyz_22 = dVyz_23 = dVyz_24 = dVyz_25 = dVyz_31 = dVyz_32  = dVyz_34 = dVyz_35 = dVyz_41 = dVyz_43 = dVyz_44 = dVyz_45 = dVyz_51 = dVyz_52 = dVyz_53 = dVyz_54 = dVyz_55 =  Zero
     Vyz_33 = - (1 .+ rho.*lam) .* eye
+    dVyz_33 = - (D*rho.*lam .+ rho.*D*lam) .* eye
     Vyz_42 = - (1 .+ rho.*lam) .* eye
+    dVyz_42 = - (D*rho.*lam .+ rho.*D*lam) .* eye
 
-    Ta = [Ta_11 Ta_12 Ta_13 Ta_14 Ta_15;Ta_21 Ta_22 Ta_23 Ta_24 Ta_25;Ta_31 Ta_32 Ta_33 Ta_34 Ta_35;Ta_41 Ta_42 Ta_43 Ta_44 Ta_45;Ta_51 Ta_52 Ta_53 Ta_54 Ta_55]
+    Ta = [Ta_14 Ta_11 Ta_12 Ta_13 Ta_15;Ta_24 Ta_21 Ta_22 Ta_23 Ta_25;Ta_34 Ta_31 Ta_32 Ta_33 Ta_35;Ta_44 Ta_41 Ta_42 Ta_43 Ta_45;Ta_54 Ta_51 Ta_52 Ta_53 Ta_55]
 
-    A = [A_11 A_12 A_13 A_14 A_15;A_21 A_22 A_23 A_24 A_25;A_31 A_32 A_33 A_34 A_35;A_41 A_42 A_43 A_44 A_45;A_51 A_52 A_53 A_54 A_55]
+    A = [A_14 A_11 A_12 A_13 A_15;A_24 A_21 A_22 A_23 A_25;A_34 A_31 A_32 A_33 A_35;A_44 A_41 A_42 A_43 A_45;A_54 A_51 A_52 A_53 A_55]
 
-    B = [B_11 B_12 B_13 B_14 B_15;B_21 B_22 B_23 B_24 B_25;B_31 B_32 B_33 B_34 B_35;B_41 B_42 B_43 B_44 B_45;B_51 B_52 B_53 B_54 B_55]
+    B = [B_14 B_11 B_12 B_13 B_15;B_24 B_21 B_22 B_23 B_25;B_34 B_31 B_32 B_33 B_35;B_44 B_41 B_42 B_43 B_45;B_54 B_51 B_52 B_53 B_55]
 
-    C = [C_11 C_12 C_13 C_14 C_15;C_21 C_22 C_23 C_24 C_25;C_31 C_32 C_33 C_34 C_35;C_41 C_42 C_43 C_44 C_45;C_51 C_52 C_53 C_54 C_55]
+    C = [C_14 C_11 C_12 C_13 C_15;C_24 C_21 C_22 C_23 C_25;C_34 C_31 C_32 C_33 C_35;C_44 C_41 C_42 C_43 C_45;C_54 C_51 C_52 C_53 C_55]
 
-    D1 = [D_11 D_12 D_13 D_14 D_15;D_21 D_22 D_23 D_24 D_25;D_31 D_32 D_33 D_34 D_35;D_41 D_42 D_43 D_44 D_45;D_51 D_52 D_53 D_54 D_55]
+    dC = [dC_14 dC_11 dC_12 dC_13 dC_15;dC_24 dC_21 dC_22 dC_23 dC_25;dC_34 dC_31 dC_32 dC_33 dC_35;dC_44 dC_41 dC_42 dC_43 dC_45;dC_54 dC_51 dC_52 dC_53 dC_55]
 
-    Vxx = [Vxx_11 Vxx_12 Vxx_13 Vxx_14 Vxx_15;Vxx_21 Vxx_22 Vxx_23 Vxx_24 Vxx_25;Vxx_31 Vxx_32 Vxx_33 Vxx_34 Vxx_35;Vxx_41 Vxx_42 Vxx_43 Vxx_44 Vxx_45;Vxx_51 Vxx_52 Vxx_53 Vxx_54 Vxx_55]
+    D1 = [D_14 D_11 D_12 D_13 D_15;D_24 D_21 D_22 D_23 D_25;D_34 D_31 D_32 D_33 D_35;D_44 D_41 D_42 D_43 D_45;D_54 D_51 D_52 D_53 D_55]
 
-    Vyy = [Vyy_11 Vyy_12 Vyy_13 Vyy_14 Vyy_15;Vyy_21 Vyy_22 Vyy_23 Vyy_24 Vyy_25;Vyy_31 Vyy_32 Vyy_33 Vyy_34 Vyy_35;Vyy_41 Vyy_42 Vyy_43 Vyy_44 Vyy_45;Vyy_51 Vyy_52 Vyy_53 Vyy_54 Vyy_55]
+    Vxx = [Vxx_14 Vxx_11 Vxx_12 Vxx_13 Vxx_15;Vxx_24 Vxx_21 Vxx_22 Vxx_23 Vxx_25;Vxx_34 Vxx_31 Vxx_32 Vxx_33 Vxx_35;Vxx_44 Vxx_41 Vxx_42 Vxx_43 Vxx_45;Vxx_54 Vxx_51 Vxx_52 Vxx_53 Vxx_55]
 
-    Vzz = [Vzz_11 Vzz_12 Vzz_13 Vzz_14 Vzz_15;Vzz_21 Vzz_22 Vzz_23 Vzz_24 Vzz_25;Vzz_31 Vzz_32 Vzz_33 Vzz_34 Vzz_35;Vzz_41 Vzz_42 Vzz_43 Vzz_44 Vzz_45;Vzz_51 Vzz_52 Vzz_53 Vzz_54 Vzz_55]
+    Vyy = [Vyy_14 Vyy_11 Vyy_12 Vyy_13 Vyy_15;Vyy_24 Vyy_21 Vyy_22 Vyy_23 Vyy_25;Vyy_34 Vyy_31 Vyy_32 Vyy_33 Vyy_35;Vyy_44 Vyy_41 Vyy_42 Vyy_43 Vyy_45;Vyy_54 Vyy_51 Vyy_52 Vyy_53 Vyy_55]
 
-    Vxy = [Vxy_11 Vxy_12 Vxy_13 Vxy_14 Vxy_15;Vxy_21 Vxy_22 Vxy_23 Vxy_24 Vxy_25;Vxy_31 Vxy_32 Vxy_33 Vxy_34 Vxy_35;Vxy_41 Vxy_42 Vxy_43 Vxy_44 Vxy_45;Vxy_51 Vxy_52 Vxy_53 Vxy_54 Vxy_55]
+    Vzz = [Vzz_14 Vzz_11 Vzz_12 Vzz_13 Vzz_15;Vzz_24 Vzz_21 Vzz_22 Vzz_23 Vzz_25;Vzz_34 Vzz_31 Vzz_32 Vzz_33 Vzz_35;Vzz_44 Vzz_41 Vzz_42 Vzz_43 Vzz_45;Vzz_54 Vzz_51 Vzz_52 Vzz_53 Vzz_55]
 
-    Vxz = [Vxz_11 Vxz_12 Vxz_13 Vxz_14 Vxz_15;Vxz_21 Vxz_22 Vxz_23 Vxz_24 Vxz_25;Vxz_31 Vxz_32 Vxz_33 Vxz_34 Vxz_35;Vxz_41 Vxz_42 Vxz_43 Vxz_44 Vxz_45;Vxz_51 Vxz_52 Vxz_53 Vxz_54 Vxz_55]
+    dVzz = [dVzz_14 dVzz_11 dVzz_12 dVzz_13 dVzz_15;dVzz_24 dVzz_21 dVzz_22 dVzz_23 dVzz_25;dVzz_34 dVzz_31 dVzz_32 dVzz_33 dVzz_35;dVzz_44 dVzz_41 dVzz_42 dVzz_43 dVzz_45;dVzz_54 dVzz_51 dVzz_52 dVzz_53 dVzz_55]
 
-    Vyz = [Vyz_11 Vyz_12 Vyz_13 Vyz_14 Vyz_15;Vyz_21 Vyz_22 Vyz_23 Vyz_24 Vyz_25;Vyz_31 Vyz_32 Vyz_33 Vyz_34 Vyz_35;Vyz_41 Vyz_42 Vyz_43 Vyz_44 Vyz_45;Vyz_51 Vyz_52 Vyz_53 Vyz_54 Vyz_55]
-    return COF(Ta,A,B,C,D1,Vxx,Vyy,Vzz,Vxy,Vxz,Vyz)
+    d2Vzz = [d2Vzz_14 d2Vzz_11 d2Vzz_12 d2Vzz_13 d2Vzz_15;d2Vzz_24 d2Vzz_21 d2Vzz_22 d2Vzz_23 d2Vzz_25;d2Vzz_34 d2Vzz_31 d2Vzz_32 d2Vzz_33 d2Vzz_35;d2Vzz_44 d2Vzz_41 d2Vzz_42 d2Vzz_43 d2Vzz_45;d2Vzz_54 d2Vzz_51 d2Vzz_52 d2Vzz_53 d2Vzz_55]
+
+    Vxy = [Vxy_14 Vxy_11 Vxy_12 Vxy_13 Vxy_15;Vxy_24 Vxy_21 Vxy_22 Vxy_23 Vxy_25;Vxy_34 Vxy_31 Vxy_32 Vxy_33 Vxy_35;Vxy_44 Vxy_41 Vxy_42 Vxy_43 Vxy_45;Vxy_54 Vxy_51 Vxy_52 Vxy_53 Vxy_55]
+
+    Vxz = [Vxz_14 Vxz_11 Vxz_12 Vxz_13 Vxz_15;Vxz_24 Vxz_21 Vxz_22 Vxz_23 Vxz_25;Vxz_34 Vxz_31 Vxz_32 Vxz_33 Vxz_35;Vxz_44 Vxz_41 Vxz_42 Vxz_43 Vxz_45;Vxz_54 Vxz_51 Vxz_52 Vxz_53 Vxz_55]
+
+    dVxz = [dVxz_14 dVxz_11 dVxz_12 dVxz_13 dVxz_15;dVxz_24 dVxz_21 dVxz_22 dVxz_23 dVxz_25;dVxz_34 dVxz_31 dVxz_32 dVxz_33 dVxz_35;dVxz_44 dVxz_41 dVxz_42 dVxz_43 dVxz_45;dVxz_54 dVxz_51 dVxz_52 dVxz_53 dVxz_55]
+    
+    Vyz = [Vyz_14 Vyz_11 Vyz_12 Vyz_13 Vyz_15;Vyz_24 Vyz_21 Vyz_22 Vyz_23 Vyz_25;Vyz_34 Vyz_31 Vyz_32 Vyz_33 Vyz_35;Vyz_44 Vyz_41 Vyz_42 Vyz_43 Vyz_45;Vyz_54 Vyz_51 Vyz_52 Vyz_53 Vyz_55]
+
+    dVyz = [dVyz_14 dVyz_11 dVyz_12 dVyz_13 dVyz_15;dVyz_24 dVyz_21 dVyz_22 dVyz_23 dVyz_25;dVyz_34 dVyz_31 dVyz_32 dVyz_33 dVyz_35;dVyz_44 dVyz_41 dVyz_42 dVyz_43 dVyz_45;dVyz_54 dVyz_51 dVyz_52 dVyz_53 dVyz_55]
+
+    return COF(Ta,A,B,C,dC,D1,Vxx,Vyy,Vzz,dVzz,d2Vzz,Vxy,Vxz,dVxz,Vyz,dVyz)
 end
 function assemble_mat(cof :: COF,D,D2,be,omega)
     L0 = cof.D1  + im * be * cof.B - im * omega * cof.Ta - be^2 * cof.Vyy + (cof.C .+ im * be * cof.Vyz) * kron(I(5), D)  + (cof.Vzz) * kron(I(5),D2) 
     L1 = im * cof.A - be * cof.Vxy + im *  cof.Vxz * kron(I(5),D)
     L2 = -cof.Vxx 
-    # L0 = L0[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
-    # L1 = L1[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
-    # L2 = L2[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    
+    return L0,L1,L2
+end
+function boudary_condition(L0,L1,L2)
+    L0 = L0[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    L1 = L1[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+    L2 = L2[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
+
     return L0,L1,L2
 end
