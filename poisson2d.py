@@ -30,6 +30,7 @@
 
 import sys
 import petsc4py
+import slepc4py
 
 petsc4py.init(sys.argv)
 
