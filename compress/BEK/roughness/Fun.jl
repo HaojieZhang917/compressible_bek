@@ -74,3 +74,8 @@ function extline(para,dat)
     data = data_positive[data_positive[:,4].>0,:]
     return data
 end
+##check the zero rows
+function zero_rows(A)
+    rows = findall(i -> all(A[i, :] .== 0), 1:size(A, 1))
+    return rows
+end

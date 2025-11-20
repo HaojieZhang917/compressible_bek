@@ -57,7 +57,7 @@ module CRD_BF
                 return np.concatenate((resa, resb))
         
         
-        z = np.linspace(0, 20, 10000)
+        z = np.linspace(0, 30, 10000)
         y = np.zeros((5, len(z)))
         y_guess = np.zeros((5, z.size))
         if kappa == 1:
@@ -84,7 +84,7 @@ module CRD_BF
         
         solution = solve_bvp(oneDiskODE, oneDiskBC, z, y_guess,tol=1e-10,max_nodes=5000000)
         
-        x_plot = np.linspace(0, 20, 10000)
+        x_plot = np.linspace(0, 30, 10000)
         
         
         y1_plot = solution.sol(x_plot)[0]
@@ -135,8 +135,8 @@ module CRD_BF
         end
         for i=1:N+1
             x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i] > 20
-                x[i] = 20
+            if x[i] > 30
+                x[i] = 30
             end
         end
         
@@ -228,8 +228,8 @@ struct COF
 end
 function baseflow_var(N_cheb,Ro,Co)
     N = 10000
-    tspan = (0,20)
-    t = range(0,20,N)
+    tspan = (0,30)
+    t = range(0,30,N)
     sigma = 0.72
     u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
@@ -252,7 +252,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,20,10000)
+        z = range(0,30,10000)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -525,31 +525,44 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     C_11 = C_12 = C_15 = C_22 = C_23 = C_24 = C_31 = C_33 = C_34 = C_41 = C_42 = C_53 = Zero
     dC_11 = dC_12 = dC_15 = dC_22 = dC_23 = dC_24 = dC_31 = dC_33 = dC_34 = dC_41 = dC_42 = dC_53 = Zero
     C_13 = R * rho.^2 .* eye
-    dC_13 = 2 * R * rho .* D * rho .* eye
+    # dC_13 = 2 * R * rho .* D * rho .* eye
+    dC_13 = D * diag(C_13) .* eye
     C_14 = rho .* H .* eye
-    dC_14 = D*rho .* H .* eye + rho .* (D*H) .* eye
-    C_21 = Ro * rho.^2  .* H .* eye
-    dC_21 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    # dC_14 = D*rho .* H .* eye + rho .* (D*H) .* eye
+    dC_14 = D * diag(C_14) .* eye
+    C_21 = Ro * rho.^2 .* H .* eye
+    # dC_21 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    dC_21 = D * diag(C_21) .* eye
     C_25 = -rho.^2 .* (D*F) .* eye
-    dC_25 = -2 * rho .* (D*rho) .* (D*F) .* eye - rho.^2 .* (D2*F) .* eye
+    # dC_25 = -2 * rho .* (D*rho) .* (D*F) .* eye - rho.^2 .* (D2*F) .* eye
+    dC_25 = D * diag(C_25) .* eye
     C_32 = Ro * rho.^2 .* H .* eye
-    dC_32 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    # dC_32 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    dC_32 = D*diag(C_32) .* eye
     C_35 = -rho.^2 .* (D*G) .* eye
-    dC_35 = -2 * rho .* (D*rho) .* (D*G) .* eye - rho.^2 .* (D2*G) .* eye
+    # dC_35 = -2 * rho .* (D*rho) .* (D*G) .* eye - rho.^2 .* (D2*G) .* eye
+    dC_35 = D * diag(C_35) .* eye
     C_43 = Ro * rho.^2 .* H .* eye
-    dC_43 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    # dC_43 = Ro * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye)
+    dC_43 = D * diag(C_43) .* eye
     C_44 = R * (gamma * Ma^2)^(-1) * rho .* T .* eye
-    dC_44 = R * (gamma * Ma^2)^(-1) * (rho .* (D*T) .+ (D*rho) .* T) .* eye
+    # dC_44 = R * (gamma * Ma^2)^(-1) * (rho .* (D*T) .+ (D*rho) .* T) .* eye
+    dC_44 = D * diag(C_44) .* eye
     C_45 = R * (gamma * Ma^2)^(-1) * rho .* rho .* eye
-    dC_45 = R * (gamma * Ma^2)^(-1) * (rho .* (D*rho) .+ (D*rho) .* rho) .* eye
+    # dC_45 = R * (gamma * Ma^2)^(-1) * (rho .* (D*rho) .+ (D*rho) .* rho) .* eye
+    dC_45 = D * diag(C_45) .* eye
     C_51 = -2 * (gamma-1) * Ma^2 * rho .* (D*F) .* eye
-    dC_51 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*F) + (D*rho) .* (D*F)) .* eye
+    # dC_51 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*F) + (D*rho) .* (D*F)) .* eye
+    dC_51 = D * diag(C_51) .* eye
     C_52 = -2 * (gamma-1) * Ma^2 * rho .* (D*G) .* eye
-    dC_52 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*G) + (D*rho) .* (D*G)) .* eye
+    # dC_52 = -2 * (gamma-1) * Ma^2 * (rho .* (D2*G) + (D*rho) .* (D*G)) .* eye
+    dC_52 = D * diag(C_52) .* eye
     C_54 = -(gamma-1)/gamma * rho .* H .* T .* eye
-    dC_54 = -(gamma-1)/gamma * (rho .* (D*T) .* H .+ (D*rho) .* T .* H .+ rho .* (D*H) .* T).* eye
+    # dC_54 = -(gamma-1)/gamma * (rho .* (D*T) .* H .+ (D*rho) .* T .* H .+ rho .* (D*H) .* T).* eye
+    dC_54 = D * diag(C_54) .* eye
     C_55 = 1/gamma * rho.^2 .* H .* eye + 1/sigma * rho.^2 .* (D*T) .* eye
-    dC_55 = 1/gamma * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye) + 1/sigma * (2 * rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2*T) .* eye)
+    # dC_55 = 1/gamma * (2 * rho .* (D*rho) .* H .+ rho.^2 .* (D*H) .* eye) + 1/sigma * (2 * rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2*T) .* eye)
+    dC_55 = D * diag(C_55) .* eye
 
     D_12 = D_15 = D_41 = D_42 = D_51 = D_52 = Zero
     D_11 = rho .* eye
@@ -572,7 +585,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     D_54 = 1/gamma * rho .* H .* (D*T) .* eye
     D_55 = -(gamma-1)/gamma * rho .* H .* (D*rho) .* eye - (1/sigma) * (rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2 * T)) .* eye - (gamma-1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* eye
 
-    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_14 = Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
+    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_14 =  Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
     Vxx_21 = -(lam + 2*T) .* eye
     Vxx_32 = -T .* eye
     Vxx_43 = -T .* eye
@@ -598,17 +611,25 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     dVzz_11 = dVzz_12 = dVzz_13 = dVzz_14 = dVzz_15 = dVzz_22 = dVzz_23 = dVzz_24 = dVzz_25 = dVzz_31 = dVzz_33 = dVzz_34 = dVzz_35 = dVzz_41 = dVzz_42 = dVzz_44 = dVzz_45 = dVzz_51 = dVzz_52 = dVzz_53 = dVzz_54 = Zero
     d2Vzz_11 = d2Vzz_12 = d2Vzz_13 = d2Vzz_14 = d2Vzz_15 = d2Vzz_22 = d2Vzz_23 = d2Vzz_24 = d2Vzz_25 = d2Vzz_31 = d2Vzz_33 = d2Vzz_34 = d2Vzz_35 = d2Vzz_41 = d2Vzz_42 = d2Vzz_44 = d2Vzz_45 = d2Vzz_51 = d2Vzz_52 = d2Vzz_53 = d2Vzz_54 = Zero    
     Vzz_21 = -rho .* eye
-    dVzz_21 = -D*rho .* eye
-    d2Vzz_21 = -D2*rho .* eye
+    # dVzz_21 = -D*rho .* eye
+    # d2Vzz_21 = -D2*rho .* eye
+    dVzz_21 = D * diag(Vzz_21) .* eye
+    d2Vzz_21 = D2 * diag(Vzz_21) .* eye
     Vzz_32 = -rho .* eye
-    dVzz_32 = -D*rho .* eye
-    d2Vzz_32 = -D2*rho .* eye
+    # dVzz_32 = -D*rho .* eye
+    # d2Vzz_32 = -D2*rho .* eye
+    dVzz_32 = D * diag(Vzz_32) .* eye
+    d2Vzz_32 = D2 * diag(Vzz_32) .* eye
     Vzz_43 = -rho .* (2 .+ lam .* rho) .* eye
-    dVzz_43 = -2 * (D*rho) .* eye -2 * rho .* (D * rho) .* lam .* eye - rho.^2 .* (D * lam) .* eye
-    d2Vzz_43 = -2 * (D2*rho) .* eye - 2 * (D * rho) .* (D * rho) .* lam .* eye - 2 * rho .* (D2 * rho) .* lam .* eye - 4 * rho .* (D * rho) .* (D * lam) .* eye - rho.^2 .* (D2 * lam) .* eye
+    # dVzz_43 = -2 * (D*rho) .* eye -2 * rho .* (D * rho) .* lam .* eye - rho.^2 .* (D * lam) .* eye
+    # d2Vzz_43 = -2 * (D2*rho) .* eye - 2 * (D * rho) .* (D * rho) .* lam .* eye - 2 * rho .* (D2 * rho) .* lam .* eye - 4 * rho .* (D * rho) .* (D * lam) .* eye - rho.^2 .* (D2 * lam) .* eye
+    dVzz_43 = D * diag(Vzz_43) .* eye
+    d2Vzz_43 = D2 * diag(Vzz_43) .* eye
     Vzz_55 = -rho.^2 .* kappa .* eye
-    dVzz_55 = -2 * rho .* (D * rho) .* kappa .* eye - rho.^2 .* (D * kappa) .* eye
-    d2Vzz_55 = - 2 * (D * rho) .* (D * rho) .* kappa .* eye - 2 * rho .* (D2 * rho) .* kappa .* eye - 4 * rho .* (D * rho) .* (D * kappa) .* eye - rho.^2 .* (D2 * kappa) .* eye
+    # dVzz_55 = -2 * rho .* (D * rho) .* kappa .* eye - rho.^2 .* (D * kappa) .* eye
+    # d2Vzz_55 = - 2 * (D * rho) .* (D * rho) .* kappa .* eye - 2 * rho .* (D2 * rho) .* kappa .* eye - 4 * rho .* (D * rho) .* (D * kappa) .* eye - rho.^2 .* (D2 * kappa) .* eye
+    dVzz_55 = D * diag(Vzz_55) .* eye
+    d2Vzz_55 = D2 * diag(Vzz_55) .* eye
 
     Vxy_11 = Vxy_12 = Vxy_13 = Vxy_14 = Vxy_15 = Vxy_21 = Vxy_23 = Vxy_24 = Vxy_25 = Vxy_32 = Vxy_33 = Vxy_34 = Vxy_35 = Vxy_41 = Vxy_42  = Vxy_43 = Vxy_44 = Vxy_45 = Vxy_51 = Vxy_52 = Vxy_53 = Vxy_54 = Vxy_55 =  Zero
     dVxy_11 = dVxy_12 = dVxy_13 = dVxy_14 = dVxy_15 = dVxy_21 = dVxy_23 = dVxy_24 = dVxy_25 = dVxy_32 = dVxy_33 = dVxy_34 = dVxy_35 = dVxy_41 = dVxy_42  = dVxy_43 = dVxy_44 = dVxy_45 = dVxy_51 = dVxy_52 = dVxy_53 = dVxy_54 = dVxy_55 =  Zero
@@ -621,16 +642,20 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     Vxz_11 = Vxz_12 = Vxz_13 = Vxz_14 = Vxz_15 = Vxz_21 = Vxz_22 = Vxz_24 = Vxz_25 = Vxz_31 = Vxz_32 = Vxz_33 = Vxz_34 = Vxz_35 = Vxz_42 = Vxz_43 = Vxz_44 = Vxz_45 = Vxz_51 = Vxz_52 = Vxz_53 = Vxz_54 = Vxz_55 =  Zero
     dVxz_11 = dVxz_12 = dVxz_13 = dVxz_14 = dVxz_15 = dVxz_21 = dVxz_22 = dVxz_24 = dVxz_25 = dVxz_31 = dVxz_32 = dVxz_33 = dVxz_34 = dVxz_35 = dVxz_42 = dVxz_43 = dVxz_44 = dVxz_45 = dVxz_51 = dVxz_52 = dVxz_53 = dVxz_54 = dVxz_55 =  Zero
     Vxz_23 = - (1 .+ rho.*lam) .* eye
-    dVxz_23 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    # dVxz_23 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    dVxz_23 = D * diag(Vxz_23) .* eye
     Vxz_41 = - (1 .+ rho.*lam) .* eye
-    dVxz_41 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    # dVxz_41 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    dVxz_41 = D * diag(Vxz_41) .* eye
 
     Vyz_11 = Vyz_12 = Vyz_13 = Vyz_14 = Vyz_15 = Vyz_21 = Vyz_22 = Vyz_23 = Vyz_24 = Vyz_25 = Vyz_31 = Vyz_32  = Vyz_34 = Vyz_35 = Vyz_41 = Vyz_43 = Vyz_44 = Vyz_45 = Vyz_51 = Vyz_52 = Vyz_53 = Vyz_54 = Vyz_55 =  Zero
     dVyz_11 = dVyz_12 = dVyz_13 = dVyz_14 = dVyz_15 = dVyz_21 = dVyz_22 = dVyz_23 = dVyz_24 = dVyz_25 = dVyz_31 = dVyz_32  = dVyz_34 = dVyz_35 = dVyz_41 = dVyz_43 = dVyz_44 = dVyz_45 = dVyz_51 = dVyz_52 = dVyz_53 = dVyz_54 = dVyz_55 =  Zero
     Vyz_33 = - (1 .+ rho.*lam) .* eye
-    dVyz_33 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    # dVyz_33 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    dVyz_33 = D * diag(Vyz_33) .* eye
     Vyz_42 = - (1 .+ rho.*lam) .* eye
-    dVyz_42 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    # dVyz_42 = - (D*rho.*lam .+ rho.*D*lam) .* eye
+    dVyz_42 = D * diag(Vyz_42) .* eye
 
     Ta = [Ta_14 Ta_11 Ta_12 Ta_13 Ta_15;Ta_24 Ta_21 Ta_22 Ta_23 Ta_25;Ta_34 Ta_31 Ta_32 Ta_33 Ta_35;Ta_44 Ta_41 Ta_42 Ta_43 Ta_45;Ta_54 Ta_51 Ta_52 Ta_53 Ta_55]
 
