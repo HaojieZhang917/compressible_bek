@@ -585,7 +585,8 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     D_54 = 1/gamma * rho .* H .* (D*T) .* eye
     D_55 = -(gamma-1)/gamma * rho .* H .* (D*rho) .* eye - (1/sigma) * (rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2 * T)) .* eye - (gamma-1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* eye
 
-    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_14 =  Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
+    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
+    Vxx_14 = -1e-8 * eye
     Vxx_21 = -(lam + 2*T) .* eye
     Vxx_32 = -T .* eye
     Vxx_43 = -T .* eye

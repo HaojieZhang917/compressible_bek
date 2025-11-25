@@ -80,13 +80,13 @@ function zero_rows(A)
     return rows
 end
 ##caculate Bi_Linear Operator
-function Bi_linear(C_A,H1_A,vec_L)
-    q_all = []
-    for i = 1 : size(C.vectors,2)
-        Q = (C_A.vectors[:,i]') * (H1_A' * vec_L)
-        q_all = [q_all ; Q]
-    end 
-    ind = findmax(abs.(q_all))
-    Q = q_all[ind[2]]
-    return q_all,Q
-end
+# function Bi_linear(C_A,H1_A,vec_L)
+#     q_all = []
+#     for i = 1 : size(C.vectors,2)
+#         Q = (C_A.vectors[:,i]') * (H1_A' * vec_L)
+#         q_all = [q_all ; Q]
+#     end 
+#     ind = findmax(abs.(q_all))
+#     Q = q_all[ind[2]]
+#     return q_all,Q,C_A.values[ind[2]]
+# end
