@@ -57,7 +57,7 @@ module CRD_BF
                 return np.concatenate((resa, resb))
         
         
-        z = np.linspace(0, 30, 10000)
+        z = np.linspace(0, 40, 10000)
         y = np.zeros((5, len(z)))
         y_guess = np.zeros((5, z.size))
         if kappa == 1:
@@ -84,7 +84,7 @@ module CRD_BF
         
         solution = solve_bvp(oneDiskODE, oneDiskBC, z, y_guess,tol=1e-10,max_nodes=5000000)
         
-        x_plot = np.linspace(0, 30, 10000)
+        x_plot = np.linspace(0, 40, 10000)
         
         
         y1_plot = solution.sol(x_plot)[0]
@@ -127,22 +127,38 @@ module CRD_BF
         dX = X - X';
         D = (c * (1 ./ c)') ./ (dX .+ I(N+1));
         D = D - diagm(vec(sum(D, dims=2))); 
-        a = 1
-        b = 0.6
-        c = 0.5
-        for i=1:N+1
-            D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
-        end
-        for i=1:N+1
-            x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i] > 30
-                x[i] = 30
+        # a = 6
+        # b = 0.6
+        # c = 0.5
+        # for i=1:N+1
+        #     D[i,:]=D[i,:].* (1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))^2/(2a*(b .+ 3 * (1-b)*x[i]^2 - 2 * c * (1-b) * x[i]))
+        # end
+        # for i=1:N+1
+        #     x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
+        #     if x[i] > 40
+        #         x[i] = 40
+        #     end
+        # end
+        y = zeros(Float64, N+1)
+        J_vec = zeros(Float64, N+1) # 雅可比向量
+        L = 2
+        for i = 1 : N+1
+            if abs(x[i] + 1.0) < 1e-12
+                # 处理边界点 eta = 1 (x = Inf)
+                # 在数值上通常不需要用到无穷远点的值（因为边界条件是0）
+                # 但雅可比需要处理
+                y[i] = 1e15 # 给一个大数代替 Inf
+                J_vec[i] = 0.0 # 远场权重通常趋于0，具体取决于映射导数极限
+            else
+                y[i] = L * (1 - x[i]) / (1 + x[i])
+                # 雅可比 J = dx/d_eta = 2L / (1-eta)^2
+                J_vec[i] = 2 * L / (1 + x[i])^2
             end
         end
-        
+        D = D .* J_vec
         D2 = D^2;
 
-        return D,D2,x
+        return D,D2,y
 
         end
 
@@ -228,8 +244,8 @@ struct COF
 end
 function baseflow_var(N_cheb,Ro,Co)
     N = 10000
-    tspan = (0,30)
-    t = range(0,30,N)
+    tspan = (0,40)
+    t = range(0,40,N)
     sigma = 0.72
     u0,v0,w0,du0,dv0,x = CRD_BF.sol_baseflowODE(Ro)
     PHI = CRD_BF.phi_var(u0,t.step.hi,N)
@@ -252,7 +268,7 @@ function T_ca(Mr,f,q,W,gamma,Tw)
  end
 function interp(u,v,w,T,x,N,mode)
     if mode == "sim"
-        z = range(0,30,10000)
+        z = range(0,40,10000)
         itu = BSplineKit.interpolate(z, u , BSplineOrder(4))
         itv = BSplineKit.interpolate(z, v , BSplineOrder(4))
         itw = BSplineKit.interpolate(z, w , BSplineOrder(4))
@@ -585,8 +601,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     D_54 = 1/gamma * rho .* H .* (D*T) .* eye
     D_55 = -(gamma-1)/gamma * rho .* H .* (D*rho) .* eye - (1/sigma) * (rho .* (D*rho) .* (D*T) .+ rho.^2 .* (D2 * T)) .* eye - (gamma-1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* eye
 
-    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
-    Vxx_14 = -1e-8 * eye
+    Vxx_11 = Vxx_12 = Vxx_13 = Vxx_14 = Vxx_15 = Vxx_22 = Vxx_23 = Vxx_24 = Vxx_25 = Vxx_31 = Vxx_33 = Vxx_34 = Vxx_35 = Vxx_41 = Vxx_42 = Vxx_44 = Vxx_45 = Vxx_51 = Vxx_52 = Vxx_53 = Vxx_54 = Zero
     Vxx_21 = -(lam + 2*T) .* eye
     Vxx_32 = -T .* eye
     Vxx_43 = -T .* eye
@@ -691,6 +706,7 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     dVyz = [dVyz_14 dVyz_11 dVyz_12 dVyz_13 dVyz_15;dVyz_24 dVyz_21 dVyz_22 dVyz_23 dVyz_25;dVyz_34 dVyz_31 dVyz_32 dVyz_33 dVyz_35;dVyz_44 dVyz_41 dVyz_42 dVyz_43 dVyz_45;dVyz_54 dVyz_51 dVyz_52 dVyz_53 dVyz_55]
 
     return COF(Ta,A,B,C,dC,D1,Vxx,Vyy,Vzz,dVzz,d2Vzz,Vxy,Vxz,dVxz,Vyz,dVyz)
+
 end
 function ALST_Operater(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,alpha,N_cheb,Ro,Co,D,D2)
     A0_11 = rho .* I(N_cheb + 1) + im * alpha * R * rho .* I(N_cheb + 1)
