@@ -127,7 +127,7 @@ module CRD_BF
         dX = X - X';
         D = (c * (1 ./ c)') ./ (dX .+ I(N+1));
         D = D - diagm(vec(sum(D, dims=2))); 
-        a = 2
+        a = 4
         b = 0.6
         c = 0.5
         for i=1:N+1

@@ -705,107 +705,6 @@ function Spatial_mode_BEK(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,N_cheb,Ro,Co,D,
     return COF(Ta,A,B,C,dC,D1,Vxx,Vyy,Vzz,dVzz,d2Vzz,Vxy,Vxz,dVxz,Vyz,dVyz)
 
 end
-function ALST_Operater(F,G,H,rho,lam,kappa,T,sigma,gamma,R,Ma,omega,be,alpha,N_cheb,Ro,Co,D,D2)
-    A0_11 = rho .* I(N_cheb + 1) + im * alpha * R * rho .* I(N_cheb + 1)
-    A0_12 = im * be * R * rho .* I(N_cheb + 1)
-    A0_13 = R * rho .* (D*rho .* I(N_cheb + 1))
-    A0_14 = im * R * (be * G .- omega ) .* I(N_cheb + 1)  + 2 * F .* I(N_cheb + 1)  + rho .* (D * H) .* I(N_cheb + 1)+ alpha * im * R * F .* I(N_cheb + 1)
-    A0_15 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A0_21 = im * R * rho .* (be * G .- omega ) .* I(N_cheb + 1) + Ro * rho .*  F .* I(N_cheb + 1) + be^2 * T .* I(N_cheb + 1) + alpha * im * R * rho .* F .* I(N_cheb + 1) + alpha^2 * (lam + 2 * T) .* I(N_cheb + 1)
-    A0_22 = -1 * rho .* (2*Ro * G .+ Co) .* I(N_cheb + 1) + alpha * be * (lam .+ T) .* I(N_cheb + 1)
-    A0_23 = R * rho.^2 .* (D*F) .* I(N_cheb + 1) - alpha * im * (rho .* (D*T)) .* I(N_cheb + 1)
-    A0_24 = rho .* (D2 * F) .* I(N_cheb + 1) + im * alpha * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
-    A0_25 = -rho .* (D * rho .* D * F + rho .* (D2 * F)) .* I(N_cheb + 1) + alpha * im * R .* I(N_cheb + 1) * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
-
-    A0_31 =  rho .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + alpha * be * (lam + T) .* I(N_cheb + 1)
-    A0_32 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho .* F .* I(N_cheb + 1) + be^2 * (lam + 2 * T) .* I(N_cheb + 1) + alpha * im * R * rho .* F .* I(N_cheb + 1) + alpha^2 * T .* I(N_cheb + 1)
-    A0_33 = R * rho.^2  .* (D*G) .* I(N_cheb + 1) - im * be * (rho .* (D*T) .* I(N_cheb + 1))
-    A0_34 = F .* (2 * Ro * G .+ Co) .* I(N_cheb + 1) + Ro * rho .* H .* (D*G) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * T .* I(N_cheb + 1)
-    A0_35 = -rho .* (D * rho .* D * G + rho .* (D2 * G)) .* I(N_cheb + 1) + im * be * R * (gamma*Ma^2)^(-1) * rho .* I(N_cheb + 1)
-
-    A0_41 = -alpha * im * (rho .* (D*lam) .* I(N_cheb + 1))
-    A0_42 = -im * be * (rho .* (D*lam)) .* I(N_cheb + 1)
-    A0_43 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1) + Ro * rho.^2 .*  ((D*H) .* I(N_cheb + 1)) + be^2 * T .* I(N_cheb + 1) + alpha * im * R * rho .* F .* I(N_cheb + 1) + alpha^2 * T .* I(N_cheb + 1)
-    A0_44 = (gamma*Ma^2)^(-1) * R * rho .* ((D*T) .* I(N_cheb + 1))
-    A0_45 = -im * rho .* (be .* (D*G)) .* I(N_cheb + 1) + (gamma*Ma^2)^(-1) * R * rho .* (D*rho.* I(N_cheb + 1)) - alpha * im * rho .* ( (D*F)) .* I(N_cheb + 1)
-
-    A0_51 = zeros(N_cheb + 1, N_cheb + 1)
-    A0_52 = zeros(N_cheb + 1, N_cheb + 1)
-    A0_53 = -2 * im * (gamma - 1) * Ma^2 * (be * (D*G))  .* I(N_cheb + 1 ) + R * rho.^2 .* (D*T) .* I(N_cheb + 1) - 2 *alpha * im * (gamma - 1) * Ma^2 * D * F .* I(N_cheb + 1)
-    A0_54 = rho .* H .* (D*T) .* I(N_cheb + 1) - ((gamma - 1) *  (gamma)^(-1) * ( (im * R * (be * G .- omega) .* T .* I(N_cheb + 1) )+ rho .* H .* D*T .* I(N_cheb + 1))) - alpha * (gamma - 1) * (gamma)^(-1) *  im * R * F  .* T .* I(N_cheb + 1)
-    A0_55 = im * R * rho .* (be * G .- omega) .* I(N_cheb + 1)+ be^2 * kappa .* I(N_cheb + 1) + (1/sigma) * (-rho .* ((D*rho) .* (D*T) .* I(N_cheb + 1) + rho .* (D2 * T) .* I(N_cheb + 1)))+ (-(gamma - 1) * Ma^2 * rho.^2 .* ((D*F).^2 + (D*G).^2) .* I(N_cheb + 1)) - ((gamma - 1) * (gamma)^(-1) * ((im * R * (be * G .- omega) .* rho .* I(N_cheb + 1)) + rho .* H .* D*rho .* I(N_cheb + 1)))
-            + alpha *  im * R * rho .* F .* I(N_cheb + 1) - (gamma - 1) * (gamma)^(-1) * im * R * F .* rho .* I(N_cheb + 1) + alpha^2 * kappa .* I(N_cheb + 1)
-    
-    A1_11 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_12 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_13 = R * rho .* rho .* I(N_cheb + 1)
-    A1_14 = rho .* H .* I(N_cheb + 1)
-    A1_15 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A1_21 = Ro * rho.^2 .* H .* I(N_cheb + 1)
-    A1_22 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_23 = - alpha *im * (1 .+ lam .* rho) .* I(N_cheb + 1)
-    A1_24 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_25 = - rho.^2 .* (D*F) .* I(N_cheb + 1)
-    
-    A1_31 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_32 = Ro * rho.^2 .* H .* I(N_cheb + 1)
-    A1_33 = -im * be * (1 .+ lam .* rho) .* I(N_cheb + 1)
-    A1_34 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_35 = - rho.^2 .* (D*G) .* I(N_cheb + 1)
-
-    A1_41 = - im *alpha *(1 .+ lam .* rho) .* I(N_cheb + 1)
-    A1_42 = - im *be * (1 .+ lam .* rho) .* I(N_cheb + 1)
-    A1_43 = Ro * rho.^2 .* H .* I(N_cheb + 1)
-    A1_44 = (gamma*Ma^2)^(-1) * R * rho .* T .* I(N_cheb + 1)
-    A1_45 = (gamma*Ma^2)^(-1) * R * rho .* rho .* I(N_cheb + 1)
-
-    A1_51 = -2 * (gamma - 1) * Ma^2 * rho .* (D*F) .* I(N_cheb + 1)
-    A1_52 = -2 * (gamma - 1) * Ma^2 * rho .* (D*G) .* I(N_cheb + 1)
-    A1_53 = zeros(N_cheb + 1, N_cheb + 1)
-    A1_54 = (gamma - 1) *  (gamma)^(-1) *rho .* H .* T .* I(N_cheb + 1)
-    A1_55 = -(1/sigma) * rho .* (D*T) .* I(N_cheb + 1) - (gamma - 1) * (gamma)^(-1) *rho .* H .* rho .* I(N_cheb + 1) + rho^2 * H .* I(N_cheb + 1)
-
-    A2_11 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_12 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_13 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_14 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_15 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A2_21 = - rho .* I(N_cheb + 1)
-    A2_22 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_23 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_24 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_25 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A2_31 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_32 = - rho .* I(N_cheb + 1)
-    A2_33 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_34 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_35 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A2_41 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_42 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_43 = - rho .* (2 .+ lam .* rho) .* I(N_cheb + 1)
-    A2_44 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_45 = zeros(N_cheb + 1, N_cheb + 1)
-
-    A2_51 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_52 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_53 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_54 = zeros(N_cheb + 1, N_cheb + 1)
-    A2_55 = -rho.^2 .* kappa .* I(N_cheb + 1)
-    
-    A0 = [A0_11 A0_12 A0_13 A0_14 A0_15 ; A0_21 A0_22 A0_23 A0_24 A0_25 ; A0_31 A0_32 A0_33 A0_34 A0_35 ; A0_41 A0_42 A0_43 A0_44 A0_45 ; A0_51 A0_52 A0_53 A0_54 A0_55  ]
-    A1 = [A1_11 A1_12 A1_13 A1_14 A1_15 ; A1_21 A1_22 A1_23 A1_24 A1_25 ; A1_31 A1_32 A1_33 A1_34 A1_35 ; A1_41 A1_42 A1_43 A1_44 A1_45 ; A1_51 A1_52 A1_53 A1_54 A1_55  ]
-    A2 = [A2_11 A2_12 A2_13 A2_14 A2_15 ; A2_21 A2_22 A2_23 A2_24 A2_25 ; A2_31 A2_32 A2_33 A2_34 A2_35 ; A2_41 A2_42 A2_43 A2_44 A2_45 ; A2_51 A2_52 A2_53 A2_54 A2_55  ]
-    
-    A0 = A0[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
-    A1 = A1[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
-    A2 = A2[setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (1,N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
-   return A0,A1,A2
-end
 function assemble_mat(cof :: COF,D,D2,be,omega)
     L0 = cof.D1  + im * be * cof.B - im * omega * cof.Ta - be^2 * cof.Vyy + (cof.C .+ im * be * cof.Vyz) * kron(I(5), D)  + (cof.Vzz) * kron(I(5),D2) 
     L1 = im * cof.A - be * cof.Vxy + im *  cof.Vxz * kron(I(5),D)
@@ -813,10 +712,38 @@ function assemble_mat(cof :: COF,D,D2,be,omega)
     
     return L0,L1,L2
 end
+function assemble_adjmat(cof,D,D2,be,omega,conj)
+    if conj == 0
+        A0_raw = transpose(cof.D1) + (im * be * transpose(cof.B)) - (im * omega * transpose(cof.Ta)) - (be^2 * transpose(cof.Vyy)) - transpose(cof.dC) - (im *be*transpose(cof.dVyz)) + transpose(cof.d2Vzz) - (transpose(cof.C) + im * be * transpose(cof.Vyz) - 2 * transpose(cof.dVzz)) * kron(I(5),D) + transpose(cof.Vzz) * kron(I(5),D2)
+        A1_raw = (im * transpose(cof.A)) - (be * transpose(cof.Vxy)) - (im * transpose(cof.dVxz)) - (im * transpose(cof.Vxz)) * kron(I(5),D) 
+        A2_raw = -transpose(cof.Vxx)
+    else conj == 1
+        A0_raw = transpose(cof.D1) + (-im * be * transpose(cof.B)) - (-im * omega * transpose(cof.Ta)) - (be^2 * transpose(cof.Vyy)) - transpose(cof.dC) - (-im *be*transpose(cof.dVyz)) + transpose(cof.d2Vzz) - (transpose(cof.C) + -1 * im * be * transpose(cof.Vyz) - 2 * transpose(cof.dVzz)) * kron(I(5),D) + transpose(cof.Vzz) * kron(I(5),D2)
+        A1_raw = (-im * transpose(cof.A)) - (be * transpose(cof.Vxy)) - (-im * transpose(cof.dVxz)) - (-im * transpose(cof.Vxz)) * kron(I(5),D) 
+        A2_raw = -transpose(cof.Vxx)
+    end
+    return A0_raw,A1_raw,A2_raw
+end
 function boudary_condition(L0,L1,L2,N_cheb)
     L0 = L0[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
     L1 = L1[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
     L2 = L2[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))]
 
     return L0,L1,L2
+end
+function Wcc_fun(z,N_cheb,)
+    Wcc = zeros(N_cheb + 1,N_cheb + 1)
+    for i = 1 : 1 : N_cheb
+        if i == 1
+            Wcc[i,i] = (z[2] - z[1])/2
+        elseif i == N_cheb + 1
+            Wcc[i,i] = (z[i] - z[i-1])/2
+        else
+            Wcc[i,i] = (z[i+1] - z[i-1])/2
+        end
+    end
+    W = kron(I(5),Wcc)
+    W = W[setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5)),setdiff(1:end , (N_cheb + 1,N_cheb + 2,2N_cheb + 2,2N_cheb + 3,3N_cheb + 3,3N_cheb + 4,4N_cheb + 4,4N_cheb + 5,5N_cheb + 5))];
+    W_H = kron(I(2),W);
+    return W,W_H
 end
