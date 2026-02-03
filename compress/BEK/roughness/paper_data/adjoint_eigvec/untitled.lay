@@ -1,0 +1,1344 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"stationary_eigvec_type2.dat"'
+$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5" "V6" "V7" "V8" "V9" "V10" "V11"'
+$!SetStyleBase Factory
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    Letter
+      {
+      Width = 8.5
+      Height = 11
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+### Page Number 1 ###
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1, Page Number 1 ###
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  ResetStyle = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 4
+  Height = 6
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-5]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    ShowText = No
+    TextShape
+      {
+      FontFamily = 'Times New Roman'
+      IsBold = No
+      IsItalic = Yes
+      Height = 4
+      }
+    Box
+      {
+      BoxType = None
+      LineThickness = 0.2
+      }
+    XYPos
+      {
+      X = 93.21
+      Y = 92.904
+      }
+    }
+$!LineMap  [1]
+  Name = '|<greek>r</greek>|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = '|u|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 3
+    }
+  Lines
+    {
+    Color = Cyan
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = '|v|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = '|w|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 5
+    }
+  Lines
+    {
+    Color = Custom3
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [5]
+  Name = '|T|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 6
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    LineThickness = 0.2
+    }
+  ViewportPosition
+    {
+    X1 = 11
+    Y1 = 10
+    X2 = 94
+    Y2 = 94
+    }
+  ViewportTopSnapTarget = 94
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 8
+    GRSpacing = 2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'z'
+      TextShape
+        {
+        FontFamily = 'Times New Roman'
+        IsItalic = Yes
+        Height = 6
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.2
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    AutoGrid = No
+    GRSpacing = 0.2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.2
+      }
+    }
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 81.09999999999999
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{u}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 76
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{v}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 70.90000000000001
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{w}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 81.99999999999999
+    Y = 61.41450044208662
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{T}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 86.2
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{\rho}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 27.02365163572058
+    Y = 89.49602122015916
+    }
+  TextShape
+    {
+    FontFamily = 'Times New Roman'
+    IsBold = No
+    Height = 30
+    }
+  Text = '(a)'
+### Frame Number 2, Page Number 1 ###
+$!CreateNewFrame 
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 5
+    Y = 0.25
+    }
+  Width = 4
+  Height = 6
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-5]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    ShowText = No
+    TextShape
+      {
+      FontFamily = 'Times'
+      IsBold = No
+      IsItalic = Yes
+      Height = 4
+      }
+    Box
+      {
+      BoxType = None
+      LineThickness = 0.2
+      }
+    XYPos
+      {
+      X = 99.517
+      Y = 93.469
+      }
+    }
+$!LineMap  [1]
+  Name = '|<greek>r</greek>|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 7
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = '|u|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Cyan
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = '|v|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 9
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = '|w|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 10
+    }
+  Lines
+    {
+    Color = Custom3
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [5]
+  Name = '|T|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 11
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    LineThickness = 0.2
+    }
+  ViewportPosition
+    {
+    X1 = 11
+    Y1 = 10
+    X2 = 94
+    Y2 = 94
+    }
+  ViewportTopSnapTarget = 94
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 8
+    GRSpacing = 2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'z'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsItalic = Yes
+        Height = 6
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.2
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    AutoGrid = No
+    GRSpacing = 0.2
+    Ticks
+      {
+      ShowOnAxisLine = No
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      NumMinOrTicks = 0
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    AxisLine
+      {
+      Show = No
+      LineThickness = 0.2
+      }
+    }
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 81.09999999999999
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\tilde{u}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 86.2
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\tilde{\rho}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 76
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\tilde{v}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 70.90000000000001
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\tilde{w}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 65.8
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\tilde{T}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 25.25530503978779
+    Y = 88.54111405835545
+    }
+  TextShape
+    {
+    FontFamily = 'Times'
+    IsBold = No
+    Height = 30
+    }
+  Text = '(b)'
+$!AttachGeom 
+  AnchorPos
+    {
+    X = 0.9016938239337176
+    Y = 0.002807070883286578
+    }
+  FillColor = Black
+  LinePattern = DashDot
+  LineThickness = 0.2
+  ArrowheadSize = 3
+  ArrowheadAngle = 30
+  RawData
+1
+2
+-2.5556767369E-08 -4.22126777977E-11 
+-2.5556767369E-08 1.00001788139 
+$!FrameControl ActivateByNumber
+  Frame = 1
+### Page Number 2 ###
+$!PageControl Create
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1, Page Number 2 ###
+$!FrameLayout 
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!SketchAxis 
+  DepXToYRatio = 1
+$!SketchAxis 
+  XDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.1251124999999999599
+    GRSpacing = 0.2
+    }
+$!SketchAxis 
+  YDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.000099999999999989
+    GRSpacing = 0.2
+    }
+### Frame Number 2, Page Number 2 ###
+$!CreateNewFrame 
+$!AttachDataSet 
+  PageNum = 2
+  Frame = 2
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-10]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    ShowText = No
+    TextShape
+      {
+      FontFamily = 'Times New Roman'
+      IsBold = No
+      IsItalic = Yes
+      Height = 4
+      }
+    Box
+      {
+      LineThickness = 0.2
+      }
+    XYPos
+      {
+      X = 89.662
+      Y = 93.894
+      }
+    }
+$!LineMap  [1]
+  Name = '|<greek>r</greek>|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = '|u|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 3
+    }
+  Lines
+    {
+    Color = Cyan
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = '|v|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = '|w|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 5
+    }
+  Lines
+    {
+    Color = Custom3
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [5]
+  Name = '|T|'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 6
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!LineMap  [6]
+  Name = 'Map 5'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 7
+    XAxis = 2
+    }
+  Lines
+    {
+    Color = Purple
+    }
+  Symbols
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  BarCharts
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  ErrorBars
+    {
+    Color = Purple
+    }
+$!LineMap  [7]
+  Name = 'Map 6'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 8
+    XAxis = 2
+    }
+  Lines
+    {
+    Color = Red
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [8]
+  Name = 'Map 7'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 9
+    XAxis = 2
+    }
+  Lines
+    {
+    Color = Green
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [9]
+  Name = 'Map 8'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 10
+    XAxis = 2
+    }
+  Lines
+    {
+    Color = Blue
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [10]
+  Name = 'Map 9'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 11
+    XAxis = 2
+    }
+  Lines
+    {
+    Color = Custom1
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    LineThickness = 0.2
+    }
+  ViewportPosition
+    {
+    X1 = 10.448
+    Y1 = 9.146
+    X2 = 96.163
+    Y2 = 96.041
+    }
+  ViewportTopSnapTarget = 96.041
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 16
+    GRSpacing = 2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      MinorLength = 0
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'z'
+      TextShape
+        {
+        FontFamily = 'Times New Roman'
+        IsItalic = Yes
+        Height = 6
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.2
+      }
+    }
+$!XYLineAxis 
+  XDetail 2
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 8
+    GRSpacing = 2
+    AxisLine
+      {
+      AxisAlignment = WithViewport
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    AutoGrid = No
+    GRSpacing = 0.2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      LineThickness = 0.2
+      MinorLength = 0
+      }
+    Title
+      {
+      TitleMode = UseText
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.2
+      }
+    }
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 81.09999999999999
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{u}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 76
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{v}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 70.90000000000001
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{w}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 65.8
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{T}|$'
+$!AttachText 
+  AnchorPos
+    {
+    X = 82
+    Y = 86.2
+    }
+  TextShape
+    {
+    Height = 24
+    }
+  TextType = LaTeX
+  Text = '$|\hat{\rho}|$'
+$!FrameControl ActivateByNumber
+  Frame = 2
+### Page Number 3 ###
+$!PageControl Create
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1, Page Number 3 ###
+$!FrameLayout 
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!SketchAxis 
+  DepXToYRatio = 1
+$!SketchAxis 
+  XDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.1251124999999999599
+    GRSpacing = 0.2
+    }
+$!SketchAxis 
+  YDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.000099999999999989
+    GRSpacing = 0.2
+    }
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config

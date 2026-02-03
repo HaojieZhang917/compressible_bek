@@ -135,8 +135,8 @@ module CRD_BF
         end
         for i=1:N+1
             x[i] = a * (1+b*x[i]+(1-b)*(x[i]^3+c*(1-x[i]^2)))/(1-b*x[i]-(1-b)*(x[i]^3+c*(1-x[i]^2)))
-            if x[i] > 40
-                x[i] = 40
+            if x[i] > 20
+                x[i] = 20
             end
         end
         # y = zeros(Float64, N+1)
@@ -713,11 +713,11 @@ function assemble_mat(cof :: COF,D,D2,be,omega)
     return L0,L1,L2
 end
 function assemble_adjmat(cof,D,D2,be,omega,conj)
-    if conj == 0
+    if conj == 0.0
         A0_raw = transpose(cof.D1) + (im * be * transpose(cof.B)) - (im * omega * transpose(cof.Ta)) - (be^2 * transpose(cof.Vyy)) - transpose(cof.dC) - (im *be*transpose(cof.dVyz)) + transpose(cof.d2Vzz) - (transpose(cof.C) + im * be * transpose(cof.Vyz) - 2 * transpose(cof.dVzz)) * kron(I(5),D) + transpose(cof.Vzz) * kron(I(5),D2)
         A1_raw = (im * transpose(cof.A)) - (be * transpose(cof.Vxy)) - (im * transpose(cof.dVxz)) - (im * transpose(cof.Vxz)) * kron(I(5),D) 
         A2_raw = -transpose(cof.Vxx)
-    else conj == 1
+    else conj == 1.0
         A0_raw = transpose(cof.D1) + (-im * be * transpose(cof.B)) - (-im * omega * transpose(cof.Ta)) - (be^2 * transpose(cof.Vyy)) - transpose(cof.dC) - (-im *be*transpose(cof.dVyz)) + transpose(cof.d2Vzz) - (transpose(cof.C) + -1 * im * be * transpose(cof.Vyz) - 2 * transpose(cof.dVzz)) * kron(I(5),D) + transpose(cof.Vzz) * kron(I(5),D2)
         A1_raw = (-im * transpose(cof.A)) - (be * transpose(cof.Vxy)) - (-im * transpose(cof.dVxz)) - (-im * transpose(cof.Vxz)) * kron(I(5),D) 
         A2_raw = -transpose(cof.Vxx)
