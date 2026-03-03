@@ -1,0 +1,770 @@
+#!MC 1410
+$!SetStyleBase Factory
+$!PlotType  = XYLine
+$!Linking 
+  BetweenFrames
+    {
+    LinkFrameSizeAndPosition = Yes
+    LinkXAxisRange = Yes
+    LinkYAxisRange = Yes
+    LinkAxisPosition = Yes
+    }
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1,5,9,13,17]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    TextShape
+      {
+      FontFamily = 'Times'
+      IsItalic = Yes
+      Height = 4
+      }
+    Box
+      {
+      LineThickness = 0.4
+      }
+    XYPos
+      {
+      X = 52
+      Y = 86
+      }
+    }
+$!LineMap  [1]
+  Name = '(0.3,0.8)'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = '(0.6,0.8)'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = '(0.9,0.8)'
+  Assign
+    {
+    Zone = 3
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = '(1.2,0.8)'
+  Assign
+    {
+    Zone = 4
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [5]
+  Name = '(0.3,0.9)'
+  Assign
+    {
+    Zone = 5
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Cyan
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!LineMap  [6]
+  Name = '(0.6,0.9)'
+  Assign
+    {
+    Zone = 6
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  BarCharts
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  ErrorBars
+    {
+    Color = Purple
+    }
+$!LineMap  [7]
+  Name = '(0.9,0.9)'
+  Assign
+    {
+    Zone = 7
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [8]
+  Name = '(1.2,0.9)'
+  Assign
+    {
+    Zone = 8
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [9]
+  Name = '(0.3,1.0)'
+  Assign
+    {
+    Zone = 9
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [10]
+  Name = '(0.6,1.0)'
+  Assign
+    {
+    Zone = 10
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [11]
+  Name = '(0.9,1.0)'
+  Assign
+    {
+    Zone = 11
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!LineMap  [12]
+  Name = '(1.2,1.0)'
+  Assign
+    {
+    Zone = 12
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  BarCharts
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  ErrorBars
+    {
+    Color = Purple
+    }
+$!LineMap  [13]
+  Name = '(0.3,1.1)'
+  Assign
+    {
+    Zone = 13
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Custom3
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [14]
+  Name = '(0.6,1.1)'
+  Assign
+    {
+    Zone = 14
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [15]
+  Name = '(0.9,1.1)'
+  Assign
+    {
+    Zone = 15
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [16]
+  Name = '(1.2,1.1)'
+  Assign
+    {
+    Zone = 16
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [17]
+  Name = '(0.3,1.2)'
+  Assign
+    {
+    Zone = 17
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!LineMap  [18]
+  Name = '(0.6,1.2)'
+  Assign
+    {
+    Zone = 18
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  BarCharts
+    {
+    Color = Purple
+    FillColor = Purple
+    }
+  ErrorBars
+    {
+    Color = Purple
+    }
+$!LineMap  [19]
+  Name = '(0.9,1.2)'
+  Assign
+    {
+    Zone = 19
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [20]
+  Name = '(1.2,1.2)'
+  Assign
+    {
+    Zone = 20
+    XAxisVar = 2
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    }
+  ViewportPosition
+    {
+    Y1 = 10
+    X2 = 96
+    Y2 = 94
+    }
+  ViewportTopSnapTarget = 94
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 200
+    RangeMax = 500
+    AutoGrid = No
+    GRSpacing = 100
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      NumMinOrTicks = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Gridlines
+      {
+      LinePattern = Dotted
+      LineThickness = 0.2
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'R'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsBold = No
+        IsItalic = Yes
+        Height = 6
+        }
+      }
+    }
+$!XYLineAxis 
+  XDetail 2
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    Gridlines
+      {
+      Show = Yes
+      }
+    MinorGridlines
+      {
+      Show = Yes
+      }
+    }
+$!XYLineAxis 
+  XDetail 3
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  XDetail 4
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  XDetail 5
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = -2.2610897027334657672
+    RangeMax = 66.262912891260697279
+    AutoGrid = No
+    GRSpacing = 10
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 1.2
+      NumMinOrTicks = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      }
+    Gridlines
+      {
+      LinePattern = Dotted
+      LineThickness = 0.2
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'n'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsBold = No
+        IsItalic = Yes
+        Height = 6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 2
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  YDetail 3
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  YDetail 4
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!XYLineAxis 
+  YDetail 5
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    }
+$!AttachText 
+  AnchorPos
+    {
+    X = 14
+    Y = 89
+    }
+  TextShape
+    {
+    FontFamily = 'Times'
+    IsBold = No
+    Height = 40
+    }
+  Text = '(a)'
+$!SetStyleBase Config
