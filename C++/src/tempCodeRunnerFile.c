@@ -1,0 +1,2 @@
+mber:");
+    scanf("%d", &number);
