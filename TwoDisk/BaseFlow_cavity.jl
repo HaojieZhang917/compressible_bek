@@ -1,6 +1,5 @@
 module CRC_BF
     using LinearAlgebra
-    using DifferentialEquations
     using BSplineKit
     using IterativeSolvers
     using PyCall
