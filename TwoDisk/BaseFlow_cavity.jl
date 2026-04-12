@@ -1,7 +1,6 @@
 module CRC_BF
     using LinearAlgebra
     using BSplineKit
-    using IterativeSolvers
     using PyCall
  function BaseFlow(Re_s,Ro,Ts,mode)
     if mode == 1 

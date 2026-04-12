@@ -1,6 +1,6 @@
 {
     "Codegeex.RepoIndex": true,
-    "julia.environmentPath": "/home/zhj/main/code/compress/compressible_bek/twodisk/src",
+    "julia.environmentPath": "/home/zhj/main/code/compress/compressible_bek",
     "python-envs.defaultEnvManager": "ms-python.python:system",
     "python-envs.pythonProjects": []
 }
