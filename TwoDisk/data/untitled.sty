@@ -2,6 +2,7 @@
 $!SetStyleBase Factory
 $!PlotType  = XYLine
 $!FrameLayout 
+  ShowBorder = No
   ShowHeader = No
   HeaderColor = Red
   XYPos
@@ -17,7 +18,7 @@ $!ThreeDAxis
 $!GlobalTime 
   SolutionTime = 0
 $!DeleteLineMaps 
-$!ActiveLineMaps  =  [1-2]
+$!ActiveLineMaps  =  [1-3]
 $!GlobalLinePlot 
   DataLabels
     {
@@ -25,18 +26,29 @@ $!GlobalLinePlot
     }
   Legend
     {
+    Show = Yes
+    TextShape
+      {
+      FontFamily = 'Times'
+      Height = 4
+      }
+    Box
+      {
+      BoxType = None
+      }
     XYPos
       {
-      X = 95
+      X = 53.691
+      Y = 84.987
       }
     }
 $!LineMap  [1]
-  Name = 'Map 0'
+  Name = '<greek> w </greek> = 0'
   Assign
     {
     Zone = 1
     XAxisVar = 2
-    YAxisVar = 3
+    YAxisVar = 6
     }
   Lines
     {
@@ -58,12 +70,12 @@ $!LineMap  [1]
     Color = Red
     }
 $!LineMap  [2]
-  Name = 'Map 1'
+  Name = '<greek> w </greek> = 4.0'
   Assign
     {
     Zone = 2
     XAxisVar = 2
-    YAxisVar = 3
+    YAxisVar = 6
     }
   Lines
     {
@@ -83,6 +95,33 @@ $!LineMap  [2]
   ErrorBars
     {
     Color = Green
+    }
+$!LineMap  [3]
+  Name = '<greek> w </greek> = 8.0'
+  Assign
+    {
+    Zone = 3
+    XAxisVar = 2
+    YAxisVar = 6
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
     }
 $!XYLineAxis 
   DepXToYRatio = 1
@@ -105,6 +144,14 @@ $!XYLineAxis
       LineThickness = 0.2
       MinorLength = 0
       }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
+      }
     Title
       {
       TitleMode = UseText
@@ -112,6 +159,7 @@ $!XYLineAxis
       TextShape
         {
         FontFamily = 'Times'
+        IsBold = No
         Height = 6
         }
       }
@@ -124,26 +172,35 @@ $!XYLineAxis
   YDetail 1
     {
     CoordScale = Linear
-    RangeMin = 0
-    RangeMax = 0.2000000000000000111
-    AutoGrid = No
-    GRSpacing = 0.1
+    RangeMin = -20
+    RangeMax = 80
+    GRSpacing = 20
     Ticks
       {
+      ShowOnGridBorderMax = Yes
       Length = 1.2
       LineThickness = 0.2
-      NumMinOrTicks = 0
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 4
+        }
       }
     Title
       {
       TitleMode = UseText
-      Text = '<greek>b</greek>'
+      Text = 'n'
       TextShape
         {
         FontFamily = 'Times'
+        IsBold = No
+        IsItalic = Yes
         Height = 6
         }
-      PercentAlongLine = 55
       }
     AxisLine
       {
