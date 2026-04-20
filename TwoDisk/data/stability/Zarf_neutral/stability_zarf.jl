@@ -6,14 +6,15 @@ using Plots
 using NonlinearEigenproblems
 include("BaseFlow_cavity.jl")
 include("Stability_Cavity.jl")
-R_ini= 450
-R_end = 85
+R_ini= 235
+R_end = 50
 be_up = 0.3
 be_down = -0.3
 alpha_ini = 0.005
 alpha_end = 0.705
 N_cheb = 129
 LinearAlgebra.BLAS.set_num_threads(1)
+Ts = -0.2
 function EigenCore(cof,D,D2,be,alpha,R,N_cheb)
     H0,H1 = CRC_STA.assemble_time_mat(cof,D,D2,be,alpha,R,N_cheb)
     C = eigen(H0,H1)
@@ -26,7 +27,7 @@ function EigenCore(cof,D,D2,be,alpha,R,N_cheb)
     if alpha < 0.031
         addition = 0.003
     else
-        addition = 0.007
+        addition = 0.008
     end
     map_index = map(x-> (real(x)) > abs(indictor) + addition , val_filter0)
     val_filter1 = val_filter0[map_index]
@@ -46,8 +47,8 @@ function EigenCore(cof,D,D2,be,alpha,R,N_cheb)
     return val_target,vec_target
 end
 
-function interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, N_cheb)
-    u0,v0,w0,du0,dv0,x = CRC_BF.BaseFlow(1000,-1,0.0,1)
+function interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, Ts, N_cheb)
+    u0,v0,w0,du0,dv0,x = CRC_BF.BaseFlow(1000,-1, Ts ,1)
     D,D2,z = CRC_BF.Cheb(N_cheb,1)
     F,G,H = CRC_BF.interp(u0,v0,w0,z,N_cheb,1)
     be_pos_range = 0.005 : 0.005 : be_up
@@ -199,8 +200,8 @@ function interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, N_cheb)
                     # --- 正向追踪 ---
                     for (ib, be) in enumerate(be_pos_range)
                         H0_work .= H0_base .+ be .* H0_be_linear .+ (be^2) .* sM_be2
-                        if  300 < R < 400 && 0.2 < alpha < 0.4
-                        val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val + 0.03 * alpha * im, vec)
+                        if  200 < R < 350 && 0.2 < alpha < 0.4
+                        val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val + 0.02 * (1-alpha) * im, vec)
                         else
                         val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val, vec)
                         end
@@ -363,4 +364,4 @@ function filter_boundary_instability!(data::Matrix{Float64})
     
     return data
 end
-interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, N_cheb)
+interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, Ts, N_cheb)

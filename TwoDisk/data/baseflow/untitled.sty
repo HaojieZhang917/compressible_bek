@@ -1,0 +1,275 @@
+#!MC 1410
+$!SetStyleBase Factory
+$!PlotType  = XYLine
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 5.25
+    }
+  Width = 7
+  Height = 2.75
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-5]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    TextShape
+      {
+      FontFamily = 'Times'
+      Height = 5
+      }
+    Box
+      {
+      BoxType = None
+      }
+    XYPos
+      {
+      X = 33.131
+      Y = 89.125
+      }
+    }
+$!LineMap  [1]
+  Name = 'Re<sub>h</sub>=400'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Red
+    FillColor = Red
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = 'Re<sub>h</sub>=600'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Green
+    FillColor = Green
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!LineMap  [3]
+  Name = 'Re<sub>h</sub>=800'
+  Assign
+    {
+    Zone = 3
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Blue
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  BarCharts
+    {
+    Color = Blue
+    FillColor = Blue
+    }
+  ErrorBars
+    {
+    Color = Blue
+    }
+$!LineMap  [4]
+  Name = 'Re<sub>h</sub>=1000'
+  Assign
+    {
+    Zone = 4
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Cyan
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Color = Custom1
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Color = Custom1
+    }
+$!LineMap  [5]
+  Name = 'Re<sub>h</sub>=2000'
+  Assign
+    {
+    Zone = 5
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Custom3
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  BarCharts
+    {
+    Color = Custom3
+    FillColor = Custom3
+    }
+  ErrorBars
+    {
+    Color = Custom3
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    }
+  ViewportPosition
+    {
+    X1 = 8
+    Y1 = 12
+    X2 = 94
+    }
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.2
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      LineThickness = 0.2
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 10
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'z'
+      TextShape
+        {
+        FontFamily = 'Times New Roman'
+        IsBold = No
+        Height = 12
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = -1.1999999999999999556
+    RangeMax = 0
+    AutoGrid = No
+    GRSpacing = 0.4
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      LineThickness = 0.1
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        Height = 10
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'H'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsBold = No
+        Height = 12
+        }
+      Offset = 4
+      }
+    }
+$!AttachGeom 
+  PositionCoordSys = Frame
+  AnchorPos
+    {
+    X = 66.40583554376649
+    Y = 54.58885941644564
+    }
+  Color = Red
+  FillColor = Red
+  LineThickness = 0.8
+  ArrowheadAttachment = AtEnd
+  ArrowheadSize = 8
+  ArrowheadAngle = 16
+  RawData
+1
+2
+4.33833307056E-06 -1.49248755577E-06 
+9.76127237082 -1.49248755577E-06 
+$!SetStyleBase Config
