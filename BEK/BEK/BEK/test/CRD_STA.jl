@@ -9,7 +9,6 @@ module CRD_BF
     using LinearAlgebra
     using BSplineKit
     using PyCall
-    using DifferentialEquations
  function sol_baseflowODE(Ro)
 
         py"""
@@ -217,7 +216,6 @@ module CRD_BF
   end
 end
 import .CRD_BF
-using DifferentialEquations
 using BSplineKit
 using LinearAlgebra
 struct COF

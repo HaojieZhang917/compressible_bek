@@ -6,15 +6,15 @@ using Plots
 using NonlinearEigenproblems
 include("BaseFlow_cavity.jl")
 include("Stability_Cavity.jl")
-R_ini= 235
-R_end = 50
+R_ini= 355
+R_end = 350
 be_up = 0.3
 be_down = -0.3
-alpha_ini = 0.005
+alpha_ini = 0.0155
 alpha_end = 0.705
 N_cheb = 129
 LinearAlgebra.BLAS.set_num_threads(1)
-Ts = -0.2
+Ts = 0.2
 function EigenCore(cof,D,D2,be,alpha,R,N_cheb)
     H0,H1 = CRC_STA.assemble_time_mat(cof,D,D2,be,alpha,R,N_cheb)
     C = eigen(H0,H1)
@@ -26,8 +26,10 @@ function EigenCore(cof,D,D2,be,alpha,R,N_cheb)
     indictor = sum(real(val_filter0))/length(val_filter0)
     if alpha < 0.031
         addition = 0.003
+    elseif 0.031 < alpha < 0.08
+        addition = 0.006
     else
-        addition = 0.008
+        addition = 0.01
     end
     map_index = map(x-> (real(x)) > abs(indictor) + addition , val_filter0)
     val_filter1 = val_filter0[map_index]
@@ -93,11 +95,11 @@ function interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, Ts, N_ch
         # 阶段一：动态大步长探测 (Probing Phase)
         # ====================================================
         println(">>> [阶段一] 开始动态探测失稳边界...")
-        probe_start = 0.3
+        probe_start = 0.23
         probe_step = 0.1
         alpha_cutoff = alpha_end + 1.0
         
-        for alpha_probe in probe_start : probe_step : alpha_end - probe_step
+        for alpha_probe in probe_start : probe_step : alpha_end
             is_globally_stable = true
             
             # 【优化】：预估阶段也使用极速多项式组装
@@ -201,7 +203,7 @@ function interation(R_ini, R_end, alpha_ini, alpha_end, be_up, be_down, Ts, N_ch
                     for (ib, be) in enumerate(be_pos_range)
                         H0_work .= H0_base .+ be .* H0_be_linear .+ (be^2) .* sM_be2
                         if  200 < R < 350 && 0.2 < alpha < 0.4
-                        val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val + 0.02 * (1-alpha) * im, vec)
+                        val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val + 0.015 * (1-alpha) * im, vec)
                         else
                         val, vec = rayleigh_quotient_iteration(H0_work, H1_work, val, vec)
                         end

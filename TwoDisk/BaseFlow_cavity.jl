@@ -248,16 +248,6 @@ module CRC_BF
                 G[i,1] = itv(x[i])
                 H[i,1] = itw(x[i])
             end
-        elseif mode == 2
-            z = range(0,30,2000)
-            itu = BSplineKit.interpolate(z, u0 , BSplineOrder(4))
-            itv = BSplineKit.interpolate(z, v0 , BSplineOrder(4))
-            itw = BSplineKit.interpolate(z, w0 , BSplineOrder(4))
-            for i = 1 : N + 1
-                F[i,1] = itu(x[i])
-                G[i,1] = itv(x[i])
-                H[i,1] = itw(x[i])
-            end
         elseif mode == 3
             z = range(0,30,2000)
             itu = BSplineKit.interpolate(z, u0 , BSplineOrder(4))
@@ -269,7 +259,7 @@ module CRC_BF
                 H[i,1] = itw(x[i])
             end
         end
-    return F,G,H
- end
+        return F,G,H
+    end
 end
 println("mode = 1:cavity; mode = 2:stationary; mode = 3:rotation;")
