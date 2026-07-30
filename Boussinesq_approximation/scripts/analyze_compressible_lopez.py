@@ -15,7 +15,7 @@ import pandas as pd
 from scipy.integrate import cumulative_trapezoid, simpson, solve_bvp
 from scipy.interpolate import CubicSpline
 
-from compare_lopez_boussinesq import initial_guess, ode, bc_fixed_tw
+from Vonkarmen_bone.scripts.compare_lopez_boussinesq import initial_guess, ode, bc_fixed_tw
 
 
 PR = 0.72

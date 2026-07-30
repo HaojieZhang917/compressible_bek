@@ -14,7 +14,7 @@ import numpy as np
 from scipy.integrate import quad, simpson
 from scipy.interpolate import CubicSpline, PchipInterpolator
 
-from analyze_compressible_lopez import (
+from Vonkarmen_bone.scripts.analyze_compressible_lopez import (
     MR_VALUES,
     OUT,
     TW_VALUES,

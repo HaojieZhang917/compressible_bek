@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import CubicSpline
 
-from investigate_boussinesq_fold import solve_fixed_h, solve_isothermal
+from Vonkarmen_bone.scripts.investigate_boussinesq_fold import solve_fixed_h, solve_isothermal
 
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 
