@@ -1,0 +1,17 @@
+# Julia and notebook caches
+*.ji
+*.tmp
+*.pyc
+*.log
+.ipynb_checkpoints/
+__pycache__/
+
+# Generated solver output
+neutral_curve_batch/
+neutral_curve_integrated/
+grid_independence/
+sutherland_marching_data/
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
