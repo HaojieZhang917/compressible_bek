@@ -54,6 +54,32 @@ See [`scripts/README.md`](scripts/README.md) for the available commands and
 A step-by-step Chinese guide for generating base flows and neutral curves is
 available in [`docs/workflow-guide-cn.md`](docs/workflow-guide-cn.md).
 
+## Local Blackburn Model
+
+The Blackburn canonical generalized-Boussinesq implementation is intentionally
+kept in this workspace and does not modify `../../../RotatingDiskFlow/src/`.
+Its momentum time derivative uses the same density factor `chi=2-T` as the
+convective acceleration.
+
+```bash
+julia --project=. test_blackburn_stability.jl
+julia --project=. test_blackburn_runner_smoke.jl
+julia --project=. ComputeBlackburnNeutralCurves.jl
+julia --project=. RunExtendedZeroFrequencyBatch.jl
+python analyze_blackburn_neutral_curves.py
+python analyze_blackburn_frozen_neutral_curves.py
+python analyze_extended_zero_frequency_errors.py
+```
+
+The production command evaluates `Tw=1.00, 1.04, ..., 1.20` at `N_cheb=69`.
+The extended zero-frequency batch adds `Tw=1.40, 1.60, 1.80`; its combined
+Blackburn/compressible error tables, topology diagnostics, and figures are
+written to `zero_frequency_extended_error_analysis/`.
+Raw Blackburn curves are written to `blackburn_neutral_curve_batch/`; curve
+comparisons, critical-point errors, figures, and Tecplot data are written to
+`blackburn_neutral_results/`. The frozen-property operator comparison is
+written separately to `blackburn_frozen_neutral_results/`.
+
 For continuing this research in a new Codex conversation, load
 [`CONVERSATION_HANDOFF.txt`](CONVERSATION_HANDOFF.txt) first.
 

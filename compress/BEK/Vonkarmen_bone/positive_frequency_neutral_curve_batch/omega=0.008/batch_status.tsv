@@ -1,0 +1,33 @@
+time	case	status	attempt	points	message
+2026-07-31T13:39:56	ome=0.008_Tw=1.0_model=blackburn	running	1	0	starting
+2026-07-31T14:00:55	ome=0.008_Tw=1.0_model=blackburn	ok	1	305	stop_reason=R_limit
+2026-07-31T14:01:01	ome=0.008_Tw=1.0_model=blackburn	running	1	0	starting
+2026-07-31T14:04:41	ome=0.008_Tw=1.0_model=blackburn	ok	1	46	stop_reason=beta_limit
+2026-07-31T16:17:26	ome=0.008_Tw=1.16_model=blackburn	running	1	0	starting
+2026-07-31T16:17:26	ome=0.008_Tw=1.08_model=blackburn	running	1	0	starting
+2026-07-31T16:17:26	ome=0.008_Tw=1.12_model=blackburn	running	1	0	starting
+2026-07-31T16:17:26	ome=0.008_Tw=1.04_model=blackburn	running	1	0	starting
+2026-07-31T16:22:38	ome=0.008_Tw=1.04_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:22:38	ome=0.008_Tw=1.04_model=blackburn	running	2	0	starting
+2026-07-31T16:22:38	ome=0.008_Tw=1.08_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:22:38	ome=0.008_Tw=1.08_model=blackburn	running	2	0	starting
+2026-07-31T16:23:43	ome=0.008_Tw=1.12_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:23:43	ome=0.008_Tw=1.12_model=blackburn	running	2	0	starting
+2026-07-31T16:23:46	ome=0.008_Tw=1.16_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:23:46	ome=0.008_Tw=1.16_model=blackburn	running	2	0	starting
+2026-07-31T16:27:46	ome=0.008_Tw=1.08_model=blackburn	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:27:46	ome=0.008_Tw=1.08_model=blackburn	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-31T16:27:46	ome=0.008_Tw=1.08_model=blackburn	failed	3	0	ArgumentError: beta_initial must lie inside beta_bounds
+2026-07-31T16:27:49	ome=0.008_Tw=1.04_model=blackburn	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:27:50	ome=0.008_Tw=1.04_model=blackburn	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-31T16:27:50	ome=0.008_Tw=1.04_model=blackburn	failed	3	0	ArgumentError: beta_initial must lie inside beta_bounds
+2026-07-31T16:28:11	ome=0.008_Tw=1.12_model=blackburn	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:28:11	ome=0.008_Tw=1.12_model=blackburn	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-31T16:28:11	ome=0.008_Tw=1.12_model=blackburn	failed	3	0	ArgumentError: beta_initial must lie inside beta_bounds
+2026-07-31T16:28:24	ome=0.008_Tw=1.16_model=blackburn	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(-0.02, 0.0398)
+2026-07-31T16:28:24	ome=0.008_Tw=1.16_model=blackburn	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-31T16:28:24	ome=0.008_Tw=1.16_model=blackburn	failed	3	0	ArgumentError: beta_initial must lie inside beta_bounds
+2026-07-31T16:28:26	ome=0.008_Tw=1.2_model=blackburn	running	1	0	starting
+2026-07-31T16:28:26	ome=0.008_Tw=1.0_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-31T16:28:45	ome=0.008_Tw=1.04_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-31T16:28:58	ome=0.008_Tw=1.08_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting

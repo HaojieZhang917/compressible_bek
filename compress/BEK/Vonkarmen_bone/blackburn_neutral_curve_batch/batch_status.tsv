@@ -1,0 +1,20 @@
+time	case	status	attempt	points	message
+2026-07-30T21:49:37	ome=0.0_Tw=1.0_model=blackburn	running	1	0	starting
+2026-07-30T22:02:50	ome=0.0_Tw=1.0_model=blackburn	ok	1	110	stop_reason=R_limit
+2026-07-31T18:30:25	ome=0.0_Tw=1.4_model=blackburn	running	1	0	starting
+2026-07-31T18:30:26	ome=0.0_Tw=1.6_model=blackburn	running	1	0	starting
+2026-07-31T18:34:18	ome=0.0_Tw=1.4_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-31T18:34:18	ome=0.0_Tw=1.4_model=blackburn	running	2	0	starting
+2026-07-31T18:34:25	ome=0.0_Tw=1.6_model=blackburn	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-31T18:34:25	ome=0.0_Tw=1.6_model=blackburn	running	2	0	starting
+2026-07-31T18:37:31	ome=0.0_Tw=1.4_model=blackburn	running	1	0	starting
+2026-07-31T18:37:32	ome=0.0_Tw=1.6_model=blackburn	running	1	0	starting
+2026-07-31T18:40:05	ome=0.0_Tw=1.4_model=blackburn	running	1	0	starting
+2026-07-31T18:40:05	ome=0.0_Tw=1.6_model=blackburn	running	1	0	starting
+2026-07-31T18:51:01	ome=0.0_Tw=1.4_model=blackburn	ok	1	95	stop_reason=R_limit
+2026-07-31T18:56:11	ome=0.0_Tw=1.6_model=blackburn	ok	1	71	stop_reason=endpoint_no_root
+2026-07-31T19:37:45	ome=0.0_Tw=1.8_model=blackburn	running	1	0	starting
+2026-07-31T19:51:47	ome=0.0_Tw=1.8_model=blackburn	ok	1	87	stop_reason=R_limit
+2026-07-31T19:53:36	ome=0.0_Tw=1.8_model=blackburn	running	1	0	starting
+2026-07-31T19:57:49	ome=0.0_Tw=1.8_model=blackburn	running	1	0	starting
+2026-07-31T20:11:12	ome=0.0_Tw=1.8_model=blackburn	ok	1	87	stop_reason=R_limit
