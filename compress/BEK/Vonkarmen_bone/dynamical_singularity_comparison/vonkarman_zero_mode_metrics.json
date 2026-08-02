@@ -1,0 +1,17 @@
+{
+  "F_relative_max": 0.05459770352646489,
+  "G_relative_max": 0.048130724969930434,
+  "H_relative_max": 1.0,
+  "T_relative_max": 0.0040809310432180475,
+  "coordinate_centroid": 35.30515802925036,
+  "active_fields_centroid": 6.500063457797963,
+  "F_peak_coordinate": 6.199399791262945,
+  "G_peak_coordinate": 4.019237886466839,
+  "H_peak_coordinate": 60.0,
+  "T_peak_coordinate": 4.420795069377235,
+  "leading_real": -1.3414634521342607e-10,
+  "leading_imag": 0.0,
+  "Tw": 1.0480217318337601,
+  "Hinf": -0.5327616218994755,
+  "steady_temporal_zero_mode_correlation": 0.9999999621211378
+}

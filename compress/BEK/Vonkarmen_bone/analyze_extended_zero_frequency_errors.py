@@ -239,22 +239,28 @@ def write_tsv(path: Path, rows: list[dict[str, object]]) -> None:
 def plot_neutral_curves(
     path: Path, curves: dict[tuple[float, str], np.ndarray]
 ) -> None:
-    figure, axes = plt.subplots(3, 3, figsize=(12.6, 10.2), sharey=True)
+    figure, axes = plt.subplots(
+        3, 3, figsize=(12.6, 10.2), sharex=True, sharey=True
+    )
     for axis, Tw in zip(axes.flat, TEMPERATURES):
         for model, label, color, style in (
             ("blackburn", "Blackburn", "#1f77b4", "-"),
             ("compressible", "Compressible", "#d62728", "--"),
         ):
             data = curves[(Tw, model)]
-            axis.plot(data[:, 2], data[:, 1], style, color=color, lw=1.6, label=label)
+            axis.plot(data[:, 1], data[:, 2], style, color=color, lw=1.6, label=label)
         axis.text(0.04, 0.93, rf"$T_w={Tw:.2f}$", transform=axis.transAxes, va="top")
-        axis.set_xlabel(r"$\beta$")
+        axis.set_xlabel(r"$R$")
         axis.grid(alpha=0.22, lw=0.6)
     for axis in axes[:, 0]:
-        axis.set_ylabel(r"$R$")
-    axes[0, 0].legend(frameon=False)
+        axis.set_ylabel(r"$\beta$")
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    figure.legend(
+        handles, labels, loc="upper center", bbox_to_anchor=(0.5, 0.972),
+        ncol=2, frameon=False,
+    )
     figure.suptitle(r"Zero-frequency neutral branches", y=0.995)
-    figure.tight_layout(rect=(0, 0, 1, 0.975))
+    figure.tight_layout(rect=(0, 0, 1, 0.935))
     figure.savefig(path, dpi=240)
     plt.close(figure)
 
