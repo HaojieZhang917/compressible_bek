@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.log
+.ipynb_checkpoints/
+.venv/
+runs/
+
+# Scientific data in this curated project are intentional assets.  These
+# negations override the repository-level blanket ignores for CSV/DAT/LPK.
+!von_karman/data/**/*.csv
+!von_karman/data/**/*.dat
+!von_karman/reference/**/*.lpk
+!rotor_stator/data/**/*.csv
+!cross_model/data/**/*.csv
+

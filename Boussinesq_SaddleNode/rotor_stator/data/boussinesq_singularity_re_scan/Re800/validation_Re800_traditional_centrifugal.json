@@ -1,0 +1,7 @@
+{
+  "reference_re_h": 1000.0,
+  "reference_comparison_applicable": false,
+  "pressure_gradient": 0.09854664485121374,
+  "max_rms_residual": 9.925007060461705e-07,
+  "nodes": 674
+}

@@ -1,0 +1,7 @@
+model,fold,side,points,temperature_distance_max,lambda_squared_slope,r2_through_origin
+von_Karman,principal,benchmark_connected_stable,3,2e-05,0.3328186058261195,0.9999962932458921
+von_Karman,principal,post_fold_unstable,3,2e-05,0.32403325033345143,0.9999960173111745
+rotor_stator,minimum,higher_Pi,5,5e-05,0.004147867256019001,0.99992339049363
+rotor_stator,minimum,lower_Pi,4,5e-05,0.004539027107023197,0.9999753874101992
+rotor_stator,maximum,higher_Pi,6,0.0001,0.002646888876651293,0.9999995877084732
+rotor_stator,maximum,lower_Pi,6,0.0001,0.002594649929864355,0.9999910583938282

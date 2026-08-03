@@ -19,11 +19,12 @@ import numpy as np
 from scipy import linalg
 
 
-ROOT = Path(__file__).resolve().parent
-TOOLKIT = ROOT.parents[2]
-TWODISK = TOOLKIT / "TwoDisk"
-OUT = ROOT / "dynamical_singularity_comparison"
-sys.path.insert(0, str(ROOT / "scripts"))
+SCRIPT_DIR = Path(__file__).resolve().parent
+TOOLKIT = SCRIPT_DIR.parent
+TWODISK = SCRIPT_DIR
+VONKARMAN = TOOLKIT / "compress" / "BEK" / "Vonkarmen_bone"
+OUT = TWODISK / "dynamical_singularity_comparison"
+sys.path.insert(0, str(VONKARMAN / "scripts"))
 sys.path.insert(0, str(TWODISK))
 
 import investigate_boussinesq_fold as vk  # noqa: E402
@@ -70,7 +71,7 @@ def read_csv_dicts(path: Path) -> list[dict]:
 
 def first_fold_by_domain() -> dict[float, tuple[float, float]]:
     rows = read_csv_dicts(
-        ROOT / "boussinesq_domain_branches" / "turning_points_by_zmax.csv"
+        VONKARMAN / "boussinesq_domain_branches" / "turning_points_by_zmax.csv"
     )
     return {
         row["zmax"]: (row["Hinf"], row["Tw"])

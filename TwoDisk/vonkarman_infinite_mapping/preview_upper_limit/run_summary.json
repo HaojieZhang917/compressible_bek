@@ -1,0 +1,39 @@
+{
+  "mapping": "eta=L(1-x)/(1+x)",
+  "degrees": [
+    70
+  ],
+  "scales": [
+    8.0
+  ],
+  "h_stop": -0.01,
+  "folds": [
+    {
+      "degree": 70,
+      "mapping_scale": 8.0,
+      "fold_index": 1,
+      "kind": "maximum",
+      "Hinf": -0.5327616099490322,
+      "Tw": 1.0480217312176139,
+      "d2Tw_dHinf2": -0.5079311807462336
+    },
+    {
+      "degree": 70,
+      "mapping_scale": 8.0,
+      "fold_index": 2,
+      "kind": "minimum",
+      "Hinf": -0.11330092628288249,
+      "Tw": 1.0301442442829918,
+      "d2Tw_dHinf2": 0.8432889460361802
+    },
+    {
+      "degree": 70,
+      "mapping_scale": 8.0,
+      "fold_index": 3,
+      "kind": "maximum",
+      "Hinf": -0.027607675851528648,
+      "Tw": 1.031960263004413,
+      "d2Tw_dHinf2": -3.6513633448009477
+    }
+  ]
+}
