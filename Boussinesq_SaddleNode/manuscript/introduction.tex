@@ -1,0 +1,82 @@
+% Standalone introduction section for inclusion in the JFM LaTeX template.
+% The bibliography keys used here are defined in references.bib.
+
+\section{Introduction}\label{sec:introduction}
+
+The Boussinesq approximation accommodates small thermally induced density
+variations within the incompressible Navier--Stokes equations by retaining them
+only where they generate buoyancy.  When buoyancy is gravitational, the
+underlying acceleration is prescribed and the usual reduction is comparatively
+unambiguous \citep{GrayGiorgini1976}.  In a rapidly rotating flow, however, the
+centrifugal acceleration can greatly exceed gravity, so even a small density
+variation can reorganise the momentum balance.  This issue is especially
+relevant to the rotating-disc boundary layer and the rotor--stator cavity,
+whose basic states descend from the classical similarity solutions of
+\citet{Cochran1934} and \citet{Batchelor1951} and underpin rotating-boundary-layer
+stability theory \citep{Lingwood1995}.  Thermal extensions of these flows have
+therefore commonly remained incompressible while introducing density variation
+through prescribed centrifugal or rotating-force terms.  Such Boussinesq-type
+closures have been used in similarity analyses of heated coaxial discs
+\citep{Soong1996IJHMT,Soong1996IJRM}, in direct and large-eddy simulations of
+rotor--stator heat transfer \citep{SerreEtAl2004,PoncetSerre2009,WangEtAl2023},
+and in recent studies of thermally modified rotating-disc transition
+\citep{DuEtAl2024}; see also the rotating-cavity review of
+\citet{OwenLong2015}.
+
+Unlike uniform gravity, centrifugal-type acceleration may arise from both
+reference-frame rotation and the fluid's own swirl.  Retaining the density
+perturbation only in a preselected solid-body centrifugal term is therefore a
+modelling choice rather than a unique consequence of the Boussinesq limit.
+\citet{LopezEtAl2013} showed that commonly used formulations omit centrifugal
+buoyancy associated with differential rotation and strong vortices, while
+\citet{BlackburnEtAl2021} derived a canonical formulation in which density
+fluctuations interact consistently with the relevant accelerative terms.  The
+latter analysis also showed that Coriolis and local-acceleration contributions
+cannot always be discarded.  Centrifugal buoyancy is known to alter the onset
+of rotating-cavity convection \citep{PitzEtAl2017}, and comparisons with fully
+compressible calculations have revealed appreciable errors in reduced
+rotating-cavity models \citep{GaoEtAl2020}.  Fully compressible rotating-disc
+theory provides the corresponding reference once the small-density-variation
+limit itself is no longer controlled \citep{TurkyilmazogluUygun2006}.
+Nevertheless, model validity has usually been assessed through differences in
+profiles, heat transfer or critical parameters.  Whether the closure can
+change the multiplicity, topology and even existence of the basic state has
+received much less attention.
+
+Here we examine this more elementary form of model selectivity.  We first
+continue the conventional centrifugal-Boussinesq equations from the isothermal
+von K\'arm\'an state on the true semi-infinite domain and compare their behaviour
+with an acceleration-consistent generalised Boussinesq formulation and the
+fully compressible model.  We then continue the conventional closure in a
+rotor--stator similarity system to determine whether finite-gap confinement,
+the radial pressure-gradient constraint and the rotating core remove the
+singularity found above a single disc.  Uniform disc temperatures are used, for
+which the governing equations remain compatible with the similarity ansatz;
+loss of a branch is therefore not caused by imposing a radially inconsistent
+thermal boundary condition.  Pseudo-arclength continuation, a rational
+Chebyshev representation of the semi-infinite domain and temporal spectra are
+used to distinguish a dynamical fold from finite-domain or iterative-solver
+failure.  The model hierarchy is interpreted asymptotically: the generalised
+Boussinesq equations are tested as a small-temperature-difference approximation,
+whereas the compressible equations are retained as the reference when density
+linearisation is no longer justified.
+
+The conventional model produces a non-degenerate saddle-node at
+$T_{w,c}=1.048021731$ on the stable, isothermal-connected von K\'arm\'an branch.
+A simple zero mode, stability exchange and square-root scaling confirm that
+this premature termination is a property of the reduced equations, rather than
+a loss of numerical convergence.  The acceleration-consistent basic state
+continues through the same interval and its neutral curves agree closely with
+the compressible results at small temperature differences, but the two models
+diverge as density linearisation and constant-property assumptions lose their
+asymptotic basis.  In that regime the fully compressible description is
+necessary, rather than merely a more expensive refinement.  Rotor--stator
+confinement delays, but does not generically remove, the topological failure:
+at $Re_h=1000$ the conventional system has folds at $T_w=1.155517549$ and
+$1.167676484$, with three similarity states between them.  These results do not
+imply that every finite-radius, three-dimensional Boussinesq simulation must
+fail at a universal temperature ratio, since radial non-similarity, sidewalls
+and unsteadiness provide additional dynamics.  They do establish that the
+choice of centrifugal-buoyancy closure is not merely a quantitative correction;
+it can determine whether the basic state used for stability analysis exists at
+all.

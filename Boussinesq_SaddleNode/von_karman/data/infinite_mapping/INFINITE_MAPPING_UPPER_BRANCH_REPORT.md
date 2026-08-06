@@ -375,22 +375,20 @@ $$
 - `convergence_full/fold_convergence.csv`：不同映射尺度和谱阶数的原始折返点；
 - `stability_N110_L8/mapped_temporal_samples.csv`：$N_t=50,70,90$ 的原始谱数据；
 - `upper_branch_infinite_mapping_summary.png`：有限域漂移、映射分支、热尾和时间谱汇总图；
-- `analyze_vonkarman_infinite_mapping.py`：无穷远映射、延拓和时间谱程序；
-- `summarize_vonkarman_infinite_mapping.py`：结果汇总与作图程序。
+- `von_karman/scripts/analyze_vonkarman_infinite_mapping.jl`：无穷远映射、延拓和时间谱程序；
+- `von_karman/scripts/summarize_vonkarman_infinite_mapping.py`：结果汇总与作图程序（数据后处理）。
 
-从 `TwoDisk` 目录复现主映射和谱计算：
+从 `Boussinesq_SaddleNode` 目录复现主映射和谱计算：
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 analyze_vonkarman_infinite_mapping.py \
+julia --project=. von_karman/scripts/analyze_vonkarman_infinite_mapping.jl \
   --degree 110 --scale 8 --h-stop -0.02 \
-  --tolerance 3e-10 --temporal-degrees 50 70 90 \
-  --output-dir vonkarman_infinite_mapping/stability_N110_L8
+  --tolerance 3e-10 --temporal-degrees 50,70,90 \
+  --output-dir von_karman/data/infinite_mapping/stability_N110_L8
 ```
 
 重新生成摘要和图：
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 summarize_vonkarman_infinite_mapping.py
+python3 von_karman/scripts/summarize_vonkarman_infinite_mapping.py
 ```

@@ -1,0 +1,16 @@
+TITLE = "branch_diagnostics"
+VARIABLES = "branch" "pressure_gradient" "H_mid" "F_mid" "G_mid" "T_mid" "core_max_abs_F" "core_G_range" "core_rms_Gz" "core_rms_inviscid_residual" "mass_integral_F" "steady_radial_residual_max" "steady_azimuthal_residual_max" "steady_thermal_residual_max" "F_interior_sign_changes" "G_interior_extrema" "mid_spatial_positive_real_count" "mid_spatial_negative_real_count" "mid_spatial_neutral_count" "shortest_mid_spatial_wavelength" "leading_temporal_real" "leading_temporal_imag" "temporal_positive_real_count" "dominant_mode_F_relative_max" "dominant_mode_H_relative_max" "dominant_mode_G_relative_max" "dominant_mode_T_relative_max" "dominant_mode_z_centroid" "least_damped_oscillatory_real" "least_damped_oscillatory_imag_abs" "least_damped_oscillatory_period" "least_damped_oscillatory_quality_factor"
+DATASETAUXDATA Source_File = "three_solution_dynamics/branch_diagnostics.csv"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="label=upper / low-Pi, similarity_temporal_class=stable-with-damped-oscillations, branch=1", I=1, DATAPACKING=POINT
+AUXDATA label = "upper / low-Pi"
+AUXDATA similarity_temporal_class = "stable-with-damped-oscillations"
+1 0.001542389588 -0.3613996296729289 -0.002207746555621336 0.06230021257052298 1.001565052286451 0.01333814049473546 0.04030125335648772 0.1197156561293191 0.0006948141469157958 -1.1037727506635e-06 7.498772177773447e-05 0.0002473437736747255 4.156090406647777e-06 1 0 3 4 0 0.8804503559063037 -0.00580321866110009 0 0 0.07914177294686195 1 0.1703583262430149 0.00776819174091318 0.6731573902464516 -0.06356802739161951 0.1034011478328154 60.76514080229149 0.8133109683882317
+ZONE T="label=middle, similarity_temporal_class=unstable-monotonic, branch=2", I=1, DATAPACKING=POINT
+AUXDATA label = "middle"
+AUXDATA similarity_temporal_class = "unstable-monotonic"
+2 0.003786919205 -0.4393382889094665 0.005355129579520792 0.07667460735138648 1.000962589891045 0.01335744224557422 0.01938212334892937 0.09299557430302806 0.001541424910011889 -1.082639487485874e-06 7.454384820048104e-05 0.0002465659831899086 4.163278145013675e-06 3 2 4 3 0 0.8531997099821402 0.00286644377804557 0 1 0.08996837547886934 1 0.2241231459070307 0.005208474746407965 0.6945986995430483 -0.06666329728037745 0.1115513233109084 56.32551117002449 0.83667721116267
+ZONE T="label=principal / isothermal-connected, similarity_temporal_class=stable-with-damped-oscillations, branch=3", I=1, DATAPACKING=POINT
+AUXDATA label = "principal / isothermal-connected"
+AUXDATA similarity_temporal_class = "stable-with-damped-oscillations"
+3 0.018230452624 -0.4855653264020511 0.008236654580159434 0.1295817434167142 1.000478849325016 0.01844075972408894 0.03525470609417561 0.1580511530817296 0.003063101900727592 -9.815513308236018e-07 7.208290052479471e-05 0.0002417028916427352 4.198349817432863e-06 3 2 4 3 0 0.6151789062235677 -0.00428367417919217 0 0 0.1442540126709136 1 0.3998264936180036 0.01046115081855866 0.7061095591042885 -0.04701904569386157 0.2033189990177044 30.90308991061119 2.162091935484008

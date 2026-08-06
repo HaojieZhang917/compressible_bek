@@ -80,6 +80,14 @@ $T_w=1.160$ 三组双盘相似性解的：
 - 分支稳定性交换；
 - 初学者动力系统说明。
 
+### `rotor_stator/tecplot/`
+
+`rotor_stator/data/` 内全部 CSV、JSON 数据和
+`rotor_stator/reference/baseflow_Res1000.npz` 的 Tecplot ASCII DAT 派生版本。
+目录结构与源数据对应；含 `README.md` 文件索引和
+`conversion_manifest.json` 机器可读转换清单。多分支数据按 branch 拆分为多个
+ZONE，文本标签保存在 ZONE AUXDATA 中。
+
 ## 3. cross-model
 
 `dynamical_singularity_comparison/` 统一比较：
@@ -99,4 +107,3 @@ $T_w=1.160$ 三组双盘相似性解的：
 2. `finite_domain_branches` 的远上支不能替代真无穷远映射结果。
 3. 第三个 von Kármán 折返目前仍为候选结构。
 4. 传统 Boussinesq 方程内存在稳定解，不等于该闭合在大温差下定量准确。
-

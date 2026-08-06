@@ -776,10 +776,10 @@ $\tau_{\mathrm{relax}}=1/|\operatorname{Re}(\lambda)|$ 发散，这叫临界慢�
 - `principal_fold_zero_modes.png`：两模型主折叠零模态；
 - `both_models_square_root_scaling.png`：三个折叠的平方根标度比较。
 
-从当前目录复现：
+从 `Boussinesq_SaddleNode` 目录复现：
 
 ```bash
-python3 compare_saddle_node_dynamics.py
+julia --project=. cross_model/scripts/compare_saddle_node_dynamics.jl
 ```
 
 脚本只读取既有 von Kármán 和 `TwoDisk` 结果，并将派生文件写入独立目录。

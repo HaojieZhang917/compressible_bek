@@ -127,17 +127,17 @@ T'' = Pr sqrt(Re_h) H T'
 
 ## 10. 文件与复现
 
-- 主程序：`two_disk_boussinesq_singularity.py`
+- 主程序：`rotor_stator/scripts/two_disk_boussinesq_singularity.jl`
 - 主结果：`boussinesq_singularity_results/`
 - 独立收敛结果：`boussinesq_singularity_convergence/`
 - Reynolds 数扫描：`boussinesq_singularity_re_scan/`
 - 汇总表：`reynolds_scan_summary.csv`
 
-从 `TwoDisk` 目录复现主计算：
+从 `Boussinesq_SaddleNode` 目录复现主计算：
 
 ```bash
-python two_disk_boussinesq_singularity.py \
-  --re-h 1000 --pr 0.72 --tol 2e-7 --initial-nodes 401 \
+julia --project=. rotor_stator/scripts/two_disk_boussinesq_singularity.jl \
+  --re-h 1000 --pr 0.72 --tol 2e-7 --degree 100 \
   --fine-pressure-step 5e-5 \
   --model traditional_centrifugal \
   --output-dir boussinesq_singularity_results
@@ -146,8 +146,8 @@ python two_disk_boussinesq_singularity.py \
 辅助旋转力敏感性计算：
 
 ```bash
-python two_disk_boussinesq_singularity.py \
-  --re-h 1000 --pr 0.72 --tol 2e-7 --initial-nodes 401 \
+julia --project=. rotor_stator/scripts/two_disk_boussinesq_singularity.jl \
+  --re-h 1000 --pr 0.72 --tol 2e-7 --degree 100 \
   --model soong_rotating_forces --alternative-max-temperature 2.0 \
   --output-dir boussinesq_singularity_results/soong_model
 ```

@@ -12,22 +12,22 @@ ROOT = Path(__file__).resolve().parent
 
 EXPECTED = {
     "von Karman finite solver": ROOT
-    / "von_karman/scripts/investigate_boussinesq_fold.py",
+    / "von_karman/scripts/investigate_boussinesq_fold.jl",
     "von Karman mapped solver": ROOT
-    / "von_karman/scripts/analyze_vonkarman_infinite_mapping.py",
+    / "von_karman/scripts/analyze_vonkarman_infinite_mapping.jl",
     "mapped fold summary": ROOT
     / "von_karman/data/infinite_mapping/confirmed_fold_summary.csv",
     "mapped temporal summary": ROOT
     / "von_karman/data/infinite_mapping/upper_branch_stability_summary.csv",
     "rotor-stator solver": ROOT
-    / "rotor_stator/scripts/two_disk_boussinesq_singularity.py",
+    / "rotor_stator/scripts/two_disk_boussinesq_singularity.jl",
     "rotor-stator reference": ROOT
     / "rotor_stator/reference/baseflow_Res1000.npz",
     "rotor-stator folds": ROOT
-    / "rotor_stator/data/boussinesq_singularity_convergence"
+    / "rotor_stator/data/boussinesq_singularity_results"
     / "folds_Re1000_traditional_centrifugal.json",
     "cross-model solver": ROOT
-    / "cross_model/scripts/compare_saddle_node_dynamics.py",
+    / "cross_model/scripts/compare_saddle_node_dynamics.jl",
     "cross-model report": ROOT
     / "cross_model/data/dynamical_singularity_comparison"
     / "BEGINNER_DYNAMICAL_SYSTEMS_COMPARISON_REPORT.md",

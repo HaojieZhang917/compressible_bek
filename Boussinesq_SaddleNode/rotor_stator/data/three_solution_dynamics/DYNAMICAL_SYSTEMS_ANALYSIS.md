@@ -227,8 +227,8 @@ T(0.5) = 1.001565, 1.000963, 1.000479,
 - 主导模态图：`dominant_temporal_modes.png`
 - 空间相图：`spatial_phase_portraits.png`
 
-从 `TwoDisk` 目录复现：
+从 `Boussinesq_SaddleNode` 目录复现：
 
 ```bash
-python analyze_three_solution_dynamics.py
+julia --project=. rotor_stator/scripts/analyze_three_solution_dynamics.jl
 ```

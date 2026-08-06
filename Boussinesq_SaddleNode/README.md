@@ -58,12 +58,16 @@ Boussinesq_SaddleNode/
 ├── cross_model/
 │   ├── scripts/       # 两模型鞍结统一比较
 │   └── data/          # 零模态、平方根律和比较报告
+├── src/               # 共用 Chebyshev、延拓、稳定性和 I/O 模块
 ├── docs/
 │   ├── DATA_CATALOG.md
 │   ├── SOURCE_MANIFEST.md
 │   └── ROTOR_STATOR_SINGULARITY_REPORT.md
-├── check_project.py
-└── requirements.txt
+├── Project.toml
+├── Manifest.toml
+├── AGENTS.md           # 后续新程序统一使用 Julia
+├── check_project.py    # 只读项目检查辅助工具
+└── requirements.txt    # 既有 Python 数据处理工具依赖
 ```
 
 ## 推荐阅读顺序
@@ -73,9 +77,15 @@ Boussinesq_SaddleNode/
 3. [`cross_model/data/dynamical_singularity_comparison/BEGINNER_DYNAMICAL_SYSTEMS_COMPARISON_REPORT.md`](cross_model/data/dynamical_singularity_comparison/BEGINNER_DYNAMICAL_SYSTEMS_COMPARISON_REPORT.md)
 4. [`docs/DATA_CATALOG.md`](docs/DATA_CATALOG.md)
 
-## Python 环境
+## 计算环境
 
-最低依赖为 Python 3.10、NumPy、SciPy 和 Matplotlib：
+主要数值求解、延拓和稳定性程序已迁移为原生 Julia，不调用 Python、SciPy 或 PythonCall。建议使用 Julia 1.10 或更高版本，在项目根目录执行：
+
+```bash
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
+```
+
+已有的 Tecplot 转换、数据校验、结果汇总和项目检查仍保留为 Python 辅助程序；需要运行这些工具时安装：
 
 ```bash
 python3 -m venv .venv
@@ -83,7 +93,7 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-首先执行只读完整性检查：
+只读完整性检查仍使用原 Python 工具：
 
 ```bash
 python3 check_project.py
@@ -94,39 +104,54 @@ python3 check_project.py
 ### von Kármán 有限域分支
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 von_karman/scripts/compute_domain_branches.py
+julia --project=. von_karman/scripts/compute_domain_branches.jl
 ```
 
 ### von Kármán 真无穷远映射和时间谱
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 von_karman/scripts/analyze_vonkarman_infinite_mapping.py \
+julia --project=. von_karman/scripts/analyze_vonkarman_infinite_mapping.jl \
   --degree 110 --scale 8 --h-stop -0.02 \
-  --tolerance 3e-10 --temporal-degrees 50 70 90 \
+  --tolerance 3e-10 --temporal-degrees 50,70,90 \
   --output-dir von_karman/data/infinite_mapping/stability_N110_L8
 
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
 python3 von_karman/scripts/summarize_vonkarman_infinite_mapping.py
 ```
 
 ### rotor--stator 分支和三解动力学
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 rotor_stator/scripts/two_disk_boussinesq_singularity.py
+julia --project=. rotor_stator/scripts/two_disk_boussinesq_singularity.jl
 
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 rotor_stator/scripts/analyze_three_solution_dynamics.py
+julia --project=. rotor_stator/scripts/analyze_three_solution_dynamics.jl
 ```
 
 ### 两模型动力系统比较
 
 ```bash
-OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
-python3 cross_model/scripts/compare_saddle_node_dynamics.py
+julia --project=. cross_model/scripts/compare_saddle_node_dynamics.jl
 ```
+
+### rotor--stator 的 Tecplot 数据
+
+现有 rotor--stator 数据已经转换为 Tecplot ASCII DAT，统一位于
+`rotor_stator/tecplot/`。转换过程不修改原始 CSV、JSON 或 NPZ 文件。
+
+重新生成并校验全部 DAT：
+
+```bash
+python3 rotor_stator/scripts/convert_all_to_tecplot.py
+python3 rotor_stator/scripts/verify_tecplot_data.py
+```
+
+生成等温相连主支在 $T_w=1.00,1.04,1.08,1.12,1.16$ 的基本流剖面：
+
+```bash
+julia --project=. rotor_stator/scripts/generate_principal_baseflow_tecplot.jl
+```
+
+各文件的变量、分区数、数据行数及源文件映射见
+`rotor_stator/tecplot/README.md` 和 `conversion_manifest.json`。
 
 这些命令可能覆盖对应的派生输出。需要保留当前快照时，应通过脚本的输出参数写入单独的试算目录。
 
@@ -142,4 +167,3 @@ python3 cross_model/scripts/compare_saddle_node_dynamics.py
 ## 版本控制说明
 
 仓库根目录默认忽略 `*.csv`、`*.dat` 和 `*.lpk`。本项目的 `.gitignore` 对整理后的科学数据作了局部反向声明，使这些文件可以作为项目资产被版本控制；本次整理没有执行暂存或提交。
-

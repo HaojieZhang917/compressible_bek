@@ -1,0 +1,52 @@
+[
+  {
+    "Tw": 1.0,
+    "pressure_gradient": 0.0979164800269465,
+    "profile_points": 2001,
+    "bvp_nodes": 2750,
+    "max_rms_residual": 1.9995693008050923e-08,
+    "boundary_residual_max": 6.12449040090559e-20,
+    "mass_integral_F_simpson": -1.1470252895643777e-11,
+    "mass_integral_F_from_H_endpoints": 6.460963686842063e-24
+  },
+  {
+    "Tw": 1.04,
+    "pressure_gradient": 0.0805997533863557,
+    "profile_points": 2001,
+    "bvp_nodes": 2818,
+    "max_rms_residual": 1.9997700827321563e-08,
+    "boundary_residual_max": 1.1102230246251565e-16,
+    "mass_integral_F_simpson": -1.126156767838893e-11,
+    "mass_integral_F_from_H_endpoints": -4.842453046666546e-24
+  },
+  {
+    "Tw": 1.08,
+    "pressure_gradient": 0.06259771948863728,
+    "profile_points": 2001,
+    "bvp_nodes": 2860,
+    "max_rms_residual": 1.9848037672740393e-08,
+    "boundary_residual_max": 1.1102230246251565e-16,
+    "mass_integral_F_simpson": -1.1051827897290423e-11,
+    "mass_integral_F_from_H_endpoints": 2.550380402700814e-25
+  },
+  {
+    "Tw": 1.12,
+    "pressure_gradient": 0.043009180393552435,
+    "profile_points": 2001,
+    "bvp_nodes": 2874,
+    "max_rms_residual": 1.9872662978078076e-08,
+    "boundary_residual_max": 3.0791479122853316e-20,
+    "mass_integral_F_simpson": -1.0851017269904637e-11,
+    "mass_integral_F_from_H_endpoints": -3.420125514391092e-24
+  },
+  {
+    "Tw": 1.16,
+    "pressure_gradient": 0.018230449551979402,
+    "profile_points": 2001,
+    "bvp_nodes": 7827,
+    "max_rms_residual": 1.9969137214808795e-08,
+    "boundary_residual_max": 4.9632745544136806e-21,
+    "mass_integral_F_simpson": -1.0711873758377049e-11,
+    "mass_integral_F_from_H_endpoints": -9.907246948953162e-25
+  }
+]

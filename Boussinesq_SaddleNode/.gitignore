@@ -11,5 +11,5 @@ runs/
 !von_karman/data/**/*.dat
 !von_karman/reference/**/*.lpk
 !rotor_stator/data/**/*.csv
+!rotor_stator/tecplot/**/*.dat
 !cross_model/data/**/*.csv
-
