@@ -1,0 +1,41 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 22. Space-time plot showing w at zδ = 1.245, Re = 4 × 105, S = 10.
+suggests that the presence of turbulence is a distinct condition inﬂuencing the energy distribution in
+the boundary layer close to the shroud.
+The focus should now be on the traveling spiral waves mode, as it is instrumental in the genesis
+of local turbulence within the disk boundary layer. As illustrated by the space-time diagram for
+case 7 in Fig. 22, it is evident that the spiral waves in the rotating-disk boundary layer begin to
+lose their stability beyond r
+δ = 493.1, leading to the formation of contorted and chaotic structures
+indicative of local turbulence. During the transition process, the morphology of the spiral waves is
+highly variable; for instance, at t = 7, a spiral wave extends to r
+δ = 524.0 before dissipating, and
+compared to other spiral waves, its striation structure has a larger angle of inclination with respect
+to the time axis. Regrettably, the current space-time diagram does not capture the local turbulence
+phenomena that would arise from secondary instabilities of the spiral waves [38,39].
+IV . CONCLUSION
+Unlike the traditionally single rotating disk, detailed trasitional processes brought by roughness
+elements, and hence, under the selective excitation of crossﬂow vortices, are still unknown until
+now. This study employs a Fourier/spectral element-based spectral vanishing viscosity method to
+conduct large eddy simulations (LES-SVV). A resistance source term based on the local relative
+velocity squared is added to the momentum equation. The objective is to investigate the effects
+of roughness elements on rotating-disk in a rotor-stator cavity on instability and furthermore, on
+transition to turbulence. The main ﬁndings of this study can be summarized as follows:
+(i) Through the analysis of eight simulation cases, the current grid resolution and numerical
+methods have been initially validated to be capable of capturing the spiral waves structure with
+an azimuthal wave number of 75 near the shroud due to the strong centrifugal and shear effects,
+as observed in Yim et al. ’s [6] study. Additionally, at a lower Reynolds number Re = 2 × 10
+5,
+stationary mode spiral waves excited by 32 azimuthal uniform roughness elements have been
+identiﬁed starting from r = 6, which almost entirely occupy the entire disk boundary layer. The
+peak of v
+rms occurs at an axial length ofzδ = 1.31. This value is remarkably close tozδ = 1.3, which
+corresponds to a von Kármán boundary layer in single rotating disk. When the drag coefﬁcient
+S = 100, there is an increase in the disturbance intensity of the crossﬂow vortices, which grow
+slowly downstream with a modest growth rate, indicative of an increase in radial wavelength. At
+higher radii, the crossﬂow vortices corresponding to drag coefﬁcients S = 10 and S = 100 both
+remain unsaturated.
+(ii) When the Reynolds number is Re = 3 × 10
+5, regardless of whether S = 10 or S = 100, the
+roughness elements-induced crossﬂow vortices reach saturation. Interestingly, despite the saturation
+013901-20

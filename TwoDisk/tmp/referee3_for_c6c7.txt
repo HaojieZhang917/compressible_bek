@@ -1,0 +1,134 @@
+             Effects of surface mass flux on the stability and receptivity
+                  of the rotor boundary layer in a rotorstator system
+                                   Haojie Zhang & Jianxin Liu
+
+In this paper investigates linear stability and receptivity of the flow between two infinitely large
+disks, of which one is stationary while the other is rotating at a constant angular velocity and
+subject to injection or suction. Flows in such a rotor-stator configuration have received much
+attention. The present study considers primarily the case where the two disks are fairly well
+separated such that the interaction between the two boundary layers over them is rather weak.
+The main focus is the linear stability of the rotor boundary layer and its receptivity to radially
+localized, azimuthally periodic roughness or more generally unsteady surface displacement.
+The paper does contain some interesting and new results, which are worth publishing eventually.
+However, the paper is let down by its poor presentation, and there also are a few technical issues
+to be resolved, as I shall highlight below. The manuscript in the present form is unsuitable
+for publication. My commendation is that the authors be give an opportunity to undertaken a
+major revision.
+
+                                            Main Points
+
+   1. The manuscript was badly prepared. Both the grammatical and technical accuracy is
+      poor. The authors’ writing style is rather casual, and often does not quite comply with
+      the basic rules of scientific writing. The authors have a habit of using inappropriate words
+      and constructing sentences in a convoluted manner. As a result, many statements fail
+      to project accurately the intended technical messages. I find it largely a guesswork to
+      decipher what they mean.
+      Often within a paragraph, the intended points are not stated in a logic order, and the
+      manuscript lacks overall coherence. There are many unnecessary repetitions as a result.
+   2. The abstract is inadequate. The receptivity problem has not been stated clearly since
+      physical disturbances exciting instability modes were not specified properly. There is also
+      confusion between the so-called ‘sensitivity’ and ‘receptivity’, which are different. The
+      locations where the adjoint eigenfunction is maximum were taken to imply ‘sensitivity’
+      to volumetric forcing if it is located in those regions. ‘Sensitivity’ is thus an intrinsic
+      property of the operator governing stability, having nothing to do with external physical
+      disturbances. The latter are present in the environment (the free stream and/or boundary),
+      and the resulting equivalent volumetric forcing does not necessarily concentrate in the
+      regions near the maxima of the adjoint eigenfunction. In certain situations, the volumetric
+      forcing is absent, which is the case in this paper. The statements in lines 8–9 are therefore
+      irrelevant and cause confusion.
+      There are quite a few words used in appropriately in the abstract: ‘susceptibility’ (line 4)
+      is a misuse for the technical term ‘receptivity’, and ‘insensitivity’ (line 7) is unnecessary
+      since the convoluted sentence (lines 7-8) can be phrased directly as ”the growth rate and
+      unstable region of the viscous type II mode are rather insensitive to the mass flux”. The
+      meaning of ‘receptivity amplitude’ and ‘circumferential-wavenumber selectivity’ is vague.
+   3. The introduction is rather rambling. The authors did not manage to statement clearly
+      relevant outstanding issues on the topic with due emphasis on the ones most relevant to
+      their work.
+
+                                                 1
+  There are a few oversights in the literature review. Concerning the absolute receptivity
+  of the boundary layer over a rotating disk, the conclusion of Lingwood (1995, 1996) was
+  first obtained with non-parallel-flow effect being neglected. Subsequent investigations by C.
+  Davis showed that the absolute instability disappeared when non-parallelism was included.
+  I do not think that the conclusion is definitive. The authors need to dig further into the
+  literature as non-parallelism is an important issue for the present paper. Citations to
+  references 33–36 appear to be mistaken since these papers did not consider receptivity at
+  all. The description of receptivity (the last paragraph of the left column of page 2) is
+  inaccurate. Receptivity is concerned with excitation of instability (eigen) modes, not just
+  ‘perturbations’ of any kind.
+4. For the type I mode, the critical Reynolds numbers of absolute instability are close to Rc
+   shown in table II (page 10). For type II mode, the critical Reynolds numbers of absolute
+   instability are also small as is shown in figure 16 (page 13). Given the rather low Reynolds
+   numbers for both types of modes, non-parallelism is expected to be significant. It is
+   important to discuss whether the absolute instability would survive.
+5. The explanation for the mild effect of the mass flux on type II mode is unconvincing (left
+   column of page 10). Given that the respective role of the ‘base flow amplitude’ and the
+   ‘wall shear stress’ was not quantified, how can the competition between them ‘provides a
+   possible explanation’ ?
+6. That the peak of the amplitude (which probably should be referred to as coupling or
+   receptivity coefficient) appears close to the location of maximum growth rate (the last
+   paragraph of the left column, page 17) was taken as a main result by the authors.There
+   seems no mathematical reason for this. Is this purely a coincidence? This peak is unlikely
+   to be significant because the mode excited has missed the exponential amplification up-
+   stream. If the same form of wall forcing is placed near the lower-branch neutral curve,
+   the mode excited would probably acquire a much greater amplitude when it reaches the
+   location of the maximum growth.
+  With the above consideration, I would like to suggest that the authors calculate the initial
+  amplitude at the lower-branch neutral curve, and follow the development of the mode to the
+  critical location for absolute instability. The amplitude gained would give some useful idea
+  of how likely the convective or absolute instability causes transition. The authors made a
+  good point in te introduction on the relative role of convective and absolute instabilities.
+  They should demonstrate it using concrete result.
+7. There appears a mathematical reason why Cr attains its maximum in the region of ‘modal
+   switching’ (the last paragraph of the left column, page 17). The authors need to explain
+   this further by stating clearly which two modes are switched over. I do not think that the
+   modes would have exactly the same eigenvalues at the switching point, but probably their
+   real parts become (nearly) identical.
+
+                                      Specific points
+
+1. Page 1, bottom line of the left column and line 3 of the right column: ‘physical’ and
+   ‘physically’ are unnecessary.
+2. Page 2, line -8 of the left column: ‘physical information’ is odd obscure expression, prob-
+   ably invented by the authors. It should be replaced by something like ‘physics at all
+   (macroscopic) scales’.
+
+                                             2
+    The last paragraph of Section I: change ‘local effect of surface imperfection’ to ‘effect of
+    localised surface imperfection’.
+ 3. Pages 3 and 4: the last paragraph of Section II. A: I think that ‘parallel flow approximation’
+    is made in the stability analysis, but not in the base flow solution. This should be made
+    clear.
+    Change ‘governing equations’ to ‘equations governing instability’.
+    The first paragraph of Section B: the ‘velocity fields vary continuously’ for all Reh . The
+    sign for the boundary layers being well separated is that a plateau appears in between.
+ 4. Page 5, left column and throughout the manuscript: the word ‘conversely’ is used fre-
+    quently but incorrectly in also all occasions. ‘In contrast’ could be used.
+ 5. Page 8, equations (32) and (33): state the physical nature of the wall forcing at this point.
+    Right column equation: refer to the appendix for the expression of ‘B.C.’, which ought to
+    be replaced by a conventional notation.
+ 6. Pages 9-10: define more precisely the ‘zarf curves’ and the projection involved.
+ 7. Page 10, figure 11: define ‘three-dimensional unstable surface’ mathematically. Is it a
+    contour of ωi ? Here and also in subsequent figures, it is necessary to present spatial
+    growth rates.
+ 8. Page 14, the last paragraph of the right column: change ‘linear perturbations’ to ‘velocity
+    perturbation components’, and ‘perturbation wave’ to ‘instability wave’.
+ 9. Page 15, the right column and throughout the paper: ‘generalized wall conditions’ is
+    a mis-characterization since the wall condition still corresponds to the standard kinetic
+    condition. Replace it by “general wall forcing’ or ‘unsteady wall forcing’.
+    Is it that xf is set to be R, the radial location where the amplitude is calculated, rather
+    than xf = 0? If xf = 0 were set, the local value of h at the excitation would change
+    tremendously with R. Also, c2 is an important parameter. If c ∗ 2 is too large, the
+    receptivity would be considerably weakened. This point needs to be discussed in relation
+    to the local nature of the wall forcing, and the scaling matching required for efficient
+    excitation.
+10. Pages 39-42: the reference list is extremely rough, and needs to be tidied up.
+    A special nouns (e.g. Navier-Stokes, Ekman, Boödewadt, . . . . . . ) must start with a capital
+    letter, and abbreviations (e.g. LES, CFD, BEK, . . . . . . ) be spelt in capital letters.
+    Journal titles must be presented in a consistent style.
+
+
+
+
+                                               3
+

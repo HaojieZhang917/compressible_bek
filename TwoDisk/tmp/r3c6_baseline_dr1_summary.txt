@@ -1,0 +1,23 @@
+Total-amplitude calculation
+Re_h = 1000
+a_s = 0.0
+n = 30
+omega_bar = 0.0
+N_cheb = 99 (100 collocation points)
+R_lower = 287.8216088946
+alpha_lower = 1.5871472157986144 + 0.3761416437565338im
+alpha_adjoint_lower = 1.5871472158756408 - 0.3761416437481561im
+C_r_lower = -1.3595969575288824e-6 - 1.7449754212278499e-6im
+abs_C_r_lower = 2.2121128152992347e-6
+Q_lower = 0.000664430237297241 + 0.0004614672657392718im
+boundary_projection_lower = 1.7868239237025598e-9 - 9.810829270327229e-11im
+R_target = 570.0
+alpha_target = 0.8426091238078154 + 0.12735851471937562im
+growth_rate_target = -0.12735851471937562
+N_target = -59.66610520536772
+gain_target = 1.2227558594811172e-26
+log_abs_A_target = -72.68766767948092
+abs_A_target = 2.7048739067404097e-32
+A_target_raw_phase = 2.6680184816543075e-32 - 4.449946436937997e-33im
+curve_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\tmp\r3c6_baseline_dr1_curve.dat
+note = A_target_raw_phase depends on the arbitrary eigenvector phase; abs_A_target is the phase-invariant result.

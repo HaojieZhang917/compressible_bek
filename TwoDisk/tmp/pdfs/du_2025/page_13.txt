@@ -1,0 +1,31 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 11. ( r, θ)p l a n ea tzδ = 1.245. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+to 1.245. Second, if using the axial position zδ corresponding to the point where vrms decreases to
+the same level as the core region to reﬂect the thickness of the boundary layer, then it is evident
+that the boundary layer thickness signiﬁcantly increases at higher radial positions. Speciﬁcally, it
+increases from z
+δ = 4 at lower radial positions to zδ = 6 at higher radial positions. According to
+Imayama et al. [26,37], this is due to the inﬂuence of nonlinear effects.
+Figures 11(a) and 11(b) present the boundary layer visualization results at a Reynolds number
+Re = 3 × 105 for S = 10 and S = 100, respectively. The coloration represents the axial velocity
+w, ranging from −0.05 (blue) to 0.05 (red), at a distance zδ = 1.245 from the rotating disk. Under
+these conditions, regular spiral waves are conﬁned to the immediate downstream vicinity of the
+roughness elements, followed by irregular spiral waves structure. Compared to the case withS = 10,
+for S = 100, the radial extent occupied by the roughness elements-induced spiral waves with an
+azimuthal wave number k = 32 is reduced. However, at a lower Reynolds number Re = 2 × 10
+5,
+the spiral waves with k = 32 excited by S = 100 display a consistent characteristic that dominates
+the entire boundary layer within the (r, θ) plane.
+To identify ﬂow characteristics in the boundary layer beyond the azimuthal mode of k = 32, the
+ﬂow kinetic energy Ek of each azimuthal Fourier mode k in the ﬂow ﬁeld is depicted in Fig. 12.
+Ek = 1
+2A
+∫
+A
+ˆukˆu∗
+k rdA, (10)
+where A is the area of the two-dimensional meridional (r, z) semiplane, and ˆu∗
+k denotes the complex
+conjugate of the velocity data in the kth Fourier mode.
+FIG. 12. Kinetic energies Ek in azimuthal Fourier modes.
+013901-13

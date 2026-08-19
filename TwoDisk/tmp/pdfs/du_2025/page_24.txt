@@ -1,0 +1,32 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+[26] S. Imayama, P. H. Alfredsson, and R. J. Lingwood, Experimental study of rotating-disk boundary-layer
+ﬂow with surface roughness, J. Fluid Mech. 786, 5 (2016).
+[27] E. Appelquist, S. Imayama, P. H. Alfredsson, P. Schlatter, and R. Lingwood, Linear disturbances in the
+rotating-disk ﬂow: A comparison between results from simulations, experiments and theory,Eur. J. Mech.
+B Fluids 55, 170 (2016).
+[28] H. M. Blackburn, D. Lee, T. Albrecht, and J. Singh, Semtex: A spectral element–Fourier solver for the
+incompressible Navier–Stokes equations in cylindrical or Cartesian coordinates,Comput. Phys. Commun.
+245, 106804 (2019).
+[29] G. Karamanos and G. Karniadakis, A spectral vanishing viscosity method for large-eddy simulations,
+J. Comput. Phys. 163, 22 (2000).
+[30] R. Pasquetti, Spectral vanishing viscosity method for large-eddy simulation of turbulent ﬂows, J. Sci.
+Comput. 27, 365 (2006).
+[31] K. Koal, J. Stiller, and H. M. Blackburn, Adapting the spectral vanishing viscosity method for large-eddy
+simulations in cylindrical conﬁgurations, J. Comput. Phys. 231, 3389 (2012).
+[32] A. Busse and N. D. Sandham, Parametric forcing approach to rough-wall turbulent channel ﬂow, J. Fluid
+Mech. 712, 169 (2012).
+[33] G. K. Batchelor, An Introduction to Flluid Dynamics(Cambridge University Press, Cambridge, UK, 1967).
+[34] R. J. Lingwood, Absolute instability of the Ekman layer and related rotating ﬂows, J. Fluid Mech. 331,
+405 (1997).
+[35] K. Kato, P. H. Alfredsson, and R. J. Lingwood, Boundary-layer transition over a rotating broad cone,
+Phys. Rev. Fluids 4, 071902(R) (2019).
+[36] K. Kato, A. Segalini, P. H. Alfredsson, and R. Lingwood, Instabilities and transition on a rotating cone–old
+problems and new challenges, in IUTAM Laminar-Turbulent Transition: 9th IUTAM Symposium, London,
+UK, September 2–6, 2019 (Springer International Publishing, Cham, 2022), pp. 203–213.
+[37] S. Imayama, P. H. Alfredsson, and R. J. Lingwood, An experimental study of edge effects on rotating-disk
+transition, J. Fluid Mech. 716, 638 (2013).
+[38] B. Viaud, E. Serre, and J.-M. Chomaz, The elephant mode between two rotating disks, J. Fluid Mech.
+598, 451 (2008).
+[39] B. Viaud, E. Serre, and J.-M. Chomaz, Transition to turbulence through steep global-modes cascade in an
+open rotating cavity, J. Fluid Mech. 688, 493 (2011).
+013901-24

@@ -1,0 +1,33 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 9. Space-time plot showing w at zδ = 1.31, Re = 2 × 105, S = 100.
+increases from around 10 δnear rδ = 261.5 to around 17.5δnear rδ = 435.9. With the increase in
+radial wavelength, the self-pulsations of the crossﬂow vortices become more pronounced. This can
+be observed in Fig. 9, particularly in the region of 392 .3 < r
+δ < 435.9, where the self-pulsations
+of the spiral waves intermittently appear. Compared to Fig. 8, the self-pulsations in Fig. 9 have a
+higher frequency and amplitude. In the next section, we will discuss this self-sustaining pulsation,
+which in fact corresponds to the traveling spiral waves mode of the rotating-disk boundary layer.
+B. Traveling spiral waves mode
+The characteristics of the traveling spiral waves mode is similar to those of the crossﬂow vortices
+mode (stationary spiral waves mode), but the traveling spiral waves mode exhibits relative motion
+with respect to the rotating disk. In the previous section, we analyzed and discussed the characteris-
+tics of the crossﬂow vortices mode excited by roughness elements, identifying ﬂuctuations at higher
+radii in the space-time plots of Figs. 8 and 9. Due to the lower Reynolds number, the rotating-disk
+boundary layer did not undergo a transition to turbulence. To further analyze the role of roughness
+elements in the transition to turbulence, the Reynolds number Re is increased to 3 × 10
+5, which
+corresponds to a maximumrδ of 547.7. At this condition, the roughness elements with a radiusr = 6
+corresponds to rδ = 320.3. Despite the increase in the global Reynolds number Re, the variation in
+the core rotation ratio vr (core) remains minimal and can still be considered as the critical Reynolds
+number for current convective instability,rδc = 301.2. Given that the roughness elements are located
+at a position where rδ > rδc , it is anticipated that disturbances will continue to grow.
+To begin, the distribution of the dimensionless azimuthal velocity root-mean-square vrms along
+the axial direction zδ at different rδ for case 4 (S = 10) and case 5 (S = 100), as shown in Figs.10(a)
+and 10(b).A tR e = 3 × 105, the disturbances in the core region, as indicated by vrms, are relatively
+smaller compared to the disturbances within the boundary layer. In particular, for S = 100, the
+magnitude of disturbances within the core region relative to those within the boundary layer remains
+unchanged in the range of 347.0 < r
+δ < 533.8. However, compared to Re= 2 × 105, there are still
+two notable differences. First, the value of zδ corresponding to the peak of vrms decreases from 1.31
+FIG. 10. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+013901-12

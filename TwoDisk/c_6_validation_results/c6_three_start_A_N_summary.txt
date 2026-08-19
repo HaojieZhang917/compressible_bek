@@ -1,0 +1,21 @@
+C6 three-start downstream evolution
+N_cheb = 99
+R_target = 570.0
+radial_step = 1.0
+a_s = 0.0
+Re_h = 1000
+omega_bar = 0.0
+n = 30
+roughness_height = 0.001
+roughness_localization = 0.5
+middle_case_note = R=372.988887508 is the maximum spatial growth-rate location on the continuously tracked branch.
+
+# label R_start alpha_r_start alpha_i_start Cr_initial_abs N_at_570 gain_at_570 A_abs_at_570 points adjoint_error
+lower_neutral 2.878216088946e+02 4.496779710572e-01 1.186210834779e-14 1.435949172934e-01 4.336183920906e+00 7.641537511650e+01 1.097285946980e+01 284 3.439166611345e-12
+maximum_growth_Rg 3.729888875080e+02 2.958051869576e-01 -3.226188598610e-02 1.939633253841e-01 2.544606962174e+00 1.273822049956e+01 2.470747607570e+00 199 4.548067107409e-12
+global_Cr_peak 4.689095315900e+02 1.790537806407e-01 -7.661282799236e-03 2.444149613551e-01 4.259424422566e-01 1.531032649813e+00 3.742072859374e-01 103 7.570843035830e-12
+
+combined_tecplot_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_validation_results\c6_three_start_A_N_evolution.dat
+individual_tecplot_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_validation_results\c6_lower_neutral_A_N.dat
+individual_tecplot_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_validation_results\c6_maximum_growth_Rg_A_N.dat
+individual_tecplot_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_validation_results\c6_global_Cr_peak_A_N.dat

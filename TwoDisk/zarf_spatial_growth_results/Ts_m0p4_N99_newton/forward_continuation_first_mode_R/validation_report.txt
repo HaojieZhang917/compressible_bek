@@ -1,0 +1,16 @@
+Zarf spatial-envelope validation
+status: PASS
+sample rows: 92695
+envelope rows: 6659
+expected temporal-Zarf points: 6659
+duplicate envelope keys: 0
+missing keys: 0
+unexpected keys: 0
+non-finite values present: False
+failed sample statuses: 0
+residuals: p50=3.472697e-09, p90=2.801272e-08, p99=4.386062e-08, p100=6.347354e-08
+max |growth + alpha_i|: 0.000000e+00
+max |omega_bar - R*omega|: 6.400569e-11
+neighbor growth jumps: p50=1.013518e-03, p90=4.997356e-03, p99=7.487818e-02, p100=6.633005e-01
+neighbor omega jumps: p50=1.088531e-03, p90=3.567465e-03, p99=1.442928e-02, p100=1.481334e-01
+maximum growth: R=500.000000, beta=0.125000, growth=8.129740107885e-01, omega=6.012227286633e-03, alpha=-8.892583478184e-01-8.129740107885e-01i, residual=-1.000000e+00

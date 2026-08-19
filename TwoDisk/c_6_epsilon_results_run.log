@@ -1,0 +1,41 @@
+mode = 1:cavity; mode = 2:stationary; mode = 3:rotation;
+Locating the lower neutral point...
+neutral scan: R= 240.0000  alpha= 0.554813635 +0.040870436i
+neutral scan: R= 242.0000  alpha= 0.549951252 +0.038830606i
+neutral scan: R= 244.0000  alpha= 0.545138346 +0.036822541i
+neutral scan: R= 246.0000  alpha= 0.540373543 +0.034845707i
+neutral scan: R= 248.0000  alpha= 0.535655505 +0.032899599i
+neutral scan: R= 250.0000  alpha= 0.530982928 +0.030983737i
+neutral scan: R= 252.0000  alpha= 0.526354541 +0.029097672i
+neutral scan: R= 254.0000  alpha= 0.521769104 +0.027240975i
+neutral scan: R= 256.0000  alpha= 0.517225408 +0.025413248i
+neutral scan: R= 258.0000  alpha= 0.512722272 +0.023614114i
+neutral scan: R= 260.0000  alpha= 0.508258544 +0.021843224i
+neutral scan: R= 262.0000  alpha= 0.503833101 +0.020100249i
+neutral scan: R= 264.0000  alpha= 0.499444846 +0.018384888i
+neutral scan: R= 266.0000  alpha= 0.495092706 +0.016696862i
+neutral scan: R= 268.0000  alpha= 0.490775637 +0.015035915i
+neutral scan: R= 270.0000  alpha= 0.486492616 +0.013401816i
+neutral scan: R= 272.0000  alpha= 0.482242647 +0.011794354i
+neutral scan: R= 274.0000  alpha= 0.478024753 +0.010213346i
+neutral scan: R= 276.0000  alpha= 0.473837986 +0.008658628i
+neutral scan: R= 278.0000  alpha= 0.469681415 +0.007130061i
+neutral scan: R= 280.0000  alpha= 0.465554135 +0.005627530i
+neutral scan: R= 282.0000  alpha= 0.461455260 +0.004150941i
+neutral scan: R= 284.0000  alpha= 0.457383928 +0.002700225i
+neutral scan: R= 286.0000  alpha= 0.453339297 +0.001275337i
+neutral scan: R= 288.0000  alpha= 0.449320547 -0.000123744i
+neutral refine  1: R= 287.8000000  alpha_i=+1.5003e-05
+neutral refine  2: R= 287.8216268  alpha_i=-1.2444e-08
+neutral refine  3: R= 287.8194641  alpha_i=+1.4890e-06
+neutral refine  4: R= 287.8214106  alpha_i=+1.3770e-07
+neutral refine  5: R= 287.8216052  alpha_i=+2.5704e-09
+neutral refine  6: R= 287.8216089  alpha_i=+9.4209e-15
+Following the lower-neutral branch and reconstructing epsilon...
+epsilon at R_lower = 0.1335600825369489
+epsilon at R_target = 10.46089180890738
+R at epsilon=0.01: 287.8216088945828
+R at epsilon=0.05: 287.8216088945828
+R at epsilon=0.1: 287.8216088945828
+data output: \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_epsilon_results\c6_lower_neutral_epsilon_N99_dr2.dat
+summary output: \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c_6_epsilon_results\c6_lower_neutral_epsilon_N99_dr2_summary.txt

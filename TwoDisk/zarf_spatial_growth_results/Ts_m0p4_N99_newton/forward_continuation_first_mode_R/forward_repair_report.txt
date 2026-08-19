@@ -1,0 +1,30 @@
+Forward continuation spatial-growth repair
+source: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton
+window: R=[350.0, 500.0], beta=[0.1, 0.2]
+continuation beta lines: 16
+forward target points: 378
+repaired points: 378
+unresolved points: 0
+replaced FE nodes: 378
+stencil size: 3
+thresholds: 5.317863980723e-02 1.292561610210e-01 3.002845361791e-02 6.542599218677e-02 1.487039902355e-01
+continuation starts:
+beta=1.000000000000e-01 start_R=4.150000000000e+02
+beta=1.050000000000e-01 start_R=4.300000000000e+02
+beta=1.100000000000e-01 start_R=4.200000000000e+02
+beta=1.150000000000e-01 start_R=4.950000000000e+02
+beta=1.200000000000e-01 start_R=3.950000000000e+02
+beta=1.250000000000e-01 start_R=3.800000000000e+02
+beta=1.350000000000e-01 start_R=3.600000000000e+02
+beta=1.400000000000e-01 start_R=3.600000000000e+02
+beta=1.450000000000e-01 start_R=3.950000000000e+02
+beta=1.500000000000e-01 start_R=3.600000000000e+02
+beta=1.550000000000e-01 start_R=3.600000000000e+02
+beta=1.600000000000e-01 start_R=3.550000000000e+02
+beta=1.650000000000e-01 start_R=3.600000000000e+02
+beta=1.750000000000e-01 start_R=3.700000000000e+02
+beta=1.800000000000e-01 start_R=3.650000000000e+02
+beta=1.850000000000e-01 start_R=3.700000000000e+02
+envelope: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/forward_continuation_first_mode_R/spatial_growth_envelope.dat
+FE triangle: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/forward_continuation_first_mode_R/spatial_growth_cloud_fetriangle.dat
+repair log: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/forward_continuation_first_mode_R/forward_interpolated_points.dat

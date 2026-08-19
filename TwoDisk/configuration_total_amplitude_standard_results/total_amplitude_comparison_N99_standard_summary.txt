@@ -1,0 +1,16 @@
+Parameters: a_s=0, n=30, omega_bar=0, c^2=1, N=99
+Fourier convention: hhat(alpha) = integral h(s) exp(-i alpha s) ds
+Inverse convention: h(s) = (1/(2*pi)) integral hhat(alpha) exp(i alpha s) d alpha
+
+Cavity lower neutral R = 287.821608894577
+Cavity |Cr(R_l)| = 1.435949172913e-01
+Cavity N(500) = 4.082880540149e+00
+Cavity |A(500)| = 8.517488515809e+00
+
+Single disk lower neutral R = 313.043829663044
+Single disk |Cr(R_l)| = 1.902413618216e-01
+Single disk N(500) = 7.694083320658e+00
+Single disk |A(500)| = 4.176407582724e+02
+
+Target amplitude ratio disk/cavity = 4.903332214622e+01
+The N factors and the amplitude ratio are unchanged by the Fourier convention.

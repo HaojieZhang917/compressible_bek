@@ -1,0 +1,1101 @@
+
+
+===== PDF PAGE 1 =====
+
+PHYSICAL REVIEW FLUIDS 10, 013901 (2025)
+Instability characteristics induced by roughness elements in the rotating-disk
+boundary layer of a rotor-stator cavity
+Qiang Du ,* Yaguang Xie,† Lei Xie, Ruonan Wang , Qingzong Xu , and Junqiang Zhu
+Advanced Gas Turbine Laboratory, Institute of Engineering Thermophysics , Chinese Academy of Sciences ,
+Beijing 100190, China;
+University of Chinese Academy of Sciences , Beijing 100049, China;
+National Key Laboratory of Science and Technology on Advanced Light-duty Gas-turbine,
+Beijing 100190, China;
+and Key Laboratory of Advanced Energy and Power ,Institute of Engineering Thermophysics ,
+Chinese Academy of Sciences , Beijing 100190, China
+(Received 21 July 2024; accepted 10 December 2024; published 8 January 2025)
+This study targets the stability issues of rotating-disk boundary layer in a rotor-stator
+cavity within the context of the incompressible Navier-Stokes equations, incorporating a
+drag model representative of roughness elements. Consequently, 32 azimuthally uniformly
+distributed roughness elements have been positioned within the computational domain.
+Owing to the inviscid crossﬂow instability inherent to the rotating-disk boundary layer,
+the roughness elements induce crossﬂow vortices with an azimuthal wave numberk = 32.
+Upon saturation of the crossﬂow vortices, a transition to turbulence does not immediately
+ensue; instead, a series of azimuthal Fourier modes constituting self-sustaining, spatiotem-
+porally coherent traveling spiral waves mode emerge downstream. At higher Reynolds
+numbers, these traveling spiral waves mode reach saturation and are followed downstream
+by a transition to turbulence. Notably, to the best of the authors’ knowledge, this is the ﬁrst
+instance where selective excitation of crossﬂow vortices with a speciﬁc wave number in
+the rotating-disk boundary layer within a rotor-stator cavity has resulted in a transitional
+process ultimately dominated by traveling mode spiral waves. This process is distinct from
+the one observed over a single rotating disk, where the crossﬂow vortices, after reaching a
+certain Reynolds number, govern the transition to turbulence in the von Kármán boundary
+layer.
+DOI: 10.1103/PhysRevFluids.10.013901
+I. INTRODUCTION
+The rotor-stator cavity holds paramount importance in facilitating the seamless operation of
+aviation turbine engines, prompting extensive scholarly focus on comprehending the intricate ﬂow
+dynamics and heat transfer phenomena that manifest within it [ 1]. Typically, the ﬂow inside the
+cavity exhibits a characteristic Batchelor ﬂow pattern, with well-deﬁned boundary layers present
+on both the stationary and rotating walls, separated by a central rotating core. Due to the rotational
+pumping effect, the ﬂow within the boundary layer on the rotor moves from the lower radius to the
+higher radius, while on the stator, it moves in the opposite direction, from the higher radius to the
+lower radius. The strong three-dimensional rotation engenders a wealth of complex ﬂow structures
+within the boundary layers of both the rotor and stator [2,3]. Investigation of these boundary layers
+*Contact author: duqiang@iet.cn
+†Contact author: xieyaguang@iet.cn
+2469-990X/2025/10(1)/013901(24) 013901-1 ©2025 American Physical Society
+
+===== PDF PAGE 2 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+not only enables a comprehensive understanding of the ﬂow and heat transfer mechanisms within
+the cavity but also provides fresh insights into the transition process of rotating ﬂows [4].
+The simpliﬁed model consists of a stationary disk and a rotating disk, each with a radius R∗,
+separated vertically by a distance of 2H∗. Typically, a shroud is present at the top of the disk [5,6],
+and a rotating hub is situated at the bottom [ 7–9]. When secondary ﬂows are introduced near the
+lower radius of the disk either radially or axially, researchers are particularly concerned with the
+aerodynamic drag or heat transfer on the disk surface, which are critical metrics for the performance
+of the rotor-stator cavity in aviation engines [10,11]. Regardless of whether it concerns aerodynamic
+drag or heat transfer, these factors are intimately connected to the ﬂow conditions on the surface of
+the disk. Laminar and turbulent ﬂows critically inﬂuence these parameters. Therefore, it is essential
+to ﬁrst elucidate the transition issues within the boundary layers of the rotor-stator cavity to obtain
+more accurate engineering parameters such as aerodynamic drag and heat transfer.
+In fact, the typical rotational Reynolds number Re for aerospace engines is around 10
+7,( R e=
+/Omega1∗R∗2/ν∗, where/Omega1∗
+d represents the angular velocity of the disk, andν∗ denotes kinematic viscosity.)
+yet current numerical studies rarely achieve such high Reynolds numbers, generally focusing around
+Re = 10
+6 [12–15]. Empirical evidence suggests that at a Reynolds number of 107, the boundary lay-
+ers of both the stationary and rotating disks are fully turbulent. However, at high altitudes with low
+Reynolds numbers, due to a signiﬁcant reduction in density, the characteristic Reynolds numbers of
+the rotor-stator cavity decrease. At extremely high altitudes, these characteristic Reynolds numbers
+can reach 10
+5. At this level of Reynolds number, the boundary layers of both the stationary and
+rotating disks may exist in a state where laminar-transitional-turbulent ﬂow coexist.
+Around this Reynolds number, numerous numerical, theoretical, and experimental studies have
+investigated the characteristics of boundary layer ﬂow within rotor-stator cavity [ 6,16–22]. For
+the stationary-disk boundary layer, the transition from laminar instability to turbulence occurs
+very rapidly, and most studies focus only on its laminar instability. The typical characteris-
+tics of instability include large-scale spiral waves distributed azimuthally and axisymmetric ring
+waves. Through linear stability analysis, these two types of instabilities are deﬁned as Type I
+inviscid crossﬂow instability, caused by a radial velocity inﬂection point, and Type II viscous
+instability, resulting from the interaction between Coriolis forces and viscous forces. The critical
+Reynolds number for Type I instability is higher than that for Type II instability, leading these
+instabilities to occur at higher and lower radii of the boundary layer, respectively. However,
+according to research by Cros et al. [23] it is highly probable that the nonlinear interaction
+between these two types of instabilities leads to the transition of the stationary-disk boundary
+layer to turbulence. Recently, Xie et al. [24] have further emphasized this phenomenon through
+direct numerical simulation and global linear stability analysis, highlighting that the nonlinear
+interaction between inviscid crossﬂow instability and viscous instability facilitates the emergence
+of localized turbulence in the stationary-disk boundary layer. They also noted that the distur-
+bances from vigorous turbulence in the stationary-disk boundary layer could propagate across
+the core region and impact the rotating-disk boundary layer due to axial migration of the cavity
+ﬂow. Therefore, to fully understand the destabilization mechanisms of the rotating-disk boundary
+layer, the inﬂuence of vigorous turbulence in the stationary-disk boundary layer must not be
+overlooked, as it may affect the linear instability processes within the stationary disk’s boundary
+layer.
+For the rotating-disk boundary layer, its ﬂow and instability characteristics are similar to those
+of the stationary disk, but transition to turbulent occurs at higher Reynolds numbers. According
+to research by Yim et al. and Séverac et al. [6,12]a tR e = 4 × 10
+5, the boundary layer can be
+divided into laminar, transitional, and turbulent regions, with the transition to turbulence being
+particularly pronounced. Similar to the case with a single rotating disk, the spiral waves transi-
+tion to turbulence through convective or absolute instability. During convective instability, spiral
+waves emerge from a lower radius, and typically, their azimuthal wave number is not large. In
+the research conducted by Séverac et al. and Xie et al. [12,21] there are about a dozen spiral
+waves. However, due to the merging and transformation of spiral waves at higher radii, the exact
+013901-2
+
+===== PDF PAGE 3 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+number is difﬁcult to discern. The spiral waves begin to develop from a lower radius and, at
+higher radii, their energy reaches saturation, becoming chaotic and exhibiting phenomena such as
+bifurcation.
+In the rotor-stator cavity, the absolute instability process of the rotating-disk boundary layer
+was discovered by Yim et al. [6] through numerical simulations. When no convective instability
+spiral waves appear at lower radii, rapidly growing spiral waves occur near the critical Reynolds
+number for absolute instability. Those spiral waves corresponding several elephant front-forming
+global modes, form a steep front, eventually leading to incipient turbulence. Those spiral waves
+corresponding to absolute instability have a relatively high azimuthal wave number, typically
+between 60 and 80. It is important to emphasize that this type of process can only occur on smooth
+disks. For realistic surfaces with unavoidable roughness elements on rotating disks, disturbances
+generated by roughness elements trigger the spiral waves of convective instability. These spiral
+waves appear at lower radii and are relatively stationary to the disk, at which point they are also
+known as crossﬂow vortices (stationary mode). In contrast, the traveling spiral waves mode implies
+that the spiral waves have relative motion with the rotating disk. In Yim et al. ’s [6] research,
+the spiral waves of absolute instability belong to the traveling spiral waves mode. Unfortunately,
+Séverac et al. [12] did not specify the relative motion state of the spiral waves in relation to the disk
+in their results. However, theoretical analysis suggests that convectively instability spiral waves can
+be either stationary mode or traveling spiral waves mode, while spiral waves of absolute instability
+are deﬁnitively traveling spiral waves mode.
+Recent research on a single rotating disk has identiﬁed global instability, which features an
+azimuthal wave number even greater than that observed for absolute instability [25]. However, under
+the rapid growth of convective instability, which triggers nonlinear effects before the disturbances
+corresponding to global instability can develop sufﬁciently across the radial extent, no transition
+processes dominated by global instability have been observed in experiments or simulations. This
+suggests that while global instability may be theoretically interesting, its practical impact on the
+ﬂow transition in typical experimental or simulations might be limited due to the dominance of
+convective processes.
+Although existing research following the work on the von Kármán boundary layer has prelimi-
+narily indicated potential instability processes in rotor-stator cavity, there are still some signiﬁcant
+additional factors that have not been explicitly discussed. For instance, when the rotating-disk
+boundary layer is transitioning to turbulence, could vigorous turbulence on the stationary-disk
+boundary layer introduce additional disturbances through the core area? To what extent will the
+strong disturbances introduced by the hub decay or grow? Most importantly, for the turbine disk
+cavities in aeroengine, what kind of transition processes might the surface roughness elements
+induce?
+Study into these questions could elucidate the similarities and differences between the rotating-
+disk boundary layer in rotor-stator cavity and the von Kármán boundary layer on a single inﬁnite
+rotating disk. This could enable better application of the theoretical work on the von Kármán
+boundary layer to the disk boundary layers in rotor-stator cavity. The current study focuses on
+the convective instability processes induced by crossﬂow vortices, which arise due to roughness
+elements. For the von Kármán boundary layer, Imayama et al. [26] conducted an experimental
+study using 32 uniformly distributed roughness elements to investigate the convective instability and
+destabilization process of the von Kármán boundary layer. In simulations, directly implementing
+wall protrusions can be challenging. Therefore, we opted to represent roughness elements using
+drag source terms proportional to the relative velocity [ 27] and employed spectral vanishing
+viscosity (SVV) for direct numerical simulation to stabilize the ﬂow. It is important to note
+that due to model-induced discrepancies, even with the same number of roughness elements,
+our current simulation results differ from Imayama et al. ’s [ 26] experimental outcomes. Con-
+sequently, we have not compared our results with those of Imayama et al. ’s [26] study in our
+presentation.
+013901-3
+
+===== PDF PAGE 4 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 1. Sketch of the computational domain for rotor-stator cavity ﬂow.
+The rest of the paper is organized as follows. Details of the mathematical model are described in
+Sec. II, including governing equations, SVV method, roughness function, simulation and boundary
+conditions. Results are given and discussed in Secs. III and III C. Finally, the main conclusions are
+summarized in Sec. IV. Appendix consists primarily of a table that lists the nomenclature for all
+parameter symbols used in the paper.
+II. THE MA THEMA TICAL MODEL
+In this section, the governing equations of the problem are presented, as well as a short de-
+scription of the Fourier/spectral element methods. The roughness resistance element model are also
+provided. The conﬁguration comprises two vertical disks with a radius of R
+∗, enclosed by a shroud
+represented by a vertical cylinder of width 2H∗. The rotor rotate at an angular velocity of /Omega1∗
+d while
+the stator and shroud remains stationary. A schematic diagram of the ﬂow system is presented in
+Fig. 1. The cavity aspect ratio, deﬁned as the ratio of R
+∗ to H∗,i sﬁ x e da t1 0.26. The current
+model does not incorporate a rotating hub. Due to centrifugal instability, this hub would introduce
+disturbances at the lower radii of the rotating-disk boundary layer, thereby altering the instability
+characteristics on the disk side. For speciﬁc differences, refer to Refs. [ 12,22] (with hub) and [ 6]
+(without hub). To avoid disturbances caused by the hub, we have not incorporated a hub in our
+study.
+A. Governing equations
+All parameters with superscript ∗in this paper are dimensional parameters. To nondimensional-
+ize the equations, we adopt the following nondimensional parameters: length is scaled by half the
+distance between the two disks (H
+∗); time is scaled by the inverse of the rotational speed of the disk
+013901-4
+
+===== PDF PAGE 5 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+(/Omega1∗
+d
+−1); velocity is scaled by /Omega1∗
+d H∗. The incompressible Navier-Stokes equations in a cylindrical
+coordinate system with the disk rotating at a speed of /Omega1d are presented below:
+∂u
+∂t + N(u) =− ρ−1∇P + ν∇2u − 2/Omega1d × u + f, (1)
+∇ · u = 0, (2)
+where u = (u, v, w) represents the velocity of radial, azimuthal and axial direction, N(u)i st h e
+nonlinear term. P is the pressure, /Omega1d = (0, 0,/Omega1d ), f is the volume force, ρ and ν the density and
+kinematic viscosity of the ﬂuid.
+Numerical simulations are performed using the open-source software SEMTEX [ 28], involved
+coupling a continuous-Galerkin nodal Fourier/spectral element spatial discretization with semi-
+implicit temporal integration via a time-splitting scheme and explicitly solving the nonlinear terms
+in skew-symmetric form N(u) = (u · ∇u + ∇ · uu)/2. The mesh is based on N
+r × Nz Gauss–
+Lobatto–Legendre collocation points in the meridional ( r, z)-semiplane and a Fourier spectral
+method in the azimuthal direction. To be speciﬁc, Due to rotational symmetry, the velocity must
+exhibit a 2π-periodicity in the azimuthal direction, and the velocity ﬁeld can be accurately decom-
+posed into a set of two-dimensional complex Fourier modes, denoted as ˆu
+k by
+ˆuk (z, r, t ) = 1
+2π
+∫ 2π
+0
+u(z, r,θ, t )e−ikθdθ, (3)
+where k is an integer wave number. The velocity ﬁeld has the associated Fourier series
+reconstruction
+u(z, r,θ, t ) =
+∞∑
+k=−∞
+ˆuk (z, r, t )eikθ. (4)
+The dimensionless formulation of the current control equations, while lacking sufﬁcient physical
+signiﬁcance, facilitates the solution process in the code. To enhance the physical interpretability of
+subsequent results, we also redimensionalize the azimuthal velocity using the disk rotation speed at
+the local radius. This is expressed as v
+r = v/(/Omega1d r), where /Omega1d is the dimensionless angular velocity
+of rotating disk and r is the local radius. In fact,/Omega1d = 1. Additionally, we will use the viscous scale
+δ= √ (ν//Omega1) to nondimensionalize the radiusr and the axial position z, represented, respectively, as
+rδ = r/δand zδ = (1 − z)/δ, where /Omega1= /Omega1F /(2 − Ro) + /Omega1d/(2 + Ro), /Omega1F is the regular velocity
+of ﬂuid in the core, and Ro =− 0.75 in the rotor-stator cavity.
+B. Spectral vanishing viscosity method
+To mitigate the need for high spatial resolution of the computational grid, the SVV method is
+implemented to stabilize the ﬂow. Speciﬁcally, when the wave number exceeds a speciﬁed threshold,
+controlled artiﬁcial dissipation is introduced in the diffusion terms of the momentum equations.
+This is necessary because inadequate spatial resolution leads to energy accumulation at high wave
+numbers, resulting in numerical oscillations that compromise the stability and accuracy of the
+calculations. By employing this method, viscosity is increased at high wave numbers, effectively
+suppressing these oscillations and dissipating the accumulated energy. It has been demonstrated in
+Ref. [29], within the context of spectral element formulations, that the use of SVV does not affect
+the convergence properties of the method. References [30,31] offer a more elaborate exposition on
+the SVV technique, encompassing an analysis of the effects of control parameters.
+In the Fourier (here, the azimuthal) direction, one implements a Fourier-mode dependent viscos-
+ity coefﬁcient of the form
+ν
+k = ν
+(
+1 + ε
+νQk
+)
+, (5)
+013901-5
+
+===== PDF PAGE 6 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+where ν represents kinematic viscosity, k is an integer Fourier mode index, εis a moderately small
+multiple of ν, and Qk is a smooth real shape function. In the implementation used in this study, an
+exponential kernel is employed to augment the viscosity at high wave numbers:
+Qk = exp
+(
+− (N − k)2
+(M − k)2
+)
+, M < k ⩽ N, (6)
+where N is the highest Fourier mode index for the computation and M is the lowest threshold from
+which the method is applied.
+Quadrilateral nodal spectral elements are used to discretise the meridional ( r, z)-semiplane. In
+this case the derivative operator matrices used to construct diffusion operators are modiﬁed via (i)
+transformation to Legendre polynomial space; (ii) factorization with a diagonal matrix of form
+diag
+(
+1 + ε
+νQk
+)1/2
+, (7)
+where Qk is of the same form as Eq. ( 6) but where now N is the order of the GLL Lagrange
+interpolants (N = 6 in the present work) and k is a Legendre polynomial index. Finally (iii) inverse
+transformation from Legendre polynomial to physical space. Refer to [31] for further details.
+C. Roughness
+To replicate the surface roughness, a continuous distribution of volumetric forces is employed
+to act upon the surface of the rotating disk. Due to the cylindrical coordinate system rotating at the
+speed of the disk, the roughness elements on the disk, along with the disk itself, maintain a ﬁxed
+spatial position within the computational domain. So the expression used to quantify these forces is
+given as
+f =− SHeav(r
+′2 − (x − x0 )2 − (y − y0 )2 )e−μ(z− z0 )2
+× (u/|u|)|u(z, r,θ, t ) − u(z0, r0,θ0 )|2. (8)
+All the length parameters mentioned above have been scaled with respect to H∗ to make them
+dimensionless. The parameter S is employed to adjust the magnitude of drag, which can be
+likened to the line density in Ref. [ 32]. Heav denotes the Heaviside function, while r′2 = 0.001,
+x0 = r0cos(θ0 ), and y0 = r0sin(θ0 ) represent the coordinates of the center of the circular roughness
+elements (r0 and θ0 deﬁne the center of the circular roughness elements.). Similarly, x = rcos(θ)
+and y = rsin(θ) correspond to the coordinates of the computation domain. To ensure continuous
+excitation of the ﬂow, a Gaussian forcing function is applied to the height of the roughness elements
+with μ = 3000. ( u/|u|)|u(z, r,θ, t ) − u(z
+0, r0,θ0 )|2 denotes the square of the relative velocity in
+each direction, since an object moving in a high-Reynolds-number ﬂow experiences drag force of
+this form [33].
+Figure 2(a) illustrates the roughness elements with r
+′2 = 0.001 and r0 = 6, obtained from the
+Heaviside function, uniformly distributed along a radial position in the azimuthal direction. For
+visual clarity, the roughness elements in the ﬁgure are magniﬁed tenfold. This type of roughness
+elements will be used for controlling the transition process on the rotor in subsequent discussions.
+Figure 2(b) presents the coefﬁcient of the corresponding height positions of the roughness elements
+represented by the Gaussian forcing function when μ = 3000. The Gaussian forcing function was
+used by Appelquist et al. [27] in their study of the von Kármán boundary layer.
+D. Simulation and boundary conditions
+Through the approach in Sec. II C, we have successfully achieved the uniformly distributed of
+roughness elements with varying drag. The distribution comprises 32 roughness elements uniformly
+distributed along the azimuthal direction at a radius ofr
+0 = 6. In this case, the computational domain
+013901-6
+
+===== PDF PAGE 7 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 2. (a) 32 roughness elements uniformly distributed along a radial position; (b) Gaussian forcing
+function.
+is deﬁned by the parameters R = 10.26, and Reynolds numbers of Re = 2 × 105 to Re = 4 × 105
+with a meshgrid ( Nr, Nz, Nθ = 240, 120, 384), where the number Fourier modes is 192, and the
+order of spectral elements is 6. This model has been extensively discussed in Yim et al. ’s [6]
+study, focusing on the laminar-transition-turbulence transition process. Consequently, it serves as
+a valuable tool for investigating the impact of surface roughness on the transition process. For the
+SVV method, the threshold fromM for azimuthal direction is 64 and for meridional (r, z) semiplane
+is 4 in all simulations used in present study. In all simulations, the parameter ε was set to 10 ν.
+Figure 3 presents the distribution characteristics of the SVV kernel Q
+k for M = 64 and N = 191
+(with Fourier mode indices starting from 0, thus the maximum index isN = 191). The primary mode
+of interest in the current study is k = 32. Although the SVV method is employed to dampen higher
+wave numbers, the ﬁrst harmonic k = 64 and the second harmonic k = 96 of mode k = 32 remain
+unaffected. However, it is important to note that higher-order harmonics are necessary to accurately
+capture the transition process from spiral waves to turbulence. We have adopted this method under
+the premise that the results are not signiﬁcantly affected. Due to the lack of comparable data, we
+took an aposteriori approach and increased the number of Fourier modes to 1152 and the order of
+spectral elements to 8 for the case 5, Re = 3 × 10
+5. Additionally, we applied SVV viscosity only
+in the meridional plane. The results showed no signiﬁcant differences, giving us conﬁdence in the
+appropriateness of the current grid resolution.
+The summary of computational parameters provided in Table I. Here, T represents the di-
+mensionless period of the disk rotation, which is equal to 2 π. In the speciﬁed time step δt,t h e
+Courant–Friedrichs–Lewy (CFL) value is constrained to be less than 1 in all simulations. The
+case 1 and case 2 correspond 32 roughness elements located on the rotor in transition process
+at Re = 2 × 10
+5, the case 4 to case 6 also in transiton process at Re = 3 × 105 and the case 7
+FIG. 3. SVV kernel Qk for M = 64 and N = 191.
+013901-7
+
+===== PDF PAGE 8 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+TABLE I. Computational parameters used in the simulations.
+Rotor Re δtS Initial ﬂow
+Case 1 laminar to transition 2 × 105 T/12560 0 —
+Case 2 laminar to transition 2 × 105 T/12560 10 —
+Case 3 laminar to transition 2 × 105 T/12560 100 —
+Case 4 laminar to transition 3 × 105 T/31400 10 result of case 2
+Case 5 laminar to transition 3 × 105 T/31400 100 result of case 3
+Case 6 laminar to transition 3 × 105 T/31400 0 result of case 4
+Case 7 transition to turbulence 4 × 105 T/62800 10 result of case 4
+Case 8 transition to turbulence 4 × 105 T/62800 0 result of case 6
+to case 8 correspond a transition to tuebulent at Re = 4 × 105. Compare to [ 6], the current grid
+resolution is already adequate to accurately capture diverse turbulent ﬂow characteristics under the
+SVV condition. When the calculations have converged, all the statistics provided in the study are
+recalculated over ﬁve rotational periods of the rotating disk.
+III. RESULTS
+A. Crossﬂow vortices mode
+At Re = 2 × 105,Y i met al. [6] observed that the majority of the rotating-disk boundary layer
+remains in a laminar state, except near the shroud where a spiral waves structure with azimuthal
+wave number k = 82 appears due to strong shear and centrifugal effects by the shroud. In Fig.4(a),
+we present the axial velocity w contour plot of the rotating-disk boundary layer under the same
+conditions, where w ranges from −0.01 (blue) to 0.01 (red). In all the contour plots characterizing
+the boundary layer, the rotation direction of rotating disk is counterclockwise.
+The results exhibit a similar behavior to Yim et al.’s [6] ﬁndings, with a uniform occurrence of
+k = 75 spiral waves structures in the azimuthal direction. It is noteworthy that the axial velocity,
+w, is much smaller than both the radial and azimuthal velocities, and approaches zero within the
+boundary layer. Therefore, it serves as an excellent reference for disturbances in the rotating-disk
+boundary layer. Consequently, in the contour plots presented in this study, the colors represent the
+axial velocity w without any additional transformations.
+FIG. 4. (a) Case 1, Re = 2 × 105, S = 0. (b) Case 2, Re = 2 × 105, S = 10. (c) Case 3, Re = 2 × 105,
+S = 100.
+013901-8
+
+===== PDF PAGE 9 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 5. (a) Neutral curves for ω = 0a tR o =− 0.75. The critical Reδ is 203.5 and the corresponding wave
+numbers areα = 0.43 and k = 28. (b) Radial growth rate−αi for disturbances of normal mode form fork = 32
+and ω = 0a tR o =− 0.75.
+In this section, the focus is on discussing the crossﬂow vortices mode (stationary spiral waves
+mode) induced by roughness elements. Therefore, Figs. 4(b) and 4(c) depict the axial velocity w
+contour maps of the boundary layer on the rotating disk for Case 2 and Case 3, respectively [where
+w ranges from −0.05 (blue) to 0.05 (red)]. In comparison to Case 2 where the roughness elements
+have a drag coefﬁcient of S = 10, Case 3 features roughness elements with a drag coefﬁcient of
+S = 100. As a result, the features of the spiral waves are more pronounced in the contour map
+corresponding to Case 3, indicating a stronger inﬂuence of the roughness elements on the ﬂow.
+These 32 roughness elements are uniformly distributed at a radial position of r = 6. In Fig. 4(b),
+the axial velocity w distribution reﬂects the presence of 32 spiral waves induced by the roughness
+elements. However, these spiral waves appear to be discontinuous. Downstream of the roughness
+elements, there is a noticeable gradual attenuation of the spiral waves. As the spiral waves convect
+downstream, they gradually strengthen, then undergo another attenuation and reach a maximum
+energy level at the periphery of the rotating disk. In Fig. 4(c), the spiral waves exhibit a gradual
+increase in radial wavelength as they convect downstream. This phenomenon reﬂects the gradual
+ampliﬁcation of perturbation energy within the boundary layer.
+From the perspective of a radius position r
+δ based on the viscous scale δ, at a Reynolds number
+Re = 2 × 105, r = 6 corresponds to rδ = 261.5. In the core region, the rotation ratio vr(core) is
+0.315, which means that the Rossby number Ro( rδ) = /Delta1/Omega1d (rδ)//Omega1d (rδ) for the current rotating-
+disk boundary layer is −0.75, where /Delta1/Omega1d (rδ) = vr(core) − /Omega1d , /Omega1d (rδ) = (vr(core) + /Omega1d )/4 +√
+((vr(core) + /Omega1d )/4)2 + (vr(core) − /Omega1d )2/2. In Lingwood [34], the critical Reynolds number Reδ
+for convective instability is 290.1 at Ro =− 1 and 160.9 at Ro =− 0.5. In the same manner, we
+obtained the neutral curve for stationary crossﬂow vortices at Ro =− 0.75, as shown in Fig. 5(a).
+Here, the Reynolds number, Re δ, is deﬁned as Re δ =| Ro|rδ. The neutral curve indicates that the
+critical Reynolds number Re δc for the current model is 203.5, with a corresponding azimuthal
+wave number k = 28. Solely for the azimuthal wave number k = 32, the critical Reynolds number
+Reδc, corresponding to a positive radial growth rate, is 210 ( rδc = 280). This is reﬂected in the
+modal I curve depicted in Fig. 5(b). Since rδc = 280 exceeds 261.5, the current roughness element
+is located in a stable region, thereby allowing the clear observation of the decay effect of spiral
+waves downstream of the roughness element in the cloud plots. However, Fig.5(b) illustrates that at
+Ro =− 0.75, the azimuthal wave number k = 32, represented by Mode I, exhibits radial growth as
+long as Re
+δ is less than 400 (rδ < 533). This implies that although disturbances within the boundary
+layer may experience temporary declines, they will continue to grow after reaching the critical
+Reynolds number Re
+δc.
+When quantitatively describing the variations of disturbances within the boundary layer, it is
+necessary to determine the axial position corresponding to the peak disturbance. Figures 6(b) and
+6(c) illustrate the changes of the azimuthal velocity root-mean-square vrms for Case 2 and Case 3
+within the radius range ofrδ = 283.3 to 435.9, as a function of the nondimensional axial positionzδ.
+013901-9
+
+===== PDF PAGE 10 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 6. (a) Case 2, Re = 2 × 105, S = 10. (b) Case 3, Re = 2 × 105, S = 100.
+Here, vrms =
+√
+vv − v2 is nondimensionalized by its maximum value, the horizontal line represents
+the time and azimuthal average. zδ is deﬁned as (1 − z)/δ.
+Although the boundary layer on the rotating disk and the corresponding disturbances of spiral
+waves develop radially, the peak values of vrms for both cases in the current study occur around
+zδ = 1.31, while in the single rotating disk with a von Kármán boundary layer, the peak value of
+vrms occurs at zδ = 1.3. This phenomenon suggests that the average ﬂow modiﬁcation caused by
+spiral waves has not yet occurred in the two present cases. It can be concluded that the spiral waves
+are still in the linear development stage and have not reached the nonlinear stage. In Fig. 6(a),i t
+can be observed that at locations with lower radii ( r
+δ = 283.3, 305.1, 326.9, 348.7), the value of
+vrms remains within the same order of magnitude as the peak value of vrms, even at positions far
+from the boundary layer. This indicates that the boundary layer at these locations is inﬂuenced
+by disturbances originating from the core. Despite this, once perturbations are excited within the
+boundary layer, their amplitude exceeds that of the perturbations originating from the core region. In
+the context of convective instability studies, we can tentatively neglect the insigniﬁcant perturbations
+from the core region, as they are unlikely to exert a pronounced inﬂuence on the results. In Fig.
+6(b), the relatively smaller v
+rms values in the core region are attributed to the larger drag coefﬁcient
+(S = 100) of the roughness elements. Consequently, the spiral waves disturbances excited by these
+roughness elements are comparatively stronger from the beginning, leading to lower vrms values in
+the core region. The two cases consistently indicate that the peak value of vrms occurs at zδ = 1.31.
+This allows us to conﬁdently analyze the boundary layer data taken at zδ = 1.31. In fact, the three
+contour plots in Fig. 4 correspond to the axial position of zδ = 1.31.
+Figure 7 shows the radial distribution of perturbation energy 1 /2log(E (rδ)) along the entire
+circular surface at zδ = 1.31, where
+E (rδ) = 1
+2n
+[ n∑
+1
+(un − ˜u)2 + (vn − ˜v)2 + (wn − ˜w)2
+]
+, (9)
+FIG. 7. The distribution of perturbation energy 1 /2log(E (rδ)) along the radial rδ.
+013901-10
+
+===== PDF PAGE 11 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 8. Space-time plot showing w at zδ = 1.31, Re = 2 × 105, S = 10.
+un, vn, wn represent the instantaneous velocity at each grid point along the circumference repre-
+sented by radius rδ, and ˜u,˜v, ˜w represent their azimuthal average velocity. Thus, the 1/2log(E (rδ))
+can serve as a good indicator for measuring the degree of instantaneous disturbances, similar to
+log(v
+rms ). For S = 0, the perturbation energy E (rδ) exhibits a sharp increase at a higher growth rate
+beyond rδ > 425, this edge-driven global mode. However, for S = 10 and S = 100, after passing
+through the roughness elements, E (rδ) initially decreases sharply and then suddenly increases. The
+magnitude of this increase is dependent on the value of S, but the overall trend remains the same.
+For S = 10, there is an initial approximately linear increase in E (rδ) beyond rδ > 264, reaching
+a maximum value before slowly decreasing. For S = 10 and S = 100, the maximum values are,
+respectively,−1.835 and −1.150. This means that under the current roughness elements, the maxi-
+mum value of the disturbances is not linearly proportional to the intensity of the roughness elements,
+but is approximately proportional to S
+0.685. For small roughness elements, experiments [ 4,35,36]
+have shown that the receptivity is proportional to the height of the roughness element. For S = 10,
+after rδ > 375, there is another approximate linear increase. For S = 100, there is a consistent and
+distinct linear increase along the radial direction beyond rδ > 325. With S = 10, which represents
+a smaller drag coefﬁcient, the excited crossﬂow vortices mode undergo multiple transitions during
+the downstream convection process and do not exhibit the linear growth characteristics along the
+radius as observed with S = 100. However, the crossﬂow vortices do not dominate the transition to
+turbulence on the rotating-disk boundary. This will be discussed when considering Re = 4 × 10
+5.
+For S = 10, the excited crossﬂow vortices mode undergo multiple transitions during the down-
+stream convection process and do not exhibit the linear growth characteristics along the radius as
+observed with S = 100. It is likely that due to the insufﬁcient intensity of the spiral waves, and the
+dominance of radial nonparallel effects, a stabilizing effect on the spiral waves has occurred between
+r
+δ = 325 and rδ = 375, where the disturbances reach saturation and exhibit a decreasing trend.
+Until rδ > 375, there is another approximate linear increase, This is attributed to the re-dominance
+of crossﬂow instability. Although existing studies have shown that roughness elements can excite
+crossﬂow vortex modes, current research has not yet provided evidence of these crossﬂow vortex
+modes, i.e., whether the spiral waves occurring within the boundary layer are stationary relative to
+the rotating disk. Therefore, to demonstrate the characteristics of crossﬂow vortex modes, Figs. 8
+and 9 present the space-time plots at z
+δ = 1.31, θ= 0, and 217 .9 < rδ < 447.2( 5 < r < 10.26)
+for a duration of 20 time units, where the axial velocity w ranges from −0.05 (blue) to 0.05 (red).
+(The rotational period of the rotating disk is 2 π time units.) These plots are intended to showcase
+the characteristics of the crossﬂow vortices mode.
+In both cases, there are parallel blue and red stripes along the time axis, the local axial velocityw
+does not exhibit periodic ﬂuctuations caused by the alternating passage of spiral waves. Recall that
+our current computational domain is in a cylindrical coordinate system that rotates with the rotating
+disk; therefore, the rotating disk is stationary within the computational domain. Consequently, the
+space-time plots indicate that the crossﬂow vortices are relatively stationary with respect to the rotat-
+ing disk. The space-time plots also clearly show that the radial wavelength of the crossﬂow vortices
+013901-11
+
+===== PDF PAGE 12 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 9. Space-time plot showing w at zδ = 1.31, Re = 2 × 105, S = 100.
+increases from around 10 δnear rδ = 261.5 to around 17.5δnear rδ = 435.9. With the increase in
+radial wavelength, the self-pulsations of the crossﬂow vortices become more pronounced. This can
+be observed in Fig. 9, particularly in the region of 392 .3 < r
+δ < 435.9, where the self-pulsations
+of the spiral waves intermittently appear. Compared to Fig. 8, the self-pulsations in Fig. 9 have a
+higher frequency and amplitude. In the next section, we will discuss this self-sustaining pulsation,
+which in fact corresponds to the traveling spiral waves mode of the rotating-disk boundary layer.
+B. Traveling spiral waves mode
+The characteristics of the traveling spiral waves mode is similar to those of the crossﬂow vortices
+mode (stationary spiral waves mode), but the traveling spiral waves mode exhibits relative motion
+with respect to the rotating disk. In the previous section, we analyzed and discussed the characteris-
+tics of the crossﬂow vortices mode excited by roughness elements, identifying ﬂuctuations at higher
+radii in the space-time plots of Figs. 8 and 9. Due to the lower Reynolds number, the rotating-disk
+boundary layer did not undergo a transition to turbulence. To further analyze the role of roughness
+elements in the transition to turbulence, the Reynolds number Re is increased to 3 × 10
+5, which
+corresponds to a maximumrδ of 547.7. At this condition, the roughness elements with a radiusr = 6
+corresponds to rδ = 320.3. Despite the increase in the global Reynolds number Re, the variation in
+the core rotation ratio vr (core) remains minimal and can still be considered as the critical Reynolds
+number for current convective instability,rδc = 301.2. Given that the roughness elements are located
+at a position where rδ > rδc , it is anticipated that disturbances will continue to grow.
+To begin, the distribution of the dimensionless azimuthal velocity root-mean-square vrms along
+the axial direction zδ at different rδ for case 4 (S = 10) and case 5 (S = 100), as shown in Figs.10(a)
+and 10(b).A tR e = 3 × 105, the disturbances in the core region, as indicated by vrms, are relatively
+smaller compared to the disturbances within the boundary layer. In particular, for S = 100, the
+magnitude of disturbances within the core region relative to those within the boundary layer remains
+unchanged in the range of 347.0 < r
+δ < 533.8. However, compared to Re= 2 × 105, there are still
+two notable differences. First, the value of zδ corresponding to the peak of vrms decreases from 1.31
+FIG. 10. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+013901-12
+
+===== PDF PAGE 13 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 11. ( r, θ)p l a n ea tzδ = 1.245. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+to 1.245. Second, if using the axial position zδ corresponding to the point where vrms decreases to
+the same level as the core region to reﬂect the thickness of the boundary layer, then it is evident
+that the boundary layer thickness signiﬁcantly increases at higher radial positions. Speciﬁcally, it
+increases from z
+δ = 4 at lower radial positions to zδ = 6 at higher radial positions. According to
+Imayama et al. [26,37], this is due to the inﬂuence of nonlinear effects.
+Figures 11(a) and 11(b) present the boundary layer visualization results at a Reynolds number
+Re = 3 × 105 for S = 10 and S = 100, respectively. The coloration represents the axial velocity
+w, ranging from −0.05 (blue) to 0.05 (red), at a distance zδ = 1.245 from the rotating disk. Under
+these conditions, regular spiral waves are conﬁned to the immediate downstream vicinity of the
+roughness elements, followed by irregular spiral waves structure. Compared to the case withS = 10,
+for S = 100, the radial extent occupied by the roughness elements-induced spiral waves with an
+azimuthal wave number k = 32 is reduced. However, at a lower Reynolds number Re = 2 × 10
+5,
+the spiral waves with k = 32 excited by S = 100 display a consistent characteristic that dominates
+the entire boundary layer within the (r, θ) plane.
+To identify ﬂow characteristics in the boundary layer beyond the azimuthal mode of k = 32, the
+ﬂow kinetic energy Ek of each azimuthal Fourier mode k in the ﬂow ﬁeld is depicted in Fig. 12.
+Ek = 1
+2A
+∫
+A
+ˆukˆu∗
+k rdA, (10)
+where A is the area of the two-dimensional meridional (r, z) semiplane, and ˆu∗
+k denotes the complex
+conjugate of the velocity data in the kth Fourier mode.
+FIG. 12. Kinetic energies Ek in azimuthal Fourier modes.
+013901-13
+
+===== PDF PAGE 14 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 13. ( r, θ)p l a n ea tzδ = 1.245, Re = 3 × 105, S = 10. (a) 10 ⩽ k ⩽ 20. (b) k = 32. (c) 80 ⩽ k ⩽ 120.
+Among all the Fourier modes, the mode k = 32 exhibits the highest kinetic energy. When
+S = 100, the kinetic energy for k = 32 is only marginally greater than that for S = 10, suggesting
+that the spiral waves in both cases have reached saturation. However, the energy of the harmonic
+mode k = 64 for S = 100 is signiﬁcantly greater than that for S = 10, indicating that, despite the
+saturation of the spiral waves, the nonlinear effects associated with the k = 32 spiral waves mode
+are more pronounced when S = 100 compared to S = 10. Apart from the mode k = 32 and its
+harmonics, modes k = 13, k = 14, k = 15, and k = 16 also exhibit high kinetic energies, which
+may correspond to the irregular spiral waves observed in Fig. 12. Between k = 80 and k = 120,
+the modal kinetic energy exhibits ﬂuctuations, which are associated with the disturbance near
+the shroud, are edge-driven, akin to the k = 75 spiral waves structure shown without roughness
+elements in Fig. 4(a).
+To further differentiate and analyze the characteristics of the above three different types of
+Fourier modes, Fig. 13 provides the visualization of the boundary layer in the ( r,θ) plane at
+z
+δ = 1.245 for Reynolds number Re = 3 × 105 and S = 10, corresponding to modes within the
+ranges 10 ⩽ k ⩽ 20 (a), k = 32 (b), and 80 ⩽ k ⩽ 120 (c). The coloration represents the axial
+velocity w, ranging from −0.05 (blue) to 0.05 (red). Figure 13(a) shows that the modes within
+the range 10 ⩽ k ⩽ 20 occupy the downstream region of the regular k = 32 spiral waves, similar
+to the ﬂow structures at the corresponding radial positions in Fig. 13(a), indicating that this portion
+of the ﬂow is predominantly governed by modes within 10 ⩽ k ⩽ 20. The k = 32 mode undergoes
+rapid development downstream of the roughness elements, then reaches saturation and gradually
+decays, thereby occupying only a short radial extent for r
+δ ⩾ 320.3( r ⩾ 6). It is evident that after
+the decay of the k = 32 mode, the modes within 10 ⩽ k ⩽ 20 begin to develop and eventually
+dominate the transition to turbulence. Whether there is an interaction between these two ranges
+of modes, and whether the modes within 10 ⩽ k ⩽ 20 are stationary or traveling, requires further
+discussion. The modes within 80 ⩽ k ⩽ 120, displayed in Fig. 13(c) near the shroud, are consistent
+with the hypothesis. However, it is not clear in the current study whether they are involved in the
+transition to turbulence.
+Figure 14 presents the distribution on the ( r
+δ, zδ) plane at θ= 0, for a Reynolds number
+Re = 3 × 105 and S = 10. The coloration represents the axial velocity w, ranging from −0.05
+(blue) to 0.05 (red). To facilitate the presentation of results, only the region near the rotating-disk
+boundary layer is shown, that is 320 .3 < r
+δ < 547.7( 6 < r < 10.26) and 0 ⩽ zδ ⩽ 10. From top
+to bottom, Fig. 14(a) represent the ( rδ, zδ) plane for all modes combined, Fig. 14(b) represent the
+(rδ, zδ) plane corresponding to modes within 10 ⩽ k ⩽ 20, and Fig. 14(c) represent the ( rδ, zδ)
+plane for the mode k = 32. As shown in the ﬁgure, modes within the range 10 ⩽ k ⩽ 20 overlap
+radially with mode k = 32, and together they constitute the instability characteristics of the ﬂow
+ﬁeld for all modes combined. The modes within 10 ⩽ k ⩽ 20 located at higher radii become more
+vivid in color with increasing radius, and their radial wavelength λr gradually increases until the
+013901-14
+
+===== PDF PAGE 15 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 14. ( r, z)p l a n ea tθ= 0, Re = 3 × 105, S = 10. (a) All modes. (b) Modes within 10 ⩽ k ⩽ 20. (c)
+Mode k = 32.
+spiral waves structure become completely distorted near the shroud. In contrast, the spiral waves
+excited by the roughness elements at lower radial positions experience an increase followed by a
+decrease in their radial wavelength with increasing radial position, consistent with the characteristics
+displayed in Fig. 13(b). At higher radial positions, Fig. 14(a) exhibits a pronounced asymmetry
+where the red regions signiﬁcantly surpass the blue regions in size. In contrast, at similar radial
+positions in Fig. 14(b), no such phenomenon is observed, the spiral waves remain uniform. This
+means that the ensemble of other modes, particularly the higher wave number modes, dominates this
+phenomenon. It is likely indicative of the instability structures at higher radii approaching saturation.
+The further growth of this uneven state may coincide with the fragmentation of the spiral waves.
+Using Parseval’s identity, The energy E (r
+δ) can be split over the contribution of each azimuthal
+wave number (mode) k, denoted Ek(rδ). Based on Figs. 13 and 14, the disturbance energy E (rδ)
+at θ= 0 and zδ = 1.245 has been divided into the radial distribution of Ek (rδ) for each Through
+the analysis of eight simulation cases, the current grid resolution and numerical methods have
+been initially validated to be capable of capturing the spiral waves structure with an azimuthal
+wave number of 75 near the shroud due to the strong centrifugal and shear effects, as observed in
+Yim et al. ’s [6] study. Additionally, at a lower Reynolds number Re = 2 × 10
+5, stationary mode
+spiral waves excited by 32 azimuthal uniform roughness elements have been identiﬁed starting
+from r = 6, which almost entirely occupy the entire disk boundary layer. The peak of v
+rms occurs
+at an axial length of zδ = 1.31. This value is remarkably close to zδ = 1.3, which corresponds to
+a von Kármán boundary layer in single rotating disk. wave number (mode) k, and the distributions
+of Ek (rδ) for modes 10 ⩽ k ⩽ 20 and mode k = 32 have been extracted separately, as shown in
+Fig. 15. Figure 15(a) corresponds to Re = 3 × 105 and S = 10, while Fig. 15(b) corresponds to
+Re = 3 × 105 and S = 100.
+Figure 15(a) indicates that at S = 10, the spiral waves of mode k = 32 reaches its energy peak
+near rδ = 400.0 and then begins to decline. At Re= 2 × 105, the corresponding disturbance energy
+for S = 100 (case3) increases linearly with radial position, and the spiral waves of mode k = 32
+occupies the entire boundary layer. However, for Re= 3 × 105, S = 100, the spiral waves of mode
+FIG. 15. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+013901-15
+
+===== PDF PAGE 16 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 16. Space-time plot showing w at zδ = 1.245, Re = 3 × 105, S = 10.
+k = 32 only occupies a small part of the boundary layer. as depicted in Fig. 15(b), the energy of
+the spiral waves of k = 32 has already started to gradually decrease before reaching rδ = 370.0.
+For the modes occupying the high radius of the disk cavity, 10 ⩽ k ⩽ 20, it is interesting to
+note that as the spiral waves reach saturation, they begin to develop gradually, with the energy
+Ek (r) increasing with radial distance. In Fig. 15(a),t h e E (r) for all modes reaches a peak around
+rδ = 400.4 and another around r = 467.1, which is actually due to the dominance of two different
+types of spiral waves. Mode k = 32 and modes 10 ⩽ k ⩽ 20 reach their peaks one after the other.
+Since the modes with 10 ⩽ k ⩽ 20 ultimately control the transition to turbulence, this raises another
+important question regarding their origin. Are the 10 ⩽ k ⩽ 20 modes excited by mode k = 32? Or
+does the energy from the decaying mode k = 32 gradually transfer to the 10 ⩽ k ⩽ 20 modes?
+Understanding the mechanism behind this energy transfer or excitation is vital for a comprehensive
+understanding of the transition process in the rotating-disk boundary layer.
+In the previous section, after the stationary modek = 32 excited by the roughness elements, new
+modes appeared at higher radii, which we refer to based on their azimuthal wave number as modes
+10 ⩽ k ⩽ 20. In fact, these modes are in relative motion with respect to the rotating disk, as opposed
+to the stationary mode k = 32. Therefore, they can more formally be referred to as traveling spiral
+waves mode.
+Figures 16 and 17 highlight the characteristics of the traveling spiral waves mode using axial
+velocity w, where w ranges from −0.05 (blue) to 0.05 (red). The mode k = 32 shows up in the
+space-time plot as bands that are parallel to the time axis. The higher radii are ﬁlled with inclined
+FIG. 17. Space-time plot showing w at zδ = 1.245, Re = 3 × 105, S = 100.
+013901-16
+
+===== PDF PAGE 17 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 18. The spectral plots obtained from the axial velocity w shows the azimuthal wave number k
+corresponding to the radius rδ, where the color represents the results after taking the logarithm base 10 of
+the amplitude. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+band structures because the spiral waves have relative motion with respect to the rotating disk. At
+the current Reynolds number Re = 3 × 105, the traveling spiral waves mode with S = 10 appears
+somewhat more disordered, which might be due to the energy of the traveling spiral waves mode
+reaching a peak at radius r
+δ = 467.1, and the subsequent breaking of some spiral waves, making
+the boundary layer more chaotic. As mentioned earlier, at Re = 2 × 105, spiral waves at high
+radii positions exhibit ﬂuctuations, but these are not large, manifesting as intermittent pulsations
+of the crossﬂow vortices themselves. At Re = 3 × 10
+5, the pulsations of the outermost crossﬂow
+vortices are very pronounced, and each pulsation corresponds to an inclined band structure on the
+spatiotemporal diagram. Clearly, the pulsations shown in these space-time plots are not due to the
+pulsations of the crossﬂow vortices themselves, but rather due to the gradual growth of the Traveling
+spiral waves mode. Thus, when they occupy the same radial position as the crossﬂow vortices, the
+visual pulsating phenomenon displayed is the result of the superposition of the two waves. Through
+comparison with Fig. 13(a), it is evident that the traveling spiral waves rotate counterclockwise.
+For S = 10, the frequency of traveling spiral waves passing through the rotating disk is approx-
+imately ω
+t = 1.5 (in rotating frame), whereas for S = 100, the frequency of traveling spiral waves
+passing through the disk is about ωt = 1.9. However, it is not possible to precisely determine the
+precession frequency of the traveling spiral waves, due to the fact that at higher radii, the azimuthal
+wave number of the spiral waves is not exact. The spectral graph shown in Fig. 18 reﬂects this
+characteristic. At higher radii, lower wave numbers primarily dominate the characteristics of the
+boundary layer disturbances; however, no harmonics of these traveling spiral wave modes appear.
+These modes radially overlap with the stationary spiral wave modes induced by roughness elements
+at intermediate radii, and the harmonic features of the stationary spiral wave modes are very distinct.
+To clarify the relationship between the traveling spiral waves mode and the stationary spiral
+waves mode excited by roughness elements, a new simulation, referred to as case 6, was carried
+out. Case 6 differs from case 4 in that the roughness elements on the rotating disk have been
+removed. The initial condition for case 6 consists of the ﬁnal ﬂow ﬁeld from case 4, with the ﬂow
+ﬁelds corresponding to modes k = 32 and k = 64 subtracted. This setup is designed to examine
+the dynamics of the traveling spiral waves mode in the absence of the roughness-element-induced
+stationary mode, thereby shedding light on whether the traveling spiral waves mode can persist
+independently. Figure 19(a) shows the variation of the kinetic energy E
+k of several speciﬁc modes
+from t = 0t o t = 20 in case 6. The Fourier modes k = 15 and k = 16, associated with high-radius
+traveling spiral waves mode, do not show signiﬁcant changes but ﬂuctuate over time. Mode k = 32
+was once a stationary mode. After the disappearance of the roughness elements, it did not regain
+dominance in the kinetic energy of the boundary layer modes. Instead, it increased rapidly to
+the same level as mode k = 33. This indicates that the excited traveling spiral waves mode is
+not inﬂuenced by the roughness elements-induced stationary spiral waves mode and can persist
+013901-17
+
+===== PDF PAGE 18 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 19. (a) Case 6, kinetic energy at k = 15, 16, 32, 33, 100. (b) The distribution of perturbation energy
+E (r) along the radial.
+independently, suggesting no interaction between stationary and traveling spiral waves mode in the
+current study. Once excited, a traveling spiral waves mode can sustain itself. Similarly, the high wave
+number mode k = 100, located near the guard, is unaffected by the roughness elements. Figure19(b)
+provides a quantitative comparison between the radial distribution of kinetic energy, E (r), for
+the ﬂow ﬁelds in case 4 after the exclusion of mode k = 32, and in case 6. In the linear growth
+region of energy (400.4 < r
+δ < 467.1), the two curves nearly overlap, further conﬁrming that the
+high-radius traveling spiral waves mode are unaffected by the stationary spiral waves modek = 32.
+If one extends the observation to lower radii, it is noted that in case 6, the traveling spiral waves
+mode begin to exhibit an increase in disturbance energy starting from a smaller radius, r
+δ = 266.9.
+Section II elaborately explains that introducing a rotating hub at the lower radius of the disk can
+induce centrifugal instability, leading to the development of large-scale convective spiral waves in
+the rotating-disk boundary layer. This is further conﬁrmed by Fig. 19(b), which demonstrates that
+the traveling spiral waves mode can also develop under disturbances at lower radii and persist.In
+Fig. 19(a), the large-scale ﬂuctuations of modes k = 15 and k = 16 over time reﬂect the nature of a
+group of spiral waves characteristic of the traveling spiral waves mode. These spiral waves undergo
+a dynamic process of merging and splitting as they evolve. Figure 20(a) illustrates the interactions
+among modes k = 13, k = 14, k = 15, and k = 16 at high radial positions, showcasing the complex
+interplay at work in the development of these traveling wave patterns. Among the observed modes,
+mode k = 14 possesses the highest kinetic energy and the largest amplitude of pulsations, with
+a pulsation period T
+k ≈ 8.5. Although the pulsation period of mode k = 15’s kinetic energy Ek
+coincides with that of mode k = 14, there is a phase shift between them, indicating a lag in the
+energy transfer between modes. While it is challenging to identify the precise pulsation periods for
+modes k = 13 and k = 16, the peaks and troughs in their kinetic energy can still be discerned and
+are phase-shifted relative to those of modek = 14 and mode k = 15. This phase difference conﬁrms
+that the nonlinear interactions leading to the merging of these traveling spiral waves modes are an
+ongoing process. As these Fourier modes exhibit an organized coherent space-time evolution, they
+FIG. 20. Case 4, kinetic energy Ek at k = 13, 14, 15, 16.
+013901-18
+
+===== PDF PAGE 19 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 21. (a) Cases 7 and 8, kinetic energy at all modes. (b) The distribution of perturbation energy E (r)
+along the radial.
+are considered to be a type of mode. Therefore, in the current study, the term traveling spiral waves
+mode is preferred to refer collectively to these phenomena, rather than identifying any single Fourier
+mode in isolation.
+C. Transition to turbulence
+At a Reynolds number of Re = 3 × 105, the traveling spiral waves mode manifest after the
+saturation of the stationary modes and dominate the majority of the downstream region within the
+boundary layer. Despite the presence of contortions in the spiral waves near the shroud, as illustrated
+in Fig. 14(b), local turbulence is not observed. It is important to note that according to Yim et al.’s
+[6] ﬁndings, local turbulence would have already occurred near the shroud at Re = 3 × 10
+5.T h e
+discrepancy might be attributed to the fact that in the current study, the dominant spiral waves
+transitioning the ﬂow have a lower azimuthal wave number compared to those with signiﬁcantly
+higher wave numbers in Yim et al.’s [6] study.
+To further investigate the effect of an increased Reynolds number, it was raised to Re= 4 × 10
+5
+in case 7. This case is identical to case 4 in all aspects except for the Reynolds number, and its
+initial ﬂow ﬁeld is taken from the stabilized ﬂow ﬁeld resulting from the case 4. Similarly, case
+8 only differs from case 6 in terms of the Reynolds number, with its initial ﬂow ﬁeld being the
+stabilized ﬂow ﬁeld from the case 5 simulation.
+As demonstrated by Fig. 21(a), the kinetic energy E
+k corresponding to mode k in the high
+azimuthal wave number satisﬁes the −5/3 power-law relationship characteristic of turbulence. For
+case 7, the presence of roughness elements means that mode k = 32 continues to dominate the
+disturbance characteristics of part of the boundary layer. In addition, the energy of the Fourier
+modes corresponding to the traveling spiral waves mode is now comparable to that of the stationary
+spiral waves mode represented by k = 32, indicating a more pronounced inﬂuence of the traveling
+spiral waves mode on the rotating-disk boundary layer at Re= 4 × 10
+5 compared to Re = 3 × 105.
+For case 8, apart from k = 32, the mode energies for other wave numbers show no signiﬁcant
+differences from case 7, suggesting that even without roughness elements, the boundary layer in
+case 8 undergoes a transition to turbulence. Figure 21(b) provides a streamwise perspective on
+the development process of the disk boundary layer at the current Reynolds number. For case
+7, disturbances are already present within the boundary layer before encountering the roughness
+elements, and after passing these elements, the disturbance energyE (r
+δ) quickly reaches a peak and
+remains relatively unchanged. However, closer to the shroud, there is a continuous and gradual
+increase in E (r
+δ), which has not been observed in previous cases. In contrast, for case 8, the
+disturbances exhibit a clear linear growth starting at rδ = 308.2, which slows around rδ = 413.0,
+and thereafter the ﬂow is largely consistent with that of case 7.
+Yim et al.’s [6] study indicates that when the ﬂow near the shroud becomes turbulent, the distur-
+bance energy E (rδ) in the vicinity of the shroud increases with radial distance. This characteristic
+should then be associated speciﬁcally with the ﬂow state in turbulent, as for all other cases in
+our study, there was no signiﬁcant increase in the disturbance energy E (r
+δ) near the shroud. This
+013901-19
+
+===== PDF PAGE 20 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 22. Space-time plot showing w at zδ = 1.245, Re = 4 × 105, S = 10.
+suggests that the presence of turbulence is a distinct condition inﬂuencing the energy distribution in
+the boundary layer close to the shroud.
+The focus should now be on the traveling spiral waves mode, as it is instrumental in the genesis
+of local turbulence within the disk boundary layer. As illustrated by the space-time diagram for
+case 7 in Fig. 22, it is evident that the spiral waves in the rotating-disk boundary layer begin to
+lose their stability beyond r
+δ = 493.1, leading to the formation of contorted and chaotic structures
+indicative of local turbulence. During the transition process, the morphology of the spiral waves is
+highly variable; for instance, at t = 7, a spiral wave extends to r
+δ = 524.0 before dissipating, and
+compared to other spiral waves, its striation structure has a larger angle of inclination with respect
+to the time axis. Regrettably, the current space-time diagram does not capture the local turbulence
+phenomena that would arise from secondary instabilities of the spiral waves [38,39].
+IV . CONCLUSION
+Unlike the traditionally single rotating disk, detailed trasitional processes brought by roughness
+elements, and hence, under the selective excitation of crossﬂow vortices, are still unknown until
+now. This study employs a Fourier/spectral element-based spectral vanishing viscosity method to
+conduct large eddy simulations (LES-SVV). A resistance source term based on the local relative
+velocity squared is added to the momentum equation. The objective is to investigate the effects
+of roughness elements on rotating-disk in a rotor-stator cavity on instability and furthermore, on
+transition to turbulence. The main ﬁndings of this study can be summarized as follows:
+(i) Through the analysis of eight simulation cases, the current grid resolution and numerical
+methods have been initially validated to be capable of capturing the spiral waves structure with
+an azimuthal wave number of 75 near the shroud due to the strong centrifugal and shear effects,
+as observed in Yim et al. ’s [6] study. Additionally, at a lower Reynolds number Re = 2 × 10
+5,
+stationary mode spiral waves excited by 32 azimuthal uniform roughness elements have been
+identiﬁed starting from r = 6, which almost entirely occupy the entire disk boundary layer. The
+peak of v
+rms occurs at an axial length ofzδ = 1.31. This value is remarkably close tozδ = 1.3, which
+corresponds to a von Kármán boundary layer in single rotating disk. When the drag coefﬁcient
+S = 100, there is an increase in the disturbance intensity of the crossﬂow vortices, which grow
+slowly downstream with a modest growth rate, indicative of an increase in radial wavelength. At
+higher radii, the crossﬂow vortices corresponding to drag coefﬁcients S = 10 and S = 100 both
+remain unsaturated.
+(ii) When the Reynolds number is Re = 3 × 10
+5, regardless of whether S = 10 or S = 100, the
+roughness elements-induced crossﬂow vortices reach saturation. Interestingly, despite the saturation
+013901-20
+
+===== PDF PAGE 21 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+of the crossﬂow vortices and the apparent nonlinear effects, they do not destabilize to cause local
+turbulence. Instead, traveling spiral waves mode emerge following the stationary mode spiral waves.
+These traveling spiral waves modes are predominantly concentrated between Fourier modes 10 to
+20 and dominate the disturbance at higher radial positions of the rotating-disk noundary layer in the
+rotor-stator cavity. Furthermore, signiﬁcant ﬂuctuations in kinetic energy are observed for Fourier
+modes with high azimuthal wave numbers ranging from 80 to 120, corresponding to the disturbances
+near the shroud in case 1. Speciﬁcally, the disturbances excite traveling spiral waves mode, which
+persist even when the stationary mode spiral waves and roughness elements are removed. As the
+stationary mode spiral waves disappear at higher radii, the transition towards turbulence in the
+current study is dominated by traveling spiral waves mode with azimuthal wave numbersk between
+10 and 20. Due to the periodic and interconnected evolution of these traveling modes, which are
+coherent structures in both time and space, there is no clear distinction in their azimuthal wave
+numbers.
+(iii) At a Reynolds number of Re= 4 × 10
+5, the disturbance energy of the traveling spiral waves
+mode reaches saturation around a radius of rδ = 462.3. However, it is not until approximately rδ =
+524.0 that all the traveling spiral waves mode completely lose their characteristic features, resulting
+in the onset of turbulence. The disparity in the radius where spiral waves instability occurs can be
+attributed to the fact that, despite the coherence in time and space, the traveling spiral waves mode
+consist of individual spiral waves with distinct characteristics, particularly manifested in the tilt
+angle of the spiral waves.
+This study has discussed the transition from laminar to turbulent ﬂow in the rotating-disk
+boundary layer, induced by 32 uniformly distributed roughness elements. Considering the destabi-
+lization mechanisms of the spiral waves themselves, the research parameter k = 32 is not a unique
+azimuthal wave number. When spiral waves of other azimuthal wave numbers are excited, the
+destabilization processes and conclusions observed in this study will also occur, indicating that
+the current conclusions can be generalized. However, there are still some issues that remain to be
+resolved. The current disturbances have induced self-sustaining traveling spiral waves mode, but
+it is unclear why the azimuthal wave numbers of these traveling spiral waves modes are conﬁned
+to the range of 10 to 20. It is highly probable that the initial development of the traveling spiral
+waves mode corresponds to the modal azimuthal wave numbers of 10–20 at r
+δ, which have the
+highest growth rates, similar to the large-scale spiral waves observed on the rotating-disk boundary
+layer of rotor-stator cavity with a rotating hub. Similarly, it is possible that the saturated stationary
+mode spiral waves induced by the roughness elements have altered the distribution of the base ﬂow,
+alter the number of spiral waves and preventing the onset of absolute instability on the rotating-disk
+boundary layer. Providing accurate answers to these questions will require further investigation
+using methodologies such as linear stability analysis to explore the characteristic parameters of
+spiral waves with different azimuthal wave numbers in subsequent work.
+Although the current SVV method is theoretically sound and does not signiﬁcantly affect the
+transition process, it remains necessary in subsequent work to use a grid with sufﬁcient resolution
+and to minimize the impact of artiﬁcial viscosity. This approach will facilitate the exploration of the
+absolute and convective instability characteristics of the rotating-disk boundary layer in the fully
+nonlinear Navier-Stokes equations.
+ACKNOWLEDGMENTS
+The authors acknowledge the ﬁnancial support of the National Natural Science Foundation
+Outstanding Youth Foundation (Grant No. 52122603), the National Science and Technology Major
+Project (No. J2019-III-0003-0046), and the numerical calculations in this study were carried out on
+the ORISE Supercomputer. Meanwhile, the current work is also supported by the Taishan Scholars
+Program.
+013901-21
+
+===== PDF PAGE 22 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+APPENDIX: NOMENCLA TURE
+To enhance the readability of the paper, the nomenclature for all parameter symbols used in the
+paper is provided in Table II.
+TABLE II. Nomenclature of all parameter symbols appearing in the paper.
+E (r) Perturbation energy along the entire circular surface. Dimensionless.
+Ek Kinetic energy of each azimuthal Fourier mode k. Dimensionless.
+f V olume force. Dimensionless.
+GLL Gauss-Lobatto-Legendre interpolant.
+Heav Heaviside function.
+H∗ Half the spacing between the disks. Dimensional, m.
+k Azimuthal wave number, also mean Fourier mode index. Dimensional.
+M Threshold from which svv is applied.
+N Highest Fourier mode index for the simulation.
+Nr, Nz, Nθ Radial, axial, and azimuthal degrees of freedom.
+N-S Navier-Stokes equations.
+N(u) Nonlinear term. Dimensionless.
+P Pressure. Dimensionless.
+Qk Smooth real shape function for SVV .
+θ Azimuthal position. Rad.
+r, z Dimensionless radial and axial position. Dimensionless by H∗.
+r′ Radius of the roughness elements. Dimensionless.
+r0 Radial position of the roughness elements. Dimensionless.
+rδ Reynolds number based on viscous scale δ. Dimensionless, rδ = r/δ.
+R∗ Radius of a disk. Dimensional, m.
+Re Reynolds number. Dimensionless, Re = /Omega1∗
+d R∗2/ν∗.
+Reδ Reynolds number based on viscous scale δand Rossby number Ro. Dimensionless, Reδ =| Ro|rδ.
+SVV Spectral vanishing viscosity.
+S Drag coefﬁcient. Dimensional.
+t Time in simulations. Dimensionless by /Omega1∗
+d .
+T Rotational period of the rotating disk, T = 2π. Dimensionless by /Omega1∗
+d .
+u = (u, v, w) Velocity of radial, azimuthal, and axial direction. Dimensionless by /Omega1∗
+d H∗.
+(u · ∇u + ∇ · uu)/2 Nonlinear terms in skew-symmetric form. Dimensionless.
+ˆu∗
+k Complex conjugate of the velocity data in the kth Fourier mode. Dimensionless.
+ˆuk Velocity of two-dimensional complex Fourier modes.
+un, vn, wn Instantaneous velocity of radial, azimuthal, and axial direction. Dimensionless.
+˜u,˜v, ˜w Average velocity of the un, vn, wn. Dimensionless.
+vrms Azimuthal velocity root-mean-square. Dimensionless.
+zδ Dimensionless distance from the rotating disk. Dimensionless by δ.
+/Omega1∗
+d Angular velocity of the disk. Dimensional, rad/s.
+/Omega1d Dimensionless rotational speed of the disk. Dimensionless by /Omega1∗
+d .
+ν∗ Kinematic viscosity of ﬂuid. Dimensional, m2/s.
+ν Kinematic of the ﬂuid. Dimensionless.
+ε Moderately small multiple of ν. Dimensionless.
+μ Coefﬁcient in the Gaussian forcing function.
+δ Viscous scale.
+ρ Density of the ﬂuid. Dimensionless.
+δt Time step in simulations. Dimensionless by /Omega1∗
+d .
+λr Radial wavelength. Dimensionless by δ.
+013901-22
+
+===== PDF PAGE 23 =====
+
+INSTABILITY CHARACTERISTICS INDUCED BY …
+[1] J. Owen and R. Rogers, Flow and Heat Transfer in Rotating Disc Systems, V ol. 1: Rotor-Stator systems
+(Research Studies Press, Forest Grove, OR, 1989).
+[2] B. Launder, S. Poncet, and E. Serre, Laminar, transitional, and turbulent ﬂows in rotor-stator cavities,
+Annu. Rev. Fluid Mech. 42, 229 (2010).
+[3] D. Martinand, E. Serre, and B. Viaud, Instabilities and routes to turbulence in rotating disc boundary
+layers and cavities, Philos. Trans. R. Soc. A 381, 20220135 (2023).
+[4] P. H. Alfredsson, K. Kato, and R. Lingwood, Flows over rotating disks and cones,Annu. Rev. Fluid Mech.
+56, 45 (2024).
+[5] J. M. Lopez, F. Marques, A. M. Rubio, and M. Avila, Crossﬂow instability of ﬁnite bödewadt ﬂows:
+Transients and spiral waves, Phys. Fluids 21, 114107 (2009).
+[6] E. Yim, J.-M. Chomaz, D. Martinand, and E. Serre, Transition to turbulence in the rotating disk boundary
+layer of a rotor–stator cavity, J. Fluid Mech. 848, 631 (2018).
+[7] E. Serre, E. Tuliszka-Sznitko, and P. Bontoux, Coupled numerical and theoretical study of the ﬂow
+transition between a rotating and a stationary disk, Phys. Fluids 16, 688 (2004).
+[8] E. Severac and E. Serre, A spectral vanishing viscosity for the LES of turbulent ﬂows within rotating
+cavities, J. Comput. Phys. 226, 1234 (2007).
+[9] S. Poncet, É. Serre, and P. Le Gal, Revisiting the two ﬁrst instabilities of the ﬂow in an annular rotor-stator
+cavity, Phys. Fluids 21, 064106 (2009).
+[10] R. Roy, G. Xu, and J. Feng, A study of convective heat transfer in a model rotor–stator disk cavity,
+J. Turbomach. 123, 621 (2001).
+[11] S. Harmand, J. Pellé, S. Poncet, and I. V . Shevchuk, Review of ﬂuid ﬂow and convective heat transfer
+within rotating disk cavities with impinging jet, Int. J. Therm. Sci. 67, 1 (2013).
+[12] É. Séverac, S. Poncet, É. Serre, and M.-P. Chauve, Large eddy simulation and measurements of turbulent
+enclosed rotor-stator ﬂows, Phys. Fluids 19, 085113 (2007).
+[13] F. Gao and J. W. Chew, Evaluation and application of advanced CFD models for rotating disc ﬂows,Proc.
+I n s t .M e c h .E n g .P a r tC235, 6847 (2021).
+[14] S. Nketia, T. I. Shih, K. Bryden, R. Dalton, and R. A. Dennis, Large eddy simulation of rotationally
+induced ingress and egress around an axial seal between rotor and stator disks, Energies 16, 4354 (2023).
+[15] S. Nketia, K. M. Bryden, R. Dalton, and T. I. Shih, Large eddy simulation of externally induced ingress
+about an axial seal by stator vanes, Energies 16, 5985 (2023).
+[16] L. Schouveiler, P. Le Gal, M. Chauve, and Y . Takeda, Spiral and circular waves in the ﬂow between a
+rotating and a stationary disk, Exp. Fluids 26, 179 (1999).
+[17] L. Schouveiler, P. Le Gal, and M. Chauve, Instabilities of the ﬂow between a rotating and a stationary
+disk, J. Fluid Mech. 443, 329 (2001).
+[18] E. Serre, E. C. Del Arco, and P. Bontoux, Annular and spiral patterns in ﬂows between rotating and
+stationary discs, J. Fluid Mech. 434, 65 (2001).
+[19] M. Queguineur, T. Bridel-Bertomeu, L. Y . Gicquel, and G. Staffelbach, Large eddy simulations and global
+stability analyses of an annular and cylindrical rotor/stator cavity limit cycles, Phys. Fluids 31, 104109
+(2019).
+[20] M. Queguineur, L. Gicquel, and G. Staffelbach, Stability and control of an annular rotor/stator cavity limit
+cycle, Phys. Fluids 32, 084101 (2020).
+[21] Y . Xie, Q. Du, L. Xie, J. Liu, and R. Wang, Temperature gradient effects on stator boundary-layer stability
+in a rotor–stator cavity, AIAA J. 62, 1601 (2024).
+[22] Q. Du, Y . Xie, L. Xie, and R. Wang, Study on transition to turbulence of rotating-disk boundary layer in
+a rotor-stator cavity with temperature gradient, Phys. Rev. Fluids 9, 053908 (2024).
+[23] A. Cros, E. Floriani, P. Le Gal, and R. Lima, Transition to turbulence of the batchelor ﬂow in a rotor/stator
+device, Eur. J. Mech. B Fluids 24, 409 (2005).
+[24] Y . Xie, Q. Du, L. Xie, Z. Wang, and S. Li, Onset of turbulence in rotor–stator cavity ﬂows,J. Fluid Mech.
+991, A3 (2024).
+[25] C. Thomas and C. Davies, On the impulse response and global instability development of the inﬁnite
+rotating-disc boundary layer, J. Fluid Mech. 857, 239 (2018).
+013901-23
+
+===== PDF PAGE 24 =====
+
+DU, XIE, XIE, W ANG, XU, AND ZHU
+[26] S. Imayama, P. H. Alfredsson, and R. J. Lingwood, Experimental study of rotating-disk boundary-layer
+ﬂow with surface roughness, J. Fluid Mech. 786, 5 (2016).
+[27] E. Appelquist, S. Imayama, P. H. Alfredsson, P. Schlatter, and R. Lingwood, Linear disturbances in the
+rotating-disk ﬂow: A comparison between results from simulations, experiments and theory,Eur. J. Mech.
+B Fluids 55, 170 (2016).
+[28] H. M. Blackburn, D. Lee, T. Albrecht, and J. Singh, Semtex: A spectral element–Fourier solver for the
+incompressible Navier–Stokes equations in cylindrical or Cartesian coordinates,Comput. Phys. Commun.
+245, 106804 (2019).
+[29] G. Karamanos and G. Karniadakis, A spectral vanishing viscosity method for large-eddy simulations,
+J. Comput. Phys. 163, 22 (2000).
+[30] R. Pasquetti, Spectral vanishing viscosity method for large-eddy simulation of turbulent ﬂows, J. Sci.
+Comput. 27, 365 (2006).
+[31] K. Koal, J. Stiller, and H. M. Blackburn, Adapting the spectral vanishing viscosity method for large-eddy
+simulations in cylindrical conﬁgurations, J. Comput. Phys. 231, 3389 (2012).
+[32] A. Busse and N. D. Sandham, Parametric forcing approach to rough-wall turbulent channel ﬂow, J. Fluid
+Mech. 712, 169 (2012).
+[33] G. K. Batchelor, An Introduction to Flluid Dynamics(Cambridge University Press, Cambridge, UK, 1967).
+[34] R. J. Lingwood, Absolute instability of the Ekman layer and related rotating ﬂows, J. Fluid Mech. 331,
+405 (1997).
+[35] K. Kato, P. H. Alfredsson, and R. J. Lingwood, Boundary-layer transition over a rotating broad cone,
+Phys. Rev. Fluids 4, 071902(R) (2019).
+[36] K. Kato, A. Segalini, P. H. Alfredsson, and R. Lingwood, Instabilities and transition on a rotating cone–old
+problems and new challenges, in IUTAM Laminar-Turbulent Transition: 9th IUTAM Symposium, London,
+UK, September 2–6, 2019 (Springer International Publishing, Cham, 2022), pp. 203–213.
+[37] S. Imayama, P. H. Alfredsson, and R. J. Lingwood, An experimental study of edge effects on rotating-disk
+transition, J. Fluid Mech. 716, 638 (2013).
+[38] B. Viaud, E. Serre, and J.-M. Chomaz, The elephant mode between two rotating disks, J. Fluid Mech.
+598, 451 (2008).
+[39] B. Viaud, E. Serre, and J.-M. Chomaz, Transition to turbulence through steep global-modes cascade in an
+open rotating cavity, J. Fluid Mech. 688, 493 (2011).
+013901-24

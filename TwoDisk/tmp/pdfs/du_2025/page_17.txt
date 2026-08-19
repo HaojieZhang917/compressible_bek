@@ -1,0 +1,45 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 18. The spectral plots obtained from the axial velocity w shows the azimuthal wave number k
+corresponding to the radius rδ, where the color represents the results after taking the logarithm base 10 of
+the amplitude. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+band structures because the spiral waves have relative motion with respect to the rotating disk. At
+the current Reynolds number Re = 3 × 105, the traveling spiral waves mode with S = 10 appears
+somewhat more disordered, which might be due to the energy of the traveling spiral waves mode
+reaching a peak at radius r
+δ = 467.1, and the subsequent breaking of some spiral waves, making
+the boundary layer more chaotic. As mentioned earlier, at Re = 2 × 105, spiral waves at high
+radii positions exhibit ﬂuctuations, but these are not large, manifesting as intermittent pulsations
+of the crossﬂow vortices themselves. At Re = 3 × 10
+5, the pulsations of the outermost crossﬂow
+vortices are very pronounced, and each pulsation corresponds to an inclined band structure on the
+spatiotemporal diagram. Clearly, the pulsations shown in these space-time plots are not due to the
+pulsations of the crossﬂow vortices themselves, but rather due to the gradual growth of the Traveling
+spiral waves mode. Thus, when they occupy the same radial position as the crossﬂow vortices, the
+visual pulsating phenomenon displayed is the result of the superposition of the two waves. Through
+comparison with Fig. 13(a), it is evident that the traveling spiral waves rotate counterclockwise.
+For S = 10, the frequency of traveling spiral waves passing through the rotating disk is approx-
+imately ω
+t = 1.5 (in rotating frame), whereas for S = 100, the frequency of traveling spiral waves
+passing through the disk is about ωt = 1.9. However, it is not possible to precisely determine the
+precession frequency of the traveling spiral waves, due to the fact that at higher radii, the azimuthal
+wave number of the spiral waves is not exact. The spectral graph shown in Fig. 18 reﬂects this
+characteristic. At higher radii, lower wave numbers primarily dominate the characteristics of the
+boundary layer disturbances; however, no harmonics of these traveling spiral wave modes appear.
+These modes radially overlap with the stationary spiral wave modes induced by roughness elements
+at intermediate radii, and the harmonic features of the stationary spiral wave modes are very distinct.
+To clarify the relationship between the traveling spiral waves mode and the stationary spiral
+waves mode excited by roughness elements, a new simulation, referred to as case 6, was carried
+out. Case 6 differs from case 4 in that the roughness elements on the rotating disk have been
+removed. The initial condition for case 6 consists of the ﬁnal ﬂow ﬁeld from case 4, with the ﬂow
+ﬁelds corresponding to modes k = 32 and k = 64 subtracted. This setup is designed to examine
+the dynamics of the traveling spiral waves mode in the absence of the roughness-element-induced
+stationary mode, thereby shedding light on whether the traveling spiral waves mode can persist
+independently. Figure 19(a) shows the variation of the kinetic energy E
+k of several speciﬁc modes
+from t = 0t o t = 20 in case 6. The Fourier modes k = 15 and k = 16, associated with high-radius
+traveling spiral waves mode, do not show signiﬁcant changes but ﬂuctuate over time. Mode k = 32
+was once a stationary mode. After the disappearance of the roughness elements, it did not regain
+dominance in the kinetic energy of the boundary layer modes. Instead, it increased rapidly to
+the same level as mode k = 33. This indicates that the excited traveling spiral waves mode is
+not inﬂuenced by the roughness elements-induced stationary spiral waves mode and can persist
+013901-17

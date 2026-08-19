@@ -1,0 +1,352 @@
+# Boussinesq 旋转流模型选择性研究：对话交接文件
+
+生成时间：2026-08-11（Asia/Shanghai）
+
+本文件用于在新的 Codex 对话中恢复研究上下文。它是对话记忆与当前结论的汇总，不替代磁盘上的源代码、数据、README 和报告。涉及数值、方程、文件状态时，始终以磁盘上的最新版本为准。
+
+======================================================================
+0. 新对话的启动指令
+======================================================================
+
+新对话开始后应先完整读取本文件，然后依次检查：
+
+1. /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/AGENTS.md
+2. /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/README.md
+3. /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/docs/DATA_CATALOG.md
+4. /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/docs/ROTOR_STATOR_SINGULARITY_REPORT.md
+5. /home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/README.md
+6. 仓库根目录的当前 Git 状态。
+
+启动阶段只需用中文概括：项目状态、已确认结论、仍待验证事项和当前论文逻辑，然后等待用户的新指令。不要自动启动计算，不要生成 Nektar++ 文件，不要恢复、覆盖、暂存或提交现有改动。
+
+2026-08-11 创建本文件时，仓库根目录 Git 状态为：
+
+    M Manifest.toml
+    ?? compress/BEK/Vonkarmen_bone/blackburn_neutral_results/Error.lay
+
+这些改动/文件属于用户。不要修改、删除、暂存或提交它们。以后每次工作前重新检查 Git 状态，因为它可能已经变化。
+
+======================================================================
+1. 用户偏好和最新工作边界
+======================================================================
+
+1. 默认使用中文讨论研究问题；论文正文和参考文献使用英文。
+2. 用户明确要求：忽略 2026 年有用户署名的中文论文，其中结论不作为新颖性判断依据；文献调研只优先采用领域内权威英文期刊和原始论文。
+3. 所有新生成的主要计算程序必须使用 Julia。已有 Python 数据转换、校验、汇总和绘图程序不需要转换，也不要主动删除。
+4. 在 Boussinesq_SaddleNode 项目中复用 src/BoussinesqSaddleNode.jl 等共享实现；不要引入 PythonCall、PyCall 或新的 Python 运行时依赖。
+5. 原始科学数据不能被覆盖，除非用户明确要求重新生成。试算应输出到新目录。
+6. 用户与 supervisor 已决定：当前论文不需要加入新的数值模拟（例如 Nektar++）来验证正确性。除非用户重新明确提出，不要启动 Nektar++、大型 DNS 或生成 Nektar++ 配置文件。
+7. 论文目标是 JFM Rapids。最新主线不是“大温差下改进模型误差增加”，而是传统离心 Boussinesq 闭合产生模型选择性的鞍结和基本流分支终止。
+8. 不要把相似性模型中的折叠夸大成“所有有限半径三维 DNS 都必然崩溃”。这是当前最重要的论证边界。
+
+======================================================================
+2. 当前项目位置与文件组织
+======================================================================
+
+Git 根目录：
+
+    /home/zhj/Rotating-Flow-ToolKit
+
+当前鞍结研究的主项目：
+
+    /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode
+
+历史/日常 von Karman、稳定性和中性曲线工作区：
+
+    /home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone
+
+可复用旋转盘 Julia 包：
+
+    /home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow
+
+Boussinesq_SaddleNode 是从原 von Karman 和双盘目录复制、整理得到的独立项目。原目录没有被移动或覆盖。主结构为：
+
+    Boussinesq_SaddleNode/
+      src/                 共用 Julia 数值实现
+      von_karman/          半无限域相似性解、真无穷远映射、谱分析
+      rotor_stator/        双盘相似性解、延拓、三解动力学、Tecplot 数据
+      cross_model/         两模型鞍结与动力系统比较
+      docs/                报告、数据目录、来源清单
+      manuscript/          introduction.tex 和 references.bib
+
+重要入口：
+
+    Boussinesq_SaddleNode/README.md
+    Boussinesq_SaddleNode/docs/DATA_CATALOG.md
+    Boussinesq_SaddleNode/docs/ROTOR_STATOR_SINGULARITY_REPORT.md
+    Boussinesq_SaddleNode/von_karman/data/infinite_mapping/INFINITE_MAPPING_UPPER_BRANCH_REPORT.md
+    Boussinesq_SaddleNode/cross_model/data/dynamical_singularity_comparison/BEGINNER_DYNAMICAL_SYSTEMS_COMPARISON_REPORT.md
+    Boussinesq_SaddleNode/manuscript/introduction.tex
+    Boussinesq_SaddleNode/manuscript/references.bib
+
+Vonkarmen_bone 中的 Blackburn 稳定性实现是按用户要求从 src 复制到当前工作区后独立修改的，意图是不动 RotatingDiskFlow/src 中的旧实现。以后若继续该部分，先读其 README，不能把本地实现擅自写回 src。
+
+======================================================================
+3. 论文当前的核心问题与最有力表述
+======================================================================
+
+最弱、也不新颖的表述是：
+
+    “Boussinesq 假设在较大温差下误差变大。”
+
+较强但仍偏定量的表述是：
+
+    “传统、广义 Boussinesq 和完全可压缩模型给出不同的基本流和中性曲线。”
+
+当前最适合 JFM Rapids 的核心命题是：
+
+    传统的固定参考离心 Boussinesq 闭合会在有限温差下人为改变经典旋转流相似性基本态的解集拓扑，产生非退化鞍结、多解和等温相连分支终止。改进的加速度一致 Boussinesq 闭合能够在小温差范围恢复与可压缩模型的一致性；当温差继续增大、线性密度和常物性假设失去渐近依据时，必须使用完全可压缩模型。
+
+英文主张可围绕：
+
+    A traditional centrifugal-Boussinesq closure causes a model-selective loss of the isothermal-connected similarity branch; rotor–stator confinement delays, but does not generically remove, the singularity.
+
+本工作的价值不只是某个临界值相差几个百分点，而是：模型选择决定基本态是否存在、是否唯一以及稳定性问题能否被定义。网格收敛只能证明求解器正确求解了所写方程，不能修正模型形式错误。
+
+必须保留的限定：目前证明的是轴对称相似性系统内的结果。有限半径、径向非相似、侧壁和三维非定常动力学可能绕开相似性分支的终止。因此不能写成“已有所有 DNS 必然在同一壁温崩溃”。
+
+======================================================================
+4. 模型层级与已经形成的认识
+======================================================================
+
+4.1 传统离心 Boussinesq
+
+传统闭合只让密度扰动乘一个预先选定的参考离心加速度。在当前 von Karman 符号下，其径向相似性方程包含独立的 (T-1) 源项。该闭合可制造有限温差鞍结。
+
+4.2 Lopez (2013) 与 Blackburn (2021)
+
+Lopez、Marques 和 Avila（JFM 2013）指出快速旋转流中常见 Boussinesq 写法会遗漏差速旋转和强涡产生的离心浮力，提出让密度变化与更完整惯性加速度耦合的思路。
+
+Blackburn、Lopez、Singh 和 Smits（JFM Rapids 2021）给出任意加速参考系中的规范表达：密度扰动原则上应与相关的完整加速度耦合，包括局部时间加速度、对流加速度和参考系加速度。Blackburn 还指出 Lopez 2013 将对流加速度改写成动能梯度的进一步表达存在推导/符号问题。因此论文中应以 Blackburn 规范形式为主，不要把 Lopez 的梯度形式直接当作最终正确模型。
+
+在当前实现的稳态相似性方程中，如果 Lopez 型和 Blackburn 型都使用同一个 chi=2-T 乘局部惯性加速度，它们可以给出相同的稳态基本流；差别会在非定常/稳定性方程中显著出现，因为 Blackburn 的动量时间导数也应带 chi，并且密度扰动还会与基本加速度耦合。不能只把差别概括成一个任意“时间项修正”，必须从连续方程线性化重新核对广义质量矩阵和各耦合块。
+
+4.3 为什么时间导数乘密度
+
+物质动量方程本质上是 rho Du/Dt。若在广义 Boussinesq 模型中保留密度扰动与全部加速度的相互作用，那么 Du/Dt 中的局部项 partial u/partial t 和对流项必须一致地乘相同的线性密度因子。稳态时局部时间项消失，所以两种写法的基本流可能相同；扰动稳定性中该项成为广义特征值问题的质量矩阵，不能省略。
+
+4.4 完全可压缩模型的角色
+
+Blackburn 模型仍是不完全可压缩的线性密度、散度约束和常物性近似。它只应作为小温差渐近模型。大温差时理想气体密度 1/T、速度散度、能量方程、黏度与导热变化均不可再由线性 Boussinesq 闭合可靠表示，此时完全可压缩模型不是“更昂贵的修正”，而是必要模型。
+
+======================================================================
+5. von Karman 半无限域：已确认结论
+======================================================================
+
+真无穷远有理 Chebyshev 映射 eta=L(1-x)/(1+x) 已确认至少两个鞍结：
+
+    第一鞍结：H_inf,c1 ≈ -0.53276166，Tw,c1 ≈ 1.048021731
+    第二鞍结：H_inf,c2 ≈ -0.11331，   Tw,c2 ≈ 1.03014466
+
+第一鞍结位于从等温经典 von Karman 解连续延拓得到的稳定分支上。Jacobian 出现简单零方向，已有平方根率、非退化系数、零模态和时间谱证据，支持它是非退化 saddle-node，而不是固定 Tw 求解器失效或有限截断域伪影。
+
+第二鞍结后仍可在数学上继续出远上支，但时间谱存在正实增长方向；因此该分支是相似性方程的数学平衡态，却不是轴对称相似性动力学中的吸引态。不能仅因它能延伸到较大 Tw 就把它直接用作物理稳定基本流。
+
+靠近 H_inf -> 0^- 还观察到第三个候选折返/长热尾奇异结构，但真无穷远极限条件数和热尾尺度困难，目前不与前两个折点列为同等级确认结论。原有限域计算没有发现它，主要因为有限 zmax 会截断越来越长的热尾并改变远上支拓扑。
+
+“平方根率”指非退化鞍结附近状态幅值 a 与参数偏离 mu=Tw-Twc 满足 a ~ ±sqrt(mu)；等价地 Tw-Twc 与局部弧长/状态幅值的平方成正比。这是折叠的局部正常形，而不是任意经验拟合。
+
+“非退化条件”至少包含：Jacobian 核空间是一维、参数方向对伴随零模态的投影非零、二次非线性在零模态方向的投影非零。它们保证局部结构确实是普通 saddle-node，而不是 pitchfork、cusp 或更高阶退化。
+
+======================================================================
+6. rotor–stator 相似性系统：已确认结论
+======================================================================
+
+基准条件：Re_h=1000，Pr=0.72，转子 z=0，静子 z=1，无抽吸，均匀壁温。传统固定参考离心 Boussinesq 相似性模型存在两个高精度收敛的折点：
+
+    lower fold:     Tw = 1.155517549054
+    principal fold: Tw = 1.167676484047
+
+在 1.15551755 < Tw < 1.16767648 内存在三组稳态相似性解。Tw=1.160 因而处于三解区。从 Tw=1 等温解连续跟踪的 principal branch 可以到达 Tw=1.160，并在 1.16767648 才终止；1.1555 是另外两支相遇的低温折点，不是等温相连主支的终点。
+
+Tw=1.160 的三解约对应：
+
+    upper branch: Pi ≈ 0.001542
+    middle branch: Pi ≈ 0.003787
+    principal branch: Pi ≈ 0.018230
+
+时间谱结果表明：两个外支在轴对称相似性子空间内稳定，中支具有一个实不稳定方向，形成模型内的双稳态和迟滞窗口。“稳定”只限于这个受限子空间，不等于三维全局稳定。
+
+若时间依赖写成 exp(lambda t)，稳定性由 Re(lambda) 决定；Im(lambda) 非零只表示衰减或增长过程伴随振荡，Im(lambda)>0 本身不能判定失稳。若使用 exp(-i omega t)，则增长率的符号由 Im(omega) 决定。分析任何“虚部大于零”前必须先确认程序采用的时间约定。
+
+Reynolds 数扫描：
+
+    Re_h=400：当前扫描到 Tw≈1.85 未检测到折叠；这不是全局唯一性证明。
+    Re_h=800：检测到两个折点，约 1.15879008 和 1.16551088。
+    Re_h=1000：两个折点如上，并已高精度验证。
+
+这提示在 400<Re_h<800 可能存在 cusp/拓扑转变，但尚未精确定位。
+
+当前 Soong-like rotating-forces 替代模型在 Re_h=1000 下可连续到 Tw=2，未见传统模型主折叠。这只能作为“折叠对密度进入哪些旋转加速度高度敏感”的对照，不能代替有限间隙双盘的规范 Blackburn 模型。双盘 Blackburn 基本流尚未作为最终决定性对照完整实现和验证。
+
+======================================================================
+7. Pi、压力梯度与质量守恒
+======================================================================
+
+双盘相似性方程中的 Pi 是未知的常径向压力梯度系数。相似性分离要求径向压力梯度具有固定的 r 依赖，其无量纲系数不随 z 变化，所以 Pi 在所有 z 上相同。它与支撑无粘旋转核的径向压力梯度有关，但在完整有限腔体中应由两盘边界层、核心旋转、侧壁和全局质量守恒共同决定，不能简单等同于任意指定的“核位置压力梯度”。
+
+Pi 不是非等温才出现。等温 rotor–stator 同样需要径向压力梯度支撑核心旋转；只是在某些推导中对径向动量方程关于 z 求导会把这个积分常数消去。von Karman 半无限域中，远场条件和变量归一化通常把相应压力常数固定或隐含消去，所以方程表面上只看到 T-1 而不显式出现 Pi。
+
+用户已经提交、正在评审的论文中，如果书面基本流方程漏写了 Pi，但实际求解时使用了对径向动量方程求导消去压力梯度的等价方程，那么首先应定性为“方程展示不完整/书写错误”，而不是数值结果必然错误。它不必然导致拒稿，但若审稿人指出，应明确给出求导后的等价方程、积分常数由边界条件恢复的方式以及等温验证。
+
+若连续性给出 H'=-2F，且两盘均不渗透 H(0)=H(1)=0，则严格有积分约束：
+
+    integral_0^1 F(z) dz = 0.
+
+用户曾观察到另外两支的 F 积分似乎不为零。当前不能仅凭该观察宣布两支非物理，因为求解器若确实同时满足 H'=-2F 和两端 H=0，该积分应自动接近零。下一步需要用与离散方程一致的谱积分/高阶求积重新计算，并检查变量缩放、节点顺序、插值和边界残差。只有显著违反该恒等式且不能由后处理误差解释时，才说明相应 BVP 解或输出存在问题。
+
+======================================================================
+8. Blackburn 与完全可压缩中性曲线：已有结果
+======================================================================
+
+该部分位于：
+
+    /home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone
+
+Blackburn 规范广义 Boussinesq 稳定性矩阵已在这个工作区本地实现，未修改 RotatingDiskFlow/src。动量时间导数使用与对流加速度相同的线性密度因子 chi=2-T。
+
+零频 omega=0 的 Blackburn 与完全可压缩中性曲线已经比较。温度点为：
+
+    Tw = 1.00, 1.04, 1.08, 1.12, 1.16, 1.20, 1.40, 1.60, 1.80.
+
+主报告：
+
+    zero_frequency_extended_error_analysis/extended_zero_frequency_detailed_summary.md
+
+关键量化结果：
+
+1. Type-I 临界 R 误差在 Tw<=1.20 仍小于约 5%；整条曲线核心区 RMS 的 5% 判据只支持到 Tw=1.12。
+2. Type-I 临界 R 误差在 Tw=1.40、1.60、1.80 约为 -5.1%、-15.1%、-45.0%，说明高温下迅速失去定量能力。
+3. 完全可压缩模型的 Type-II 折点从 Tw=1.16 起消失，而 Blackburn 在更高温仍可能保留，属于拓扑失配，不能写成普通百分比误差。
+4. 网格收敛验证表明，可压缩模型 Tw=1.16 的 Type-II 消失不是 Chebyshev 网格不足导致：N=69、79、89 的曲线均一致单调；问题属于物理/模型分支拓扑而非空间网格。Tw=1.14 的极浅折点对 beta 步长敏感，用更密的 Delta beta=2e-4 可以恢复。
+5. 线性密度 chi_w=2-Tw 相对理想气体 1/Tw 的误差随 (Tw-1)^2 墑长；Tw=1.4--1.8 应视为 Boussinesq 失效诊断区，而不是定量预测区。
+
+supervisor 已接受的解释是：改进模型能较好预测小温差失稳；Tw>1.2 后误差增大符合主流 Boussinesq 适用范围认识。因此论文重点已从高温误差曲线转向传统模型的有限温差奇点和改进闭合的必要性。
+
+正频率 omega>0 的完整中性曲线尝试只得到局部分支，原因与特征值选支、分支终止和参数延拓有关。该任务已暂时搁置，不能把不完整曲线当作完整物理边界。
+
+======================================================================
+9. DNS 与相似性解：上一轮对话最后确认的关键认识
+======================================================================
+
+用户最后提出：“直接数值模拟中的基本流一般不是按照相似性解的结果吗？”
+
+结论是：不完全是。
+
+1. 全非线性 DNS 直接积分完整三维时变方程，通常只需要初值和边界条件；相似性解可作为初值、参考态、局部边界层近似或稳定性基流，但 DNS 并不必然一直受相似性形式约束。
+2. 无限盘、局部平行流或明确施加 u_r=rF(z)、u_theta=rG(z)、T=T(z) 的计算中，相似性解直接决定基本流。
+3. 有限半径 rotor–stator 全局 DNS 的稳态通常是 U(r,z)、T(r,z)，还包含侧壁、径向非相似、全局压力调整和核心流；它不严格属于只依赖 z 的相似性子空间。
+4. 因此，相似性 ODE 在 Tw=1.1677 折叠，不能直接推出完整有限半径 DNS 在相同 Tw 没有解。完整 PDE 可能转向径向非相似稳态，也可能进入非定常状态。
+5. 当前安全结论：传统 Boussinesq 会使 DNS 和稳定性研究经常依赖的经典相似性基本态发生模型选择性的分支终止；对完整全局 DNS 的影响需要重新评估。
+
+如果未来要把论断扩展到 DNS，需要至少做一项：完整二维轴对称 (r,z) 稳态延拓；证明已有 DNS 在边界/初值/稳定性中直接嵌入该相似性基流；或系统展示折叠后 PDE 只能通过非相似/非定常响应绕开。当前 supervisor 决定不做新数值模拟，因此正文应控制主张范围，而不是强行补 DNS。
+
+======================================================================
+10. 文献认识与推荐引用（只用权威英文论文）
+======================================================================
+
+模型基础：
+
+1. Spiegel & Veronis (1960), On the Boussinesq Approximation for a Compressible Fluid, ApJ 131, 442.
+2. Gray & Giorgini (1976), The Validity of the Boussinesq Approximation for Liquids and Gases, IJHMT 19, 545–551.
+3. Barletta (2022), The Boussinesq approximation for buoyant flows, Mechanics Research Communications 124, 103939.
+
+快速旋转中的 Boussinesq 闭合：
+
+4. Lopez, Marques & Avila (2013), The Boussinesq approximation in rapidly rotating flows, JFM 737, 56–77, DOI 10.1017/jfm.2013.558.
+5. Blackburn et al. (2021), On the Boussinesq approximation in arbitrarily accelerating frames of reference, JFM 924, R1, DOI 10.1017/jfm.2021.640.
+
+rotor–stator DNS/LES 和工程背景：
+
+6. Serre, Bontoux & Launder (2004), Transitional-turbulent flow with heat transfer in a closed rotor-stator cavity, Journal of Turbulence 5, DOI 10.1088/1468-5248/5/1/008.
+7. Poncet & Serre (2009), High-order LES of turbulent heat transfer in a rotor–stator cavity, IJHFF 30, 590–601.
+8. Owen & Long (2015), Review of Buoyancy-Induced Flow in Rotating Cavities, Journal of Turbomachinery, DOI 10.1115/1.4031039.
+9. Zandbergen & Dijkstra (1987), Von Karman Swirling Flows, Annual Review of Fluid Mechanics 19, 465–491.
+
+可压缩对照：
+
+10. Saini & Sandberg (2020), Simulations of compressibility effects in centrifugal buoyancy-induced flow in a closed rotating cavity, IJHFF 85, 108656.
+11. Saini & Sandberg (2022), Compressibility effects on the linear-stability of centrifugal buoyancy-induced flow, IJHFF 96, 108999.
+12. Gao & Chew (2020), Numerical investigation of buoyancy-induced flow in a sealed rapidly rotating disc cavity, IJHMT 147, 118860.
+
+CFD 验证和模型形式误差：
+
+13. Stern et al. (2001), Comprehensive approach to verification and validation of CFD simulations—Part 1, Journal of Fluids Engineering 123, 793–802.
+14. Oberkampf & Trucano (2002), Verification and validation in computational fluid dynamics, Progress in Aerospace Sciences 38, 209–272.
+
+文献使用边界：Serre 2004 和 Poncet & Serre 2009 可以证明传统 Boussinesq 曾用于代表性 rotor–stator DNS/LES，但不能仅凭两篇论文写成“大多数 DNS 都采用传统模型”。在没有系统文献统计前，使用“widely used in representative DNS and LES studies”更严谨。
+
+======================================================================
+11. JFM Rapids 叙事顺序
+======================================================================
+
+建议正文保持单一主线，避免把中性曲线误差、全部三维 DNS、所有高温效应同时塞入 Rapids。
+
+1. 问题：Boussinesq 在重力场中较明确，但旋转流中的“浮力加速度”依赖模型选择。
+2. 缺口：既有研究多比较速度、换热或临界值误差，很少检查闭合是否改变基本态的存在性和分支拓扑。
+3. von Karman 结果：传统模型在 Tw≈1.048 的等温相连稳定分支上出现非退化鞍结；真无穷远映射排除有限域伪影。
+4. 模型对照：加速度一致的广义 Boussinesq 基本态通过同一区间；小温差稳定性接近可压缩模型；高温则必须转向完全可压缩模型。
+5. rotor–stator 普适性：有限间隙把奇点推迟到 Tw≈1.168，但 Re_h=800、1000 仍出现双折点和三解，证明不是单盘几何偶然。
+6. 结论：模型选择可以决定基本态是否存在，而不只是改变误差百分比。
+
+推荐把 Re_h=1000 高精度分支图、Tw=1.160 三解、von Karman 真无穷远折点/平方根律作为核心图；Re 扫描、网格收敛和更详细动力学放补充材料。
+
+当前 introduction 草稿位于：
+
+    /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/manuscript/introduction.tex
+
+参考文献位于：
+
+    /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/manuscript/references.bib
+
+引言曾参考 JFM_BLSS21.pdf 的 Rapids 结构润色。题目应避免完整陈述句，倾向简洁名词短语，例如围绕 model-selective singularity、centrifugal Boussinesq closure、rotating-flow similarity states。
+
+======================================================================
+12. 当前仍待验证或不能过度声称的事项
+======================================================================
+
+1. 双盘系统尚缺规范 Blackburn 基本流方程的直接延拓；当前 Soong-like 模型只能说明敏感性。
+2. 400<Re_h<800 之间可能存在 cusp，但未定位。
+3. 第三个 von Karman 折返仍是候选，不能作为主结论。
+4. 三支 F 积分的质量守恒问题需要用一致求积重新检查。
+5. 当前时间稳定性只覆盖轴对称相似性子空间，不代表三维稳定。
+6. 相似性折叠不能直接等同于完整有限半径 DNS 崩溃。
+7. Du et al. (PRF 2024) 是否确实把转子侧基本流向无限域延拓，先前只从摘要/有限材料判断；在获得全文并核对算法前不要写成已确认事实。
+8. 正频率中性曲线不完整，暂时不用作论文核心证据。
+9. 大温差 Blackburn 结果属于失效诊断，不应作为定量预测。
+
+======================================================================
+13. Tecplot 和数据状态
+======================================================================
+
+rotor–stator 的 CSV/JSON/NPZ 已转换为 Tecplot ASCII DAT，位于：
+
+    /home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/rotor_stator/tecplot
+
+读取：
+
+    rotor_stator/tecplot/README.md
+    rotor_stator/tecplot/conversion_manifest.json
+
+主支 Tw=1.00、1.04、1.08、1.12、1.16 的基本流剖面位于：
+
+    rotor_stator/tecplot/data/baseflow_profiles/principal_branch_Tw1.00_1.16_step0.04.dat
+
+Tw=1.16 仍属于等温相连主支，只是同时处于三解区。
+
+此前 temporal_eigenvalues_convergence.dat 导入 Tecplot 报 ZONE 行粘连/缺值错误。当前数据已由转换和验证脚本统一生成；若再次出现，先运行只读校验脚本并检查每个 ZONE 的 I 数与实际数据行数以及前一分区末尾换行，不要手工删除科学数据。
+
+======================================================================
+14. 新对话的第一条建议回复
+======================================================================
+
+完整读取后，新对话应只概括：
+
+- 主项目已经集中在 Boussinesq_SaddleNode，旧工作区保留；
+- von Karman 两个确认折点和 rotor–stator Re_h=1000 两个折点；
+- 论文以传统闭合的模型选择性分支终止为核心；
+- 广义 Boussinesq 只负责小温差，全可压缩负责高温；
+- 不能把相似性折叠直接推广为所有 DNS 崩溃；
+- 当前 Git 有用户改动，不能恢复/覆盖/提交；
+- 等待用户的新指令，不自动运行计算。
+

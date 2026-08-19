@@ -1,0 +1,24 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 16. Space-time plot showing w at zδ = 1.245, Re = 3 × 105, S = 10.
+k = 32 only occupies a small part of the boundary layer. as depicted in Fig. 15(b), the energy of
+the spiral waves of k = 32 has already started to gradually decrease before reaching rδ = 370.0.
+For the modes occupying the high radius of the disk cavity, 10 ⩽ k ⩽ 20, it is interesting to
+note that as the spiral waves reach saturation, they begin to develop gradually, with the energy
+Ek (r) increasing with radial distance. In Fig. 15(a),t h e E (r) for all modes reaches a peak around
+rδ = 400.4 and another around r = 467.1, which is actually due to the dominance of two different
+types of spiral waves. Mode k = 32 and modes 10 ⩽ k ⩽ 20 reach their peaks one after the other.
+Since the modes with 10 ⩽ k ⩽ 20 ultimately control the transition to turbulence, this raises another
+important question regarding their origin. Are the 10 ⩽ k ⩽ 20 modes excited by mode k = 32? Or
+does the energy from the decaying mode k = 32 gradually transfer to the 10 ⩽ k ⩽ 20 modes?
+Understanding the mechanism behind this energy transfer or excitation is vital for a comprehensive
+understanding of the transition process in the rotating-disk boundary layer.
+In the previous section, after the stationary modek = 32 excited by the roughness elements, new
+modes appeared at higher radii, which we refer to based on their azimuthal wave number as modes
+10 ⩽ k ⩽ 20. In fact, these modes are in relative motion with respect to the rotating disk, as opposed
+to the stationary mode k = 32. Therefore, they can more formally be referred to as traveling spiral
+waves mode.
+Figures 16 and 17 highlight the characteristics of the traveling spiral waves mode using axial
+velocity w, where w ranges from −0.05 (blue) to 0.05 (red). The mode k = 32 shows up in the
+space-time plot as bands that are parallel to the time axis. The higher radii are ﬁlled with inclined
+FIG. 17. Space-time plot showing w at zδ = 1.245, Re = 3 × 105, S = 100.
+013901-16

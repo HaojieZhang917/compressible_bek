@@ -1,0 +1,28 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 1. Sketch of the computational domain for rotor-stator cavity ﬂow.
+The rest of the paper is organized as follows. Details of the mathematical model are described in
+Sec. II, including governing equations, SVV method, roughness function, simulation and boundary
+conditions. Results are given and discussed in Secs. III and III C. Finally, the main conclusions are
+summarized in Sec. IV. Appendix consists primarily of a table that lists the nomenclature for all
+parameter symbols used in the paper.
+II. THE MA THEMA TICAL MODEL
+In this section, the governing equations of the problem are presented, as well as a short de-
+scription of the Fourier/spectral element methods. The roughness resistance element model are also
+provided. The conﬁguration comprises two vertical disks with a radius of R
+∗, enclosed by a shroud
+represented by a vertical cylinder of width 2H∗. The rotor rotate at an angular velocity of /Omega1∗
+d while
+the stator and shroud remains stationary. A schematic diagram of the ﬂow system is presented in
+Fig. 1. The cavity aspect ratio, deﬁned as the ratio of R
+∗ to H∗,i sﬁ x e da t1 0.26. The current
+model does not incorporate a rotating hub. Due to centrifugal instability, this hub would introduce
+disturbances at the lower radii of the rotating-disk boundary layer, thereby altering the instability
+characteristics on the disk side. For speciﬁc differences, refer to Refs. [ 12,22] (with hub) and [ 6]
+(without hub). To avoid disturbances caused by the hub, we have not incorporated a hub in our
+study.
+A. Governing equations
+All parameters with superscript ∗in this paper are dimensional parameters. To nondimensional-
+ize the equations, we adopt the following nondimensional parameters: length is scaled by half the
+distance between the two disks (H
+∗); time is scaled by the inverse of the rotational speed of the disk
+013901-4

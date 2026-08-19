@@ -1,0 +1,49 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 21. (a) Cases 7 and 8, kinetic energy at all modes. (b) The distribution of perturbation energy E (r)
+along the radial.
+are considered to be a type of mode. Therefore, in the current study, the term traveling spiral waves
+mode is preferred to refer collectively to these phenomena, rather than identifying any single Fourier
+mode in isolation.
+C. Transition to turbulence
+At a Reynolds number of Re = 3 × 105, the traveling spiral waves mode manifest after the
+saturation of the stationary modes and dominate the majority of the downstream region within the
+boundary layer. Despite the presence of contortions in the spiral waves near the shroud, as illustrated
+in Fig. 14(b), local turbulence is not observed. It is important to note that according to Yim et al.’s
+[6] ﬁndings, local turbulence would have already occurred near the shroud at Re = 3 × 10
+5.T h e
+discrepancy might be attributed to the fact that in the current study, the dominant spiral waves
+transitioning the ﬂow have a lower azimuthal wave number compared to those with signiﬁcantly
+higher wave numbers in Yim et al.’s [6] study.
+To further investigate the effect of an increased Reynolds number, it was raised to Re= 4 × 10
+5
+in case 7. This case is identical to case 4 in all aspects except for the Reynolds number, and its
+initial ﬂow ﬁeld is taken from the stabilized ﬂow ﬁeld resulting from the case 4. Similarly, case
+8 only differs from case 6 in terms of the Reynolds number, with its initial ﬂow ﬁeld being the
+stabilized ﬂow ﬁeld from the case 5 simulation.
+As demonstrated by Fig. 21(a), the kinetic energy E
+k corresponding to mode k in the high
+azimuthal wave number satisﬁes the −5/3 power-law relationship characteristic of turbulence. For
+case 7, the presence of roughness elements means that mode k = 32 continues to dominate the
+disturbance characteristics of part of the boundary layer. In addition, the energy of the Fourier
+modes corresponding to the traveling spiral waves mode is now comparable to that of the stationary
+spiral waves mode represented by k = 32, indicating a more pronounced inﬂuence of the traveling
+spiral waves mode on the rotating-disk boundary layer at Re= 4 × 10
+5 compared to Re = 3 × 105.
+For case 8, apart from k = 32, the mode energies for other wave numbers show no signiﬁcant
+differences from case 7, suggesting that even without roughness elements, the boundary layer in
+case 8 undergoes a transition to turbulence. Figure 21(b) provides a streamwise perspective on
+the development process of the disk boundary layer at the current Reynolds number. For case
+7, disturbances are already present within the boundary layer before encountering the roughness
+elements, and after passing these elements, the disturbance energyE (r
+δ) quickly reaches a peak and
+remains relatively unchanged. However, closer to the shroud, there is a continuous and gradual
+increase in E (r
+δ), which has not been observed in previous cases. In contrast, for case 8, the
+disturbances exhibit a clear linear growth starting at rδ = 308.2, which slows around rδ = 413.0,
+and thereafter the ﬂow is largely consistent with that of case 7.
+Yim et al.’s [6] study indicates that when the ﬂow near the shroud becomes turbulent, the distur-
+bance energy E (rδ) in the vicinity of the shroud increases with radial distance. This characteristic
+should then be associated speciﬁcally with the ﬂow state in turbulent, as for all other cases in
+our study, there was no signiﬁcant increase in the disturbance energy E (r
+δ) near the shroud. This
+013901-19

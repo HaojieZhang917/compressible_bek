@@ -1,0 +1,52 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+of the crossﬂow vortices and the apparent nonlinear effects, they do not destabilize to cause local
+turbulence. Instead, traveling spiral waves mode emerge following the stationary mode spiral waves.
+These traveling spiral waves modes are predominantly concentrated between Fourier modes 10 to
+20 and dominate the disturbance at higher radial positions of the rotating-disk noundary layer in the
+rotor-stator cavity. Furthermore, signiﬁcant ﬂuctuations in kinetic energy are observed for Fourier
+modes with high azimuthal wave numbers ranging from 80 to 120, corresponding to the disturbances
+near the shroud in case 1. Speciﬁcally, the disturbances excite traveling spiral waves mode, which
+persist even when the stationary mode spiral waves and roughness elements are removed. As the
+stationary mode spiral waves disappear at higher radii, the transition towards turbulence in the
+current study is dominated by traveling spiral waves mode with azimuthal wave numbersk between
+10 and 20. Due to the periodic and interconnected evolution of these traveling modes, which are
+coherent structures in both time and space, there is no clear distinction in their azimuthal wave
+numbers.
+(iii) At a Reynolds number of Re= 4 × 10
+5, the disturbance energy of the traveling spiral waves
+mode reaches saturation around a radius of rδ = 462.3. However, it is not until approximately rδ =
+524.0 that all the traveling spiral waves mode completely lose their characteristic features, resulting
+in the onset of turbulence. The disparity in the radius where spiral waves instability occurs can be
+attributed to the fact that, despite the coherence in time and space, the traveling spiral waves mode
+consist of individual spiral waves with distinct characteristics, particularly manifested in the tilt
+angle of the spiral waves.
+This study has discussed the transition from laminar to turbulent ﬂow in the rotating-disk
+boundary layer, induced by 32 uniformly distributed roughness elements. Considering the destabi-
+lization mechanisms of the spiral waves themselves, the research parameter k = 32 is not a unique
+azimuthal wave number. When spiral waves of other azimuthal wave numbers are excited, the
+destabilization processes and conclusions observed in this study will also occur, indicating that
+the current conclusions can be generalized. However, there are still some issues that remain to be
+resolved. The current disturbances have induced self-sustaining traveling spiral waves mode, but
+it is unclear why the azimuthal wave numbers of these traveling spiral waves modes are conﬁned
+to the range of 10 to 20. It is highly probable that the initial development of the traveling spiral
+waves mode corresponds to the modal azimuthal wave numbers of 10–20 at r
+δ, which have the
+highest growth rates, similar to the large-scale spiral waves observed on the rotating-disk boundary
+layer of rotor-stator cavity with a rotating hub. Similarly, it is possible that the saturated stationary
+mode spiral waves induced by the roughness elements have altered the distribution of the base ﬂow,
+alter the number of spiral waves and preventing the onset of absolute instability on the rotating-disk
+boundary layer. Providing accurate answers to these questions will require further investigation
+using methodologies such as linear stability analysis to explore the characteristic parameters of
+spiral waves with different azimuthal wave numbers in subsequent work.
+Although the current SVV method is theoretically sound and does not signiﬁcantly affect the
+transition process, it remains necessary in subsequent work to use a grid with sufﬁcient resolution
+and to minimize the impact of artiﬁcial viscosity. This approach will facilitate the exploration of the
+absolute and convective instability characteristics of the rotating-disk boundary layer in the fully
+nonlinear Navier-Stokes equations.
+ACKNOWLEDGMENTS
+The authors acknowledge the ﬁnancial support of the National Natural Science Foundation
+Outstanding Youth Foundation (Grant No. 52122603), the National Science and Technology Major
+Project (No. J2019-III-0003-0046), and the numerical calculations in this study were carried out on
+the ORISE Supercomputer. Meanwhile, the current work is also supported by the Taishan Scholars
+Program.
+013901-21

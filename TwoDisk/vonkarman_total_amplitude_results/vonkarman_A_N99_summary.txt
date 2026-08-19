@@ -1,0 +1,30 @@
+Malik Type-I stationary benchmark
+reference R = 285.36
+reference beta = 0.07759
+reference alpha_r = 0.38482
+N=79 alpha=0.38505248962566885 + 0.0003486658269325461im pairing_error=5.670782940335537e-13 direct_residual=3.3009177955325434e-15 adjoint_residual=3.585388173078322e-16
+N=99 alpha=0.38505248962930666 + 0.0003486657859461014im pairing_error=1.111341954572812e-14 direct_residual=1.819170082467023e-15 adjoint_residual=5.485567877274917e-17
+N=129 alpha=0.38505248959573957 + 0.0003486658168845591im pairing_error=9.280063012356189e-13 direct_residual=4.0515512502839377e-13 adjoint_residual=2.4880350756545547e-14
+N=99 relative alpha_r error = 0.0006041516275314816
+
+von Karman amplitude evolution
+parameters: n=30, omega=0, c^2=1, N=99, Delta R=2
+Fourier convention: hhat(alpha)=integral h(s) exp(-i alpha s) ds
+lower neutral R = 313.0438296630485
+lower neutral beta = 0.09583322575720835
+lower neutral alpha = 0.4885771191258977 - 1.4702915627122307e-11im
+initial |Cr| = 0.19024136182190804
+target R = 500.0
+N(target) = 7.693921295573355
+gain(target) = 2194.964814572673
+|A(target)| = 417.57309547547715
+order-one radius = 390.7903486182958
+direct residual at lower neutral = 2.0969173178130777e-17
+adjoint residual at lower neutral = 1.2846346647807217e-16
+pairing error at lower neutral = 1.0667958156869876e-14
+
+integration-step check
+Delta R approximately 2.0: Ntarget=7.693921295573355 Atarget=417.57309547547715
+Delta R approximately 4.0: Ntarget=7.6932764250658465 Atarget=417.3039017083656
+Delta R approximately 8.0: Ntarget=7.690728316222359 Atarget=416.2419195436819
+curve_file = /home/zhj/Rotating-Flow-ToolKit/TwoDisk/vonkarman_total_amplitude_results/vonkarman_A_N99.dat

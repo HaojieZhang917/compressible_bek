@@ -1,0 +1,18 @@
+C7 two-branch diagnostic summary
+N_cheb = 99
+R_min_delta_alpha_r = 470.0
+alpha_I = 0.17799857366967567 - 0.0074067153294091834im
+alpha_II = 0.17751905310225463 + 0.02476812203316729im
+delta_alpha_r = 0.0004795205674210379
+delta_alpha_i = 0.032174837362576474
+delta_alpha_abs = 0.03217841045301689
+Cr_I_at_closest = 0.24425879854885824
+Cr_II_at_closest = 0.17243486200146693
+Q_I_at_closest = 0.00035775337493303567
+Q_II_at_closest = 0.0003202957586356254
+BC_I_at_closest = 8.738440953794251e-5
+BC_II_at_closest = 5.523015493998923e-5
+R_min_Cr_difference = 500.0
+Cr_I_at_cross = 0.1597513519768789
+Cr_II_at_cross = 0.1260257284468493
+data_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\c7_validation_results\c7_two_branches.dat

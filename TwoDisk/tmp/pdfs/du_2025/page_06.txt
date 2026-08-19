@@ -1,0 +1,58 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+where ν represents kinematic viscosity, k is an integer Fourier mode index, εis a moderately small
+multiple of ν, and Qk is a smooth real shape function. In the implementation used in this study, an
+exponential kernel is employed to augment the viscosity at high wave numbers:
+Qk = exp
+(
+− (N − k)2
+(M − k)2
+)
+, M < k ⩽ N, (6)
+where N is the highest Fourier mode index for the computation and M is the lowest threshold from
+which the method is applied.
+Quadrilateral nodal spectral elements are used to discretise the meridional ( r, z)-semiplane. In
+this case the derivative operator matrices used to construct diffusion operators are modiﬁed via (i)
+transformation to Legendre polynomial space; (ii) factorization with a diagonal matrix of form
+diag
+(
+1 + ε
+νQk
+)1/2
+, (7)
+where Qk is of the same form as Eq. ( 6) but where now N is the order of the GLL Lagrange
+interpolants (N = 6 in the present work) and k is a Legendre polynomial index. Finally (iii) inverse
+transformation from Legendre polynomial to physical space. Refer to [31] for further details.
+C. Roughness
+To replicate the surface roughness, a continuous distribution of volumetric forces is employed
+to act upon the surface of the rotating disk. Due to the cylindrical coordinate system rotating at the
+speed of the disk, the roughness elements on the disk, along with the disk itself, maintain a ﬁxed
+spatial position within the computational domain. So the expression used to quantify these forces is
+given as
+f =− SHeav(r
+′2 − (x − x0 )2 − (y − y0 )2 )e−μ(z− z0 )2
+× (u/|u|)|u(z, r,θ, t ) − u(z0, r0,θ0 )|2. (8)
+All the length parameters mentioned above have been scaled with respect to H∗ to make them
+dimensionless. The parameter S is employed to adjust the magnitude of drag, which can be
+likened to the line density in Ref. [ 32]. Heav denotes the Heaviside function, while r′2 = 0.001,
+x0 = r0cos(θ0 ), and y0 = r0sin(θ0 ) represent the coordinates of the center of the circular roughness
+elements (r0 and θ0 deﬁne the center of the circular roughness elements.). Similarly, x = rcos(θ)
+and y = rsin(θ) correspond to the coordinates of the computation domain. To ensure continuous
+excitation of the ﬂow, a Gaussian forcing function is applied to the height of the roughness elements
+with μ = 3000. ( u/|u|)|u(z, r,θ, t ) − u(z
+0, r0,θ0 )|2 denotes the square of the relative velocity in
+each direction, since an object moving in a high-Reynolds-number ﬂow experiences drag force of
+this form [33].
+Figure 2(a) illustrates the roughness elements with r
+′2 = 0.001 and r0 = 6, obtained from the
+Heaviside function, uniformly distributed along a radial position in the azimuthal direction. For
+visual clarity, the roughness elements in the ﬁgure are magniﬁed tenfold. This type of roughness
+elements will be used for controlling the transition process on the rotor in subsequent discussions.
+Figure 2(b) presents the coefﬁcient of the corresponding height positions of the roughness elements
+represented by the Gaussian forcing function when μ = 3000. The Gaussian forcing function was
+used by Appelquist et al. [27] in their study of the von Kármán boundary layer.
+D. Simulation and boundary conditions
+Through the approach in Sec. II C, we have successfully achieved the uniformly distributed of
+roughness elements with varying drag. The distribution comprises 32 roughness elements uniformly
+distributed along the azimuthal direction at a radius ofr
+0 = 6. In this case, the computational domain
+013901-6

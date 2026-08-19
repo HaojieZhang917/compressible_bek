@@ -1,0 +1,63 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+(/Omega1∗
+d
+−1); velocity is scaled by /Omega1∗
+d H∗. The incompressible Navier-Stokes equations in a cylindrical
+coordinate system with the disk rotating at a speed of /Omega1d are presented below:
+∂u
+∂t + N(u) =− ρ−1∇P + ν∇2u − 2/Omega1d × u + f, (1)
+∇ · u = 0, (2)
+where u = (u, v, w) represents the velocity of radial, azimuthal and axial direction, N(u)i st h e
+nonlinear term. P is the pressure, /Omega1d = (0, 0,/Omega1d ), f is the volume force, ρ and ν the density and
+kinematic viscosity of the ﬂuid.
+Numerical simulations are performed using the open-source software SEMTEX [ 28], involved
+coupling a continuous-Galerkin nodal Fourier/spectral element spatial discretization with semi-
+implicit temporal integration via a time-splitting scheme and explicitly solving the nonlinear terms
+in skew-symmetric form N(u) = (u · ∇u + ∇ · uu)/2. The mesh is based on N
+r × Nz Gauss–
+Lobatto–Legendre collocation points in the meridional ( r, z)-semiplane and a Fourier spectral
+method in the azimuthal direction. To be speciﬁc, Due to rotational symmetry, the velocity must
+exhibit a 2π-periodicity in the azimuthal direction, and the velocity ﬁeld can be accurately decom-
+posed into a set of two-dimensional complex Fourier modes, denoted as ˆu
+k by
+ˆuk (z, r, t ) = 1
+2π
+∫ 2π
+0
+u(z, r,θ, t )e−ikθdθ, (3)
+where k is an integer wave number. The velocity ﬁeld has the associated Fourier series
+reconstruction
+u(z, r,θ, t ) =
+∞∑
+k=−∞
+ˆuk (z, r, t )eikθ. (4)
+The dimensionless formulation of the current control equations, while lacking sufﬁcient physical
+signiﬁcance, facilitates the solution process in the code. To enhance the physical interpretability of
+subsequent results, we also redimensionalize the azimuthal velocity using the disk rotation speed at
+the local radius. This is expressed as v
+r = v/(/Omega1d r), where /Omega1d is the dimensionless angular velocity
+of rotating disk and r is the local radius. In fact,/Omega1d = 1. Additionally, we will use the viscous scale
+δ= √ (ν//Omega1) to nondimensionalize the radiusr and the axial position z, represented, respectively, as
+rδ = r/δand zδ = (1 − z)/δ, where /Omega1= /Omega1F /(2 − Ro) + /Omega1d/(2 + Ro), /Omega1F is the regular velocity
+of ﬂuid in the core, and Ro =− 0.75 in the rotor-stator cavity.
+B. Spectral vanishing viscosity method
+To mitigate the need for high spatial resolution of the computational grid, the SVV method is
+implemented to stabilize the ﬂow. Speciﬁcally, when the wave number exceeds a speciﬁed threshold,
+controlled artiﬁcial dissipation is introduced in the diffusion terms of the momentum equations.
+This is necessary because inadequate spatial resolution leads to energy accumulation at high wave
+numbers, resulting in numerical oscillations that compromise the stability and accuracy of the
+calculations. By employing this method, viscosity is increased at high wave numbers, effectively
+suppressing these oscillations and dissipating the accumulated energy. It has been demonstrated in
+Ref. [29], within the context of spectral element formulations, that the use of SVV does not affect
+the convergence properties of the method. References [30,31] offer a more elaborate exposition on
+the SVV technique, encompassing an analysis of the effects of control parameters.
+In the Fourier (here, the azimuthal) direction, one implements a Fourier-mode dependent viscos-
+ity coefﬁcient of the form
+ν
+k = ν
+(
+1 + ε
+νQk
+)
+, (5)
+013901-5

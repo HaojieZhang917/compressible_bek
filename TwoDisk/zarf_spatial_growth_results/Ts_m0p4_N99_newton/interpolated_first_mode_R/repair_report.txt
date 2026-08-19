@@ -1,0 +1,17 @@
+Fixed-beta spatial-growth repair
+source: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton
+window: R=[350.0, 500.0], beta=[0.1, 0.2]
+initial flagged points in window: 52
+repair target points in window: 99
+repaired points: 99
+unresolved points: 0
+stencil size: 3
+edge extrapolation enabled: True
+iterations: 5
+post-repair flagged points in window: 13
+post-repair flagged points already repaired: 13
+initial thresholds: 5.317863980723e-02 1.292561610210e-01 3.002845361791e-02 6.542599218677e-02 1.487039902355e-01
+final thresholds: 4.302984157555e-02 1.292561610210e-01 2.281908815328e-02 6.428589335576e-02 1.440854946937e-01
+envelope: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/interpolated_first_mode_R/spatial_growth_envelope.dat
+FE triangle: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/interpolated_first_mode_R/spatial_growth_cloud_fetriangle.dat
+repair log: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/Ts_m0p4_N99_newton/interpolated_first_mode_R/interpolated_points.dat

@@ -1,0 +1,17 @@
+C6 lower-neutral epsilon evolution
+Re_h = 1000
+a_s = 0.0
+omega_bar = 0.0
+n = 30
+N_cheb = 99
+radial_step = 2.0
+R_lower = 287.8216088945828
+abs_Cr_lower = 0.14359491729260287
+N_at_target = 4.33600278112283
+epsilon_at_lower = 0.1335600825369489
+epsilon_at_target = 10.46089180890738
+U_ref_definition = max_z sqrt(F^2 + G^2 + H^2)
+epsilon_definition = abs(Cr) exp(N) max_z sqrt(abs(u_hat)^2 + abs(v_hat)^2 + abs(w_hat)^2) / U_ref
+R_at_epsilon_0.01 = 287.8216088945828
+R_at_epsilon_0.05 = 287.8216088945828
+R_at_epsilon_0.1 = 287.8216088945828

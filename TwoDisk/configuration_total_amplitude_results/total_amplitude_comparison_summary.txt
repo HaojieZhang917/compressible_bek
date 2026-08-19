@@ -1,0 +1,26 @@
+Parameters: a_s=0, n=30, omega_bar=0, c^2=1, N=99
+Both coefficients use the same unitary Gaussian Fourier normalization.
+
+Cavity lower neutral R = 287.82160889457725
+Cavity alpha at lower neutral = 0.44967797105716156 + 1.202127383989963e-14im
+Cavity corrected |Cr(R_l)| = 0.05728608375823763
+Cavity N(R_target) = 4.082880540148696
+Cavity |A(R_target)| = 3.397986291789959
+Cavity order-one radius = 408.11419894588863
+
+Single-disk lower neutral R = 313.043829663044
+Single-disk alpha at lower neutral = 0.48857711912590496 - 1.4702525565676618e-11im
+Single-disk corrected |Cr(R_l)| = 0.07589532271177649
+Single-disk N(R_target) = 7.694083320658354
+Single-disk |A(R_target)| = 166.61455649379045
+Single-disk order-one radius = 411.8439793868476
+
+Common target radius = 500.0
+Target amplitude ratio disk/cavity = 49.03332214622409
+
+Integration-step check derived from the Delta R=1 curves
+Delta R approximately 1: cavity Ntarget=4.082880540148696 Atarget=3.397986291789959; single Ntarget=7.694083320658354 Atarget=166.61455649379045
+Delta R approximately 2: cavity Ntarget=4.082699780824814 Atarget=3.3973721295947406; single Ntarget=7.69392129556122 Atarget=166.58756294096622
+Delta R approximately 4: cavity Ntarget=4.081976782247218 Atarget=3.394916722112496; single Ntarget=7.693276424974237 Atarget=166.48017015241535
+
+curve_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\configuration_total_amplitude_results\total_amplitude_comparison_N99.dat

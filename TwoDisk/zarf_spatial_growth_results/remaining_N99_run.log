@@ -1,0 +1,2 @@
+mode = 1:cavity; mode = 2:stationary; mode = 3:rotation;
+a_s=-0.4: completed 1/84 radius groups

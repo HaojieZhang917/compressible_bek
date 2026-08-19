@@ -1,0 +1,8 @@
+mode = 1:cavity; mode = 2:stationary; mode = 3:rotation;
+a_s=-0.4: completed 1/10 radius groups
+a_s=-0.4: completed 5/10 radius groups
+a_s=-0.4: completed 10/10 radius groups
+a_s=-0.4 complete: 15112/15112 samples, 1088 envelope points
+frequency branches: 1596
+samples:  /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/remaining_newton_chunks/Ts_m0p4/R370_415/Ts_m0p4_N99/spatial_growth_samples.dat
+envelope: /home/zhj/Rotating-Flow-ToolKit/TwoDisk/zarf_spatial_growth_results/remaining_newton_chunks/Ts_m0p4/R370_415/Ts_m0p4_N99/spatial_growth_envelope.dat

@@ -1,0 +1,45 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 5. (a) Neutral curves for ω = 0a tR o =− 0.75. The critical Reδ is 203.5 and the corresponding wave
+numbers areα = 0.43 and k = 28. (b) Radial growth rate−αi for disturbances of normal mode form fork = 32
+and ω = 0a tR o =− 0.75.
+In this section, the focus is on discussing the crossﬂow vortices mode (stationary spiral waves
+mode) induced by roughness elements. Therefore, Figs. 4(b) and 4(c) depict the axial velocity w
+contour maps of the boundary layer on the rotating disk for Case 2 and Case 3, respectively [where
+w ranges from −0.05 (blue) to 0.05 (red)]. In comparison to Case 2 where the roughness elements
+have a drag coefﬁcient of S = 10, Case 3 features roughness elements with a drag coefﬁcient of
+S = 100. As a result, the features of the spiral waves are more pronounced in the contour map
+corresponding to Case 3, indicating a stronger inﬂuence of the roughness elements on the ﬂow.
+These 32 roughness elements are uniformly distributed at a radial position of r = 6. In Fig. 4(b),
+the axial velocity w distribution reﬂects the presence of 32 spiral waves induced by the roughness
+elements. However, these spiral waves appear to be discontinuous. Downstream of the roughness
+elements, there is a noticeable gradual attenuation of the spiral waves. As the spiral waves convect
+downstream, they gradually strengthen, then undergo another attenuation and reach a maximum
+energy level at the periphery of the rotating disk. In Fig. 4(c), the spiral waves exhibit a gradual
+increase in radial wavelength as they convect downstream. This phenomenon reﬂects the gradual
+ampliﬁcation of perturbation energy within the boundary layer.
+From the perspective of a radius position r
+δ based on the viscous scale δ, at a Reynolds number
+Re = 2 × 105, r = 6 corresponds to rδ = 261.5. In the core region, the rotation ratio vr(core) is
+0.315, which means that the Rossby number Ro( rδ) = /Delta1/Omega1d (rδ)//Omega1d (rδ) for the current rotating-
+disk boundary layer is −0.75, where /Delta1/Omega1d (rδ) = vr(core) − /Omega1d , /Omega1d (rδ) = (vr(core) + /Omega1d )/4 +√
+((vr(core) + /Omega1d )/4)2 + (vr(core) − /Omega1d )2/2. In Lingwood [34], the critical Reynolds number Reδ
+for convective instability is 290.1 at Ro =− 1 and 160.9 at Ro =− 0.5. In the same manner, we
+obtained the neutral curve for stationary crossﬂow vortices at Ro =− 0.75, as shown in Fig. 5(a).
+Here, the Reynolds number, Re δ, is deﬁned as Re δ =| Ro|rδ. The neutral curve indicates that the
+critical Reynolds number Re δc for the current model is 203.5, with a corresponding azimuthal
+wave number k = 28. Solely for the azimuthal wave number k = 32, the critical Reynolds number
+Reδc, corresponding to a positive radial growth rate, is 210 ( rδc = 280). This is reﬂected in the
+modal I curve depicted in Fig. 5(b). Since rδc = 280 exceeds 261.5, the current roughness element
+is located in a stable region, thereby allowing the clear observation of the decay effect of spiral
+waves downstream of the roughness element in the cloud plots. However, Fig.5(b) illustrates that at
+Ro =− 0.75, the azimuthal wave number k = 32, represented by Mode I, exhibits radial growth as
+long as Re
+δ is less than 400 (rδ < 533). This implies that although disturbances within the boundary
+layer may experience temporary declines, they will continue to grow after reaching the critical
+Reynolds number Re
+δc.
+When quantitatively describing the variations of disturbances within the boundary layer, it is
+necessary to determine the axial position corresponding to the peak disturbance. Figures 6(b) and
+6(c) illustrate the changes of the azimuthal velocity root-mean-square vrms for Case 2 and Case 3
+within the radius range ofrδ = 283.3 to 435.9, as a function of the nondimensional axial positionzδ.
+013901-9

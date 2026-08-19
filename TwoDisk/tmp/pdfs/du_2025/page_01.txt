@@ -1,0 +1,43 @@
+PHYSICAL REVIEW FLUIDS 10, 013901 (2025)
+Instability characteristics induced by roughness elements in the rotating-disk
+boundary layer of a rotor-stator cavity
+Qiang Du ,* Yaguang Xie,† Lei Xie, Ruonan Wang , Qingzong Xu , and Junqiang Zhu
+Advanced Gas Turbine Laboratory, Institute of Engineering Thermophysics , Chinese Academy of Sciences ,
+Beijing 100190, China;
+University of Chinese Academy of Sciences , Beijing 100049, China;
+National Key Laboratory of Science and Technology on Advanced Light-duty Gas-turbine,
+Beijing 100190, China;
+and Key Laboratory of Advanced Energy and Power ,Institute of Engineering Thermophysics ,
+Chinese Academy of Sciences , Beijing 100190, China
+(Received 21 July 2024; accepted 10 December 2024; published 8 January 2025)
+This study targets the stability issues of rotating-disk boundary layer in a rotor-stator
+cavity within the context of the incompressible Navier-Stokes equations, incorporating a
+drag model representative of roughness elements. Consequently, 32 azimuthally uniformly
+distributed roughness elements have been positioned within the computational domain.
+Owing to the inviscid crossﬂow instability inherent to the rotating-disk boundary layer,
+the roughness elements induce crossﬂow vortices with an azimuthal wave numberk = 32.
+Upon saturation of the crossﬂow vortices, a transition to turbulence does not immediately
+ensue; instead, a series of azimuthal Fourier modes constituting self-sustaining, spatiotem-
+porally coherent traveling spiral waves mode emerge downstream. At higher Reynolds
+numbers, these traveling spiral waves mode reach saturation and are followed downstream
+by a transition to turbulence. Notably, to the best of the authors’ knowledge, this is the ﬁrst
+instance where selective excitation of crossﬂow vortices with a speciﬁc wave number in
+the rotating-disk boundary layer within a rotor-stator cavity has resulted in a transitional
+process ultimately dominated by traveling mode spiral waves. This process is distinct from
+the one observed over a single rotating disk, where the crossﬂow vortices, after reaching a
+certain Reynolds number, govern the transition to turbulence in the von Kármán boundary
+layer.
+DOI: 10.1103/PhysRevFluids.10.013901
+I. INTRODUCTION
+The rotor-stator cavity holds paramount importance in facilitating the seamless operation of
+aviation turbine engines, prompting extensive scholarly focus on comprehending the intricate ﬂow
+dynamics and heat transfer phenomena that manifest within it [ 1]. Typically, the ﬂow inside the
+cavity exhibits a characteristic Batchelor ﬂow pattern, with well-deﬁned boundary layers present
+on both the stationary and rotating walls, separated by a central rotating core. Due to the rotational
+pumping effect, the ﬂow within the boundary layer on the rotor moves from the lower radius to the
+higher radius, while on the stator, it moves in the opposite direction, from the higher radius to the
+lower radius. The strong three-dimensional rotation engenders a wealth of complex ﬂow structures
+within the boundary layers of both the rotor and stator [2,3]. Investigation of these boundary layers
+*Contact author: duqiang@iet.cn
+†Contact author: xieyaguang@iet.cn
+2469-990X/2025/10(1)/013901(24) 013901-1 ©2025 American Physical Society

@@ -1,0 +1,32 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+TABLE I. Computational parameters used in the simulations.
+Rotor Re δtS Initial ﬂow
+Case 1 laminar to transition 2 × 105 T/12560 0 —
+Case 2 laminar to transition 2 × 105 T/12560 10 —
+Case 3 laminar to transition 2 × 105 T/12560 100 —
+Case 4 laminar to transition 3 × 105 T/31400 10 result of case 2
+Case 5 laminar to transition 3 × 105 T/31400 100 result of case 3
+Case 6 laminar to transition 3 × 105 T/31400 0 result of case 4
+Case 7 transition to turbulence 4 × 105 T/62800 10 result of case 4
+Case 8 transition to turbulence 4 × 105 T/62800 0 result of case 6
+to case 8 correspond a transition to tuebulent at Re = 4 × 105. Compare to [ 6], the current grid
+resolution is already adequate to accurately capture diverse turbulent ﬂow characteristics under the
+SVV condition. When the calculations have converged, all the statistics provided in the study are
+recalculated over ﬁve rotational periods of the rotating disk.
+III. RESULTS
+A. Crossﬂow vortices mode
+At Re = 2 × 105,Y i met al. [6] observed that the majority of the rotating-disk boundary layer
+remains in a laminar state, except near the shroud where a spiral waves structure with azimuthal
+wave number k = 82 appears due to strong shear and centrifugal effects by the shroud. In Fig.4(a),
+we present the axial velocity w contour plot of the rotating-disk boundary layer under the same
+conditions, where w ranges from −0.01 (blue) to 0.01 (red). In all the contour plots characterizing
+the boundary layer, the rotation direction of rotating disk is counterclockwise.
+The results exhibit a similar behavior to Yim et al.’s [6] ﬁndings, with a uniform occurrence of
+k = 75 spiral waves structures in the azimuthal direction. It is noteworthy that the axial velocity,
+w, is much smaller than both the radial and azimuthal velocities, and approaches zero within the
+boundary layer. Therefore, it serves as an excellent reference for disturbances in the rotating-disk
+boundary layer. Consequently, in the contour plots presented in this study, the colors represent the
+axial velocity w without any additional transformations.
+FIG. 4. (a) Case 1, Re = 2 × 105, S = 0. (b) Case 2, Re = 2 × 105, S = 10. (c) Case 3, Re = 2 × 105,
+S = 100.
+013901-8

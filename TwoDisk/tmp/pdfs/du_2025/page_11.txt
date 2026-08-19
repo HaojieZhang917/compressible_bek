@@ -1,0 +1,47 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 8. Space-time plot showing w at zδ = 1.31, Re = 2 × 105, S = 10.
+un, vn, wn represent the instantaneous velocity at each grid point along the circumference repre-
+sented by radius rδ, and ˜u,˜v, ˜w represent their azimuthal average velocity. Thus, the 1/2log(E (rδ))
+can serve as a good indicator for measuring the degree of instantaneous disturbances, similar to
+log(v
+rms ). For S = 0, the perturbation energy E (rδ) exhibits a sharp increase at a higher growth rate
+beyond rδ > 425, this edge-driven global mode. However, for S = 10 and S = 100, after passing
+through the roughness elements, E (rδ) initially decreases sharply and then suddenly increases. The
+magnitude of this increase is dependent on the value of S, but the overall trend remains the same.
+For S = 10, there is an initial approximately linear increase in E (rδ) beyond rδ > 264, reaching
+a maximum value before slowly decreasing. For S = 10 and S = 100, the maximum values are,
+respectively,−1.835 and −1.150. This means that under the current roughness elements, the maxi-
+mum value of the disturbances is not linearly proportional to the intensity of the roughness elements,
+but is approximately proportional to S
+0.685. For small roughness elements, experiments [ 4,35,36]
+have shown that the receptivity is proportional to the height of the roughness element. For S = 10,
+after rδ > 375, there is another approximate linear increase. For S = 100, there is a consistent and
+distinct linear increase along the radial direction beyond rδ > 325. With S = 10, which represents
+a smaller drag coefﬁcient, the excited crossﬂow vortices mode undergo multiple transitions during
+the downstream convection process and do not exhibit the linear growth characteristics along the
+radius as observed with S = 100. However, the crossﬂow vortices do not dominate the transition to
+turbulence on the rotating-disk boundary. This will be discussed when considering Re = 4 × 10
+5.
+For S = 10, the excited crossﬂow vortices mode undergo multiple transitions during the down-
+stream convection process and do not exhibit the linear growth characteristics along the radius as
+observed with S = 100. It is likely that due to the insufﬁcient intensity of the spiral waves, and the
+dominance of radial nonparallel effects, a stabilizing effect on the spiral waves has occurred between
+r
+δ = 325 and rδ = 375, where the disturbances reach saturation and exhibit a decreasing trend.
+Until rδ > 375, there is another approximate linear increase, This is attributed to the re-dominance
+of crossﬂow instability. Although existing studies have shown that roughness elements can excite
+crossﬂow vortex modes, current research has not yet provided evidence of these crossﬂow vortex
+modes, i.e., whether the spiral waves occurring within the boundary layer are stationary relative to
+the rotating disk. Therefore, to demonstrate the characteristics of crossﬂow vortex modes, Figs. 8
+and 9 present the space-time plots at z
+δ = 1.31, θ= 0, and 217 .9 < rδ < 447.2( 5 < r < 10.26)
+for a duration of 20 time units, where the axial velocity w ranges from −0.05 (blue) to 0.05 (red).
+(The rotational period of the rotating disk is 2 π time units.) These plots are intended to showcase
+the characteristics of the crossﬂow vortices mode.
+In both cases, there are parallel blue and red stripes along the time axis, the local axial velocityw
+does not exhibit periodic ﬂuctuations caused by the alternating passage of spiral waves. Recall that
+our current computational domain is in a cylindrical coordinate system that rotates with the rotating
+disk; therefore, the rotating disk is stationary within the computational domain. Consequently, the
+space-time plots indicate that the crossﬂow vortices are relatively stationary with respect to the rotat-
+ing disk. The space-time plots also clearly show that the radial wavelength of the crossﬂow vortices
+013901-11

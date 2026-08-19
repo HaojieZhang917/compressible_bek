@@ -1,0 +1,53 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+[1] J. Owen and R. Rogers, Flow and Heat Transfer in Rotating Disc Systems, V ol. 1: Rotor-Stator systems
+(Research Studies Press, Forest Grove, OR, 1989).
+[2] B. Launder, S. Poncet, and E. Serre, Laminar, transitional, and turbulent ﬂows in rotor-stator cavities,
+Annu. Rev. Fluid Mech. 42, 229 (2010).
+[3] D. Martinand, E. Serre, and B. Viaud, Instabilities and routes to turbulence in rotating disc boundary
+layers and cavities, Philos. Trans. R. Soc. A 381, 20220135 (2023).
+[4] P. H. Alfredsson, K. Kato, and R. Lingwood, Flows over rotating disks and cones,Annu. Rev. Fluid Mech.
+56, 45 (2024).
+[5] J. M. Lopez, F. Marques, A. M. Rubio, and M. Avila, Crossﬂow instability of ﬁnite bödewadt ﬂows:
+Transients and spiral waves, Phys. Fluids 21, 114107 (2009).
+[6] E. Yim, J.-M. Chomaz, D. Martinand, and E. Serre, Transition to turbulence in the rotating disk boundary
+layer of a rotor–stator cavity, J. Fluid Mech. 848, 631 (2018).
+[7] E. Serre, E. Tuliszka-Sznitko, and P. Bontoux, Coupled numerical and theoretical study of the ﬂow
+transition between a rotating and a stationary disk, Phys. Fluids 16, 688 (2004).
+[8] E. Severac and E. Serre, A spectral vanishing viscosity for the LES of turbulent ﬂows within rotating
+cavities, J. Comput. Phys. 226, 1234 (2007).
+[9] S. Poncet, É. Serre, and P. Le Gal, Revisiting the two ﬁrst instabilities of the ﬂow in an annular rotor-stator
+cavity, Phys. Fluids 21, 064106 (2009).
+[10] R. Roy, G. Xu, and J. Feng, A study of convective heat transfer in a model rotor–stator disk cavity,
+J. Turbomach. 123, 621 (2001).
+[11] S. Harmand, J. Pellé, S. Poncet, and I. V . Shevchuk, Review of ﬂuid ﬂow and convective heat transfer
+within rotating disk cavities with impinging jet, Int. J. Therm. Sci. 67, 1 (2013).
+[12] É. Séverac, S. Poncet, É. Serre, and M.-P. Chauve, Large eddy simulation and measurements of turbulent
+enclosed rotor-stator ﬂows, Phys. Fluids 19, 085113 (2007).
+[13] F. Gao and J. W. Chew, Evaluation and application of advanced CFD models for rotating disc ﬂows,Proc.
+I n s t .M e c h .E n g .P a r tC235, 6847 (2021).
+[14] S. Nketia, T. I. Shih, K. Bryden, R. Dalton, and R. A. Dennis, Large eddy simulation of rotationally
+induced ingress and egress around an axial seal between rotor and stator disks, Energies 16, 4354 (2023).
+[15] S. Nketia, K. M. Bryden, R. Dalton, and T. I. Shih, Large eddy simulation of externally induced ingress
+about an axial seal by stator vanes, Energies 16, 5985 (2023).
+[16] L. Schouveiler, P. Le Gal, M. Chauve, and Y . Takeda, Spiral and circular waves in the ﬂow between a
+rotating and a stationary disk, Exp. Fluids 26, 179 (1999).
+[17] L. Schouveiler, P. Le Gal, and M. Chauve, Instabilities of the ﬂow between a rotating and a stationary
+disk, J. Fluid Mech. 443, 329 (2001).
+[18] E. Serre, E. C. Del Arco, and P. Bontoux, Annular and spiral patterns in ﬂows between rotating and
+stationary discs, J. Fluid Mech. 434, 65 (2001).
+[19] M. Queguineur, T. Bridel-Bertomeu, L. Y . Gicquel, and G. Staffelbach, Large eddy simulations and global
+stability analyses of an annular and cylindrical rotor/stator cavity limit cycles, Phys. Fluids 31, 104109
+(2019).
+[20] M. Queguineur, L. Gicquel, and G. Staffelbach, Stability and control of an annular rotor/stator cavity limit
+cycle, Phys. Fluids 32, 084101 (2020).
+[21] Y . Xie, Q. Du, L. Xie, J. Liu, and R. Wang, Temperature gradient effects on stator boundary-layer stability
+in a rotor–stator cavity, AIAA J. 62, 1601 (2024).
+[22] Q. Du, Y . Xie, L. Xie, and R. Wang, Study on transition to turbulence of rotating-disk boundary layer in
+a rotor-stator cavity with temperature gradient, Phys. Rev. Fluids 9, 053908 (2024).
+[23] A. Cros, E. Floriani, P. Le Gal, and R. Lima, Transition to turbulence of the batchelor ﬂow in a rotor/stator
+device, Eur. J. Mech. B Fluids 24, 409 (2005).
+[24] Y . Xie, Q. Du, L. Xie, Z. Wang, and S. Li, Onset of turbulence in rotor–stator cavity ﬂows,J. Fluid Mech.
+991, A3 (2024).
+[25] C. Thomas and C. Davies, On the impulse response and global instability development of the inﬁnite
+rotating-disc boundary layer, J. Fluid Mech. 857, 239 (2018).
+013901-23

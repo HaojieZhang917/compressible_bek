@@ -1,0 +1,23 @@
+R=470, n=30, omega_bar=0, a_s=0, N=99
+
+Base-flow wall gradients in the local viscous coordinate
+cavity F_eta(0)=0.47274432394150945
+cavity G_eta(0)=-0.5243199124020691
+single F_eta(0)=0.5102321279429464
+single G_eta(0)=-0.6159236369901402
+
+Eigenfunction peak locations
+cavity direct |v| peak=(1.1326024258747933, 0.9999999999999999)
+single direct |v| peak=(1.4184973065359445, 1.0)
+cavity adjoint |u| peak=(1.1326024258747933, 1.0)
+single adjoint |u| peak=(1.6875660574425646, 1.0)
+
+Boundary projection split
+cavity |BC_u/Q|=0.6709664049525557
+cavity |BC_v/Q|=0.4267339212232818
+cavity |(BC_u+BC_v)/Q|=0.24425879856078114
+cavity BC cancellation index=0.2225186535306304
+single Thomas |BC_u/Q|=0.15474872739381468
+single Thomas |BC_v/Q|=0.05242123190526529
+single Thomas |(BC_u+BC_v)/Q|=0.10252459111631808
+single BC cancellation index=0.49488155263046085

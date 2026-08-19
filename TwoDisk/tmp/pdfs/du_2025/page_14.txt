@@ -1,0 +1,44 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 13. ( r, θ)p l a n ea tzδ = 1.245, Re = 3 × 105, S = 10. (a) 10 ⩽ k ⩽ 20. (b) k = 32. (c) 80 ⩽ k ⩽ 120.
+Among all the Fourier modes, the mode k = 32 exhibits the highest kinetic energy. When
+S = 100, the kinetic energy for k = 32 is only marginally greater than that for S = 10, suggesting
+that the spiral waves in both cases have reached saturation. However, the energy of the harmonic
+mode k = 64 for S = 100 is signiﬁcantly greater than that for S = 10, indicating that, despite the
+saturation of the spiral waves, the nonlinear effects associated with the k = 32 spiral waves mode
+are more pronounced when S = 100 compared to S = 10. Apart from the mode k = 32 and its
+harmonics, modes k = 13, k = 14, k = 15, and k = 16 also exhibit high kinetic energies, which
+may correspond to the irregular spiral waves observed in Fig. 12. Between k = 80 and k = 120,
+the modal kinetic energy exhibits ﬂuctuations, which are associated with the disturbance near
+the shroud, are edge-driven, akin to the k = 75 spiral waves structure shown without roughness
+elements in Fig. 4(a).
+To further differentiate and analyze the characteristics of the above three different types of
+Fourier modes, Fig. 13 provides the visualization of the boundary layer in the ( r,θ) plane at
+z
+δ = 1.245 for Reynolds number Re = 3 × 105 and S = 10, corresponding to modes within the
+ranges 10 ⩽ k ⩽ 20 (a), k = 32 (b), and 80 ⩽ k ⩽ 120 (c). The coloration represents the axial
+velocity w, ranging from −0.05 (blue) to 0.05 (red). Figure 13(a) shows that the modes within
+the range 10 ⩽ k ⩽ 20 occupy the downstream region of the regular k = 32 spiral waves, similar
+to the ﬂow structures at the corresponding radial positions in Fig. 13(a), indicating that this portion
+of the ﬂow is predominantly governed by modes within 10 ⩽ k ⩽ 20. The k = 32 mode undergoes
+rapid development downstream of the roughness elements, then reaches saturation and gradually
+decays, thereby occupying only a short radial extent for r
+δ ⩾ 320.3( r ⩾ 6). It is evident that after
+the decay of the k = 32 mode, the modes within 10 ⩽ k ⩽ 20 begin to develop and eventually
+dominate the transition to turbulence. Whether there is an interaction between these two ranges
+of modes, and whether the modes within 10 ⩽ k ⩽ 20 are stationary or traveling, requires further
+discussion. The modes within 80 ⩽ k ⩽ 120, displayed in Fig. 13(c) near the shroud, are consistent
+with the hypothesis. However, it is not clear in the current study whether they are involved in the
+transition to turbulence.
+Figure 14 presents the distribution on the ( r
+δ, zδ) plane at θ= 0, for a Reynolds number
+Re = 3 × 105 and S = 10. The coloration represents the axial velocity w, ranging from −0.05
+(blue) to 0.05 (red). To facilitate the presentation of results, only the region near the rotating-disk
+boundary layer is shown, that is 320 .3 < r
+δ < 547.7( 6 < r < 10.26) and 0 ⩽ zδ ⩽ 10. From top
+to bottom, Fig. 14(a) represent the ( rδ, zδ) plane for all modes combined, Fig. 14(b) represent the
+(rδ, zδ) plane corresponding to modes within 10 ⩽ k ⩽ 20, and Fig. 14(c) represent the ( rδ, zδ)
+plane for the mode k = 32. As shown in the ﬁgure, modes within the range 10 ⩽ k ⩽ 20 overlap
+radially with mode k = 32, and together they constitute the instability characteristics of the ﬂow
+ﬁeld for all modes combined. The modes within 10 ⩽ k ⩽ 20 located at higher radii become more
+vivid in color with increasing radius, and their radial wavelength λr gradually increases until the
+013901-14

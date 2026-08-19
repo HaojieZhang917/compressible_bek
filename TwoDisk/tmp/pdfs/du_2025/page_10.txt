@@ -1,0 +1,38 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 6. (a) Case 2, Re = 2 × 105, S = 10. (b) Case 3, Re = 2 × 105, S = 100.
+Here, vrms =
+√
+vv − v2 is nondimensionalized by its maximum value, the horizontal line represents
+the time and azimuthal average. zδ is deﬁned as (1 − z)/δ.
+Although the boundary layer on the rotating disk and the corresponding disturbances of spiral
+waves develop radially, the peak values of vrms for both cases in the current study occur around
+zδ = 1.31, while in the single rotating disk with a von Kármán boundary layer, the peak value of
+vrms occurs at zδ = 1.3. This phenomenon suggests that the average ﬂow modiﬁcation caused by
+spiral waves has not yet occurred in the two present cases. It can be concluded that the spiral waves
+are still in the linear development stage and have not reached the nonlinear stage. In Fig. 6(a),i t
+can be observed that at locations with lower radii ( r
+δ = 283.3, 305.1, 326.9, 348.7), the value of
+vrms remains within the same order of magnitude as the peak value of vrms, even at positions far
+from the boundary layer. This indicates that the boundary layer at these locations is inﬂuenced
+by disturbances originating from the core. Despite this, once perturbations are excited within the
+boundary layer, their amplitude exceeds that of the perturbations originating from the core region. In
+the context of convective instability studies, we can tentatively neglect the insigniﬁcant perturbations
+from the core region, as they are unlikely to exert a pronounced inﬂuence on the results. In Fig.
+6(b), the relatively smaller v
+rms values in the core region are attributed to the larger drag coefﬁcient
+(S = 100) of the roughness elements. Consequently, the spiral waves disturbances excited by these
+roughness elements are comparatively stronger from the beginning, leading to lower vrms values in
+the core region. The two cases consistently indicate that the peak value of vrms occurs at zδ = 1.31.
+This allows us to conﬁdently analyze the boundary layer data taken at zδ = 1.31. In fact, the three
+contour plots in Fig. 4 correspond to the axial position of zδ = 1.31.
+Figure 7 shows the radial distribution of perturbation energy 1 /2log(E (rδ)) along the entire
+circular surface at zδ = 1.31, where
+E (rδ) = 1
+2n
+[ n∑
+1
+(un − ˜u)2 + (vn − ˜v)2 + (wn − ˜w)2
+]
+, (9)
+FIG. 7. The distribution of perturbation energy 1 /2log(E (rδ)) along the radial rδ.
+013901-10

@@ -1,0 +1,35 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 14. ( r, z)p l a n ea tθ= 0, Re = 3 × 105, S = 10. (a) All modes. (b) Modes within 10 ⩽ k ⩽ 20. (c)
+Mode k = 32.
+spiral waves structure become completely distorted near the shroud. In contrast, the spiral waves
+excited by the roughness elements at lower radial positions experience an increase followed by a
+decrease in their radial wavelength with increasing radial position, consistent with the characteristics
+displayed in Fig. 13(b). At higher radial positions, Fig. 14(a) exhibits a pronounced asymmetry
+where the red regions signiﬁcantly surpass the blue regions in size. In contrast, at similar radial
+positions in Fig. 14(b), no such phenomenon is observed, the spiral waves remain uniform. This
+means that the ensemble of other modes, particularly the higher wave number modes, dominates this
+phenomenon. It is likely indicative of the instability structures at higher radii approaching saturation.
+The further growth of this uneven state may coincide with the fragmentation of the spiral waves.
+Using Parseval’s identity, The energy E (r
+δ) can be split over the contribution of each azimuthal
+wave number (mode) k, denoted Ek(rδ). Based on Figs. 13 and 14, the disturbance energy E (rδ)
+at θ= 0 and zδ = 1.245 has been divided into the radial distribution of Ek (rδ) for each Through
+the analysis of eight simulation cases, the current grid resolution and numerical methods have
+been initially validated to be capable of capturing the spiral waves structure with an azimuthal
+wave number of 75 near the shroud due to the strong centrifugal and shear effects, as observed in
+Yim et al. ’s [6] study. Additionally, at a lower Reynolds number Re = 2 × 10
+5, stationary mode
+spiral waves excited by 32 azimuthal uniform roughness elements have been identiﬁed starting
+from r = 6, which almost entirely occupy the entire disk boundary layer. The peak of v
+rms occurs
+at an axial length of zδ = 1.31. This value is remarkably close to zδ = 1.3, which corresponds to
+a von Kármán boundary layer in single rotating disk. wave number (mode) k, and the distributions
+of Ek (rδ) for modes 10 ⩽ k ⩽ 20 and mode k = 32 have been extracted separately, as shown in
+Fig. 15. Figure 15(a) corresponds to Re = 3 × 105 and S = 10, while Fig. 15(b) corresponds to
+Re = 3 × 105 and S = 100.
+Figure 15(a) indicates that at S = 10, the spiral waves of mode k = 32 reaches its energy peak
+near rδ = 400.0 and then begins to decline. At Re= 2 × 105, the corresponding disturbance energy
+for S = 100 (case3) increases linearly with radial position, and the spiral waves of mode k = 32
+occupies the entire boundary layer. However, for Re= 3 × 105, S = 100, the spiral waves of mode
+FIG. 15. (a) Case 4, Re = 3 × 105, S = 10. (b) Case 5, Re = 3 × 105, S = 100.
+013901-15

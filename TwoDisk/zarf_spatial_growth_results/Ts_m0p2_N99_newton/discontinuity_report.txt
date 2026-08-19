@@ -1,0 +1,9 @@
+envelope points: 6070
+raw flagged points: 137
+expanded target points: 287
+neighbor rings: 1
+growth edge jump: threshold=3.734534585031e-02, maximum=6.844716514510e-02
+omega edge jump: threshold=1.000000000000e-02, maximum=1.295096918267e-02
+growth curvature: threshold=1.832929742737e-02, maximum=5.043995423220e-02
+omega curvature: threshold=5.586779175188e-03, maximum=6.689197980235e-03
+alpha curvature: threshold=7.586187341093e-02, maximum=1.376960157823e-01

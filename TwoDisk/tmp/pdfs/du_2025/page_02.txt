@@ -1,0 +1,59 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+not only enables a comprehensive understanding of the ﬂow and heat transfer mechanisms within
+the cavity but also provides fresh insights into the transition process of rotating ﬂows [4].
+The simpliﬁed model consists of a stationary disk and a rotating disk, each with a radius R∗,
+separated vertically by a distance of 2H∗. Typically, a shroud is present at the top of the disk [5,6],
+and a rotating hub is situated at the bottom [ 7–9]. When secondary ﬂows are introduced near the
+lower radius of the disk either radially or axially, researchers are particularly concerned with the
+aerodynamic drag or heat transfer on the disk surface, which are critical metrics for the performance
+of the rotor-stator cavity in aviation engines [10,11]. Regardless of whether it concerns aerodynamic
+drag or heat transfer, these factors are intimately connected to the ﬂow conditions on the surface of
+the disk. Laminar and turbulent ﬂows critically inﬂuence these parameters. Therefore, it is essential
+to ﬁrst elucidate the transition issues within the boundary layers of the rotor-stator cavity to obtain
+more accurate engineering parameters such as aerodynamic drag and heat transfer.
+In fact, the typical rotational Reynolds number Re for aerospace engines is around 10
+7,( R e=
+/Omega1∗R∗2/ν∗, where/Omega1∗
+d represents the angular velocity of the disk, andν∗ denotes kinematic viscosity.)
+yet current numerical studies rarely achieve such high Reynolds numbers, generally focusing around
+Re = 10
+6 [12–15]. Empirical evidence suggests that at a Reynolds number of 107, the boundary lay-
+ers of both the stationary and rotating disks are fully turbulent. However, at high altitudes with low
+Reynolds numbers, due to a signiﬁcant reduction in density, the characteristic Reynolds numbers of
+the rotor-stator cavity decrease. At extremely high altitudes, these characteristic Reynolds numbers
+can reach 10
+5. At this level of Reynolds number, the boundary layers of both the stationary and
+rotating disks may exist in a state where laminar-transitional-turbulent ﬂow coexist.
+Around this Reynolds number, numerous numerical, theoretical, and experimental studies have
+investigated the characteristics of boundary layer ﬂow within rotor-stator cavity [ 6,16–22]. For
+the stationary-disk boundary layer, the transition from laminar instability to turbulence occurs
+very rapidly, and most studies focus only on its laminar instability. The typical characteris-
+tics of instability include large-scale spiral waves distributed azimuthally and axisymmetric ring
+waves. Through linear stability analysis, these two types of instabilities are deﬁned as Type I
+inviscid crossﬂow instability, caused by a radial velocity inﬂection point, and Type II viscous
+instability, resulting from the interaction between Coriolis forces and viscous forces. The critical
+Reynolds number for Type I instability is higher than that for Type II instability, leading these
+instabilities to occur at higher and lower radii of the boundary layer, respectively. However,
+according to research by Cros et al. [23] it is highly probable that the nonlinear interaction
+between these two types of instabilities leads to the transition of the stationary-disk boundary
+layer to turbulence. Recently, Xie et al. [24] have further emphasized this phenomenon through
+direct numerical simulation and global linear stability analysis, highlighting that the nonlinear
+interaction between inviscid crossﬂow instability and viscous instability facilitates the emergence
+of localized turbulence in the stationary-disk boundary layer. They also noted that the distur-
+bances from vigorous turbulence in the stationary-disk boundary layer could propagate across
+the core region and impact the rotating-disk boundary layer due to axial migration of the cavity
+ﬂow. Therefore, to fully understand the destabilization mechanisms of the rotating-disk boundary
+layer, the inﬂuence of vigorous turbulence in the stationary-disk boundary layer must not be
+overlooked, as it may affect the linear instability processes within the stationary disk’s boundary
+layer.
+For the rotating-disk boundary layer, its ﬂow and instability characteristics are similar to those
+of the stationary disk, but transition to turbulent occurs at higher Reynolds numbers. According
+to research by Yim et al. and Séverac et al. [6,12]a tR e = 4 × 10
+5, the boundary layer can be
+divided into laminar, transitional, and turbulent regions, with the transition to turbulence being
+particularly pronounced. Similar to the case with a single rotating disk, the spiral waves transi-
+tion to turbulence through convective or absolute instability. During convective instability, spiral
+waves emerge from a lower radius, and typically, their azimuthal wave number is not large. In
+the research conducted by Séverac et al. and Xie et al. [12,21] there are about a dozen spiral
+waves. However, due to the merging and transformation of spiral waves at higher radii, the exact
+013901-2

@@ -1,0 +1,35 @@
+Configuration-effect diagnostic validation
+Parameters: R=470, n=30, omega_bar=0, a_s=0, N=99
+
+Cavity alpha = 0.1779985736718234 - 0.007406715329660352im
+Cavity |Cr| (current manuscript convention) = 0.24425879852343474
+Cavity pairing error = 7.759332976324973e-12
+Cavity direct residual = 9.081071103861774e-15
+Cavity adjoint residual = 2.2660384858750335e-18
+
+Single-disk alpha = 0.2799333877995875 - 0.06162969144658621im
+Single-disk |Cr| (Thomas/Fig. Cr_ref convention) = 0.10252459086347916
+Single-disk |Cr| (same unnormalized Gaussian transform as cavity code) = 0.256991038303372
+Single-disk |Q| = 0.014520731905860043
+Single-disk |K| = 0.014520731905860045
+Relative |Q|-|K| difference = 1.1946529191663784e-16
+Single-disk pairing error = 2.536731957651609e-12
+Single-disk direct residual = 6.898352974160795e-14
+Single-disk adjoint residual = 3.871348696480016e-15
+
+Growth-rate ratio (-alpha_i single)/(-alpha_i cavity) = 8.320785760428617
+Native plotted Cr ratio cavity/single = 2.3824410950216577
+Same-Fourier-convention Cr ratio cavity/single = 0.9504564833700265
+
+Single-disk grid convergence at R=470
+N=79 alpha=0.27993338776010374 - 0.06162969140283886im Cr_Thomas=0.10256951352740788 pairing_error=1.0666555982582863e-12
+N=99 alpha=0.2799333877902071 - 0.061629691446465656im Cr_Thomas=0.10252459100430773 pairing_error=7.519471682305045e-12
+N=129 alpha=0.2799333877291801 - 0.06162969142204871im Cr_Thomas=0.10257710495124989 pairing_error=1.0485290128158712e-11
+
+Malik/Thomas stationary neutral benchmark
+reference alpha approximately 0.38482+0i
+computed alpha = 0.3850524896293069 + 0.0003486657859470845im
+curve_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\configuration_effect_validation_results\configuration_comparison_N99.dat
+profile_file = \\wsl.localhost\Ubuntu-24.04\home\zhj\Rotating-Flow-ToolKit\TwoDisk\configuration_effect_validation_results\baseflow_modes_R470_N99.dat
+
+Interpretation warning: the current cavity and single-disk plotting paths use Gaussian Fourier amplitudes that differ by sqrt(2*pi). The raw BC and Q are also formulation-dependent. A physical configuration mechanism must therefore be based on a common forcing convention and scale-invariant modal diagnostics, not on the native Cr ratio alone.

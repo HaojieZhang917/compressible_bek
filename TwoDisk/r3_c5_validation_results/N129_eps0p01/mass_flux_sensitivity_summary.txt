@@ -1,0 +1,45 @@
+Reviewer 3 Comment 5: quantitative Type-II mass-flux sensitivity
+N_cheb = 129; N_z = 130; epsilon_as = 0.01
+
+Critical-radius trends from the manuscript table
+Type I: central dRc/das = 311.87500000; endpoint dRc/das = 331.88750000; endpoint DeltaRc/Rc(as=0) = 0.93750221
+Type II: central dRc/das = 43.17500000; endpoint dRc/das = 48.31250000; endpoint DeltaRc/Rc(as=0) = 0.42435222
+
+[Type I]
+critical parameters: R=283.21000000 beta=0.08240000 alpha=0.40300000
+omega(as=0) = 5.729399297533e-03 +4.888543053948e-05i
+omega(+eps) = 5.606000891151e-03 -7.996419419970e-05i
+omega(-eps) = 5.854071816435e-03 +1.760058625398e-04i
+direct FD domega/das = -1.240354626421e-02 -1.279850283697e-02i
+adjoint domega/das = -1.240359618050e-02 -1.279771782586e-02i
+profile-value total = -3.326428170253e-02 +7.220105545025e-03i
+profile-shear total = 2.086068552203e-02 -2.001782337089e-02i
+  F value  = -4.230458297483e-02 +3.953767016343e-03i
+  G value  = 6.652151986829e-03 +5.525819128112e-03i
+  H value  = 2.388149285472e-03 -2.259480599430e-03i
+  F shear  = 2.377439036365e-02 -1.133449667690e-02i
+  G shear  = -2.901971797714e-03 -8.494827515014e-03i
+  H shear  = -1.173304391519e-05 -1.884991789788e-04i
+operator reconstruction error = 6.727266240048e-13
+direct eigen residual = 3.037774490537e-12
+adjoint pairing error = 2.500028446651e-15
+
+[Type II]
+critical parameters: R=91.08000000 beta=-0.11350000 alpha=0.25600000
+omega(as=0) = 1.013119278605e-01 +1.270063970924e-06i
+omega(+eps) = 1.009910257221e-01 -1.719582234136e-05i
+omega(-eps) = 1.016298558876e-01 +1.868969174742e-05i
+direct FD domega/das = -3.194150827367e-02 -1.794275704439e-03i
+adjoint domega/das = -3.194139236947e-02 -1.793960114137e-03i
+profile-value total = -3.285648914728e-02 +4.815278909080e-03i
+profile-shear total = 9.150967778081e-04 -6.609239023220e-03i
+  F value  = -2.376837763431e-02 +5.148783385565e-03i
+  G value  = -1.146874857690e-02 -2.008747541904e-03i
+  H value  = 2.380637063936e-03 +1.675243065418e-03i
+  F shear  = 1.482994757514e-03 -3.821802235082e-03i
+  G shear  = -6.031165286596e-04 -2.587576878733e-03i
+  H shear  = 3.521854895401e-05 -1.998599094050e-04i
+operator reconstruction error = 1.715303331575e-12
+direct eigen residual = 4.112736961015e-13
+adjoint pairing error = 2.388913565225e-15
+

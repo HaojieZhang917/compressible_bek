@@ -1,0 +1,8 @@
+Cavity lower neutral R = 287.821608894600
+Cavity initial A = 1.435949172913e-01
+Cavity A(500) = 8.517488515809e+00
+Disk lower neutral R = 313.043829663000
+Disk initial A = 1.902413618219e-01
+Disk A(500) = 4.175730954755e+02
+Crossover R = 318.179217707908, 416.114885124477
+A(500) ratio disk/cavity = 4.902537816170e+01

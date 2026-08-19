@@ -1,0 +1,34 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+FIG. 19. (a) Case 6, kinetic energy at k = 15, 16, 32, 33, 100. (b) The distribution of perturbation energy
+E (r) along the radial.
+independently, suggesting no interaction between stationary and traveling spiral waves mode in the
+current study. Once excited, a traveling spiral waves mode can sustain itself. Similarly, the high wave
+number mode k = 100, located near the guard, is unaffected by the roughness elements. Figure19(b)
+provides a quantitative comparison between the radial distribution of kinetic energy, E (r), for
+the ﬂow ﬁelds in case 4 after the exclusion of mode k = 32, and in case 6. In the linear growth
+region of energy (400.4 < r
+δ < 467.1), the two curves nearly overlap, further conﬁrming that the
+high-radius traveling spiral waves mode are unaffected by the stationary spiral waves modek = 32.
+If one extends the observation to lower radii, it is noted that in case 6, the traveling spiral waves
+mode begin to exhibit an increase in disturbance energy starting from a smaller radius, r
+δ = 266.9.
+Section II elaborately explains that introducing a rotating hub at the lower radius of the disk can
+induce centrifugal instability, leading to the development of large-scale convective spiral waves in
+the rotating-disk boundary layer. This is further conﬁrmed by Fig. 19(b), which demonstrates that
+the traveling spiral waves mode can also develop under disturbances at lower radii and persist.In
+Fig. 19(a), the large-scale ﬂuctuations of modes k = 15 and k = 16 over time reﬂect the nature of a
+group of spiral waves characteristic of the traveling spiral waves mode. These spiral waves undergo
+a dynamic process of merging and splitting as they evolve. Figure 20(a) illustrates the interactions
+among modes k = 13, k = 14, k = 15, and k = 16 at high radial positions, showcasing the complex
+interplay at work in the development of these traveling wave patterns. Among the observed modes,
+mode k = 14 possesses the highest kinetic energy and the largest amplitude of pulsations, with
+a pulsation period T
+k ≈ 8.5. Although the pulsation period of mode k = 15’s kinetic energy Ek
+coincides with that of mode k = 14, there is a phase shift between them, indicating a lag in the
+energy transfer between modes. While it is challenging to identify the precise pulsation periods for
+modes k = 13 and k = 16, the peaks and troughs in their kinetic energy can still be discerned and
+are phase-shifted relative to those of modek = 14 and mode k = 15. This phase difference conﬁrms
+that the nonlinear interactions leading to the merging of these traveling spiral waves modes are an
+ongoing process. As these Fourier modes exhibit an organized coherent space-time evolution, they
+FIG. 20. Case 4, kinetic energy Ek at k = 13, 14, 15, 16.
+013901-18

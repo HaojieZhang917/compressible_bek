@@ -1,0 +1,31 @@
+INSTABILITY CHARACTERISTICS INDUCED BY …
+FIG. 2. (a) 32 roughness elements uniformly distributed along a radial position; (b) Gaussian forcing
+function.
+is deﬁned by the parameters R = 10.26, and Reynolds numbers of Re = 2 × 105 to Re = 4 × 105
+with a meshgrid ( Nr, Nz, Nθ = 240, 120, 384), where the number Fourier modes is 192, and the
+order of spectral elements is 6. This model has been extensively discussed in Yim et al. ’s [6]
+study, focusing on the laminar-transition-turbulence transition process. Consequently, it serves as
+a valuable tool for investigating the impact of surface roughness on the transition process. For the
+SVV method, the threshold fromM for azimuthal direction is 64 and for meridional (r, z) semiplane
+is 4 in all simulations used in present study. In all simulations, the parameter ε was set to 10 ν.
+Figure 3 presents the distribution characteristics of the SVV kernel Q
+k for M = 64 and N = 191
+(with Fourier mode indices starting from 0, thus the maximum index isN = 191). The primary mode
+of interest in the current study is k = 32. Although the SVV method is employed to dampen higher
+wave numbers, the ﬁrst harmonic k = 64 and the second harmonic k = 96 of mode k = 32 remain
+unaffected. However, it is important to note that higher-order harmonics are necessary to accurately
+capture the transition process from spiral waves to turbulence. We have adopted this method under
+the premise that the results are not signiﬁcantly affected. Due to the lack of comparable data, we
+took an aposteriori approach and increased the number of Fourier modes to 1152 and the order of
+spectral elements to 8 for the case 5, Re = 3 × 10
+5. Additionally, we applied SVV viscosity only
+in the meridional plane. The results showed no signiﬁcant differences, giving us conﬁdence in the
+appropriateness of the current grid resolution.
+The summary of computational parameters provided in Table I. Here, T represents the di-
+mensionless period of the disk rotation, which is equal to 2 π. In the speciﬁed time step δt,t h e
+Courant–Friedrichs–Lewy (CFL) value is constrained to be less than 1 in all simulations. The
+case 1 and case 2 correspond 32 roughness elements located on the rotor in transition process
+at Re = 2 × 10
+5, the case 4 to case 6 also in transiton process at Re = 3 × 105 and the case 7
+FIG. 3. SVV kernel Qk for M = 64 and N = 191.
+013901-7

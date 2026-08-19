@@ -1,0 +1,58 @@
+DU, XIE, XIE, W ANG, XU, AND ZHU
+APPENDIX: NOMENCLA TURE
+To enhance the readability of the paper, the nomenclature for all parameter symbols used in the
+paper is provided in Table II.
+TABLE II. Nomenclature of all parameter symbols appearing in the paper.
+E (r) Perturbation energy along the entire circular surface. Dimensionless.
+Ek Kinetic energy of each azimuthal Fourier mode k. Dimensionless.
+f V olume force. Dimensionless.
+GLL Gauss-Lobatto-Legendre interpolant.
+Heav Heaviside function.
+H∗ Half the spacing between the disks. Dimensional, m.
+k Azimuthal wave number, also mean Fourier mode index. Dimensional.
+M Threshold from which svv is applied.
+N Highest Fourier mode index for the simulation.
+Nr, Nz, Nθ Radial, axial, and azimuthal degrees of freedom.
+N-S Navier-Stokes equations.
+N(u) Nonlinear term. Dimensionless.
+P Pressure. Dimensionless.
+Qk Smooth real shape function for SVV .
+θ Azimuthal position. Rad.
+r, z Dimensionless radial and axial position. Dimensionless by H∗.
+r′ Radius of the roughness elements. Dimensionless.
+r0 Radial position of the roughness elements. Dimensionless.
+rδ Reynolds number based on viscous scale δ. Dimensionless, rδ = r/δ.
+R∗ Radius of a disk. Dimensional, m.
+Re Reynolds number. Dimensionless, Re = /Omega1∗
+d R∗2/ν∗.
+Reδ Reynolds number based on viscous scale δand Rossby number Ro. Dimensionless, Reδ =| Ro|rδ.
+SVV Spectral vanishing viscosity.
+S Drag coefﬁcient. Dimensional.
+t Time in simulations. Dimensionless by /Omega1∗
+d .
+T Rotational period of the rotating disk, T = 2π. Dimensionless by /Omega1∗
+d .
+u = (u, v, w) Velocity of radial, azimuthal, and axial direction. Dimensionless by /Omega1∗
+d H∗.
+(u · ∇u + ∇ · uu)/2 Nonlinear terms in skew-symmetric form. Dimensionless.
+ˆu∗
+k Complex conjugate of the velocity data in the kth Fourier mode. Dimensionless.
+ˆuk Velocity of two-dimensional complex Fourier modes.
+un, vn, wn Instantaneous velocity of radial, azimuthal, and axial direction. Dimensionless.
+˜u,˜v, ˜w Average velocity of the un, vn, wn. Dimensionless.
+vrms Azimuthal velocity root-mean-square. Dimensionless.
+zδ Dimensionless distance from the rotating disk. Dimensionless by δ.
+/Omega1∗
+d Angular velocity of the disk. Dimensional, rad/s.
+/Omega1d Dimensionless rotational speed of the disk. Dimensionless by /Omega1∗
+d .
+ν∗ Kinematic viscosity of ﬂuid. Dimensional, m2/s.
+ν Kinematic of the ﬂuid. Dimensionless.
+ε Moderately small multiple of ν. Dimensionless.
+μ Coefﬁcient in the Gaussian forcing function.
+δ Viscous scale.
+ρ Density of the ﬂuid. Dimensionless.
+δt Time step in simulations. Dimensionless by /Omega1∗
+d .
+λr Radial wavelength. Dimensionless by δ.
+013901-22
