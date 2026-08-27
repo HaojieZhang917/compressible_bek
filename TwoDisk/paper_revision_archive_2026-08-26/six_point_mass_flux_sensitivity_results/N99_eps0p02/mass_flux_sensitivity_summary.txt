@@ -1,0 +1,151 @@
+Six-point Type-I/Type-II mass-flux sensitivity
+N_cheb = 99; N_z = 100; epsilon_as = 0.02
+
+Critical-radius trends from the manuscript table
+Type I: central dRc/das = 311.87500000; endpoint dRc/das = 331.88750000; endpoint DeltaRc/Rc(as=0) = 0.93750221
+Type II: central dRc/das = 43.17500000; endpoint dRc/das = 48.31250000; endpoint DeltaRc/Rc(as=0) = 0.42435222
+
+[I-C: Type I, critical]
+operating parameters: R=283.21000000 beta=0.08240000 alpha=0.40300000
+omega(as=0) = 5.729399187832e-03 +4.888549327589e-05i
+omega(+eps) = 5.483901545500e-03 -2.105759642190e-04i
+omega(-eps) = 5.979992753257e-03 +3.014284143567e-04i
+direct FD domega/das = -1.240228019391e-02 -1.280010946439e-02i
+adjoint domega/das = -1.240247947437e-02 -1.279696793000e-02i
+profile-value total = -3.326159562941e-02 +7.219961974610e-03i
+profile-shear total = 2.085911615504e-02 -2.001692990462e-02i
+  F value  = -4.230386808586e-02 +3.953793025879e-03i
+  G value  = 6.654115474400e-03 +5.525645095840e-03i
+  H value  = 2.388156982053e-03 -2.259476147109e-03i
+  F shear  = 2.377328923175e-02 -1.133426556135e-02i
+  G shear  = -2.902440329365e-03 -8.494168680566e-03i
+  H shear  = -1.173274734647e-05 -1.884956626981e-04i
+operator reconstruction error = 2.068820293515e-13
+direct eigen residual = 1.668667402287e-12
+adjoint pairing error = 2.161025028091e-15
+
+FD/adjoint relative error = 1.766381923697e-04
+mode overlap (+eps) = 9.998662593366e-01
+mode overlap (-eps) = 9.998673286606e-01
+growth-rate cancellation index = 4.698395098365e-01
+
+[I-M: Type I, interior ridge]
+operating parameters: R=310.00000000 beta=0.08000000 alpha=0.40500000
+omega(as=0) = 7.009126236099e-03 +1.041433479217e-03i
+omega(+eps) = 6.756996562833e-03 +8.044620731907e-04i
+omega(-eps) = 7.266089986024e-03 +1.272081559379e-03i
+direct FD domega/das = -1.272733557978e-02 -1.169048715470e-02i
+adjoint domega/das = -1.272768216648e-02 -1.168793307124e-02i
+profile-value total = -3.416536141357e-02 +7.140185826324e-03i
+profile-shear total = 2.143767924710e-02 -1.882811889756e-02i
+  F value  = -4.258568948298e-02 +3.836011320744e-03i
+  G value  = 6.234810267915e-03 +5.336331749825e-03i
+  H value  = 2.185517801494e-03 -2.032157244246e-03i
+  F shear  = 2.401503192710e-02 -1.040424171087e-02i
+  G shear  = -2.571765545109e-03 -8.253459909336e-03i
+  H shear  = -5.587134891841e-06 -1.704172773510e-04i
+operator reconstruction error = 1.680395999295e-13
+direct eigen residual = 1.724650818236e-12
+adjoint pairing error = 4.797816471411e-16
+
+FD/adjoint relative error = 1.491595955114e-04
+mode overlap (+eps) = 9.998643487198e-01
+mode overlap (-eps) = 9.998652805621e-01
+growth-rate cancellation index = 4.500845625277e-01
+
+[I-R: Type I, common R=350]
+operating parameters: R=350.00000000 beta=0.08500000 alpha=0.39500000
+omega(as=0) = 4.245016696448e-03 +2.236127200727e-03i
+omega(+eps) = 4.016188065198e-03 +2.012405355965e-03i
+omega(-eps) = 4.478758694910e-03 +2.454126181812e-03i
+direct FD domega/das = -1.156426574279e-02 -1.104302064618e-02i
+adjoint domega/das = -1.156474231425e-02 -1.104094369282e-02i
+profile-value total = -3.357746306696e-02 +6.623667240996e-03i
+profile-shear total = 2.201272075271e-02 -1.766461093382e-02i
+  F value  = -4.157583368368e-02 +2.798076983791e-03i
+  G value  = 5.970356063419e-03 +5.585646307194e-03i
+  H value  = 2.028014553303e-03 -1.760056049988e-03i
+  F shear  = 2.416011769608e-02 -8.650798371635e-03i
+  G shear  = -2.146648315801e-03 -8.869639302381e-03i
+  H shear  = -7.486275647840e-07 -1.441732598041e-04i
+operator reconstruction error = 2.159144622624e-13
+direct eigen residual = 2.495247928041e-12
+adjoint pairing error = 1.982675150205e-15
+
+FD/adjoint relative error = 1.332752781487e-04
+mode overlap (+eps) = 9.998641179499e-01
+mode overlap (-eps) = 9.998648442344e-01
+growth-rate cancellation index = 4.545791024525e-01
+
+[II-C: Type II, critical]
+operating parameters: R=91.08000000 beta=-0.11350000 alpha=0.25600000
+omega(as=0) = 1.013119278482e-01 +1.270059863156e-06i
+omega(+eps) = 1.006671101710e-01 -3.671801381071e-05i
+omega(-eps) = 1.019448486820e-01 +3.507302084931e-05i
+direct FD domega/das = -3.194346277596e-02 -1.794775866501e-03i
+adjoint domega/das = -3.194299910036e-02 -1.793513494222e-03i
+profile-value total = -3.285814394140e-02 +4.815468880187e-03i
+profile-shear total = 9.151448410361e-04 -6.608982374409e-03i
+  F value  = -2.376796874256e-02 +5.148686102766e-03i
+  G value  = -1.147082383104e-02 -2.008446898679e-03i
+  H value  = 2.380648632211e-03 +1.675229676100e-03i
+  F shear  = 1.483017766823e-03 -3.821653185741e-03i
+  G shear  = -6.030904305587e-04 -2.587472435384e-03i
+  H shear  = 3.521750477150e-05 -1.998567532845e-04i
+operator reconstruction error = 1.830021019641e-13
+direct eigen residual = 2.788702544276e-13
+adjoint pairing error = 1.230059227783e-15
+
+FD/adjoint relative error = 4.203485449192e-05
+mode overlap (+eps) = 9.999077030747e-01
+mode overlap (-eps) = 9.999079044868e-01
+growth-rate cancellation index = 1.569890276787e-01
+
+[II-M: Type II, interior ridge]
+operating parameters: R=200.00000000 beta=-0.05000000 alpha=0.21500000
+omega(as=0) = 5.837162094667e-02 +2.108055703652e-03i
+omega(+eps) = 5.796608686787e-02 +2.093861426953e-03i
+omega(-eps) = 5.877059885917e-02 +2.119425027784e-03i
+direct FD domega/das = -2.011279978240e-02 -6.390900207842e-04i
+adjoint domega/das = -2.011263858166e-02 -6.384794904073e-04i
+profile-value total = -2.353771788265e-02 +3.581126490335e-03i
+profile-shear total = 3.425079300991e-03 -4.219605980742e-03i
+  F value  = -2.174897363176e-02 +3.792805902362e-03i
+  G value  = -3.772730310040e-03 -1.607837548942e-03i
+  H value  = 1.983986059149e-03 +1.396158136916e-03i
+  F shear  = 4.721996138231e-03 -2.814822271149e-03i
+  G shear  = -1.316177127535e-03 -1.331393725724e-03i
+  H shear  = 1.926029029423e-05 -7.338998386940e-05i
+operator reconstruction error = 4.457815469033e-13
+direct eigen residual = 2.520270183406e-13
+adjoint pairing error = 1.362836524348e-15
+
+FD/adjoint relative error = 3.138002818199e-05
+mode overlap (+eps) = 9.999155356569e-01
+mode overlap (-eps) = 9.999149236605e-01
+growth-rate cancellation index = 8.184865879896e-02
+
+[II-R: Type II, common R=350]
+operating parameters: R=350.00000000 beta=-0.02500000 alpha=0.18500000
+omega(as=0) = 4.017081847908e-02 +2.487291236584e-03i
+omega(+eps) = 3.988043751255e-02 +2.482246584655e-03i
+omega(-eps) = 4.045628969147e-02 +2.490079499960e-03i
+direct FD domega/das = -1.439630447296e-02 -1.958228826407e-04i
+adjoint domega/das = -1.439658189277e-02 -1.953441832382e-04i
+profile-value total = -1.905203358204e-02 +2.673617496498e-03i
+profile-shear total = 4.655451689262e-03 -2.868961679737e-03i
+  F value  = -1.904765067740e-02 +2.652957651927e-03i
+  G value  = -1.653877284271e-03 -1.045730280025e-03i
+  H value  = 1.649494379633e-03 +1.066390124596e-03i
+  F shear  = 5.985183322948e-03 -1.946048194697e-03i
+  G shear  = -1.340821859629e-03 -8.862004051372e-04i
+  H shear  = 1.109022594304e-05 -3.671307990287e-05i
+operator reconstruction error = 1.823056606266e-13
+direct eigen residual = 2.366299704375e-13
+adjoint pairing error = 1.180040544269e-15
+
+FD/adjoint relative error = 3.842756339767e-05
+mode overlap (+eps) = 9.999083853395e-01
+mode overlap (-eps) = 9.999069543465e-01
+growth-rate cancellation index = 3.524427473689e-02
+

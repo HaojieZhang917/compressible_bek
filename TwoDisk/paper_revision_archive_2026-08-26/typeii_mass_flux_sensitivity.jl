@@ -13,8 +13,10 @@ const MODE = 1
 const N_CHEB = parse(Int, get(ENV, "R3C5_N_CHEB", "99"))
 const EPSILON_AS = parse(Float64, get(ENV, "R3C5_EPSILON_AS", "0.01"))
 
-struct CriticalMode
+struct OperatingPoint
     name::String
+    point_id::String
+    role::String
     radius::Float64
     beta::Float64
     alpha::Float64
@@ -22,8 +24,18 @@ struct CriticalMode
 end
 
 const MODES = [
-    CriticalMode("Type I", 283.21, 0.0824, 0.403, 0.0099 + 0.0im),
-    CriticalMode("Type II", 91.08, -0.1135, 0.256, 0.0983 + 0.0im),
+    OperatingPoint("Type I", "I-C", "critical", 283.21, 0.0824, 0.403,
+                   0.0057293993 + 4.88854e-5im),
+    OperatingPoint("Type I", "I-M", "interior ridge", 310.0, 0.080, 0.405,
+                   0.00700913 + 0.00104143im),
+    OperatingPoint("Type I", "I-R", "common R=350", 350.0, 0.085, 0.395,
+                   0.00424502 + 0.00223613im),
+    OperatingPoint("Type II", "II-C", "critical", 91.08, -0.1135, 0.256,
+                   0.1013119279 + 1.27006e-6im),
+    OperatingPoint("Type II", "II-M", "interior ridge", 200.0, -0.050, 0.215,
+                   0.0583716 + 0.00210806im),
+    OperatingPoint("Type II", "II-R", "common R=350", 350.0, -0.025, 0.185,
+                   0.0401708 + 0.00248729im),
 ]
 
 const AS_VALUES = [-0.4, -0.2, 0.0, 0.2, 0.4]
@@ -43,7 +55,7 @@ function base_profile(a_s, D, z)
     return vec(F), vec(G .- 1), vec(H)
 end
 
-function temporal_problem(F, G, H, mode::CriticalMode, D, D2)
+function temporal_problem(F, G, H, mode::OperatingPoint, D, D2)
     cof = CRC_STA.Spatial_mode_BEK1(
         reshape(F, :, 1), reshape(G, :, 1), reshape(H, :, 1),
         mode.radius, N_CHEB, D, D2, RE_H,
@@ -76,7 +88,7 @@ function block_range(component, n)
     return first:(first + n - 1)
 end
 
-function profile_operator_components(F, G, H, mode::CriticalMode, D)
+function profile_operator_components(F, G, H, mode::OperatingPoint, D)
     n = length(F)
     total = 4n
     sqrt_re = sqrt(RE_H)
@@ -132,7 +144,11 @@ function profile_operator_components(F, G, H, mode::CriticalMode, D)
     )
 end
 
-function mode_sensitivity(mode::CriticalMode, epsilon, D, D2, z)
+function normalized_overlap(reference, candidate)
+    return abs(dot(reference, candidate)) / (norm(reference) * norm(candidate))
+end
+
+function mode_sensitivity(mode::OperatingPoint, epsilon, D, D2, z)
     F0, G0, H0profile = base_profile(0.0, D, z)
     Fp, Gp, Hp = base_profile(epsilon, D, z)
     Fm, Gm, Hm = base_profile(-epsilon, D, z)
@@ -143,8 +159,8 @@ function mode_sensitivity(mode::CriticalMode, epsilon, D, D2, z)
 
     omega, direct = nearest_pair(H00, H1, mode.omega_target)
     adjoint_value, left = paired_left_vector(H00, H1, omega)
-    omega_p, _ = nearest_pair(H0p, H1p, omega)
-    omega_m, _ = nearest_pair(H0m, H1m, omega)
+    omega_p, direct_p = nearest_pair(H0p, H1p, omega)
+    omega_m, direct_m = nearest_pair(H0m, H1m, omega)
 
     full_derivative = (H0p - H0m) / (2epsilon)
     plus_components = profile_operator_components(Fp, Gp, Hp, mode, D)
@@ -185,6 +201,11 @@ function mode_sensitivity(mode::CriticalMode, epsilon, D, D2, z)
         reconstruction_error = reconstruction_error,
         eigen_residual = norm(H00 * direct - omega * H1 * direct) / norm(H00 * direct),
         adjoint_pair_error = abs(adjoint_value - conj(omega)),
+        overlap_plus = normalized_overlap(direct, direct_p),
+        overlap_minus = normalized_overlap(direct, direct_m),
+        fd_adjoint_error = abs(direct_fd - adjoint_total) / max(abs(adjoint_total), eps()),
+        cancellation_index = abs(imag(adjoint_total)) /
+            (abs(imag(value_total)) + abs(imag(shear_total))),
     )
 end
 
@@ -205,7 +226,7 @@ function critical_radius_summary()
 end
 
 function main()
-    output_dir = joinpath(@__DIR__, "r3_c5_validation_results",
+    output_dir = joinpath(@__DIR__, "six_point_mass_flux_sensitivity_results",
                           "N$(N_CHEB)_eps$(replace(string(EPSILON_AS), "." => "p"))")
     mkpath(output_dir)
     D, D2, z_matrix = CRC_BF.Cheb(N_CHEB, MODE)
@@ -216,7 +237,7 @@ function main()
     summary = critical_radius_summary()
 
     open(joinpath(output_dir, "mass_flux_sensitivity_summary.txt"), "w") do io
-        println(io, "Reviewer 3 Comment 5: quantitative Type-II mass-flux sensitivity")
+        println(io, "Six-point Type-I/Type-II mass-flux sensitivity")
         println(io, "N_cheb = $N_CHEB; N_z = $(N_CHEB + 1); epsilon_as = $epsilon")
         println(io)
         println(io, "Critical-radius trends from the manuscript table")
@@ -228,8 +249,8 @@ function main()
         println(io)
 
         for result in results
-            println(io, "[$(result.mode.name)]")
-            @printf(io, "critical parameters: R=%.8f beta=%.8f alpha=%.8f\n",
+            println(io, "[$(result.mode.point_id): $(result.mode.name), $(result.mode.role)]")
+            @printf(io, "operating parameters: R=%.8f beta=%.8f alpha=%.8f\n",
                     result.mode.radius, result.mode.beta, result.mode.alpha)
             @printf(io, "omega(as=0) = %.12e %+.12ei\n", real(result.omega), imag(result.omega))
             @printf(io, "omega(+eps) = %.12e %+.12ei\n", real(result.omega_p), imag(result.omega_p))
@@ -249,25 +270,40 @@ function main()
             @printf(io, "operator reconstruction error = %.12e\n", result.reconstruction_error)
             @printf(io, "direct eigen residual = %.12e\n", result.eigen_residual)
             @printf(io, "adjoint pairing error = %.12e\n\n", result.adjoint_pair_error)
+            @printf(io, "FD/adjoint relative error = %.12e\n", result.fd_adjoint_error)
+            @printf(io, "mode overlap (+eps) = %.12e\n", result.overlap_plus)
+            @printf(io, "mode overlap (-eps) = %.12e\n", result.overlap_minus)
+            @printf(io, "growth-rate cancellation index = %.12e\n\n",
+                    result.cancellation_index)
         end
     end
 
-    rows = Any[]
-    for result in results
-        push!(rows, [
-            result.mode.name,
-            real(result.omega), imag(result.omega),
-            real(result.direct_fd), imag(result.direct_fd),
-            real(result.adjoint_total), imag(result.adjoint_total),
-            real(result.value_total), imag(result.value_total),
-            real(result.shear_total), imag(result.shear_total),
-        ])
-    end
     open(joinpath(output_dir, "mass_flux_sensitivity.dat"), "w") do io
-        println(io, "TITLE = \"Type-I and Type-II mass-flux sensitivity\"")
-        println(io, "VARIABLES = \"Mode\" \"omega_r\" \"omega_i\" \"FD_domega_r\" \"FD_domega_i\" \"Adj_domega_r\" \"Adj_domega_i\" \"Value_domega_r\" \"Value_domega_i\" \"Shear_domega_r\" \"Shear_domega_i\"")
-        for row in rows
-            println(io, join(row, " "))
+        println(io, "TITLE = \"Six-point Type-I and Type-II mass-flux sensitivity\"")
+        println(io, "VARIABLES = \"R\" \"alpha\" \"beta\" \"omega_r\" \"omega_i\" \"FD_domega_r\" \"FD_domega_i\" \"Adj_domega_r\" \"Adj_domega_i\" \"S_b_r\" \"S_b_i\" \"S_g_r\" \"S_g_i\" \"cancellation_index\" \"FD_adjoint_error\" \"direct_residual\" \"adjoint_pair_error\" \"overlap_plus\" \"overlap_minus\"")
+        println(io, "DATASETAUXDATA Re_h=\"$(RE_H)\"")
+        println(io, "DATASETAUXDATA a_s=\"0.0\"")
+        println(io, "DATASETAUXDATA N_cheb=\"$(N_CHEB)\"")
+        println(io, "DATASETAUXDATA N_z=\"$(N_CHEB + 1)\"")
+        println(io, "DATASETAUXDATA epsilon_as=\"$(EPSILON_AS)\"")
+        println(io, "DATASETAUXDATA sensitivity_definition=\"fixed R, alpha, beta\"")
+        for result in results
+            println(io, "ZONE T=\"$(result.mode.point_id) $(result.mode.name) $(result.mode.role)\", I=1, F=POINT")
+            println(io, "AUXDATA Mode=\"$(result.mode.name)\"")
+            println(io, "AUXDATA Point_ID=\"$(result.mode.point_id)\"")
+            println(io, "AUXDATA Role=\"$(result.mode.role)\"")
+            values = [
+                result.mode.radius, result.mode.alpha, result.mode.beta,
+                real(result.omega), imag(result.omega),
+                real(result.direct_fd), imag(result.direct_fd),
+                real(result.adjoint_total), imag(result.adjoint_total),
+                real(result.value_total), imag(result.value_total),
+                real(result.shear_total), imag(result.shear_total),
+                result.cancellation_index, result.fd_adjoint_error,
+                result.eigen_residual, result.adjoint_pair_error,
+                result.overlap_plus, result.overlap_minus,
+            ]
+            println(io, join(values, " "))
         end
     end
 

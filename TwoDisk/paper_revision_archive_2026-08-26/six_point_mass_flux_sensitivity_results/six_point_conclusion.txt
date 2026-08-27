@@ -1,0 +1,68 @@
+Six-point wall-mass-flux sensitivity: design, results, and scope
+
+Operating condition
+Re_h = 1000
+a_s = 0
+Sensitivity definition: R, alpha, and beta are held fixed while a_s varies.
+Final discretization: N_cheb = 199 (N_z = 200)
+Central-difference step used for the final table: delta a_s = 0.01
+
+Representative-point design
+Point  Mode     Role              R       alpha    beta
+I-C    Type I   tabulated critical 283.21  0.403   0.0824
+I-M    Type I   interior ridge     310.00  0.405   0.0800
+I-R    Type I   common R           350.00  0.395   0.0850
+II-C   Type II  tabulated critical  91.08  0.256  -0.1135
+II-M   Type II  interior ridge     200.00  0.215  -0.0500
+II-R   Type II  common R           350.00  0.185  -0.0250
+
+The four new points were selected from the a_s=0 temporal maximum-growth
+ridges. At the common radius, each mode retains its own ridge-optimal alpha
+and beta; equal wave numbers are not imposed.
+
+Final N=199 results
+Point  omega_i          S_b,i            S_g,i            d omega_i/d a_s  cancellation
+I-C     4.888548037e-05  7.220105512e-03 -2.001782345e-02 -1.279771794e-02  0.469849
+I-M     1.041433468e-03  7.140308983e-03 -1.882892460e-02 -1.168861561e-02  0.450095
+I-R     2.236127183e-03  6.623722549e-03 -1.766531960e-02 -1.104159705e-02  0.454592
+II-C    1.270059650e-06  4.815278901e-03 -6.609239023e-03 -1.793960123e-03  0.157027
+II-M    2.108055695e-03  3.580952201e-03 -4.219730376e-03 -6.387781746e-04  0.081887
+II-R    2.487291221e-03  2.673457517e-03 -2.869007067e-03 -1.955495504e-04  0.035282
+
+Interpretation
+1. The sign structure is universal across the six tested points:
+   S_b,i > 0, S_g,i < 0, and d omega_i/d a_s < 0.
+2. Type-I sensitivity remains O(10^-2) at all three points. Its cancellation
+   index remains in the narrow range 0.450--0.470.
+3. Type-II sensitivity is weaker at all three points and becomes progressively
+   smaller downstream because S_b,i and S_g,i approach equal magnitudes. Its
+   cancellation index decreases from 0.157 at the critical point to 0.035 at
+   R=350.
+4. The same-radius comparison rules out radius alone as the explanation:
+   at R=350 the Type-II net growth-rate sensitivity is only 1.77% of the
+   Type-I value (the Type-I magnitude is about 56.5 times larger).
+5. Therefore, the manuscript's qualitative conclusion is supported throughout
+   the tested representative set: Type II has a much weaker net response
+   because the base-flow and gradient contributions cancel more strongly.
+   The numerical statement “about 14% of Type I” is local to the two critical
+   points and must not be presented as a universal ratio.
+
+Numerical validation
+- N_cheb = 99, 129, and 199 give the same sensitivities to better than 1e-6
+  in relative terms for the reported totals.
+- delta a_s = 0.005, 0.01, and 0.02 preserve all signs and trends. The maximum
+  finite-difference/adjoint relative error is 1.77e-4 at delta a_s=0.02,
+  4.42e-5 at 0.01, and 1.11e-5 at 0.005, consistent with a second-order
+  central difference.
+- At N_cheb=199 and delta a_s=0.01, the minimum perturbed-mode overlap is
+  0.999966, the maximum direct residual is 2.19e-11, and the maximum adjoint
+  pairing error is 1.32e-14.
+
+Important limitation
+The tabulated Type-I critical point is rounded and gives omega_i =
+4.89e-5 rather than exact neutrality; the Type-II value is 1.27e-6.
+These are the two points already used in the manuscript. The six-point
+comparison is internally converged, but a claim of evaluation at exact
+criticality requires a separate continuous refinement of R, alpha, and beta.
+The present test supports representative-point robustness at a_s=0; it does
+not prove universality over all radii, wave numbers, Re_h, or nonzero a_s.
