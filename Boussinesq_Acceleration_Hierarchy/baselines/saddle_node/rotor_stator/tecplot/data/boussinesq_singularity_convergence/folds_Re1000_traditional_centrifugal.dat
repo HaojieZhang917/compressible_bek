@@ -1,0 +1,10 @@
+TITLE = "folds_Re1000_traditional_centrifugal"
+VARIABLES = "pressure_gradient" "Tw" "thermal_rossby" "rotor_heat_flux_Tz" "G_mid" "H_min" "F_min" "F_max"
+DATASETAUXDATA Source_File = "boussinesq_singularity_convergence/folds_Re1000_traditional_centrifugal.json"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="kind=minimum", I=1, DATAPACKING=POINT
+AUXDATA kind = "minimum"
+0.002192365559999031 1.155517549054263 0.1555175490542628 -1.309285444807062 0.06603354407033077 -0.5838357596054117 -0.02242241154800328 0.1484110270740976
+ZONE T="kind=maximum", I=1, DATAPACKING=POINT
+AUXDATA kind = "maximum"
+0.009135420120248171 1.16767648404691 0.1676764840469098 -1.4079672094995 0.1003016673058201 -0.5769183566215799 -0.04622502639730401 0.1454268716620568

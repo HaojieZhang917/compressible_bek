@@ -1,0 +1,62 @@
+time	case	status	attempt	points	message
+2026-07-17T12:56:33	ome=0.0_Tw=1.08_model=lopez	running	1	0	starting
+2026-07-17T13:00:24	ome=0.0_Tw=1.08_model=lopez	running	1	0	starting
+2026-07-17T13:04:35	ome=0.0_Tw=1.08_model=lopez	ok	1	28	stop_reason=endpoint_no_root
+2026-07-17T13:04:35	ome=0.0_Tw=1.1_model=lopez	running	1	0	starting
+2026-07-17T13:08:20	ome=0.0_Tw=1.1_model=lopez	ok	1	30	stop_reason=endpoint_no_root
+2026-07-17T13:08:20	ome=0.0_Tw=1.12_model=lopez	running	1	0	starting
+2026-07-17T13:12:51	ome=0.0_Tw=1.12_model=lopez	ok	1	33	stop_reason=endpoint_no_root
+2026-07-17T13:12:51	ome=0.0_Tw=1.14_model=lopez	running	1	0	starting
+2026-07-17T13:24:41	ome=0.0_Tw=1.08_model=lopez	retry	0	28	completed file failed revalidation: only 28 points; a complete curve requires at least 50; maximum beta=0.048288097387284214 is below 0.08
+2026-07-17T13:24:41	ome=0.0_Tw=1.08_model=lopez	running	1	0	starting
+2026-07-17T13:28:42	ome=0.0_Tw=1.08_model=lopez	retry	1	28	premature endpoint at beta=0.048288097386666604 with 28 points
+2026-07-17T13:28:42	ome=0.0_Tw=1.08_model=lopez	running	2	0	starting
+2026-07-17T13:35:20	ome=0.0_Tw=1.08_model=lopez	retry	2	29	premature endpoint at beta=0.04831309499522898 with 29 points
+2026-07-17T13:35:20	ome=0.0_Tw=1.08_model=lopez	failed	2	0	curve validation failed
+2026-07-17T13:35:20	ome=0.0_Tw=1.1_model=lopez	retry	0	30	completed file failed revalidation: only 30 points; a complete curve requires at least 50; maximum beta=0.048323444176254685 is below 0.08
+2026-07-17T13:35:20	ome=0.0_Tw=1.1_model=lopez	running	1	0	starting
+2026-07-17T13:52:12	ome=0.0_Tw=1.08_model=lopez	running	1	0	starting
+2026-07-17T13:56:17	ome=0.0_Tw=1.08_model=lopez	retry	1	28	premature endpoint at beta=0.04828809738666654 with 28 points
+2026-07-17T13:56:17	ome=0.0_Tw=1.08_model=lopez	running_typeI	3	0	saved disconnected Type-II branch to ome=0.0_Tw=1.08_model=lopez_branch=typeII.dat
+2026-07-17T14:00:18	ome=0.0_Tw=1.08_model=lopez	retry	3	10	premature endpoint at beta=0.022188096945169097 with 10 points
+2026-07-17T14:00:18	ome=0.0_Tw=1.08_model=lopez	failed	3	0	curve validation failed
+2026-07-17T14:00:18	ome=0.0_Tw=1.1_model=lopez	running	1	0	starting
+2026-07-17T14:04:03	ome=0.0_Tw=1.1_model=lopez	retry	1	30	premature endpoint at beta=0.048323444176254705 with 30 points
+2026-07-17T14:04:03	ome=0.0_Tw=1.1_model=lopez	running_typeI	3	0	saved disconnected Type-II branch to ome=0.0_Tw=1.1_model=lopez_branch=typeII.dat
+2026-07-17T14:09:16	ome=0.0_Tw=1.08_model=lopez	skipped	0	0	excluded by user request
+2026-07-17T14:09:16	ome=0.0_Tw=1.1_model=lopez	running	1	0	starting
+2026-07-17T14:13:32	ome=0.0_Tw=1.1_model=lopez	retry	1	30	premature endpoint at beta=0.0483234441762547 with 30 points
+2026-07-17T14:13:32	ome=0.0_Tw=1.1_model=lopez	running_typeI	3	0	saved disconnected Type-II branch to ome=0.0_Tw=1.1_model=lopez_branch=typeII.dat
+2026-07-17T14:25:54	ome=0.0_Tw=1.1_model=lopez	ok	3	91	stop_reason=endpoint_no_root; disconnected_typeII=ome=0.0_Tw=1.1_model=lopez_branch=typeII.dat
+2026-07-17T14:25:54	ome=0.0_Tw=1.12_model=lopez	retry	0	33	completed file failed revalidation: only 33 points; a complete curve requires at least 50; maximum beta=0.04842927097322841 is below 0.08
+2026-07-17T14:25:54	ome=0.0_Tw=1.12_model=lopez	running	1	0	starting
+2026-07-17T14:30:32	ome=0.0_Tw=1.12_model=lopez	retry	1	33	premature endpoint at beta=0.04842927097322851 with 33 points
+2026-07-17T14:30:32	ome=0.0_Tw=1.12_model=lopez	running_typeI	3	0	saved disconnected Type-II branch to ome=0.0_Tw=1.12_model=lopez_branch=typeII.dat
+2026-07-17T14:43:19	ome=0.0_Tw=1.12_model=lopez	ok	3	90	stop_reason=endpoint_no_root; disconnected_typeII=ome=0.0_Tw=1.12_model=lopez_branch=typeII.dat
+2026-07-17T14:43:19	ome=0.0_Tw=1.14_model=lopez	running	1	0	starting
+2026-07-17T14:47:45	ome=0.0_Tw=1.14_model=lopez	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T14:47:45	ome=0.0_Tw=1.14_model=lopez	running	2	0	starting
+2026-07-17T15:03:02	ome=0.0_Tw=1.14_model=lopez	ok	2	135	stop_reason=R_limit
+2026-07-17T15:03:02	ome=0.0_Tw=1.16_model=lopez	running	1	0	starting
+2026-07-17T15:07:33	ome=0.0_Tw=1.16_model=lopez	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:07:33	ome=0.0_Tw=1.16_model=lopez	running	2	0	starting
+2026-07-17T15:21:45	ome=0.0_Tw=1.16_model=lopez	ok	2	137	stop_reason=R_limit
+2026-07-17T15:21:45	ome=0.0_Tw=1.18_model=lopez	running	1	0	starting
+2026-07-17T15:26:12	ome=0.0_Tw=1.18_model=lopez	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:26:12	ome=0.0_Tw=1.18_model=lopez	running	2	0	starting
+2026-07-17T15:30:35	ome=0.0_Tw=1.18_model=lopez	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:30:35	ome=0.0_Tw=1.18_model=lopez	failed	3	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:30:35	ome=0.0_Tw=1.2_model=lopez	running	1	0	starting
+2026-07-17T15:32:20	ome=0.0_Tw=1.08_model=lopez	skipped	0	0	excluded by user request
+2026-07-17T15:32:20	ome=0.0_Tw=1.18_model=lopez	running	1	0	starting
+2026-07-17T15:37:13	ome=0.0_Tw=1.18_model=lopez	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:37:13	ome=0.0_Tw=1.18_model=lopez	running	2	0	starting
+2026-07-17T15:41:37	ome=0.0_Tw=1.18_model=lopez	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:41:37	ome=0.0_Tw=1.18_model=lopez	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-17T15:50:27	ome=0.0_Tw=1.18_model=lopez	ok	3	87	stop_reason=endpoint_no_root
+2026-07-17T15:50:27	ome=0.0_Tw=1.2_model=lopez	running	1	0	starting
+2026-07-17T15:54:46	ome=0.0_Tw=1.2_model=lopez	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:54:46	ome=0.0_Tw=1.2_model=lopez	running	2	0	starting
+2026-07-17T15:58:59	ome=0.0_Tw=1.2_model=lopez	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:58:59	ome=0.0_Tw=1.2_model=lopez	running_typeI	3	0	base-branch initialization failed; trying Type-I fallback
+2026-07-17T16:08:08	ome=0.0_Tw=1.2_model=lopez	ok	3	85	stop_reason=endpoint_no_root

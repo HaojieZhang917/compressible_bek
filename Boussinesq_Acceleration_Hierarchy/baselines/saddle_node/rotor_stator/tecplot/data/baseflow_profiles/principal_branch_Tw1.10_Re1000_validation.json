@@ -1,0 +1,31 @@
+{
+  "model": "traditional_centrifugal",
+  "branch": "isothermal-connected principal branch",
+  "Re_h": 1000.0,
+  "Pr": 0.72,
+  "Tw": 1.1,
+  "pressure_gradient_Pi": 0.05311054913964245,
+  "solver_nodes": 5448,
+  "max_rms_residual": 1.9991457398989414e-09,
+  "max_boundary_residual": 2.220446049250313e-15,
+  "boundary_residuals": [
+    0.0,
+    4.016270285327551e-33,
+    0.0,
+    -2.220446049250313e-15,
+    -3.9187681519699686e-23,
+    1.2527896785707959e-21,
+    1.8672362661871038e-20,
+    0.0
+  ],
+  "integral_F_0_1": -1.0950755927052747e-11,
+  "continuity_integral_error": -6.925866166015466e-10,
+  "H_min": -0.8905442794123657,
+  "H_max": 0.0,
+  "F_min": -0.11148989232438175,
+  "F_max": 0.15438778712314977,
+  "G_mid": 0.22424974494280248,
+  "rotor_heat_flux_Tz": -0.9183373367213178,
+  "stator_heat_flux_Tz": -9.106710746976029e-07,
+  "output_dat": "/home/zhj/Rotating-Flow-ToolKit/Boussinesq_SaddleNode/rotor_stator/tecplot/data/baseflow_profiles/principal_branch_Tw1.10_Re1000.dat"
+}

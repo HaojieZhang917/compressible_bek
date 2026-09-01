@@ -1,0 +1,502 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"blackburn_vs_compressible_critical_errors.dat"'
+$!VarSet |LFDSVL1| = '"Tw" "R_c_blackburn" "R_c_compressible" "R_error_vs_compressible_percent" "PPT_R_difference_compressible_vs_blackburn_percent" "beta_c_blackburn" "beta_c_compressible" "beta_error_vs_compressible_percent" "PPT_beta_difference_compressible_vs_blackburn_percent"'
+$!SetStyleBase Factory
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    Letter
+      {
+      Width = 8.5
+      Height = 11
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+$!SetAuxData 
+  AuxDataLocation = Layout
+  Name = 'UI.FirstPageOffset'
+  ValueString = '1'
+### Page Number 1 ###
+$!Page 
+  Name = 'Error_beta'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1, Page Number 1 ###
+$!FrameLayout 
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!SketchAxis 
+  DepXToYRatio = 1
+$!SketchAxis 
+  XDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.1251124999999999599
+    GRSpacing = 0.2
+    }
+$!SketchAxis 
+  YDetail
+    {
+    RangeMin = 0
+    RangeMax = 1.000099999999999989
+    GRSpacing = 0.2
+    }
+### Frame Number 2, Page Number 1 ###
+$!CreateNewFrame 
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  ResetStyle = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-2]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    TextShape
+      {
+      FontFamily = 'Times'
+      IsItalic = Yes
+      }
+    Box
+      {
+      BoxType = None
+      }
+    XYPos
+      {
+      X = 43.128
+      Y = 85.411
+      }
+    }
+$!LineMap  [1]
+  Name = 'Type Ⅰ'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Diamond
+      }
+    Color = Red
+    FillMode = UseLineColor
+    FillColor = Red
+    LineThickness = 0.2
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = 'Type Ⅱ'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 8
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Diamond
+      }
+    Color = Black
+    FillMode = UseLineColor
+    FillColor = Green
+    LineThickness = 0.2
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    LineThickness = 0.1
+    }
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 1
+    RangeMax = 1.2010000000000000675
+    GRSpacing = 0.05
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 0.5
+      LineThickness = 0.02
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsItalic = Yes
+        Height = 4
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.1
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 0
+    RangeMax = 5
+    AutoGrid = No
+    GRSpacing = 1
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 0.5
+      LineThickness = 0.02
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Error(%)'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsItalic = Yes
+        Height = 4
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.1
+      }
+    }
+$!LinePlotLayers 
+  ShowSymbols = Yes
+$!FrameControl ActivateByNumber
+  Frame = 2
+### Page Number 2 ###
+$!PageControl Create
+$!Page 
+  Name = 'Error_R'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = Yes
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = Letter
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1, Page Number 2 ###
+$!AttachDataSet 
+  PageNum = 2
+  Frame = 2
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = 1
+    Y = 0.25
+    }
+  Width = 9
+  Height = 8
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-2]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    TextShape
+      {
+      FontFamily = 'Times'
+      IsItalic = Yes
+      }
+    Box
+      {
+      BoxType = None
+      }
+    XYPos
+      {
+      X = 43.128
+      Y = 85.411
+      }
+    }
+$!LineMap  [1]
+  Name = 'Type Ⅰ'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Red
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Diamond
+      }
+    Color = Red
+    FillMode = UseLineColor
+    FillColor = Red
+    LineThickness = 0.2
+    }
+  BarCharts
+    {
+    Color = Red
+    FillColor = Red
+    }
+  ErrorBars
+    {
+    Color = Red
+    }
+$!LineMap  [2]
+  Name = 'Type Ⅱ'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 4
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    SymbolShape
+      {
+      GeomShape = Diamond
+      }
+    Color = Black
+    FillMode = UseLineColor
+    FillColor = Green
+    LineThickness = 0.2
+    }
+  BarCharts
+    {
+    Color = Green
+    FillColor = Green
+    }
+  ErrorBars
+    {
+    Color = Green
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    LineThickness = 0.1
+    }
+$!XYLineAxis 
+  XDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = 1
+    RangeMax = 1.2010000000000000675
+    GRSpacing = 0.05
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 0.5
+      LineThickness = 0.02
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsItalic = Yes
+        Height = 4
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.1
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    CoordScale = Linear
+    RangeMin = -3
+    RangeMax = 3
+    AutoGrid = No
+    GRSpacing = 1
+    Ticks
+      {
+      ShowOnGridBorderMax = Yes
+      Length = 0.5
+      LineThickness = 0.02
+      MinorLength = 0
+      }
+    TickLabel
+      {
+      TextShape
+        {
+        FontFamily = 'Times'
+        }
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Error(%)'
+      TextShape
+        {
+        FontFamily = 'Times'
+        IsItalic = Yes
+        Height = 4
+        }
+      }
+    AxisLine
+      {
+      LineThickness = 0.1
+      }
+    }
+$!LinePlotLayers 
+  ShowSymbols = Yes
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config

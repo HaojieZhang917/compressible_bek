@@ -1,0 +1,6 @@
+TITLE = "validation_Re1000_soong_rotating_forces"
+VARIABLES = "reference_re_h" "reference_comparison_applicable" "H_max_abs" "H_rms" "F_max_abs" "F_rms" "G_max_abs" "G_rms" "pressure_gradient" "max_rms_residual" "nodes"
+DATASETAUXDATA Source_File = "boussinesq_singularity_results/soong_model/validation_Re1000_soong_rotating_forces.json"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="data", I=1, DATAPACKING=POINT
+1000 1 3.562029560200131e-10 1.558585965345163e-10 8.591468161900373e-11 2.549079609277157e-11 1.847779707020436e-10 1.113282707562572e-10 0.0979164800975601 1.998093597387017e-07 1226

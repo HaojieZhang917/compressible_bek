@@ -1,0 +1,22 @@
+time	case	status	attempt	points	message
+2026-07-17T13:00:24	ome=0.0_Tw=1.08_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T13:21:47	ome=0.0_Tw=1.08_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	104	stop_reason=R_limit
+2026-07-17T13:21:47	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T13:24:42	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T13:52:11	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T14:14:21	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	103	stop_reason=R_limit
+2026-07-17T14:14:21	ome=0.0_Tw=1.12_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T14:35:35	ome=0.0_Tw=1.12_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	101	stop_reason=R_limit
+2026-07-17T14:35:35	ome=0.0_Tw=1.14_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T14:57:03	ome=0.0_Tw=1.14_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	100	stop_reason=R_limit
+2026-07-17T14:57:03	ome=0.0_Tw=1.16_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T15:17:59	ome=0.0_Tw=1.16_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	98	stop_reason=R_limit
+2026-07-17T15:17:59	ome=0.0_Tw=1.18_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T15:38:34	ome=0.0_Tw=1.18_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	97	stop_reason=R_limit
+2026-07-17T15:38:34	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T15:49:26	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:49:26	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	2	0	starting
+2026-07-17T16:03:15	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	retry	2	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T16:03:15	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	failed	3	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T16:04:45	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	running	1	0	starting
+2026-07-17T16:54:52	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=off_baseProp=frozen	ok	1	96	stop_reason=R_limit

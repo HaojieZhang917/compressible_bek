@@ -1,0 +1,16 @@
+TITLE = "reynolds_scan_summary"
+VARIABLES = "Re_h" "lower_fold_Tw" "principal_fold_Tw" "scanned_Tw_max"
+DATASETAUXDATA Source_File = "reynolds_scan_summary.csv"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="fold_status=no_fold_detected, interpretation=No fold on the continued branch over the sampled pressure interval; this is not proof of global uniqueness.", I=1, DATAPACKING=POINT
+AUXDATA fold_status = "no_fold_detected"
+AUXDATA interpretation = "No fold on the continued branch over the sampled pressure interval; this is not proof of global uniqueness."
+400 NaN NaN 1.849620220824
+ZONE T="fold_status=two_folds, interpretation=Three similarity solutions coexist between the two folds.", I=1, DATAPACKING=POINT
+AUXDATA fold_status = "two_folds"
+AUXDATA interpretation = "Three similarity solutions coexist between the two folds."
+800 1.158790083439 1.16551087999 1.94041238049
+ZONE T="fold_status=two_folds, interpretation=Fine-grid values; the isothermal-connected branch terminates at the principal fold.", I=1, DATAPACKING=POINT
+AUXDATA fold_status = "two_folds"
+AUXDATA interpretation = "Fine-grid values; the isothermal-connected branch terminates at the principal fold."
+1000 1.155517549054 1.167676484047 1.965753566478

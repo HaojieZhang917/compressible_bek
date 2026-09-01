@@ -1,0 +1,6 @@
+TITLE = "validation_Re400_traditional_centrifugal"
+VARIABLES = "reference_re_h" "reference_comparison_applicable" "pressure_gradient" "max_rms_residual" "nodes"
+DATASETAUXDATA Source_File = "boussinesq_singularity_re_scan/Re400/validation_Re400_traditional_centrifugal.json"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="data", I=1, DATAPACKING=POINT
+1000 0 0.09462698382392948 9.932648841857981e-07 1211

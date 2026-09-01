@@ -1,0 +1,18 @@
+Generated: 2026-07-09T16:28:53.199
+Model: non-similar compressible rotating-disk boundary-layer marching with Sutherland viscosity
+Tw=1.5
+sigma=0.72
+gamma=1.4
+Minf=0.015
+Tinf_dim=273.0
+S_dim=114.0
+r0=1.0
+rmax=20.0
+final_R=20.0
+final_Mr=0.3
+Nr=41
+zmax=20.0
+Nz=81
+radial_discretization=BDF2 after the second station; first station local-similar; second station backward Euler
+velocity_form=u=r*U, v_rotating=r*V, v_inertial=r*(V+1), w=W
+newton_tol=1.0e-8

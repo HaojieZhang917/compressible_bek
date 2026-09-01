@@ -1,0 +1,540 @@
+旋转圆盘 Boussinesq / 完全可压缩稳定性研究：对话交接记录
+生成日期：2026-07-22（Asia/Shanghai）
+
+======================================================================
+0. 新对话启动方式
+======================================================================
+
+请新对话中的 Codex 首先完整读取本文件：
+
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/CONVERSATION_HANDOFF.txt
+
+推荐在新对话中直接发送：
+
+“请先完整阅读
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/CONVERSATION_HANDOFF.txt，
+再检查当前 Git 状态和相关源文件。以该文件作为项目背景，但以磁盘上的最新代码为准，
+不要恢复或覆盖尚未提交的整理改动。读完后概括当前状态并继续我的新任务。”
+
+重要原则：本文件是上下文摘要，不替代源代码。涉及方程符号、矩阵元素、参数默认值、
+输出文件是否完整时，必须重新读取当前文件并进行数值验证。
+
+======================================================================
+1. 项目目标与论文主线
+======================================================================
+
+研究对象是带温差的不可压缩/可压缩旋转圆盘边界层，包括：
+
+1. 传统 Boussinesq 假设下的基本流、分支结构和稳定性。
+2. Lopez、Marques 与 Avila 提出的广义 Boussinesq 思路在旋转圆盘中的应用。
+3. 低马赫数（主要取 Mr=0.3）完全可压缩模型，与 Boussinesq 模型比较。
+4. Chapman 型相似可压缩模型与最严格的 Sutherland 可变物性径向推进模型。
+5. Type-I、Type-II 空间中性曲线、物性反馈分解和后续感受性分析。
+6. 用独立数值方法（计划使用 Nektar++）验证基本流及增长率/稳定性结论。
+
+拟议论文逻辑：
+
+1. 从传统和广义 Boussinesq 基本流入手，量化闭合方式的影响。
+2. 展示传统固定参考离心浮力模型的鞍结及其有限适用范围。
+3. 用 Chapman 可压缩模型对经典文献进行验证。
+4. 用 Sutherland 模型研究可变物性和非相似径向演化。
+5. 比较 Boussinesq 与完全可压缩中性曲线，尤其是 Type-II 模态。
+6. 通过物性开关分解误差来源。
+7. 引出完全可压缩模型下的稳定性和感受性研究。
+
+目标期刊讨论过 JFM Rapids 和 Physics of Fluids。当前结果有潜力，但若要作出强结论，
+仍需要独立数值验证、严格统一尺度和频率/波数定义、完整网格收敛以及误差机制分解。
+不能仅凭两条中性曲线不同就宣称 Boussinesq 普遍失效。
+
+用户明确说明：马赫数不是主要扫描参数，Mr=0.3 作为低马赫数可压缩输入；研究重点是
+温度和模型闭合，不计划重点讨论旋转速度的影响。
+
+======================================================================
+2. 工作区和发行版位置
+======================================================================
+
+日常工作区：
+
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone
+
+独立 Julia 发行包：
+
+/home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow
+
+Git 根目录：
+
+/home/zhj/Rotating-Flow-ToolKit
+
+当前分支：main
+
+GitHub 仓库曾使用：
+
+https://github.com/HaojieZhang917/Boussinesq-Approximation-Capacity
+
+日常工作区保留 notebook、结果数据和兼容入口；发行包保存可复用模块、测试、脚本和英文
+文档。新代码优先修改 RotatingDiskFlow/src 中的实现，工作区顶层兼容文件只负责 include。
+
+核心兼容入口：
+
+CRD_STA.jl
+LopezBaseflow.jl
+LopezStability.jl
+NeutralContinuation.jl
+NeutralCurveRunner.jl
+SutherlandMarching.jl
+
+主要 notebook：
+
+Bounssinesq.ipynb
+
+注意文件名拼写就是 Bounssinesq.ipynb，不要擅自重命名。
+
+======================================================================
+3. 当前文件夹整理状态（非常重要）
+======================================================================
+
+2026-07-21 对 Vonkarmen_bone 做了尚未提交的整理：
+
+1. 顶层只保留 notebook、Project/Manifest、README 和兼容入口。
+2. 18 个当前分析、验证和汇总工具移动到 scripts/。
+3. 旧求解器移动到 archive/legacy_scripts/。
+4. Tecplot 布局和一个非字节相同的重复结果移动到 archive/。
+5. 删除一次性诊断脚本：
+   audit_crd_sta.jl
+   diagnose_crd_type2.jl
+   scan_lopez_modes.jl
+6. 删除版本库中误跟踪的 __pycache__/*.pyc 和三个旧状态日志。
+7. 更新 .gitignore，使 *.pyc、*.log、缓存和生成目录不再污染版本库。
+8. 修复所有移动后脚本的 @__DIR__、输入和输出路径。
+9. 新增 README、scripts/README.md、archive/README.md 和中文工作流说明。
+
+当前整理改动没有暂存、没有提交。Git status 会把移动显示成旧路径 D 和新目录 ??，在正式
+git add 后才可能识别为 rename。下一位助手不得把这些 D 当成误删而恢复旧顶层文件，
+也不要删除 scripts/ 或 archive/。
+
+中文使用说明：
+
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/docs/workflow-guide-cn.md
+
+工作区总说明：
+
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/README.md
+
+======================================================================
+4. 基本流模型和当前符号约定
+======================================================================
+
+4.1 当前相似变量约定
+
+当前 Lopez/传统 Boussinesq Python 基本流使用：
+
+H' = -2F
+
+壁面：
+
+H(0)=0, F(0)=0, G(0)=0, T(0)=Tw
+
+远场：
+
+F(infinity)=0, G(infinity)=1, T(infinity)=1
+
+这里 G 是从壁面 0 过渡到远场 1 的周向速度亏损形式。不同论文或旧代码可能采用
+G-1、1-G 或旋转系周向速度，比较符号前必须先统一变量定义。
+
+定义：
+
+A = F^2 + H F' - (1-G)^2
+B = 2FG + H G' - 2F
+
+温度方程：
+
+T'' = Pr H T',  Pr=0.72
+
+4.2 传统固定参考离心 Boussinesq 模型
+
+当前 scripts/compare_lopez_boussinesq.py 中实现为：
+
+F'' = A + (T-1)
+G'' = B
+
+当前符号是经过项目变量约定后的实现。此前对离心浮力正负号有过多轮讨论，不能只看
+“热流体向外/向内”作判断；如果要改符号，必须从该代码采用的旋转坐标、G 定义、压力
+基态和径向正方向重新推导，并用 Tw=1 基准与小温差连续性验证。
+
+传统模型把密度变化只放入固定参考离心项，使温度效应表现为独立源项。既往计算发现
+连接经典解的分支在约
+
+Tw,c = 1.048021731
+H_infinity,c = -0.532761653
+
+附近出现鞍结。不同 zmax 的分支曾计算到 zmax=80，用于检验有限域影响。折点处缩放
+Jacobian 的 sigma_min/sigma_max 曾得到约 7.5e-15，表示 Jacobian 几乎奇异，是鞍结的
+数值证据。这个结果是当前数据结论，正式发表前仍应从最新脚本重算并给出收敛表。
+
+鞍结含义：以 Tw 为控制参数时两个稳态分支相遇并消失；Jacobian 出现零特征方向。
+这不等于所有时间演化都“数学上不能越过”，而是该稳态相似分支不能作为 Tw 的单值连续
+解继续。分支的动态选择还需要完整时间稳定性分析。
+
+4.3 Lopez 广义 Boussinesq 闭合
+
+当前实现使用线性密度：
+
+rho_l/rho_inf = 1-(T-1) = 2-T
+
+并把局部径向、周向惯性加速度整体乘以该线性密度：
+
+F'' = [1-(T-1)] A
+G'' = [1-(T-1)] B
+
+H' 和温度方程保持上述形式。
+
+物理解释：传统闭合只让密度扰动乘固定参考离心加速度；Lopez 思路让密度扰动与完整
+局部惯性加速度耦合。在旋转系解释时，这对应相对对流、Coriolis 和参考离心效应组合后
+的局部作用，而不是在所有 z 位置加入同一个固定温度源项。
+
+Lopez 模型可形式上越过传统模型 Tw≈1.049 的折点，但不能据此证明它“优于”传统模型。
+它仍使用不可压缩散度、线性密度和常物性，不是完全可压缩模型。对于理想气体，线性密度
+相对 1/T 的误差从 O((Tw-1)^2) 增长；高温延拓只能视为模型诊断，不能直接作定量预测。
+
+4.4 Chapman 型完全可压缩相似模型
+
+CRD_STA.jl 中保存可压缩基本流和稳定性实现。基本流使用相似坐标（密度加权轴向坐标）
+求解，BF 的 phy/sim 只决定物理坐标或相似坐标输出。稳定性计算必须使用 sim，而不是
+phy。物理坐标只用于基本流剖面对比和画图。
+
+Chapman 型变换可使某些速度相似函数幅值对温度不敏感，而温度主要拉伸物理轴向坐标。
+这种不变性是变换和物性律的结果，不等于真实物理速度处处与温度无关。
+
+4.5 Sutherland 非相似径向推进模型
+
+RotatingDiskFlow/src/SutherlandMarching.jl 实现：
+
+u(r,z)=r U(r,z)
+v_rotating(r,z)=r V(r,z)
+v_inertial(r,z)=r [V(r,z)+1]
+w(r,z)=W(r,z)
+
+模型保留理想气体密度、Sutherland 黏度、可变导热、径向非相似项和能量方程中的黏性
+耗散。径向第一站为局部相似，第二站后退 Euler，之后二阶 BDF2；每个径向站用 Newton
+迭代求解。
+
+命令示例：
+
+julia --project=. SutherlandMarching.jl --Tw=1.5 --Mr=0.3 --R=20 \
+  --r0=1 --Nr=81 --Nz=121 --zmax=25 \
+  --out_dir=sutherland_Tw1.5_Mr0.3_R20
+
+Mr 是目标 R 处局部马赫数，内部 Minf=Mr/R，Mr(r)=Minf*r。
+
+已有观察：Sutherland 下速度最大幅值相对 Chapman 的变化通常较小，温度更明显地改变
+边界层厚度和峰值位置；不能把“幅值几乎不变”简单解释成可压缩性没有作用。
+
+======================================================================
+5. 稳定性模型、边界条件和验证基准
+======================================================================
+
+局部扰动一般写作：
+
+q=(u,v,w,theta,p)^T exp{i[alpha(r-R)+beta R theta-omega t]}
+
+r-R 表示在局部分析半径 R 附近展开；常数相位 exp(i alpha R) 不改变物理结果，但该写法
+清楚表达局部平行流近似。
+
+空间模式通常给定实 beta 和 omega，求复 alpha；中性条件为 Im(alpha)=0。
+
+已确认的重要边界条件原则：
+
+1. 壁面施加速度扰动和温度扰动的物理边界条件。
+2. 压力不应在壁面人为置零。
+3. 压力规范/衰减条件放在远场，项目讨论中采用远场压力扰动为零。
+4. 按 Malik 局部理论处理时，可忽略 O(R^-2) 项；不要在其他位置随意加小量。
+5. 稳定性程序必须使用相似坐标基本流及其在 Chebyshev 点上的插值。
+
+Malik (1986) 两个等温 benchmark（omega=0）：
+
+Type-I:  R=285.36, beta=0.07759
+Type-II: R=440.88, beta=0.04672
+
+验证脚本：
+
+julia --project=. scripts/CheckMalikBenchmarks.jl
+
+2026-07-21 在 Windows Juliaup Julia 1.12.6、N_cheb=69 下整理后实际运行得到：
+
+Type-I alpha ≈ 0.38505249 + 3.4867e-4 i
+Type-II alpha ≈ 0.13184955 + 9.0798e-4 i
+
+这说明调用链可运行，不应把它表述成高精度命中 benchmark。正式验证需报告 N_cheb、
+zmax、alpha 选择和残差随网格收敛。用户此前认为约 3.5e-4 的 Type-I 偏差可接受，
+Type-II 更敏感，仍需更严格的独立检查。
+
+生产计算通常使用 N_cheb=69。Chebyshev 点不是越多越好：高阶微分矩阵条件数快速增长，
+非正规特征值问题会放大舍入误差。应在 49、59、69、79、89 等序列做网格独立性，而不是
+盲目提高 N。
+
+Lopez 稳定性矩阵和推导文档：
+
+/home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow/docs/lopez-stability-derivation.md
+/home/zhj/Rotating-Flow-ToolKit/compress/BEK/Vonkarmen_bone/docs/lopez-stability-derivation.md
+
+可压缩矩阵审计：
+
+/home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow/docs/crd-stability-audit.md
+
+再次修改矩阵前必须逐块核对连续方程、三方向动量、能量、状态方程、黏度/导热扰动和
+边界条件，并做等温回归。不要依赖聊天中的口头推导直接改矩阵。
+
+======================================================================
+6. 中性曲线追踪程序现状
+======================================================================
+
+当前推荐入口不是 notebook 中历史 cur_legacy，而是发行包中的：
+
+RotatingDiskFlow/src/NeutralCurveRunner.jl
+RotatingDiskFlow/src/NeutralContinuation.jl
+
+工作区兼容入口：NeutralCurveRunner.jl。
+
+主要功能：
+
+1. 用特征向量重叠追踪同一模态。
+2. 把上一步特征值和特征向量传给下一步求解。
+3. 自适应 beta 步长和有界 R 搜索。
+4. 中性点校正、模态重叠阈值和跳跃检测。
+5. 主分支失败时保存 Type-II，并尝试高 beta Type-I fallback。
+6. 成功后可删除日志；支持断点续算和批量重新验证。
+
+单工况推荐：
+
+include("NeutralCurveRunner.jl")
+using .NeutralCurveRunner
+
+config = CurveConfig(
+    Tw=1.10,
+    omega=0.0,
+    R_initial=500.0,
+    beta_initial=0.04,
+    alpha_target=0.10,
+    num_modes=2,
+    model=:lopez,                 # 或 :compressible
+    Mr=0.3,
+    Ro=-1.0,
+    N_cheb=69,
+    beta_step=8.0e-4,
+    neutral_tol=1.0e-7,
+    output_dir=joinpath(pwd(),"neutral_curve_batch"),
+    keep_logs=false,
+)
+
+result = NeutralCurveRunner.run_case_with_retries(config)
+
+可压缩物性开关：
+
+full compressible: property_perturbations=true,  base_property_variation=true
+no perturbation:   property_perturbations=false, base_property_variation=true
+frozen base props: property_perturbations=false, base_property_variation=false
+
+标准批次壁温为 Tw=1.06:0.02:1.20，每个温度四种模型配置，共 32 个工况。
+
+只算 Lopez：
+
+NEUTRAL_PARALLEL=false NEUTRAL_WORKER=lopez \
+NEUTRAL_OUTPUT_DIR=neutral_curve_batch NEUTRAL_N_CHEB=69 \
+NEUTRAL_RESUME=true julia --project=. NeutralCurveRunner.jl
+
+特殊分支脚本：
+
+scripts/ComputeLopezTypeI.jl
+  当前只内置 Tw=1.08 Type-I 种子。
+
+scripts/ComputeLopezTypeII.jl
+  当前内置 Tw=1.08、1.18、1.20 Type-II 种子。
+
+分支合并和总数据：
+
+scripts/MergeLopezNeutralBranches.jl
+scripts/IntegrateNeutralCurves.jl
+scripts/AnalyzeNeutralCriticalErrors.jl
+scripts/AnalyzeBoussinesqRange.jl
+
+中性曲线 DAT 列：
+
+omega R beta alpha_r_1 alpha_i_1 alpha_r_2 alpha_i_2
+
+输出文件名区分模型和开关，例如：
+
+ome=0.0_Tw=1.1_model=lopez.dat
+ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=on_baseProp=variable.dat
+ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=variable.dat
+ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=off_baseProp=frozen.dat
+
+======================================================================
+7. 已得到的主要物理/数值观察
+======================================================================
+
+以下是目前工作假设和数值观察，不应在未重算时当成最终论文数字：
+
+1. 传统 Boussinesq 固定离心源项模型在 Tw≈1.048 出现鞍结；该限制不是所有热旋转
+   不可压缩模型共有的限制。
+2. Lopez 广义闭合可形式上越过该折点，说明折点很可能与传统固定参考离心闭合的正反馈
+   有关，而不等于小温差展开在 4.8% 温差处必然普遍失效。
+3. 传统模型中，升温改变 F 幅值而峰值 z 位置变化较小；Chapman 完全可压缩相似模型中，
+   温度更明显地拉伸物理 z 坐标，速度相似函数幅值变化较小。
+4. Sutherland 可变物性后，速度幅值会变化，但已有工况下幅值变化仍小于峰值位置/厚度
+   变化。需要用统一物理坐标和速度尺度比较。
+5. Tw=1.1 的 Lopez 与完全可压缩中性曲线中，Type-I 较接近，Type-II 差异明显更大。
+6. 用户已通过连续追踪和形状检查确认低 beta 的“耳朵”是真实物理解，不是简单模态跳跃。
+7. 关闭可压缩扰动物性对中性曲线影响很小；进一步冻结基本流物性后，Type-II 与 Lopez
+   的误差明显减小，但仍不完全一致。
+8. 上述开关结果说明主要误差可能更多来自基本流物性变化、密度/温度结构和模型闭合，
+   而不是线性化黏度/导热扰动本身。残余误差还可能来自连续性、热力学耦合、坐标变换、
+   压力和能量方程，不能只归因于一个项。
+9. “下分支在相似子空间稳定”不等于完整三维稳定。基本流分支的线性稳定性必须把各自
+   F,G,H,T 带入完整扰动系统；稳定性只能支持动态可实现性，不能单独证明哪个分支必然是
+   唯一物理解。
+
+======================================================================
+8. 关键结果目录
+======================================================================
+
+BASEFLOW/
+  历史基本流数据。
+
+baseflow_comparison_data/
+  Boussinesq 与可压缩基本流的物理网格、共同网格、导数、特征和报告。
+
+lopez_boussinesq_comparison/
+  传统与 Lopez 基本流、误差、远场收敛和图。
+
+compressible_lopez_comparison/
+  低马赫数可压缩与 Lopez 基本流比较。
+
+boussinesq_fold_analysis/
+  传统模型鞍结、多方法验证和分支数据。
+
+boussinesq_domain_branches/
+  不同 zmax 的 H_infinity-Tw 分支与转折点。
+
+sutherland_Tw1.5_Mr0.3_R20/
+  Sutherland 径向推进示例。
+
+chapman_sutherland_comparison/
+  Chapman 和 Sutherland 对比数据、图和报告。
+
+neutral_curve_batch/
+  各壁温、模型和物性开关的原始中性曲线。
+
+neutral_curve_integrated/
+  合并后的完整曲线、manifest、临界点和误差数据。
+
+grid_independence/
+  两个模态的配置点网格验证。
+
+archive/
+  历史脚本、Tecplot layout 和保留的重复变体，不是当前主入口。
+
+======================================================================
+9. 最近验证结果和环境信息
+======================================================================
+
+文件夹整理后执行过：
+
+1. 9 个 Python 文件语法检查：通过。
+2. 14 个 Julia 文件语法检查：通过。
+3. 5 个默认输入路径检查：通过。
+4. SutherlandMarching.jl --help：通过。
+5. CheckMalikBenchmarks.jl 实际调用：完成，输出见第 5 节。
+
+当时 Windows PowerShell 中 julia 来自 Juliaup，版本 1.12.6。
+当时非交互 WSL shell 中 command -v julia 找不到 Julia，但用户此前 Jupyter/远程 Julia
+栈在 /home/zhj 下正常运行。下一位助手运行长算例前应先确认当前实际 Julia 可执行文件和
+Project 环境，不能假设 WSL PATH 已配置。
+
+工作区 Project.toml 和 Manifest.toml 仍在 Vonkarmen_bone 顶层；发行包也有独立环境。
+
+======================================================================
+10. 当前最重要的下一步：Nektar++ 独立验证
+======================================================================
+
+用户在本对话末尾提出：探索 Nektar++ 方案，在新的文件夹调用本地 Nektar++，先建模并
+验证基本流，最后说明如何操作。但用户明确要求：
+
+“不要一次性计算所有的文件，我需要通过这个过程学习，一步一步生成。”
+
+截至本交接文件生成时，Nektar++ 建模尚未真正开始；随后先完成了文件夹整理和使用说明。
+
+新对话继续 Nektar++ 时应遵循：
+
+1. 先探测本地 Nektar++ 版本、安装路径、可用求解器和示例，不立即生成整套 case。
+2. 新建独立目录，例如 Vonkarmen_bone/nektar_validation/，不要污染根目录。
+3. 第一步只建立最小几何/网格，并解释 XML/mesh 每一部分。
+4. 第二步先验证等温 Tw=1 的基本流或最简单可压缩边界层，不直接计算中性曲线。
+5. 每生成一个文件就展示内容、用途、运行命令和预期输出，等待用户学习/确认后继续。
+6. 理想情况下，若 Nektar++ 求解的是同一完全可压缩方程、相同物性律、尺度、边界条件和
+   局部参数，其收敛结果应与完全可压缩求解器一致；数值方法不同不应改变连续模型解。
+7. 若采用 Nektar++ 的低马赫/不可压缩求解器、不同能量方程或不同 Sutherland 常数，则
+   不能直接要求与当前完全可压缩结果相同。
+8. 基本流验证后，再讨论径向空间推进、扰动增长率或 DNS/PSE 形式的独立稳定性验证。
+
+用户当前浏览过 Nektar++ 用户指南：
+
+https://doc.nektar.info/userguide/latest/user-guidese41.html
+
+必须浏览当前官方文档或本地安装帮助来确认 2026 年版本接口，技术结论优先引用官方
+Nektar++ 文档。
+
+======================================================================
+11. 下一位 Codex 的工作约束
+======================================================================
+
+1. 先读本文件，再读相关源码；不要仅凭摘要修改科学方程。
+2. 不得恢复用户尚未提交的目录整理改动。
+3. 修改矩阵或方程后必须做 Tw=1 等温回归、Malik 两模态验证和网格收敛。
+4. 稳定性使用 sim 坐标；phy 只用于物理基本流比较。
+5. 压力只设远场条件，不在壁面人为指定 p=0。
+6. 继续使用 eigenvector overlap 追踪，不按最近特征值单独选模态。
+7. 中性曲线必须检查残差、连续性、特征函数和临界点是否为内部极值。
+8. 高温 Lopez 解只能称形式延拓；完全可压缩比较前要统一物性、坐标和尺度。
+9. Nektar++ 必须一步一步构建，先基本流，不能一次生成所有文件和结果。
+10. 工作完成后更新本交接文件中已过时的状态，方便下一次对话继续。
+
+======================================================================
+12. 常用入口
+======================================================================
+
+完整中文使用说明：
+
+docs/workflow-guide-cn.md
+
+发行包中性曲线说明：
+
+/home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow/docs/neutral-curves.md
+
+发行包测试：
+
+cd /home/zhj/Rotating-Flow-ToolKit/RotatingDiskFlow
+julia --project=. test/runtests.jl
+RUN_PHYSICS_REGRESSION=true julia --project=. test/runtests.jl
+
+基本流脚本：
+
+scripts/compare_lopez_boussinesq.py
+scripts/generate_boussinesq_compressible_report.py
+scripts/analyze_compressible_lopez.py
+scripts/compare_chapman_sutherland.py
+scripts/investigate_boussinesq_fold.py
+scripts/compute_domain_branches.py
+
+中性曲线脚本：
+
+scripts/RecomputeBenchmarkCurves.jl
+scripts/CheckMalikBenchmarks.jl
+scripts/ComputeLopezTypeI.jl
+scripts/ComputeLopezTypeII.jl
+scripts/MergeLopezNeutralBranches.jl
+scripts/IntegrateNeutralCurves.jl
+scripts/AnalyzeNeutralCriticalErrors.jl
+scripts/AnalyzeBoussinesqRange.jl
+scripts/LopezGridIndependence.jl
+
+交接结束。

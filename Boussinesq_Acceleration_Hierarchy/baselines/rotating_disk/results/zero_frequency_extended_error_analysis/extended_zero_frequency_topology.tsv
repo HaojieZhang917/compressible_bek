@@ -1,0 +1,19 @@
+Tw	model	local_minima_count	local_maxima_count	local_minima_beta	local_maxima_beta	TypeII_fold	TypeI_minimum	stop_reason
+1.0	blackburn	2	1	0.0464718521,0.0776718521	0.0488718521	present	present	R_limit
+1.0	compressible	2	1	0.0464787314,0.0768787314	0.0488787314	present	present	R_limit
+1.04	blackburn	2	1	0.0456685304,0.0752685304	0.0472685304	present	present	R_limit
+1.04	compressible	2	1	0.0444,0.074	0.0468	present	present	unknown
+1.08	blackburn	2	1	0.0440605054,0.0728605054	0.0464605054	present	present	R_limit
+1.08	compressible	2	1	0.0435523667,0.0707523667	0.0443523667	present	present	unknown
+1.12	blackburn	2	1	0.0432579982,0.0704579982	0.0456579982	present	present	R_limit
+1.12	compressible	2	1	0.041949541,0.067549541	0.042749541	present	present	unknown
+1.16	blackburn	2	1	0.0424700743,0.0680700743	0.0440700743	present	present	R_limit
+1.16	compressible	1	0	0.0652857568		absent	present	unknown
+1.2	blackburn	2	1	0.0417042662,0.0657042662	0.0433042662	present	present	R_limit
+1.2	compressible	1	0	0.062342122		absent	present	unknown
+1.4	blackburn	2	1	0.0380692674,0.0552692674	0.0396692674	present	present	R_limit
+1.4	compressible	1	0	0.052594939		absent	present	near_degenerate_endpoint
+1.6	blackburn	1	1	0.0465383639	0.0383383639	absent	present	endpoint_no_root
+1.6	compressible	1	0	0.0447292857		absent	present	R_limit
+1.8	blackburn	1	0	0.0334355733		absent	present	R_limit
+1.8	compressible	1	0	0.038797187		absent	present	R_limit

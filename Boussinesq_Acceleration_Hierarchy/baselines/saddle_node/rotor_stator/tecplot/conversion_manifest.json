@@ -1,0 +1,490 @@
+[
+  {
+    "source": "boussinesq_singularity_convergence/branch_Re1000_traditional_centrifugal.csv",
+    "output": "data/boussinesq_singularity_convergence/branch_Re1000_traditional_centrifugal.dat",
+    "source_type": "csv",
+    "rows": 1048,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max",
+      "nodes",
+      "max_rms_residual"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_convergence/folds_Re1000_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_convergence/folds_Re1000_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 2,
+    "zones": 2,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max"
+    ],
+    "text_aux_fields": [
+      "kind"
+    ]
+  },
+  {
+    "source": "boussinesq_singularity_convergence/three_solutions_Tw1.160.csv",
+    "output": "data/boussinesq_singularity_convergence/three_solutions_Tw1.160.dat",
+    "source_type": "csv",
+    "rows": 3003,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "pressure_gradient",
+      "z",
+      "H",
+      "F",
+      "G",
+      "T"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_convergence/validation_Re1000_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_convergence/validation_Re1000_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "reference_re_h",
+      "reference_comparison_applicable",
+      "H_max_abs",
+      "H_rms",
+      "F_max_abs",
+      "F_rms",
+      "G_max_abs",
+      "G_rms",
+      "pressure_gradient",
+      "max_rms_residual",
+      "nodes"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re400/branch_Re400_traditional_centrifugal.csv",
+    "output": "data/boussinesq_singularity_re_scan/Re400/branch_Re400_traditional_centrifugal.dat",
+    "source_type": "csv",
+    "rows": 384,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max",
+      "nodes",
+      "max_rms_residual"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re400/folds_Re400_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_re_scan/Re400/folds_Re400_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "record_count"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re400/three_solutions_Tw1.160.csv",
+    "output": "data/boussinesq_singularity_re_scan/Re400/three_solutions_Tw1.160.dat",
+    "source_type": "csv",
+    "rows": 1001,
+    "zones": 1,
+    "numeric_variables": [
+      "branch",
+      "pressure_gradient",
+      "z",
+      "H",
+      "F",
+      "G",
+      "T"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re400/validation_Re400_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_re_scan/Re400/validation_Re400_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "reference_re_h",
+      "reference_comparison_applicable",
+      "pressure_gradient",
+      "max_rms_residual",
+      "nodes"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re800/branch_Re800_traditional_centrifugal.csv",
+    "output": "data/boussinesq_singularity_re_scan/Re800/branch_Re800_traditional_centrifugal.dat",
+    "source_type": "csv",
+    "rows": 387,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max",
+      "nodes",
+      "max_rms_residual"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re800/folds_Re800_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_re_scan/Re800/folds_Re800_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 2,
+    "zones": 2,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max"
+    ],
+    "text_aux_fields": [
+      "kind"
+    ]
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re800/three_solutions_Tw1.160.csv",
+    "output": "data/boussinesq_singularity_re_scan/Re800/three_solutions_Tw1.160.dat",
+    "source_type": "csv",
+    "rows": 3003,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "pressure_gradient",
+      "z",
+      "H",
+      "F",
+      "G",
+      "T"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_re_scan/Re800/validation_Re800_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_re_scan/Re800/validation_Re800_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "reference_re_h",
+      "reference_comparison_applicable",
+      "pressure_gradient",
+      "max_rms_residual",
+      "nodes"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/branch_Re1000_traditional_centrifugal.csv",
+    "output": "data/boussinesq_singularity_results/branch_Re1000_traditional_centrifugal.dat",
+    "source_type": "csv",
+    "rows": 609,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max",
+      "nodes",
+      "max_rms_residual"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/folds_Re1000_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_results/folds_Re1000_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 2,
+    "zones": 2,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max"
+    ],
+    "text_aux_fields": [
+      "kind"
+    ]
+  },
+  {
+    "source": "boussinesq_singularity_results/soong_model/branch_Re1000_soong_rotating_forces.csv",
+    "output": "data/boussinesq_singularity_results/soong_model/branch_Re1000_soong_rotating_forces.dat",
+    "source_type": "csv",
+    "rows": 101,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "thermal_rossby",
+      "rotor_heat_flux_Tz",
+      "G_mid",
+      "H_min",
+      "F_min",
+      "F_max",
+      "nodes",
+      "max_rms_residual"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/soong_model/folds_Re1000_soong_rotating_forces.json",
+    "output": "data/boussinesq_singularity_results/soong_model/folds_Re1000_soong_rotating_forces.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "record_count"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/soong_model/validation_Re1000_soong_rotating_forces.json",
+    "output": "data/boussinesq_singularity_results/soong_model/validation_Re1000_soong_rotating_forces.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "reference_re_h",
+      "reference_comparison_applicable",
+      "H_max_abs",
+      "H_rms",
+      "F_max_abs",
+      "F_rms",
+      "G_max_abs",
+      "G_rms",
+      "pressure_gradient",
+      "max_rms_residual",
+      "nodes"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/three_solutions_Tw1.160.csv",
+    "output": "data/boussinesq_singularity_results/three_solutions_Tw1.160.dat",
+    "source_type": "csv",
+    "rows": 3003,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "pressure_gradient",
+      "z",
+      "H",
+      "F",
+      "G",
+      "T"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "boussinesq_singularity_results/validation_Re1000_traditional_centrifugal.json",
+    "output": "data/boussinesq_singularity_results/validation_Re1000_traditional_centrifugal.dat",
+    "source_type": "json",
+    "rows": 1,
+    "zones": 1,
+    "numeric_variables": [
+      "reference_re_h",
+      "reference_comparison_applicable",
+      "H_max_abs",
+      "H_rms",
+      "F_max_abs",
+      "F_rms",
+      "G_max_abs",
+      "G_rms",
+      "pressure_gradient",
+      "max_rms_residual",
+      "nodes"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "reynolds_scan_summary.csv",
+    "output": "data/reynolds_scan_summary.dat",
+    "source_type": "csv",
+    "rows": 3,
+    "zones": 3,
+    "numeric_variables": [
+      "Re_h",
+      "lower_fold_Tw",
+      "principal_fold_Tw",
+      "scanned_Tw_max"
+    ],
+    "text_aux_fields": [
+      "fold_status",
+      "interpretation"
+    ]
+  },
+  {
+    "source": "three_solution_dynamics/branch_diagnostics.csv",
+    "output": "data/three_solution_dynamics/branch_diagnostics.dat",
+    "source_type": "csv",
+    "rows": 3,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "pressure_gradient",
+      "H_mid",
+      "F_mid",
+      "G_mid",
+      "T_mid",
+      "core_max_abs_F",
+      "core_G_range",
+      "core_rms_Gz",
+      "core_rms_inviscid_residual",
+      "mass_integral_F",
+      "steady_radial_residual_max",
+      "steady_azimuthal_residual_max",
+      "steady_thermal_residual_max",
+      "F_interior_sign_changes",
+      "G_interior_extrema",
+      "mid_spatial_positive_real_count",
+      "mid_spatial_negative_real_count",
+      "mid_spatial_neutral_count",
+      "shortest_mid_spatial_wavelength",
+      "leading_temporal_real",
+      "leading_temporal_imag",
+      "temporal_positive_real_count",
+      "dominant_mode_F_relative_max",
+      "dominant_mode_H_relative_max",
+      "dominant_mode_G_relative_max",
+      "dominant_mode_T_relative_max",
+      "dominant_mode_z_centroid",
+      "least_damped_oscillatory_real",
+      "least_damped_oscillatory_imag_abs",
+      "least_damped_oscillatory_period",
+      "least_damped_oscillatory_quality_factor"
+    ],
+    "text_aux_fields": [
+      "label",
+      "similarity_temporal_class"
+    ]
+  },
+  {
+    "source": "three_solution_dynamics/branch_temporal_growth.csv",
+    "output": "data/three_solution_dynamics/branch_temporal_growth.dat",
+    "source_type": "csv",
+    "rows": 74,
+    "zones": 1,
+    "numeric_variables": [
+      "pressure_gradient",
+      "Tw",
+      "leading_real",
+      "leading_imag",
+      "positive_real_count",
+      "fold_sample"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "three_solution_dynamics/midplane_spatial_eigenvalues.csv",
+    "output": "data/three_solution_dynamics/midplane_spatial_eigenvalues.dat",
+    "source_type": "csv",
+    "rows": 21,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "rank",
+      "real",
+      "imag",
+      "spatial_wavelength"
+    ],
+    "text_aux_fields": [
+      "label"
+    ]
+  },
+  {
+    "source": "three_solution_dynamics/temporal_convergence.json",
+    "output": "data/three_solution_dynamics/temporal_convergence.dat",
+    "source_type": "json",
+    "rows": 12,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "collocation_points",
+      "leading_real",
+      "leading_imag",
+      "positive_real_count"
+    ],
+    "text_aux_fields": []
+  },
+  {
+    "source": "three_solution_dynamics/temporal_eigenvalues_convergence.csv",
+    "output": "data/three_solution_dynamics/temporal_eigenvalues_convergence.dat",
+    "source_type": "csv",
+    "rows": 240,
+    "zones": 3,
+    "numeric_variables": [
+      "branch",
+      "collocation_points",
+      "rank",
+      "real",
+      "imag",
+      "oscillation_frequency_over_Omega",
+      "period_Omega_t"
+    ],
+    "text_aux_fields": [
+      "label"
+    ]
+  },
+  {
+    "source": "baseflow_Res1000.npz",
+    "output": "reference/baseflow_Res1000.dat",
+    "source_type": "npz",
+    "rows": 20000,
+    "zones": 1,
+    "numeric_variables": [
+      "x",
+      "w0",
+      "u0",
+      "v0",
+      "du0",
+      "dv0"
+    ],
+    "text_aux_fields": []
+  }
+]

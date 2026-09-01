@@ -1,0 +1,3 @@
+time	case	status	attempt	points	message
+2026-07-30T21:51:30	ome=0.0_Tw=1.04_model=blackburn	running	1	0	starting
+2026-07-30T22:06:01	ome=0.0_Tw=1.04_model=blackburn	ok	1	107	stop_reason=R_limit

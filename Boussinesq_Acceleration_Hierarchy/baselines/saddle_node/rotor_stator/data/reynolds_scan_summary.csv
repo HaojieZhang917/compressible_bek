@@ -1,0 +1,4 @@
+Re_h,fold_status,lower_fold_Tw,principal_fold_Tw,scanned_Tw_max,interpretation
+400,no_fold_detected,,,1.849620220824,"No fold on the continued branch over the sampled pressure interval; this is not proof of global uniqueness."
+800,two_folds,1.158790083439,1.165510879990,1.940412380490,"Three similarity solutions coexist between the two folds."
+1000,two_folds,1.155517549054,1.167676484047,1.965753566478,"Fine-grid values; the isothermal-connected branch terminates at the principal fold."

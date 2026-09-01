@@ -1,0 +1,6 @@
+TITLE = "folds_Re1000_soong_rotating_forces"
+VARIABLES = "record_count"
+DATASETAUXDATA Source_File = "boussinesq_singularity_results/soong_model/folds_Re1000_soong_rotating_forces.json"
+DATASETAUXDATA Converter = "convert_all_to_tecplot.py"
+ZONE T="data", I=1, DATAPACKING=POINT
+0

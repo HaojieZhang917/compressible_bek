@@ -1,0 +1,13 @@
+{
+  "reference_re_h": 1000.0,
+  "reference_comparison_applicable": true,
+  "H_max_abs": 2.3961943540484754e-11,
+  "H_rms": 9.635351277663272e-12,
+  "F_max_abs": 5.285138646171639e-12,
+  "F_rms": 1.7318631560158185e-12,
+  "G_max_abs": 9.981848680951089e-12,
+  "G_rms": 6.03070218201017e-12,
+  "pressure_gradient": 0.09791648002903,
+  "max_rms_residual": 1.996368738498399e-08,
+  "nodes": 2588
+}

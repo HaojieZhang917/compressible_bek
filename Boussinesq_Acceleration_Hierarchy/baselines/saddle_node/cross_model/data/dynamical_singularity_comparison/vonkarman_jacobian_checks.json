@@ -1,0 +1,9 @@
+{
+  "degree": 120,
+  "newton_residual": 5.185828155784833e-11,
+  "newton_iterations": 4,
+  "sigma_min_over_max": 9.15845904362379e-11,
+  "sigma_second_min_over_max": 1.299065749008417e-06,
+  "nullity_gap_sigma_second_over_sigma_min": 14184.32667352309,
+  "transversality_coefficient": 4.4098530254110874e-05
+}

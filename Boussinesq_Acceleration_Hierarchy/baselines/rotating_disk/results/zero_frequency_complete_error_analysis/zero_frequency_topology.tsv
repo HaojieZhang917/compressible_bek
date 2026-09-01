@@ -1,0 +1,13 @@
+Tw	model	TypeII_fold	low_beta_local_minima	low_beta_local_maxima	high_beta_local_minima	high_beta_local_maxima
+1.0	blackburn	present	1	1	1	0
+1.0	compressible	present	1	1	1	0
+1.04	blackburn	present	1	1	1	0
+1.04	compressible	present	1	1	1	0
+1.08	blackburn	present	1	1	1	0
+1.08	compressible	present	1	1	1	0
+1.12	blackburn	present	1	1	1	0
+1.12	compressible	present	1	1	1	0
+1.16	blackburn	present	1	1	1	0
+1.16	compressible	absent	0	0	1	0
+1.2	blackburn	present	1	1	1	0
+1.2	compressible	absent	0	0	1	0

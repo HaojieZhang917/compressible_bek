@@ -1,0 +1,19 @@
+time	case	status	attempt	points	message
+2026-07-17T13:00:25	ome=0.0_Tw=1.08_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T13:20:19	ome=0.0_Tw=1.08_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	101	stop_reason=R_limit
+2026-07-17T13:20:19	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T13:24:41	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T13:52:12	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T14:12:14	ome=0.0_Tw=1.1_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	99	stop_reason=R_limit
+2026-07-17T14:12:14	ome=0.0_Tw=1.12_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T14:31:37	ome=0.0_Tw=1.12_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	97	stop_reason=R_limit
+2026-07-17T14:31:37	ome=0.0_Tw=1.14_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T14:50:49	ome=0.0_Tw=1.14_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	96	stop_reason=R_limit
+2026-07-17T14:50:49	ome=0.0_Tw=1.16_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T15:09:35	ome=0.0_Tw=1.16_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	94	stop_reason=R_limit
+2026-07-17T15:09:35	ome=0.0_Tw=1.18_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T15:28:10	ome=0.0_Tw=1.18_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	1	93	stop_reason=R_limit
+2026-07-17T15:28:10	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	1	0	starting
+2026-07-17T15:38:52	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=on_baseProp=variable	retry	1	0	No initial neutral crossing was found at R=500.0 inside beta_bounds=(0.001, 0.2)
+2026-07-17T15:38:52	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=on_baseProp=variable	running	2	0	starting
+2026-07-17T15:58:48	ome=0.0_Tw=1.2_model=compressible_Mr=0.3_propPert=on_baseProp=variable	ok	2	91	stop_reason=R_limit
