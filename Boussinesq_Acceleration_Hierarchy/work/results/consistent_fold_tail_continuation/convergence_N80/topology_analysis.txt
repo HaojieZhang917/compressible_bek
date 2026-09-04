@@ -1,0 +1,15 @@
+fold_left_points=21
+fold_right_points=96
+cusp_indicator_zero_brackets=3
+cusp_1_Ro=-0.325434108555
+cusp_1_Tw=1.500504553747
+cusp_1_Hinf=-0.015444301136
+cusp_2_Ro=-0.371766717455
+cusp_2_Tw=1.555280103988
+cusp_2_Hinf=-0.006638232742
+cusp_3_Ro=-0.110820072525
+cusp_3_Tw=1.199851841673
+cusp_3_Hinf=-0.002642893590
+closest_fold_tail_Ro=-0.241242050501
+closest_fold_tail_Hinf=-0.001599206496
+closest_fold_tail_Tw_gap=-1.864245480645e-04

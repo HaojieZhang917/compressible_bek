@@ -1,0 +1,6 @@
+source_N=160
+points=8
+Hinf_range=[-2.808217317900e-02,-3.817988243000e-03]
+Ro_at_Hinf_0_quadratic=-0.307231858344
+Tw_at_Hinf_0_quadratic=1.478290203202
+interpretation=resolution_limited_extrapolation_not_exact_tail_solution

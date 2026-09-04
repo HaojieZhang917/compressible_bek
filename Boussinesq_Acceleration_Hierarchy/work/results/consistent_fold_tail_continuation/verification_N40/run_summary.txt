@@ -1,0 +1,14 @@
+degree=40
+a=2.000000
+b=0.600000
+c=0.500000
+Pr=0.720000
+gamma=1.000000
+seed_Ro=-0.500000000000
+seed_Tw=1.721704822170
+seed_Hinf=-0.297579167019
+left_points=35
+right_points=120
+left_failures=0
+right_failures=6
+tail_boundary_points=24
